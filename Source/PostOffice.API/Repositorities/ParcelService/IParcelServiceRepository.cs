@@ -8,5 +8,6 @@ namespace PostOffice.API.Repositories.ParcelService
         Task<ParcelService> AddParcelService(ParcelServiceCreateDTO parcelServiceCreateDTO);
         Task<bool> UpdateParcelService(int id, ParcelServiceUpdateDTO parcelServiceUpdateDTO);
         Task<ParcelServiceBaseDTO> GetParcelServiceList();
+        Task<ParcelServiceBaseDTO> GetParcelServiceById(int id);
     }
 }

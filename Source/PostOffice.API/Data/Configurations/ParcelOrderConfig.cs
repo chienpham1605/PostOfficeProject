@@ -82,7 +82,10 @@ namespace PostOffice.API.Data.Configurations
             builder.HasMany(d => d.TrackHistories).WithOne(p => p.ParcelOrder)
               .HasForeignKey(d => d.order_id)
               .OnDelete(DeleteBehavior.NoAction);
-             
+
+            builder.HasOne(d => d.ParcelType).WithMany(d => d.ParcelOrders).HasForeignKey(d => d.parcel_type_id);
+            builder.HasOne(d => d.ParcelService).WithMany(d => d.ParcelOrders).HasForeignKey(d => d.service_id);
+
 
         }
     }

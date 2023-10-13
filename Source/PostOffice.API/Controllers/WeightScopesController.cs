@@ -20,12 +20,14 @@ namespace PostOffice.API.Controllers
         {
             private readonly IWeightScopeRepository _repository;
             private readonly IMapper _mapper;
+            private readonly AppDbContext _context;
 
 
-        public WeightScopesController(IWeightScopeRepository repository, IMapper mapper)
+        public WeightScopesController(IWeightScopeRepository repository, IMapper mapper, AppDbContext context)
             {
                 _repository = repository;
                 _mapper = mapper;
+                _context = context;
             }
 
             // GET api/weightscopes
@@ -98,5 +100,18 @@ namespace PostOffice.API.Controllers
                 await _repository.DeleteAsync(id);
                 return NoContent();
             }
+
+        [HttpGet("getWeightRange")]
+        public async Task<ActionResult<WeightScope>> GetWeightRange(double weight)
+        {
+            var weightRange = await _context.WeightScopes.FirstOrDefaultAsync(w => w.min_weight <= weight && w.max_weight >= weight);
+
+            if (weightRange == null)
+            {
+                return NotFound();
+            }
+
+            return weightRange;
         }
+    }
     }

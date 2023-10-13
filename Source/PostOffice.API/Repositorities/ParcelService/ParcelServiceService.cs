@@ -50,5 +50,16 @@ namespace PostOffice.API.Repositories.ParcelService
 
             return true;
         }
+
+        public async Task<ParcelServiceBaseDTO> GetParcelServiceById(int id)
+        {
+            var parcelserviceByid = _context.ParcelServices.SingleOrDefault(p => p.service_id == id);
+            var parcelServiceDto = _mapper.Map<ParcelServiceBaseDTO>(parcelserviceByid);
+            if (parcelServiceDto == null)
+            {
+                throw new KeyNotFoundException();
+            }
+            return parcelServiceDto;
+        }
     }
 }

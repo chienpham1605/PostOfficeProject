@@ -21,8 +21,6 @@ namespace PostOffice.API.Data.Configurations
             builder.Property(e => e.description)
               .HasMaxLength(500)
               .IsRequired();
-            builder.HasMany(p => p.ParcelOrders)
-                .WithOne(p => p.ParcelType).HasForeignKey(p => p.parcel_type_id).OnDelete(DeleteBehavior.NoAction);
 
         }
     }
