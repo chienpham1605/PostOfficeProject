@@ -9,7 +9,7 @@
 - Microsoft.EntityFrameworkCore.SqlServer --version 6.0.22
 - Microsoft.EntityFrameworkCore.Tools --version 6.0.22
 - Microsoft.EntityFrameworkCore.Design --version 6.0.22
-
+- Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 6.0.22
 
 - Microsoft.AspNetCore.Authentication.JwtBearer --6.0.22
 
