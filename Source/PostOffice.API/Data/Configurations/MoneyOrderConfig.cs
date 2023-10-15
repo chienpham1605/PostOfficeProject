@@ -13,27 +13,27 @@ namespace PostOffice.API.Data.Configurations
             builder.HasKey(x => x.id);
             builder.Property(x => x.id).UseIdentityColumn();
 
-            builder.Property(x => x.sender_name).IsRequired().IsUnicode(true).HasMaxLength(50);
-            builder.Property(x => x.sender_name).IsRequired().IsUnicode(true).HasMaxLength(50);
+            builder.Property(x => x.sender_name).IsUnicode(true).HasMaxLength(50);
+            builder.Property(x => x.sender_name).IsUnicode(true).HasMaxLength(50);
            
-            builder.Property(x => x.sender_phone).IsRequired().HasMaxLength(10);
-            builder.Property(x => x.sender_address).IsRequired().IsUnicode(true).HasMaxLength(200);
-            builder.Property(x => x.receiver_name).IsRequired().IsUnicode(true).HasMaxLength(50);
+            builder.Property(x => x.sender_phone).HasMaxLength(10);
+            builder.Property(x => x.sender_address).IsUnicode(true).HasMaxLength(200);
+            builder.Property(x => x.receiver_name).IsUnicode(true).HasMaxLength(50);
           
-            builder.Property(x => x.receiver_phone).IsRequired().HasMaxLength(10);
-            builder.Property(x => x.receiver_address).IsRequired().IsUnicode(true).HasMaxLength(200);
+            builder.Property(x => x.receiver_phone).HasMaxLength(10);
+            builder.Property(x => x.receiver_address).IsUnicode(true).HasMaxLength(200);
 
-            builder.Property(x => x.transfer_value).IsRequired();
+            builder.Property(x => x.transfer_value);
 
-            builder.Property(x => x.transfer_fee).IsRequired();
+            builder.Property(x => x.transfer_fee);
 
-            builder.Property(x => x.total_charge).IsRequired();
+            builder.Property(x => x.total_charge);
 
             builder.Property(x => x.note).HasMaxLength(500);
 
-            builder.Property(x => x.send_date).IsRequired();
+            builder.Property(x => x.send_date);
 
-            builder.Property(x => x.transfer_status).IsRequired();
+            builder.Property(x => x.transfer_status);
 
             builder.Property(x => x.sender_national_identity_number).HasMaxLength(20);
 

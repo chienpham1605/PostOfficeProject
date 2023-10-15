@@ -12,7 +12,7 @@ namespace PostOffice.API.Data.Configurations
 
             builder.HasKey(x => x.id);             
 
-            builder.Property(x => x.fee).IsRequired();
+            builder.Property(x => x.fee);
 
             // Xác định mối quan hệ với MoneyScope (một MoneyService thuộc về một MoneyScope)
             builder.HasOne(x => x.MoneyScopes)

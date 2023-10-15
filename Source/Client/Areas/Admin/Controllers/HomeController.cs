@@ -1,21 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Client.Controllers
+namespace PostOffice.Client.Areas.Admin.Controllers
 {
-    public class AdminController : Controller
+    [Area("Admin")]
+    public class HomeController : Controller
     {
-        [HttpGet]
         public IActionResult Index()
-        {
-            return View();
-        }
-        [HttpGet]
-        public IActionResult MoneyOrderManage()
-        {
-            return View();
-        }
-        [HttpGet]
-        public IActionResult ParcelManage()
         {
             return View();
         }
@@ -24,6 +14,7 @@ namespace Client.Controllers
         {
             return View();
         }
+        [HttpGet]
         public IActionResult EditParcel()
         {
             return View();
@@ -45,5 +36,4 @@ namespace Client.Controllers
             return View();
         }
     }
-    
-    }
+}

@@ -51,9 +51,10 @@ namespace PostOffice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddParcelOrder ([FromBody] ParcelOrderCreateDTO parcelOrderDto)
         {
-            await _repository.AddParcelOrderAsync(parcelOrderDto);
-            return Ok(parcelOrderDto);
-
+            var parcelOrder = _mapper.Map<ParcelOrder>(parcelOrderDto);
+            _context.ParcelOrders.Add(parcelOrder);
+            await _context.SaveChangesAsync();
+            return Ok(parcelOrder);
         }
         [HttpPut]
         public async Task<IActionResult> UpdateParcelOrder(int orderid, [FromBody] ParcelOrderUpdateDTO parcelOrderUpdateDto) 
@@ -66,6 +67,18 @@ namespace PostOffice.API.Controllers
             }
 
             return NoContent();
+        }
+        [HttpGet("price")]
+        public async Task<IActionResult> GetOrderByFee(int id, [FromBody]ParcelOrderFeeShippingDTO parcelOrderFeeShipping)
+        {
+            var parcelOrderDto = await _repository.GetOrderWithFee(id, parcelOrderFeeShipping);
+
+            if (parcelOrderDto == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(parcelOrderDto);
         }
 
     }

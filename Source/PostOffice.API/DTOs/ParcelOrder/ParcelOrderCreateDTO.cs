@@ -1,4 +1,6 @@
-﻿namespace PostOffice.API.DTOs.ParcelOrder
+﻿using PostOffice.API.DTOs.Pincode;
+
+namespace PostOffice.API.DTOs.ParcelOrder
 {
     public class ParcelOrderCreateDTO
     {
@@ -9,7 +11,7 @@
         public string? sender_address { get; set; }
         public string? sender_phone { get; set; }
         public string? sender_email { get; set; }
-        public string? desciption { get; set; }
+        public string? description { get; set; }
         public string? note { get; set; }
 
         public string? receiver_name { get; set; }
@@ -25,10 +27,13 @@
         //payment infor
         public string? payer { get; set; }
         public string? payment_method { get; set; }
-
+        
+        public int parcel_type_id { get; set; }
+        public string? order_status { get; set; }
         //datetime infor
         public DateTime send_date { get; set; }
         public DateTime receive_date { get; set; }
+       
 
 
     }

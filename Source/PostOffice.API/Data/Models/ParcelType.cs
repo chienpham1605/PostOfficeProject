@@ -15,7 +15,7 @@ namespace PostOffice.API.Data.Models
         public float max_height { get; set; }        
         public float over_dimension_rate { get; set; }
 
-        public ICollection<ParcelServicePrice> ParcelServicePrice { get; set; }
-        public ICollection<ParcelOrder> ParcelOrders { get; set; }
+        public ICollection<ParcelServicePrice>? ParcelServicePrice { get; set; }
+        public ICollection<ParcelOrder>? ParcelOrders { get; set; }
     }
 }

@@ -11,11 +11,10 @@ namespace PostOffice.API.Data.Configurations
             builder.ToTable("TrackHistory");
             builder.HasKey(e => e.track_id);
             builder.Property(e => e.new_location)
-                .HasMaxLength(50)
-                .IsRequired();
+                .HasMaxLength(50);
             builder.Property(e => e.new_status)
-                .HasMaxLength(50)
-                .IsRequired();
+                .HasMaxLength(50);
+                
                          
         
           

@@ -1,26 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Client.Controllers
+namespace PostOffice.Client.Areas.Client.Controllers
 {
-    public class ClientController : Controller
+    [Area("Client")]
+    public class HomeController : Controller
     {
-        [HttpGet]
         public IActionResult Index()
-        {
-            return View();
-        }
-        [HttpGet]
-        public IActionResult ParselCreate ()
-        {
-            return View();
-        }
-        [HttpGet]
-        public IActionResult MoneyOrder()
-        {
-            return View();
-        }
-        [HttpGet]
-        public IActionResult Statistic()
         {
             return View();
         }

@@ -13,62 +13,47 @@ namespace PostOffice.API.Data.Configurations
             builder.ToTable("ParcelOrder");
 
             builder.HasKey(e => e.id);
-          /*  builder.Property(e => e.receive_date)
+            builder.Property(e => e.receive_date)
                 .IsRowVersion()
-                .IsConcurrencyToken()
-                .IsRequired();*/
+                .IsConcurrencyToken();
             builder.Property(e => e.description)
-                .HasMaxLength(200)
-                .IsRequired();
+                .HasMaxLength(200);
             builder.Property(e => e.note)
-                .HasMaxLength(50)
-                .IsRequired();
-           /* builder.Property(e => e.send_date)
+                .HasMaxLength(5000);
+            builder.Property(e => e.send_date)
                 .IsRowVersion()
-                .IsConcurrencyToken()
-                .IsRequired();*/
+                .IsConcurrencyToken();
             builder.Property(e => e.order_status)
-                .HasMaxLength(10)
-                .IsRequired();
-            builder.Property(e => e.parcel_height).IsRequired();
-            builder.Property(e => e.parcel_height).IsRequired();
-           /* builder.Property(e => e.parcel_type_id).IsRequired();*/
-            builder.Property(e => e.parcel_weight).IsRequired();
-            builder.Property(e => e.parcel_width).IsRequired();
+                .HasMaxLength(10);
+            builder.Property(e => e.parcel_height);
+            builder.Property(e => e.parcel_height);
+            builder.Property(e => e.parcel_type_id);
+            builder.Property(e => e.parcel_weight);
+            builder.Property(e => e.parcel_width);
             builder.Property(e => e.payment_method)
-                .HasMaxLength(10)
-                .IsRequired();
+                .HasMaxLength(10);
             builder.Property(e => e.payer)
-                .HasMaxLength(10)
-                .IsRequired();
+                .HasMaxLength(10);
             builder.Property(e => e.receiver_address)
-                .HasMaxLength(200)
-                .IsRequired();
+                .HasMaxLength(200);
             builder.Property(e => e.receiver_email)
-                .HasMaxLength(50)
-                .IsRequired();
+                .HasMaxLength(50);
             builder.Property(e => e.receiver_name)
-                .HasMaxLength(50)
-                .IsRequired();
+                .HasMaxLength(50);
             builder.Property(e => e.receiver_phone)
-                .HasMaxLength(50)
-                .IsRequired();
-           
+                .HasMaxLength(50);  
             builder.Property(e => e.sender_address)
-                .HasMaxLength(200)
-                .IsRequired();
+                .HasMaxLength(200);
             builder.Property(e => e.sender_email)
-                .HasMaxLength(50)
-                .IsRequired();
+                .HasMaxLength(50);
             builder.Property(e => e.sender_name)
-                .HasMaxLength(50)
-                .IsRequired();
+                .HasMaxLength(50);
             builder.Property(e => e.sender_phone)
                 .HasMaxLength(20)
-                .IsRequired();            
+                ;            
             
-            builder.Property(e => e.total_charge).IsRequired();
-            builder.Property(e => e.vpp_value).IsRequired();
+            builder.Property(e => e.total_charge);
+            builder.Property(e => e.vpp_value);
 
         
             builder.HasOne(d => d.ParcelSenderPincode)

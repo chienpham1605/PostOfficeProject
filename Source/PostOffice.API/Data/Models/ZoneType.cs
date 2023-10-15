@@ -9,7 +9,7 @@ namespace PostOffice.API.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
         public string zone_description { get; set; }
-        public ICollection<ParcelServicePrice> ParcelServicePrice { get; set; }
-        public ICollection<MoneyServicePrice> MoneyServicePrice { get; set; }
+        public ICollection<ParcelServicePrice>? ParcelServicePrice { get; set; }
+        public ICollection<MoneyServicePrice>? MoneyServicePrice { get; set; }
     }
 }

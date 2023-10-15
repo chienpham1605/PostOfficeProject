@@ -11,6 +11,6 @@ namespace PostOffice.API.Data.Models
         public float min_weight { get; set; }
         public float max_weight { get; set;}
         public string description { get; set; }
-        public ICollection<ParcelServicePrice> ParcelServicePrice { get; set; }
+        public ICollection<ParcelServicePrice>? ParcelServicePrice { get; set; }
     }
 }

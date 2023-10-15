@@ -15,8 +15,8 @@ namespace PostOffice.API.Data.Models
 
         public int delivery_time { get; set; }
 
-        public ICollection<ParcelServicePrice> ParcelServicePrice { get; set; }
-        public ICollection<ParcelOrder> ParcelOrders { get; set; }
+        public ICollection<ParcelServicePrice>? ParcelServicePrice { get; set; }
+        public ICollection<ParcelOrder>? ParcelOrders { get; set; }
 
     }
 }

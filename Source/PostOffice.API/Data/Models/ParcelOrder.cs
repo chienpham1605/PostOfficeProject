@@ -23,8 +23,8 @@ namespace PostOffice.API.Data.Models
         public string receiver_email { get; set; }
 
         //parcel infor
-        public string order_status { get; set; }
-        public string description { get; set; }
+        public string? order_status { get; set; } = null;
+        public string? description { get; set; }
         public string? note { get; set; }
         public float parcel_length { get; set; }
         public float parcel_height { get; set; }
@@ -40,21 +40,21 @@ namespace PostOffice.API.Data.Models
         public string payment_method { get; set; }
 
         //datetime infor
-        public DateTime send_date { get; set; }
+        public DateTime? send_date { get; set; }
         public DateTime? receive_date { get; set; }
 
         //charge infor
         public float vpp_value { get; set; }
         public float total_charge { get; set; }
 
-        public ParcelService ParcelService { get; set; }
-        public ParcelType ParcelType { get; set; }
+        public ParcelService? ParcelService { get; set; }
+        public ParcelType? ParcelType { get; set; }
 
-        public Pincode ParcelSenderPincode { get; set; }
-        public Pincode ParcelReceiverPincode { get; set; }
+        public Pincode? ParcelSenderPincode { get; set; }
+        public Pincode? ParcelReceiverPincode { get; set; }
 
-        public AppUser AppUser { get; set; }
-        public ICollection <TrackHistory> TrackHistories { get; set; }
+        public AppUser? AppUser { get; set; }
+        public ICollection<TrackHistory>? TrackHistories { get; set; }
 
     }
 }

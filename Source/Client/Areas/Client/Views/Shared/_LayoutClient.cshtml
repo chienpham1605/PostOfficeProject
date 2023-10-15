@@ -1,4 +1,5 @@
-﻿<!doctype html>
+﻿﻿
+<!doctype html>
 
 <html class="no-js" lang="en">
 
@@ -49,8 +50,8 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Orders</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a asp-action="ParselCreate" asp-controller="Client">Parcel Orders</a></li>
-                            <li><i class="fa fa-table"></i><a asp-action="MoneyOrder" asp-controller="Client">Money Orders</a></li>
+                            <li><i class="fa fa-table"></i><a href="/Client/Client/ParselCreate">Parcel Orders</a></li>
+                            <li><i class="fa fa-table"></i><a href="/Client/Client/MoneyOrder">Money Orders</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -63,11 +64,8 @@
 
                     <h3 class="menu-title">Icons</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Statistic</a>
+                        <a href="/CLient/Client/Statistic" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Statistic</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
-                            <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
-                            <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
                         </ul>
                     </li>
                     <h3 class="menu-title">Extras</h3><!-- /.menu-title -->
@@ -235,45 +233,43 @@
             @RenderBody()
 
         </div><!-- End #main -->
-    <!-- End Header -->
-    <!-- ======= Hero Section ======= -->
-</div>
+        <!-- End Header -->
+        <!-- ======= Hero Section ======= -->
+    </div>
 
-  
+
     <!-- ======= Footer ======= -->
-
-
     <!-- Vendor JS Files -->
-        <script src="~/client/vendors/jquery/dist/jquery.min.js"></script>
-        <script src="~/client/vendors/popper.js/dist/umd/popper.min.js"></script>
-        <script src="~/client/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="~/client/assets/js/main.js"></script>
+    <script src="~/client/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="~/client/vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="~/client/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/client/assets/js/main.js"></script>
 
 
-        <script src="~/client/vendors/chart.js/dist/Chart.bundle.min.js"></script>
-        <script src="~/client/assets/js/dashboard.js"></script>
-        <script src="~/client/assets/js/widgets.js"></script>
-        <script src="~/client/vendors/jqvmap/dist/jquery.vmap.min.js"></script>
-        <script src="~/client/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-        <script src="~/client/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-        <script>
-            (function ($) {
-                "use strict";
+    <script src="~/client/vendors/chart.js/dist/Chart.bundle.min.js"></script>
+    <script src="~/client/assets/js/dashboard.js"></script>
+    <script src="~/client/assets/js/widgets.js"></script>
+    <script src="~/client/vendors/jqvmap/dist/jquery.vmap.min.js"></script>
+    <script src="~/client/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <script src="~/client/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script>
+        (function ($) {
+            "use strict";
 
-                jQuery('#vmap').vectorMap({
-                    map: 'world_en',
-                    backgroundColor: null,
-                    color: '#ffffff',
-                    hoverOpacity: 0.7,
-                    selectedColor: '#1de9b6',
-                    enableZoom: true,
-                    showTooltip: true,
-                    values: sample_data,
-                    scaleColors: ['#1de9b6', '#03a9f5'],
-                    normalizeFunction: 'polynomial'
-                });
-            })(jQuery);
-        </script>
+            jQuery('#vmap').vectorMap({
+                map: 'world_en',
+                backgroundColor: null,
+                color: '#ffffff',
+                hoverOpacity: 0.7,
+                selectedColor: '#1de9b6',
+                enableZoom: true,
+                showTooltip: true,
+                values: sample_data,
+                scaleColors: ['#1de9b6', '#03a9f5'],
+                normalizeFunction: 'polynomial'
+            });
+        })(jQuery);
+    </script>
 
 </body>
 

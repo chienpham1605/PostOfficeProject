@@ -31,14 +31,19 @@ namespace PostOffice.API.Helpers
             CreateMap<ParcelServiceCreateDTO, ParcelService>();
             CreateMap<ParcelServiceUpdateDTO, ParcelService>().ReverseMap();
 
+            CreateMap<ServicePriceBaseDTO, ParcelServicePrice>().ReverseMap();
+            CreateMap<ServicePriceCreateDTO, ParcelServicePrice>().ReverseMap();
+            CreateMap<ServicePriceUpdateDTO, ParcelServicePrice>().ReverseMap();
+
+            CreateMap<ParcelOrderFeeShippingDTO, ParcelOrder>().ReverseMap();
 
             CreateMap<ParcelTypeBaseDTO, ParcelType>().ReverseMap();
             CreateMap<ParcelTypeCreateDTO, ParcelType>();
             CreateMap<ParcelTypeUpdateDTO, ParcelType>();
 
             CreateMap<ParcelOrderBase, ParcelOrder>().ReverseMap();
-            CreateMap<ParcelOrderCreateDTO, ParcelOrder>();
-            CreateMap<ParcelOrderUpdateDTO, ParcelOrder>();
+            CreateMap<ParcelOrder, ParcelOrderCreateDTO>().ReverseMap();
+            CreateMap<ParcelOrderUpdateDTO, ParcelOrder>().ReverseMap();
 
             CreateMap<ServicePriceCreateDTO, ParcelServicePrice>();
             CreateMap<ServicePriceUpdateDTO, ParcelServicePrice>();
