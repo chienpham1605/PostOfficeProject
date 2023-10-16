@@ -17,7 +17,7 @@ public void Configure(EntityTypeBuilder<ParcelServicePrice> builder)
             builder.HasOne(e => e.ParcelTypes).WithMany(p => p.ParcelServicePrice).HasForeignKey(p => p.parcel_type_id);
             builder.HasOne(e => e.WeightScopes).WithMany(z => z.ParcelServicePrice).HasForeignKey(w => w.scope_weight_id);
             builder.HasOne(e => e.ParcelServices).WithMany(z => z.ParcelServicePrice).HasForeignKey(w => w.service_id);
-            builder.Property(x => x.service_price).IsRequired();
+            builder.Property(x => x.service_price);
         }
     }
 }

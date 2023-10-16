@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using PostOffice.API.Data.DTOs.MoneyOrder;
 using PostOffice.API.Data.Models;
 using PostOffice.API.DTOs.Area;
 using PostOffice.API.DTOs.Branch;
+using PostOffice.API.DTOs.MoneyOrder;
 using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelService;
 using PostOffice.API.DTOs.ParcelServicePrice;
@@ -39,6 +41,12 @@ namespace PostOffice.API.Helpers
 
             CreateMap<ServicePriceCreateDTO, ParcelServicePrice>();
             CreateMap<ServicePriceUpdateDTO, ParcelServicePrice>();
+
+            CreateMap<MoneyOrderBaseDTO, MoneyOrder>();
+            CreateMap<MoneyOrderCreateDTO, MoneyOrder>();
+            CreateMap<MoneyOrderUpdateDTO, MoneyOrder>();
+
+
         }
     }
 }

@@ -12,10 +12,10 @@ namespace PostOffice.API.Data.Configurations
             builder.HasKey(e => e.track_id);
             builder.Property(e => e.new_location)
                 .HasMaxLength(50)
-                .IsRequired();
+             ;
             builder.Property(e => e.new_status)
                 .HasMaxLength(50)
-                .IsRequired();
+               ;
                          
         
           

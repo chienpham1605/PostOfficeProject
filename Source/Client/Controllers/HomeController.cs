@@ -1,7 +1,7 @@
 ﻿using Client.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-
+using PostOffice.API.DTOs;
 namespace Client.Controllers
 {
    

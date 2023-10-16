@@ -10,10 +10,10 @@ namespace PostOffice.API.Data.Configurations
         {
             builder.ToTable("ParcelServices");
             builder.HasKey(p => p.service_id);
-            builder.Property(p => p.name).IsRequired();
-            builder.Property(p => p.description).IsRequired();
-            builder.Property(p => p.delivery_time).IsRequired();
-            builder.Property(p => p.status).IsRequired();
+            builder.Property(p => p.name);
+            builder.Property(p => p.description);
+            builder.Property(p => p.delivery_time);
+            builder.Property(p => p.status);
 
             builder.HasMany(e => e.ParcelOrders)
                 .WithOne(o => o.ParcelService).HasForeignKey(o => o.service_id);

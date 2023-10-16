@@ -112,7 +112,7 @@ namespace PostOffice.API.Data.Extensions
             {
                 id = 1,
                 min_value = 1,
-                max_value = 1000000,
+                max_value = 100000,
                 description = "Under one million",
 
             },
@@ -186,34 +186,34 @@ namespace PostOffice.API.Data.Extensions
            );
 
             modelBuilder.Entity<MoneyServicePrice>().HasData(
-            new MoneyServicePrice { id = 1, zone_type_id = 1, money_scope_id = 1, fee = 100000},
-            new MoneyServicePrice { id = 2, zone_type_id = 2, money_scope_id = 1, fee = 150000 },
-            new MoneyServicePrice { id = 3, zone_type_id = 3, money_scope_id = 1, fee = 220000 },
-            new MoneyServicePrice { id = 4, zone_type_id = 1, money_scope_id = 2, fee = 230000 },
-            new MoneyServicePrice { id = 5, zone_type_id = 2, money_scope_id = 2, fee = 270000 },
-            new MoneyServicePrice { id = 6, zone_type_id = 3, money_scope_id = 2, fee = 300000 },
-            new MoneyServicePrice { id = 7, zone_type_id = 1, money_scope_id = 3, fee = 300000 },
-            new MoneyServicePrice { id = 8, zone_type_id = 2, money_scope_id = 3, fee = 340000 },
-            new MoneyServicePrice { id = 9, zone_type_id = 3, money_scope_id = 3, fee = 440000 },
-            new MoneyServicePrice { id = 10, zone_type_id = 1, money_scope_id = 4, fee = 500000 },
-            new MoneyServicePrice { id = 11, zone_type_id = 2, money_scope_id = 4, fee = 550000 },
-            new MoneyServicePrice { id = 12, zone_type_id = 3, money_scope_id = 4, fee = 590000 },
-            new MoneyServicePrice { id = 13, zone_type_id = 1, money_scope_id = 5, fee = 600000 },
-            new MoneyServicePrice { id = 14, zone_type_id = 2, money_scope_id = 5, fee = 660000 },
-            new MoneyServicePrice { id = 15, zone_type_id = 3, money_scope_id = 5, fee = 700000 }
+            new MoneyServicePrice { id = 1, zone_type_id = 1, money_scope_id = 1, fee = 50000},
+            new MoneyServicePrice { id = 2, zone_type_id = 2, money_scope_id = 1, fee = 75000 },
+            new MoneyServicePrice { id = 3, zone_type_id = 3, money_scope_id = 1, fee = 100000 },
+            new MoneyServicePrice { id = 4, zone_type_id = 1, money_scope_id = 2, fee = 100000 },
+            new MoneyServicePrice { id = 5, zone_type_id = 2, money_scope_id = 2, fee = 125000 },
+            new MoneyServicePrice { id = 6, zone_type_id = 3, money_scope_id = 2, fee = 150000 },
+            new MoneyServicePrice { id = 7, zone_type_id = 1, money_scope_id = 3, fee = 150000 },
+            new MoneyServicePrice { id = 8, zone_type_id = 2, money_scope_id = 3, fee = 175000 },
+            new MoneyServicePrice { id = 9, zone_type_id = 3, money_scope_id = 3, fee = 200000 },
+            new MoneyServicePrice { id = 10, zone_type_id = 1, money_scope_id = 4, fee = 200000 },
+            new MoneyServicePrice { id = 11, zone_type_id = 2, money_scope_id = 4, fee = 225000 },
+            new MoneyServicePrice { id = 12, zone_type_id = 3, money_scope_id = 4, fee = 250000 },
+            new MoneyServicePrice { id = 13, zone_type_id = 1, money_scope_id = 5, fee = 250000 },
+            new MoneyServicePrice { id = 14, zone_type_id = 2, money_scope_id = 5, fee = 275000 },
+            new MoneyServicePrice { id = 15, zone_type_id = 3, money_scope_id = 5, fee = 300000 }
             );
             //area
             modelBuilder.Entity<ZoneType>().HasData(
-                new ZoneType { id = 1, zone_description = "The North"},
-                new ZoneType { id = 2, zone_description = "The Central"},
-                new ZoneType { id = 3, zone_description = "The South" }
+                new ZoneType { id = 1, zone_description = "Local" },
+                new ZoneType { id = 2, zone_description = "Regional" },
+                new ZoneType { id = 3, zone_description = "National" }
                );
 
             //area
             modelBuilder.Entity<Area>().HasData(
-                new Area { id = 1, area_name = "Local"},
-                new Area { id = 2, area_name = "Regional"},
-                new Area { id = 3, area_name = "National"}
+                new Area { id = 1, area_name = "The North" },
+                new Area { id = 2, area_name = "The Central" },
+                new Area { id = 3, area_name =  "The South" }
                );
             //pincode
             modelBuilder.Entity<Pincode>().HasData(

@@ -9,7 +9,7 @@ namespace PostOffice.API.Data.Configurations
         public void Configure(EntityTypeBuilder<ZoneType> builder)
         {
             builder.ToTable("ZoneTypes");             
-            builder.Property(x => x.zone_description).IsRequired();
+            builder.Property(x => x.zone_description);
         }
     }
 }
