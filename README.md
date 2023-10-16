@@ -21,5 +21,5 @@
 - using route sample: {AreaName}/{Contoller}/{Action}/{id?}
 - Example: If you want to go to the Money Order Page of Client Areas, this route will be followed: Client/Client/MoneyOrder
 - Explaination: because the Client in Areas Folder which has Area Name: Client, getting into ClientController to get the view of MoneyOrder.cshtml 
-- update database
+
   
