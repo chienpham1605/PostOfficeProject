@@ -11,7 +11,7 @@ namespace PostOffice.API.Controllers
     using PostOffice.API.DTOs.ParcelOrder;
     using PostOffice.API.Repositories.ParcelOrder;
 
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[Action]")]
     [ApiController]
     public class ParcelOrderController : ControllerBase
     {

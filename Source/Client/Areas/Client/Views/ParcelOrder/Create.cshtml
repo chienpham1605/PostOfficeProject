@@ -1,4 +1,4 @@
-﻿
+﻿@model PostOffice.API.DTOs.ParcelOrder.ParcelOrderCreateDTO
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
@@ -9,18 +9,18 @@
         <strong>Parcel Orders</strong>
     </div>
     <div class="card-body card-block">
-        <form asp-action="Create" method="post" enctype="multipart/form-data" class="form-horizontal">
+        <form asp-action="Create" asp-controller="ParcelOrder" method="post" enctype="multipart/form-data" class="form-horizontal">
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Your Name</label></div>
-                <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="sender_name" type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Address</label></div>
-                <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                <div class="col-12 col-md-9"><input asp-for="sender_address" type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Email</label></div>
-                <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                <div class="col-12 col-md-9"><input asp-for="sender_email" type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="selectSm" class=" form-control-label">City</label></div>
@@ -31,25 +31,24 @@
                         <option value="2">Ha Noi</option>
                         <option value="3">Hai Phong</option>
                         <option value="4">Da Nang</option>
-                        <option value="5">Option #5</option>
                     </select>
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Pincode</label></div>
-                <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                <div class="col-12 col-md-9"><input asp-for="sender_pincode" type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">The receiver's name</label></div>
-                <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                <div class="col-12 col-md-9"><input asp-for="receiver_name" type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">The receiver's email </label></div>
-                <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
+                <div class="col-12 col-md-9"><input asp-for="receiver_email" type="email" id="email-input" name="email-input" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">The receiver's address</label></div>
-                <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                <div class="col-12 col-md-9"><input asp-for="receiver_address" type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="selectSm" class=" form-control-label">The receiver's city</label></div>
@@ -60,13 +59,12 @@
                         <option value="2">Ha Noi</option>
                         <option value="3">Hai Phong</option>
                         <option value="4">Da Nang</option>
-                        <option value="5">Option #5</option>
                     </select>
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">The receiver's Pincode</label></div>
-                <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                <div class="col-12 col-md-9"><input asp-for="receiver_pincode" type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
             </div>
             @* <div class="row form-group">
             <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">Disabled Input</label></div>
@@ -74,11 +72,11 @@
             </div> *@
             <div class="row form-group">
                 <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Note</label></div>
-                <div class="col-12 col-md-9"><textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Please put your note of the parcel." class="form-control"></textarea></div>
+                <div class="col-12 col-md-9"><textarea name="textarea-input" asp-for="note" id="textarea-input" rows="9" placeholder="Please put your note of the parcel." class="form-control"></textarea></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description</label></div>
-                <div class="col-12 col-md-9"><textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea></div>
+                <div class="col-12 col-md-9"><textarea name="textarea-input" asp-for="description" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="select" class=" form-control-label">Choose the service</label></div>
@@ -203,29 +201,23 @@
             <div class="col col-md-3"><label for="file-multiple-input" class=" form-control-label">Multiple File input</label></div>
             <div class="col-12 col-md-9"><input type="file" id="file-multiple-input" name="file-multiple-input" multiple="" class="form-control-file"></div>
             </div> *@
-        </form>
-    </div>
+       
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary btn-sm">
+        <input type="submit" value="Create" class="btn btn-primary btn-sm">
             <i class="fa fa-dot-circle-o"></i> Submit
-        </button>
-        <button type="reset" class="btn btn-danger btn-sm">
+        </input>
+        <input type="reset" class="btn btn-danger btn-sm">
             <i class="fa fa-ban"></i> Reset
-        </button>
-    </div>
+        </input>
+    </div> 
+    </form>
 </div>
 <div class="card">
     <div class="card-header">
         <strong>Inline</strong> Form
     </div>
-    <div class="card-body card-block">
-        <form action="" method="post" class="form-inline">
-            <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Name</label><input type="text" id="exampleInputName2" placeholder="Jane Doe" required="" class="form-control"></div>
-            <div class="form-group"><label for="exampleInputEmail2" class="px-1  form-control-label">Email</label><input type="email" id="exampleInputEmail2" placeholder="jane.doe@example.com" required="" class="form-control"></div>
-        </form>
-    </div>
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary btn-sm">
+        <button type="submit"  class="btn btn-primary btn-sm">
             <i class="fa fa-dot-circle-o"></i> Submit
         </button>
         <button type="reset" class="btn btn-danger btn-sm">
