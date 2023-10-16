@@ -19,17 +19,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\PostOffice.API\PostOffice.API.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Client\Data\" />
-    <Folder Include="Areas\Client\Models\" />
-    <Folder Include="Views\Home\" />
+    <Folder Include="Areas\Authentication\Data\" />
+    <Folder Include="Areas\Authentication\Models\" />
   </ItemGroup>
 
 </Project>
