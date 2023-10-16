@@ -1,4 +1,4 @@
-﻿using Client.Models;
+﻿using PostOffice.Client.Areas.Client.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

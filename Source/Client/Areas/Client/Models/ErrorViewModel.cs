@@ -1,4 +1,4 @@
-namespace PostOffice.Client.Models
+namespace PostOffice.Client.Areas.Client.Models
 {
     public class ErrorViewModel
     {
