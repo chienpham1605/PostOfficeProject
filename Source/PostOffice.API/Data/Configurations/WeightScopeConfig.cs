@@ -10,12 +10,11 @@ namespace PostOffice.API.Data.Configurations
         {
             builder.ToTable("WeightScope");
 
-            builder.Property(e => e.id).HasColumnName("id");
+            builder.HasKey(e => e.id);
             builder.Property(e => e.description)
-                .HasMaxLength(50)
-                .HasColumnName("description");
-            builder.Property(e => e.max_weight).IsRequired();
-            builder.Property(e => e.min_weight).IsRequired();
+                .HasMaxLength(1000);
+            builder.Property(e => e.max_weight);
+            builder.Property(e => e.min_weight);
         }
     }
 }

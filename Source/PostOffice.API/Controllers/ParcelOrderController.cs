@@ -4,7 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PostOffice.API.Controllers
 {
+    using AutoMapper;
+    using PostOffice.API.Data.Context;
     using PostOffice.API.Data.Models;
+    using PostOffice.API.DTOs.Area;
     using PostOffice.API.DTOs.ParcelOrder;
     using PostOffice.API.Repositories.ParcelOrder;
 
@@ -12,11 +15,25 @@ namespace PostOffice.API.Controllers
     [ApiController]
     public class ParcelOrderController : ControllerBase
     {
+        private readonly AppDbContext _context;
         private readonly IParcelOrderRepository _repository;
-
-        public ParcelOrderController(IParcelOrderRepository repository)
+        private readonly IMapper _mapper;
+        public ParcelOrderController(IParcelOrderRepository repository, IMapper mapper, AppDbContext context)
         {
             _repository = repository;
+            _mapper = mapper;
+            _context = context;
+        }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ParcelOrderBase>>> GetAllOrders()
+        {
+            if (_context.ParcelOrders == null)
+            {
+                return NotFound();
+            }
+            var areas = await _context.ParcelOrders.ToListAsync();
+            var records = _mapper.Map<List<ParcelOrderBase>>(areas);
+            return Ok(records);
         }
         [HttpGet("parcelorders/{id}", Name = "GetParcelOrderById")]
         public async Task<IActionResult> GetParcelOrderById(int id)
@@ -34,9 +51,10 @@ namespace PostOffice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddParcelOrder ([FromBody] ParcelOrderCreateDTO parcelOrderDto)
         {
-            await _repository.AddParcelOrderAsync(parcelOrderDto);
-            return Ok(parcelOrderDto);
-
+            var parcelOrder = _mapper.Map<ParcelOrder>(parcelOrderDto);
+            _context.ParcelOrders.Add(parcelOrder);
+            await _context.SaveChangesAsync();
+            return Ok(parcelOrder);
         }
         [HttpPut]
         public async Task<IActionResult> UpdateParcelOrder(int orderid, [FromBody] ParcelOrderUpdateDTO parcelOrderUpdateDto) 
@@ -49,6 +67,18 @@ namespace PostOffice.API.Controllers
             }
 
             return NoContent();
+        }
+        [HttpGet("price")]
+        public async Task<IActionResult> GetOrderByFee(int id, [FromBody]ParcelOrderFeeShippingDTO parcelOrderFeeShipping)
+        {
+            var parcelOrderDto = await _repository.GetOrderWithFee(id, parcelOrderFeeShipping);
+
+            if (parcelOrderDto == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(parcelOrderDto);
         }
 
     }

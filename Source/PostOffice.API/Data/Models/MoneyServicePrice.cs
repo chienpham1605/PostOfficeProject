@@ -13,6 +13,6 @@ namespace PostOffice.API.Data.Models
         public float fee { get; set; }
 
         public MoneyScope MoneyScopes { get; set; }
-        public ZoneType ZoneTypes { get; set; }
+        public ZoneType? ZoneTypes { get; set; }
     }
 }

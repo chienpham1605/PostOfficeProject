@@ -1,8 +1,5 @@
+
 ﻿<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
 <html class="no-js" lang="en">
 <!--<![endif]-->
 
@@ -60,9 +57,11 @@
                             </label>
 
                         </div>
-                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30" asp-action="Index" asp-controller="Client">Sign in</button>
+                        <a class="btn btn-success btn-flat m-b-30 m-t-30" asp-action="Index" href="/Client/Home/Index">Sign in</a>
                         <div class="register-link m-t-15 text-center">
-                            <p>Don't have account ? <a asp-action="Register" asp-controller="Client"> Sign Up Here</a></p>
+                            <p>Don't have account ? <a href="/Client/Home/Register"> Sign Up Here</a></p>
+                            <p>If you are a member's compnay <a href="/Admin/Home/Index"> Follow this page</a></p>
+
                         </div>
                     </form>
                 </div>

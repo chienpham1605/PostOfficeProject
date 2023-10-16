@@ -16,26 +16,34 @@ namespace PostOffice.API.Helpers
         public AppMapperProfile()
         {
             CreateMap<PincodeBaseDTO, Pincode>();
-            CreateMap<AreaBaseDTO, Area>().ReverseMap(); ;
+            CreateMap<AreaBaseDTO, Area>().ReverseMap(); 
             CreateMap<AreaCreateDTO, Area>();
             CreateMap<AreaUpdateDTO, Area>();
             CreateMap<OfficeBranch, OfficeBranchBaseDTO>();
 
-            CreateMap<WeightScopeBaseDTO, WeightScope>();
+            CreateMap<WeightScopeBaseDTO, WeightScope>().ReverseMap();
             CreateMap<WeightScopeCreateDTO, WeightScope>();
             CreateMap<WeightScopeUpdateDTO, WeightScope>();
 
-            CreateMap<ServicePriceBaseDTO, ParcelServicePrice>();
-            CreateMap<ParcelServiceBaseDTO, ParcelService>();
-            CreateMap<ParcelServiceCreateDTO, ParcelService>();
+            CreateMap<ServicePriceBaseDTO, ParcelServicePrice>().ReverseMap();
 
-            CreateMap<ParcelTypeBaseDTO, ParcelType>();
+            CreateMap<ParcelServiceBaseDTO, ParcelService>().ReverseMap();
+            CreateMap<ParcelServiceCreateDTO, ParcelService>();
+            CreateMap<ParcelServiceUpdateDTO, ParcelService>().ReverseMap();
+
+            CreateMap<ServicePriceBaseDTO, ParcelServicePrice>().ReverseMap();
+            CreateMap<ServicePriceCreateDTO, ParcelServicePrice>().ReverseMap();
+            CreateMap<ServicePriceUpdateDTO, ParcelServicePrice>().ReverseMap();
+
+            CreateMap<ParcelOrderFeeShippingDTO, ParcelOrder>().ReverseMap();
+
+            CreateMap<ParcelTypeBaseDTO, ParcelType>().ReverseMap();
             CreateMap<ParcelTypeCreateDTO, ParcelType>();
             CreateMap<ParcelTypeUpdateDTO, ParcelType>();
 
-            CreateMap<ParcelOrderBase, ParcelOrder>();
-            CreateMap<ParcelOrderCreateDTO, ParcelOrder>();
-            CreateMap<ParcelOrderUpdateDTO, ParcelOrder>();
+            CreateMap<ParcelOrderBase, ParcelOrder>().ReverseMap();
+            CreateMap<ParcelOrder, ParcelOrderCreateDTO>().ReverseMap();
+            CreateMap<ParcelOrderUpdateDTO, ParcelOrder>().ReverseMap();
 
             CreateMap<ServicePriceCreateDTO, ParcelServicePrice>();
             CreateMap<ServicePriceUpdateDTO, ParcelServicePrice>();

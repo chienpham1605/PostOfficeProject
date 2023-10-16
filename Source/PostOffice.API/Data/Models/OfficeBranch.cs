@@ -9,6 +9,6 @@
         public string address { get; set; }
         public string branch_phone { get; set; }
 
-        public Pincode Pincode { get; set; }
+        public Pincode? Pincode { get; set; }
     }
 }

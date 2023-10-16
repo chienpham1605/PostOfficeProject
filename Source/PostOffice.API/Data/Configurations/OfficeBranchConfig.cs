@@ -10,10 +10,10 @@ namespace PostOffice.API.Data.Configurations
         {
             builder.ToTable("OfficeBranchs");
             builder.HasKey(x => x.id);
-            builder.Property(x => x.district_name).IsRequired();
-            builder.Property(x => x.branch_name).IsRequired();
-            builder.Property(x => x.address).IsRequired();
-            builder.HasOne(x => x.Pincode).WithMany(y => y.OfficeBranches).HasForeignKey(x => x.pincode).IsRequired();
+            builder.Property(x => x.district_name);
+            builder.Property(x => x.branch_name);
+            builder.Property(x => x.address);
+            builder.HasOne(x => x.Pincode).WithMany(y => y.OfficeBranches).HasForeignKey(x => x.pincode);
         }
     }
 }
