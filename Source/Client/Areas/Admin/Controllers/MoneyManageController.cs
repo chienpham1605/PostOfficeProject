@@ -3,16 +3,13 @@
 namespace PostOffice.Client.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class HomeController : Controller
+    public class MoneyManageController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-
-
-        [HttpGet]
-        public IActionResult Invoice()
+        public IActionResult Edit()
         {
             return View();
         }

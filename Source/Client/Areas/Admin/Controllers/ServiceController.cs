@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace PostOffice.Client.Areas.Client.Controllers
+namespace PostOffice.Client.Areas.Admin.Controllers
 {
-    [Area("Client")]
-    public class HomeController : Controller
+    [Area("Admin")]
+    public class ServiceController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult Login()
+        public IActionResult Create()
         {
             return View();
+
         }
-        public IActionResult Register()
+        public IActionResult Edit()
         {
             return View();
         }
