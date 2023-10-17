@@ -368,6 +368,7 @@ namespace PostOffice.API.Data.Extensions
                     payment_method = "Cash",
                     vpp_value = 0,
                     send_date = new DateTime(2023, 01, 14),
+                    receive_date = new DateTime(2023, 01, 18),
                     order_status = "received",
                     total_charge = 36000
                 }

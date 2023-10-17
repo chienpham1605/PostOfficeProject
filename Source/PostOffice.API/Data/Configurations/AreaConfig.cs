@@ -13,7 +13,7 @@ namespace PostOffice.API.Data.Configurations
             builder.ToTable("Areas");
             builder.HasKey(a =>a.id);
             builder.Property(a => a.area_name);
-            builder.HasMany(a => a.Pincodes).WithOne(p => p.Area).HasForeignKey(p => p.area_id);
+            builder.HasMany(a => a.Pincodes).WithOne(p => p.Area).HasForeignKey(p =>p.area_id);
         }
     }
 }

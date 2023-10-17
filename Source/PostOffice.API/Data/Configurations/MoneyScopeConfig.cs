@@ -10,7 +10,7 @@ namespace PostOffice.API.Data.Configurations
         {
             builder.ToTable("MoneyScope");
 
-            builder.Property(e => e.id).HasColumnName("id");
+            builder.HasKey(e => e.id);
             builder.Property(e => e.description)
                 .HasMaxLength(50)
                 .HasColumnName("description");

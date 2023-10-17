@@ -1,4 +1,4 @@
-﻿using Client.Models;
+﻿using PostOffice.Client.Areas.Client.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using PostOffice.API.DTOs;
@@ -18,7 +18,6 @@ namespace Client.Controllers
         {
             return View();
         }
-        [HttpGet]
         public IActionResult Contact()
         {
             return View();
@@ -43,6 +42,10 @@ namespace Client.Controllers
         {
             return View();
         }
+        public IActionResult ExpressService()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult MoneyService()
         {
@@ -53,7 +56,6 @@ namespace Client.Controllers
         {
             return View();
         }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

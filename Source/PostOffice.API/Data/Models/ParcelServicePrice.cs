@@ -14,11 +14,11 @@ namespace PostOffice.API.Data.Models
         public int scope_weight_id { get; set; }
         public float service_price { get; set; }
 
-        public ZoneType ZoneTypes { get; set; }
-        public ParcelService ParcelServices { get; set; }
-        public ParcelType ParcelTypes { get; set; }
+        public ZoneType? ZoneTypes { get; set; }
+        public ParcelService? ParcelServices { get; set; }
+        public ParcelType? ParcelTypes { get; set; }
 
-        public WeightScope WeightScopes { get; set; }  
+        public WeightScope? WeightScopes { get; set; }  
         
     }
 }

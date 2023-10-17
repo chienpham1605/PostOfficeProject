@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostOfficeOnline", "PostOff
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostOffice.API", "PostOffice.API\PostOffice.API.csproj", "{41EE10F3-0937-4F6D-ABD2-B5B3891D7E77}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{C435B3EC-6BD8-408B-97C7-8159743CB6ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostOffice.Client", "Client\PostOffice.Client.csproj", "{C435B3EC-6BD8-408B-97C7-8159743CB6ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{2854B425-CB5B-4098-9F74-D6620298A8DD}"
 EndProject

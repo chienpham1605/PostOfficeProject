@@ -7,6 +7,8 @@ namespace PostOffice.API.Repositories.ParcelOrder
     {
         Task<ParcelOrder> AddParcelOrderAsync(ParcelOrderCreateDTO parcelOrderDTO);
         Task<bool> UpdateParcelOrder(int id, ParcelOrderUpdateDTO parcelOrderUpdateDTO);
+
         Task<ParcelOrderBase> GetParcelOrderById(int id);
+        Task<ParcelOrderFeeShippingDTO> GetOrderWithFee(int id, ParcelOrderFeeShippingDTO dto);
     }
 }

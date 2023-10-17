@@ -14,11 +14,11 @@ namespace PostOffice.API.Data.Models
         public string? Address { get; set; }          
         public string? Status { get; set; }
 
-        public ICollection<MoneyOrder> MoneyOrders { get; set; }
+        public ICollection<MoneyOrder>? MoneyOrders { get; set; }
 
-        public ICollection<ParcelOrder> ParcelOrders { get; set; }
+        public ICollection<ParcelOrder>? ParcelOrders { get; set; }
 
-        public ICollection<HistoryEmployee> HistoryEmployees { get; set; }
+        public ICollection<HistoryEmployee>? HistoryEmployees { get; set; }
 
 
     }

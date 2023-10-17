@@ -1,4 +1,6 @@
-﻿namespace PostOffice.API.DTOs.ParcelOrder
+﻿using PostOffice.API.DTOs.Pincode;
+
+namespace PostOffice.API.DTOs.ParcelOrder
 {
     public class ParcelOrderBase
     {
@@ -37,5 +39,6 @@
         //charge infor
         public float? vpp_value { get; set; }
         public float? total_charge { get; set; }
+        public List<PincodeBaseDTO> PincodeBaseDTOs { get; set; }
     }
 }

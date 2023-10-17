@@ -42,9 +42,9 @@ namespace PostOffice.API.Data.Models
         public float total_charge { get; set; }
 
 
-        public Pincode MoneySenderPincode { get; set; }
-        public Pincode MoneyReceiverPincode { get; set; }
-        public AppUser AppUser { get; set; }             
+        public Pincode? MoneySenderPincode { get; set; }
+        public Pincode? MoneyReceiverPincode { get; set; }
+        public AppUser? AppUser { get; set; }             
        /* public MoneyServicePrice MoneyServicePrice { get; set; }*/
     }
 }

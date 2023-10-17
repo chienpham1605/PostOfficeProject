@@ -8,7 +8,7 @@ using PostOffice.API.Repositories.ParcelService;
 
 namespace PostOffice.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ParcelServiceController : ControllerBase
     {
@@ -19,13 +19,20 @@ namespace PostOffice.API.Controllers
             _repository = repository;
             _mapper = mapper;
         }
+
        
-        [HttpGet("products")]
+        [HttpGet("services")]
         public async Task<IActionResult> GetAllService()
         {
             var parcelservices = await _repository.GetParcelServiceList();
 
             return Ok(parcelservices);
+        }
+        [HttpGet("services/id")]
+        public async Task<IActionResult> GetServiceById(int id) 
+        {
+            var serviceById = await _repository.GetParcelServiceById(id);
+            return Ok(serviceById);
         }
 
         [HttpPost]
