@@ -8,7 +8,7 @@ namespace PostOffice.API.Data.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-        public string area_name { get; set; }
+        public string? area_name { get; set; }
         public ICollection<Pincode>? Pincodes { get; set; }
     }
 }

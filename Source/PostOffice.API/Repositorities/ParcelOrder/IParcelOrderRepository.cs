@@ -2,7 +2,7 @@
 namespace PostOffice.API.Repositories.ParcelOrder
 {
  using PostOffice.API.DTOs.ParcelOrder;
-    using PostOffice.API.Data.Models;
+ using PostOffice.API.Data.Models;
     public interface IParcelOrderRepository
     {
         Task<ParcelOrder> AddParcelOrderAsync(ParcelOrderCreateDTO parcelOrderDTO);

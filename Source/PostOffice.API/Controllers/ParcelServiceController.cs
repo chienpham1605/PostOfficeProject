@@ -8,7 +8,7 @@ using PostOffice.API.Repositories.ParcelService;
 
 namespace PostOffice.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ParcelServiceController : ControllerBase
     {

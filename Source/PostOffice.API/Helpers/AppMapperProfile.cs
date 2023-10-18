@@ -2,6 +2,9 @@
 using PostOffice.API.Data.Models;
 using PostOffice.API.DTOs.Area;
 using PostOffice.API.DTOs.Branch;
+using PostOffice.API.DTOs.MoneyOrder;
+using PostOffice.API.DTOs.MoneyScope;
+using PostOffice.API.DTOs.MoneyServicePrice;
 using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelService;
 using PostOffice.API.DTOs.ParcelServicePrice;
@@ -47,6 +50,23 @@ namespace PostOffice.API.Helpers
 
             CreateMap<ServicePriceCreateDTO, ParcelServicePrice>();
             CreateMap<ServicePriceUpdateDTO, ParcelServicePrice>();
+
+            CreateMap<MoneyOrderBaseDTO, MoneyOrder>().ReverseMap();
+            CreateMap<MoneyOrderCreateDTO, MoneyOrder>().ReverseMap();
+            CreateMap<MoneyOrderUpdateDTO, MoneyOrder>().ReverseMap();
+
+            CreateMap<MoneyScopeBaseDTO, MoneyScope>().ReverseMap();
+            CreateMap<MoneyScopeCreateDTO, MoneyScope>().ReverseMap();
+            CreateMap<MoneyScopeUpdateDTO, MoneyScope>().ReverseMap();
+
+            CreateMap<MServicePriceBaseDTO, MoneyServicePrice>().ReverseMap();
+            CreateMap<MServicePriceCreateDTO, MoneyServicePrice>().ReverseMap();
+            CreateMap<MServicePriceUpdateDTO, MoneyServicePrice>().ReverseMap();
+
+            CreateMap<PincodeBaseDTO, Pincode>().ReverseMap();
+
+
+
         }
     }
 }

@@ -55,7 +55,6 @@ namespace PostOffice.API.Data.Configurations
             builder.Property(e => e.total_charge);
             builder.Property(e => e.vpp_value);
 
-        
             builder.HasOne(d => d.ParcelSenderPincode)
        .WithMany(p => p.SenderPincodePO)
        .HasForeignKey(d => d.sender_pincode).OnDelete(DeleteBehavior.NoAction); ;
