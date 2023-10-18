@@ -1,7 +1,7 @@
 ﻿using PostOffice.API.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace PostOffice.API.Data.DTOs.MoneyOrder
+namespace PostOffice.API.DTOs.MoneyOrder
 {
     public class MoneyOrderUpdateDTO
     {

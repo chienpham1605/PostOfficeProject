@@ -4,16 +4,18 @@ namespace PostOffice.API.Repositories.MoneyOrder
 {
     using PostOffice.API.DTOs.MoneyOrder;
     using PostOffice.API.Data.Models;
-    using PostOffice.API.Data.DTOs.MoneyOrder;
+
 
     public interface IMoneyOrderRepository
     {
 
-        Task<MoneyOrder> CreateMoneyOrder(MoneyOrderCreateDTO moneyOrderDTO);
+        Task<bool> CreateMoneyOrder(MoneyOrderBaseDTO moneyOrderDTO);
 
-        Task<bool> UpdateMoneyOrder( int id, MoneyOrderUpdateDTO moneyOrderUpdateDTO);
+        Task<bool> UpdateMoneyOrder( int id, MoneyOrderBaseDTO moneyOrderUpdateDTO);
 
         Task<MoneyOrderBaseDTO> GetMoneyOrderById(int id);
+
+        Task<bool> CreateMoney(MoneyOrderCreateDTO moneyOrderCreateDTO);
 
     }
 }

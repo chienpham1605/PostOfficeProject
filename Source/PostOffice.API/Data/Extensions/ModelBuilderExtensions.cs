@@ -112,7 +112,7 @@ namespace PostOffice.API.Data.Extensions
             {
                 id = 1,
                 min_value = 1,
-                max_value = 100000,
+                max_value = 1000000,
                 description = "Under one million",
 
             },
@@ -126,23 +126,23 @@ namespace PostOffice.API.Data.Extensions
                new MoneyScope
                {
                    id = 3,
-                   min_value = 50000001,
+                   min_value = 5000001,
                    max_value = 20000000,
                    description = "5 -20 million",
                },
                new MoneyScope
                {
                    id = 4,
-                   min_value = 200000001,
-                   max_value = 500000000,
+                   min_value = 20000001,
+                   max_value = 50000000,
                    description = "20 -50 million",
                },
                new MoneyScope
                {
                    id = 5,
-                   min_value = 500000001,
-                   max_value = 1000000000,
-                   description = "Over 50 million",
+                   min_value = 50000001,
+                   max_value = 100000000,
+                   description = "50 - 100 million",
                });
 
             //area

@@ -1,4 +1,4 @@
-﻿namespace PostOffice.API.Data.DTOs.MoneyServicePrice
+﻿namespace PostOffice.API.DTOs.MoneyServicePrice
 {
     public class MServicePriceBaseDTO
     {

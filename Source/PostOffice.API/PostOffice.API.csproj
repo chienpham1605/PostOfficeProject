@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="ClassLibrary3">
       <HintPath>..\..\..\..\dotnet\Test\ClassLibrary3\bin\Debug\net6.0\ClassLibrary3.dll</HintPath>
     </Reference>

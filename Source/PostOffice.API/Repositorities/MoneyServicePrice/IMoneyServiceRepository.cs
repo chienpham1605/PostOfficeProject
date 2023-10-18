@@ -4,7 +4,6 @@ namespace PostOffice.API.Repositorities.MoneyServicePrice
     using PostOffice.API.Data.Models;
     using PostOffice.API.DTOs.MoneyServicePrice;
     
-    using PostOffice.API.Data.DTOs.MoneyServicePrice;
     public interface IMoneyServiceRepository
     {
         Task<MoneyServicePrice> GetMoneyServiceById(int id);
@@ -13,6 +12,7 @@ namespace PostOffice.API.Repositorities.MoneyServicePrice
 
         Task<bool> UpdateMoneyService (int id, MServicePriceUpdateDTO mServicePriceUpdateDTO);
 
+        Task<MServicePriceBaseDTO>  GetByZoneNScope(int zone, int scope);
 
     }
 }

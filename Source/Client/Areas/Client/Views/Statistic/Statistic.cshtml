@@ -1,0 +1,244 @@
+﻿
+@{
+    ViewData["Title"] = "Statistic";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<style>
+    .selectpicker + button.btn {
+        border-radius: 5px !important;
+    }
+
+    fieldset {
+        padding: 10px;
+        position: relative;
+    }
+
+    legend {
+        position: absolute;
+        top: -20px;
+        background-color: #ffffff;
+        padding: 0 10px;
+        white-space: nowrap;
+        text-align: center;
+        width: 30%;
+    }
+
+    .bg-custom-blue {
+        background-color: #0C0095;
+    }
+
+    .border-left-only {
+        border-radius: .25rem 0 0 .25rem;
+    }
+
+    .pr-05rem {
+        padding-right: .5rem !important;
+    }
+</style>
+
+<div class="card">
+    <div class="card-header">
+        <strong>
+            Manage bills of lading
+        </strong> Details in Required Fields Below
+    </div>
+    <div class="card-body card-block">
+        <form asp-action="MoneyOrder" asp-controller="MoneyOrder" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+            <ul class="nav nav-pills">
+                <div ="card p-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Find order information">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-secondary"><i class="fa fa-search"></i>&nbsp;
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <@* div class="dates">
+                    <div class="start_date input-group mb-4">
+                    <input class="form-control start_date" type="text" placeholder="start date" id="startdate_datepicker">
+                    <div class="input-group-append">
+                    <span class="fa fa-calendar input-group-text start_date_calendar" aria-hidden="true "></span>
+                    </div>
+                    </div>
+                    <div class="end_date input-group mb-4">
+                    <input class="form-control end_date" type="text" placeholder="end date" id="enddate_datepicker">
+                    <div class="input-group-append">
+                    <span class="fa fa-calendar input-group-text end_date_calendar" aria-hidden="true "></span>
+                    </div>
+                    </div>
+                    </div> *@
+            </ul>
+
+            <br />
+
+            <nav>
+            <div class="card-group">
+                    <a class="card btn btn btn-outline-primary" id="custom-nav-total-tab" data-toggle="collapse" data-parent="#nav-tabContent" data-target="#custom-nav-total" aria-controls="custom-nav-total" aria-selected="true">
+                    <div class="card-body d-flex flex-column align-items-center " >
+                            <h5 class="card-title"><i class="ti-archive"></i>&nbsp;Total Bill</h5>
+                    </div>
+                </a>
+                <div class="card-group">
+                        <a class="card btn btn btn-outline-primary" id="custom-nav-sucsess-tab" data-toggle="collapse" data-parent="#nav-tabContent" data-target="#custom-nav-success" aria-controls="custom-nav-success" aria-selected="false">
+                            <div class="card-body d-flex flex-column align-items-center" >
+                                <h5 class="card-title"><i class=" fa fa-check-square-o"></i>&nbsp;Get Success</h5>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card-group">
+                        <a class="card btn btn btn-outline-primary" id="custom-nav-pending-tab" data-toggle="collapse" data-parent="#nav-tabContent" data-target="#custom-nav-pending" aria-controls="custom-nav-pending" aria-selected="false">
+                            <div class="card-body d-flex flex-column align-items-center" >
+                                <h5 class="card-title"><i class=" fa fa-clock-o"></i>&nbsp;Pending</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="card-group">
+                        <a class="card btn btn btn-outline-primary" id="custom-nav-denied-tab" data-toggle="collapse" data-parent="#nav-tabContent" data-target="#custom-nav-denied" aria-controls="custom-nav-denied" aria-selected="false">
+                            <div class="card-body d-flex flex-column align-items-center">
+                                <h5 class="card-title"><i class=" fa fa-times"></i>&nbsp;Cancel</h5>
+                        </div>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                <div id="custom-nav-total" class="collapse" role="tabpanel" aria-labelledby="custom-nav-total-tab">
+                        <!-- Nội dung dropdown  total -->
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Type of Shipping</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Fee Payer</th>
+                                    <th scope="col">Total Fee</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Money Order</td>
+                                    <td>Delivery</td>
+                                    <td>Sender pay</td>
+                                    <td>44000000</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Parcel Order</td>
+                                    <td>Pending</td>
+                                    <td>Receiver pay</td>
+                                    <td>86000</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Money Order</td>
+                                    <td>Succesfully</td>
+                                    <td>Sender pay</td>
+                                    <td>50000000</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="custom-nav-success" class="collapse" role="tabpanel" aria-labelledby="custom-nav-sucsess-tab">
+                        <!-- Nội dung dropdown sucess -->
+                        <div class="d-flex">
+                            <p class="flex-fill">All</p>
+                            <p class="flex-fill">Shipping</p>
+                            <p class="flex-fill">Delivered successfully</p>
+                            <p class="flex-fill">Pending</p>                         
+                        </div>
+                    </div>
+
+                <div id="custom-nav-pending" class="collapse" role="tabpanel" aria-labelledby="custom-nav-pending-tab">
+                        <!-- Nội dung dropdown pending -->
+                        <div class="d-flex">
+                            <p class="flex-fill">All</p>
+                            <p class="flex-fill">Received</p>
+                            <p class="flex-fill">Picking up</p>
+                        </div>
+                    </div>
+
+                <div id="custom-nav-denied" class="collapse" role="tabpanel" aria-labelledby="custom-nav-denied-tab">
+                        <!-- Nội dung dropdown  denied-->
+                        <div class="d-flex">
+                            <p class="flex-fill">All</p>
+                            <p class="flex-fill">Shop canceled pickup</p>
+                            <p class="flex-fill">TARS cancel Pickup</p>
+                            
+                        </div>
+                    </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="card-body">
+        <div class="custom-tab">
+
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab" href="#custom-nav-home" role="tab" aria-controls="custom-nav-home" aria-selected="false">Home</a>
+                    <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile" aria-selected="false">Profile</a>
+                    <a class="nav-item nav-link active show" id="custom-nav-contact-tab" data-toggle="tab" href="#custom-nav-contact" role="tab" aria-controls="custom-nav-contact" aria-selected="true">Contact</a>
+                </div>
+            </nav>
+            <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                <div class="tab-pane fade" id="custom-nav-home" role="tabpanel" aria-labelledby="custom-nav-home-tab">
+                    <p>
+                        Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit
+                        butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, irure terry richardson ex sd. Alip placeat salvia cillum iphone. Seitan alip s cardigan american apparel, butcher voluptate nisi .
+                    </p>
+                </div>
+                <div class="tab-pane fade" id="custom-nav-profile" role="tabpanel" aria-labelledby="custom-nav-profile-tab">
+                    <p>
+                        Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit
+                        butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, irure terry richardson ex sd. Alip placeat salvia cillum iphone. Seitan alip s cardigan american apparel, butcher voluptate nisi .
+                    </p>
+                </div>
+                <div class="tab-pane fade active show" id="custom-nav-contact" role="tabpanel" aria-labelledby="custom-nav-contact-tab">
+                    <p>
+                        Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit
+                        butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, irure terry richardson ex sd. Alip placeat salvia cillum iphone. Seitan alip s cardigan american apparel, butcher voluptate nisi .
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="card btn" id="custom-nav-demo-tab">
+        <div class="card-body d-flex flex-column align-items-center" data-toggle="collapse" data-target="#custom-nav-demo" aria-controls="custom-nav-demo" aria-selected="true">
+            <h5 class="card-title">Demo</h5>
+            <div id="custom-nav-demo" class="collapse" aria-labelledby="custom-nav-demo-tab">
+                <!-- Nội dung dropdown -->
+                <div class="d-flex">
+                    <p class="flex-fill">Nội dung dropdown 1</p>
+                    <p class="flex-fill">Nội dung dropdown 2</p>
+                    <p class="flex-fill">Nội dung dropdown 3</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+    //datepicker
+    $("#startdate_datepicker").datepicker();
+    $("#enddate_datepicker").datepicker();
+
+</script>
+

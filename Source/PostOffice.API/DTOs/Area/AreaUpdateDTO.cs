@@ -2,6 +2,6 @@
 {
     public class AreaUpdateDTO
     {          
-        public string area_name { get; set; }
+        public string? area_name { get; set; }
     }
 }

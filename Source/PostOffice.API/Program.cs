@@ -6,12 +6,17 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PostOffice.API.Data.Context;
 using PostOffice.API.Data.Models;
+using PostOffice.API.Repositories.MoneyOrder;
 using PostOffice.API.Repositories.ParcelOrder;
 using PostOffice.API.Repositories.ParcelServciePrice;
 using PostOffice.API.Repositories.ParcelService;
 using PostOffice.API.Repositories.ParcelServicePrice;
 using PostOffice.API.Repositories.ParcelType;
 using PostOffice.API.Repositories.WeightScope;
+using PostOffice.API.Repositorities.MoneyOrder;
+using PostOffice.API.Repositorities.MoneyScope;
+using PostOffice.API.Repositorities.MoneyServicePrice;
+using PostOffice.API.Repositorities.Pincode;
 using PostOffice.API.Repositorities.WeightScope;
 using PostOffice.API.Utilities.Mail.Models;
 using PostOffice.API.Utilities.Mail.Services;
@@ -90,6 +95,12 @@ builder.Services.AddScoped<IParcelOrderRepository, ParcelOrderService>();
 builder.Services.AddScoped<IParcelTypeRepository, ParcelTypeService>();
 builder.Services.AddScoped<IWeightScopeRepository, WeightScopeService>();
 builder.Services.AddScoped<IParcelServiceRepository, ParcelServiceService>();
+builder.Services.AddScoped<IMoneyOrderRepository, MoneyOrderRepository>();
+builder.Services.AddScoped<IMoneyServiceRepository, MoneyServiceRepository>();
+builder.Services.AddScoped<IMoneyScopeRepository, MoneyScopeRepository>();
+builder.Services.AddScoped<IPincodeRepository, PincodeRepository>();
+builder.Services.AddScoped<IMoneyServiceRepository, MoneyServiceRepository>();
+
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });

@@ -6,7 +6,7 @@ namespace PostOffice.API.Repositorities.MoneyServicePrice
     using PostOffice.API.Data.Models;
     using PostOffice.API.Data.Context;
     using PostOffice.API.DTOs.MoneyServicePrice;
-    using PostOffice.API.Data.DTOs.MoneyOrder;
+
 
     public class MoneyServiceRepository : IMoneyServiceRepository
     {
@@ -19,10 +19,18 @@ namespace PostOffice.API.Repositorities.MoneyServicePrice
         }
         public async Task<MoneyServicePrice> CreateMoneyServicePrice(MServicePriceCreateDTO mServicePriceCreateDTO)
         {
-            var moneyService = _mapper.Map<Data.Models.MoneyServicePrice>(mServicePriceCreateDTO);
+            var moneyService = _mapper.Map<MoneyServicePrice>(mServicePriceCreateDTO);
             _context.MoneyServices.AddAsync(moneyService);
             await _context.SaveChangesAsync();
             return moneyService;
+
+        }
+
+        public async Task<MServicePriceBaseDTO> GetByZoneNScope(int zone, int scope)
+        {
+           var moneyService = await _context.MoneyServices.Where(m => m.zone_type_id == zone && m.money_scope_id == scope)
+                .FirstOrDefaultAsync();
+            return _mapper.Map<MServicePriceBaseDTO>(moneyService);
 
         }
 
@@ -46,5 +54,7 @@ namespace PostOffice.API.Repositorities.MoneyServicePrice
 
             return true;
         }
+
+
     }
 }

@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PostOffice.API.Data.DTOs.MoneyOrder;
+using Microsoft.EntityFrameworkCore;
+using PostOffice.API.Data.Context;
+using PostOffice.API.Data.Models;
+using PostOffice.API.DTOs.MoneyOrder;
 using PostOffice.API.Repositories.MoneyOrder;
 
 namespace PostOffice.API.Controllers
@@ -11,39 +15,42 @@ namespace PostOffice.API.Controllers
 
     {
         private readonly IMoneyOrderRepository _repository;
-
         public MoneyOrderController(IMoneyOrderRepository repository)
         {
             _repository = repository;
         }
+
         [HttpGet("moneyorders/{id}", Name = "GetMoneyOrderById")]
         public async Task<IActionResult> GetMoneyOrderById(int id)
         {
             var moneyOrderDto = await _repository.GetMoneyOrderById(id);
-            if(moneyOrderDto == null)
+            if (moneyOrderDto == null)
             {
                 return NotFound();
             }
             return Ok(moneyOrderDto);
         }
 
+
         [HttpPost]
-        public async Task<IActionResult> CreateMoneyOrder([FromBody] MoneyOrderCreateDTO moneyOrderDto)
+        public async Task<bool> CreateMoneyOrder(MoneyOrderBaseDTO moneyOrderDto)
         {
             await _repository.CreateMoneyOrder(moneyOrderDto);
-            return Ok(moneyOrderDto);
+            return true;
         }
 
+
         [HttpPut]
-        public async Task<IActionResult> UpdateMoneyOrder( int moneyid, [FromBody] MoneyOrderUpdateDTO moneyOrderUpdateDTO)
+        public async Task<IActionResult> UpdateMoneyOrder(int id, MoneyOrderBaseDTO moneyOrderUpdateDTO)
         {
-            var isUpdated = await _repository.UpdateMoneyOrder(moneyid, moneyOrderUpdateDTO);
-            if (!isUpdated) {
-            
-            return NotFound();
+            var isUpdated = await _repository.UpdateMoneyOrder(id, moneyOrderUpdateDTO);
+            if (!isUpdated)
+            {
+
+                return NotFound();
             }
             return NoContent();
         }
 
-   }
+    }
 }

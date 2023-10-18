@@ -1,4 +1,4 @@
-﻿namespace PostOffice.API.Data.DTOs.MoneyScope
+﻿namespace PostOffice.API.DTOs.MoneyScope
 {
     public class MoneyScopeBaseDTO
     {
