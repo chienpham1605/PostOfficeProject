@@ -45,22 +45,22 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            @foreach (var item in Model)
-                            {
-                                <tbody>
-                                    <tr>
-                                        <td>@item.sender_name</td>
-                                        <td>@item.sender_phone</td>
-                                        <td>@item.sender_address</td>
-                                        <td>@item.id </td>
-                                        <td>@item.desciption</td>
-                                        <td>@item.vpp_value</td>
-                                        <td>@item.order_status</td>
-                                        <td>@item.total_charge</td>
-                                        <td>@Html.ActionLink("Edit", "Edit", new {id = item.id})</td>
-                                    </tr>
+                            @foreach(var item in Model){
+                            <tbody>
+                                <tr>
+                                    <td>@item.sender_name</td>
+                                    <td>@item.sender_phone</td>
+                                    <td>@item.sender_address</td>
+                                    <td>@item.id </td>
+                                    <td>@item.description</td>
+                                    <td>@item.vpp_value</td>
+                                    <td>@item.order_status</td>
+                                    <td>@item.total_charge</td>
+                                    <td>@Html.ActionLink("Edit", "Edit", new {id = item.id})</td>
+                                </tr>
 
-                                </tbody>
+                            </tbody>
+
                             }
                         </table>
                     </div>

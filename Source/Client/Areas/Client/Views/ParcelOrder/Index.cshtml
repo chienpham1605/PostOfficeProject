@@ -19,16 +19,16 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.sender_name</td>
-                <td>@item.receiver_name</td>
-                <td>@item.receiver_address</td>
-                <td>@item.receiver_phone</td>
-                <td>@item.receiver_email</td>
-                <td>@item.order_status</td>
-                <td>@item.note</td>
-                <td>@Html.ActionLink("Shipping","Shipping",new {id = item.id})</td>
-            </tr>
-        }
+        <tr>
+            <td>@item.sender_name</td>
+            <td>@item.receiver_name</td>
+            <td>@item.receiver_address</td>
+            <td>@item.receiver_phone</td>
+            <td>@item.receiver_email</td>
+            <td>@item.order_status</td>
+            <td>@item.note</td>
+            <td>@Html.ActionLink("Shipping","Shipping",new {id = item.id})</td>
+        </tr>
+
     </tbody>
 </table>

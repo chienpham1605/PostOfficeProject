@@ -23,7 +23,7 @@ namespace PostOffice.API.Data.Models
         public string receiver_email { get; set; }
 
         //parcel infor
-        public string? order_status { get; set; } = null;
+        public string? order_status { get; set; }
         public string? description { get; set; }
         public string? note { get; set; }
         public float parcel_length { get; set; }

@@ -46,12 +46,12 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         {
             try
             {
-                ParcelOrderBase parcelOrder = new ParcelOrderBase();
-                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelOrder/GetParcelOrderById/parcelorders" + id).Result;
+                ParcelOrderUpdateDTO parcelOrder = new ParcelOrderUpdateDTO();
+                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelOrder/GetParcelOrderById" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    parcelOrder = JsonConvert.DeserializeObject<ParcelOrderBase>(data);
+                    parcelOrder = JsonConvert.DeserializeObject<ParcelOrderUpdateDTO>(data);
 
                 }
                 return View(parcelOrder);

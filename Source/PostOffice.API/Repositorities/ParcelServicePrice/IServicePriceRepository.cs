@@ -7,5 +7,6 @@
     {
         Task<ParcelServicePrice> AddServicePrice(ServicePriceCreateDTO servicePriceCreateDTO);
         Task<bool> UpdateServicePrice(int id, ServicePriceUpdateDTO servicePriceUpdateDto);
+
     }
 }

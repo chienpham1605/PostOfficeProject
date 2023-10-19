@@ -62,6 +62,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public IActionResult Shipping(int id)
         {

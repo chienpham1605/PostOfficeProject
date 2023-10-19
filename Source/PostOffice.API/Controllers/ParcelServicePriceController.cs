@@ -9,6 +9,7 @@ using PostOffice.API.DTOs.ParcelService;
 using PostOffice.API.DTOs.ParcelServicePrice;
 using PostOffice.API.DTOs.ParcelType;
 using PostOffice.API.Repositories.ParcelServicePrice;
+using System.Security.Policy;
 
 namespace PostOffice.API.Controllers
 {
@@ -26,7 +27,7 @@ namespace PostOffice.API.Controllers
             _context = context;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ServicePriceBaseDTO>>> GetAreas()
+        public async Task<ActionResult<IEnumerable<ServicePriceBaseDTO>>> GetPrices()
         {
             if (_context.ServicePrices == null)
             {
@@ -56,6 +57,7 @@ namespace PostOffice.API.Controllers
             return NoContent();
 
         }
+
 
     }
 }

@@ -525,9 +525,9 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("0d04dce2-969a-435d-bba4-df3f325983dc"), "0fa6daec-b21b-4ce5-ac44-842369e95ff4", "Customer role", "customer", "CUSTOMER" },
-                    { new Guid("79bd714f-9576-45ba-b5b7-f00649be00de"), "7da2111e-50ff-45cb-92ee-fc41db2e69d8", "Employee role", "employee", "EMPLOYEE" },
-                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "5fca8ad3-5e77-4a24-bff1-d5f1b4b70140", "Administrator role", "admin", "ADMIN" }
+                    { new Guid("0d04dce2-969a-435d-bba4-df3f325983dc"), "33002cd5-8d49-4455-811f-de5f20ce6de5", "Customer role", "customer", "CUSTOMER" },
+                    { new Guid("79bd714f-9576-45ba-b5b7-f00649be00de"), "c4a3f0b2-d567-45f8-a552-1961d3bc36b7", "Employee role", "employee", "EMPLOYEE" },
+                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "0e9b3bc4-e035-4810-ad26-5ca48fba57f9", "Administrator role", "admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -535,9 +535,9 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Create_date", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "5c6d2e90-219a-42d0-a7a0-49c253c03722", new DateTime(2021, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "hoanguyen@gmail.com", true, "Nguyen", "Hoa", false, null, "hoanguyen@gmail.com", "HOANG", "AQAAAAEAACcQAAAAENqCcyeAFecA6oq5W7fVj1RcFEj4NpFQ24YyDG+hUVlAZ3+vLXgQNrUPJI3/ozs5TQ==", null, false, "", null, false, "hoang" },
-                    { new Guid("59bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "d1f37d00-9e36-40c1-bda0-e3abf601a46d", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyenphuonghoa0709@gmail.com", true, "Nguyen", "Phuong Hoa", false, null, "nguyenphuonghoa0709@gmail.com", "HOANP", "AQAAAAEAACcQAAAAENRBAhIzQM/VE5bGRgAzXRT3jwprxhFuqniN7OaE0AAipsVXB6q2eqhpl7Rfy9KLtg==", null, false, "", null, false, "hoanp" },
-                    { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "5efda701-929b-4d3a-88f2-8ec16f0f00b0", new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "onlinepostofficegroup4@gmail.com", true, "Pham", "Chien", false, null, "onlinepostofficegroup4@gmail.com", "admin", "AQAAAAEAACcQAAAAEPIAggmKMvkn1uEO5Mf4dpTwf0P9g4dBzo8CJ0G8r78Kqu8cYyVCM7lP+RItJrt6IA==", null, false, "", null, false, "admin" }
+                    { new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "8d08f5f4-87c3-47c1-bfb0-401f53690d41", new DateTime(2021, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "hoanguyen@gmail.com", true, "Nguyen", "Hoa", false, null, "hoanguyen@gmail.com", "HOANG", "AQAAAAEAACcQAAAAEIl/NKjS2JZkZeCERmyyKU7qdTk6G1ZjGUtiXiNstLmp2FVK0nw6p4tYdd+xIwbrhA==", null, false, "", null, false, "hoang" },
+                    { new Guid("59bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "b7a479b8-7a54-4740-9051-d9c0225c5711", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyenphuonghoa0709@gmail.com", true, "Nguyen", "Phuong Hoa", false, null, "nguyenphuonghoa0709@gmail.com", "HOANP", "AQAAAAEAACcQAAAAEB1JmvrkdCO7I/tdIOnTpLnVr0ktRcjWPMOPSQ9Aj1JuOHv6QJlbUl0eaHA/1It6gg==", null, false, "", null, false, "hoanp" },
+                    { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "0a59926d-a276-4faf-a7da-836fb6fb0a9b", new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "onlinepostofficegroup4@gmail.com", true, "Pham", "Chien", false, null, "onlinepostofficegroup4@gmail.com", "admin", "AQAAAAEAACcQAAAAEGcMFavAzEL3Qc3aRS6PFpPzTRcnvO1+6zZQbSY/JOxEI6eMKGNT5+xVWHThyUmXqg==", null, false, "", null, false, "admin" }
                 });
 
             migrationBuilder.InsertData(
