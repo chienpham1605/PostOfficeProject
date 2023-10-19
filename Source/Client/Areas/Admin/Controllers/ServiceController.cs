@@ -65,12 +65,12 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         {
             try
             {
-                ParcelServiceBaseDTO parcelService = new ParcelServiceBaseDTO();
+                ParcelServiceUpdateDTO parcelService = new ParcelServiceUpdateDTO();
                 HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelOrder/GetServiceById/services" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    parcelService = JsonConvert.DeserializeObject<ParcelServiceBaseDTO>(data);
+                    parcelService = JsonConvert.DeserializeObject<ParcelServiceUpdateDTO>(data);
 
                 }
                 return View(parcelService);
@@ -89,7 +89,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             HttpResponseMessage response = _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelOrder/UpdateParcelService", content).Result;
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("/Admin/Service/Index");
             }
             return View();
         }

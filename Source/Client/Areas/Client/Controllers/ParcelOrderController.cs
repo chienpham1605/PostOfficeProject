@@ -62,5 +62,26 @@ namespace PostOffice.Client.Areas.Client.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult Shipping(int id)
+        {
+            try
+            {
+                ParcelOrderBase parcelOrder = new ParcelOrderBase();
+                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelOrder/GetParcelOrderById/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    parcelOrder = JsonConvert.DeserializeObject<ParcelOrderBase>(data);
+
+                }
+                return View(parcelOrder);
+            }
+            catch (Exception ex)
+            {
+
+                return View();
+            }
+        }
     }
 }
