@@ -1,4 +1,5 @@
-﻿using PostOffice.API.DTOs.Pincode;
+﻿using PostOffice.API.Data.Enums;
+using PostOffice.API.DTOs.Pincode;
 
 namespace PostOffice.API.DTOs.ParcelOrder
 {
@@ -29,7 +30,7 @@ namespace PostOffice.API.DTOs.ParcelOrder
         public string? payment_method { get; set; }
         
         public int parcel_type_id { get; set; }
-        public string? order_status { get; set; }
+        public TransferStatus order_status { get; set; }
         //datetime infor
         public DateTime send_date { get; set; }
         public DateTime receive_date { get; set; }

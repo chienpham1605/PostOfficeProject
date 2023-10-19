@@ -16,6 +16,7 @@ namespace PostOffice.API.Helpers
         public AppMapperProfile()
         {
             CreateMap<PincodeBaseDTO, Pincode>();
+
             CreateMap<AreaBaseDTO, Area>().ReverseMap(); 
             CreateMap<AreaCreateDTO, Area>();
             CreateMap<AreaUpdateDTO, Area>();
@@ -27,7 +28,7 @@ namespace PostOffice.API.Helpers
 
             CreateMap<ServicePriceBaseDTO, ParcelServicePrice>().ReverseMap();
 
-            CreateMap<ParcelServiceBaseDTO, ParcelService>().ReverseMap();
+            CreateMap< ParcelService, ParcelServiceBaseDTO>().ReverseMap(); 
             CreateMap<ParcelServiceCreateDTO, ParcelService>();
             CreateMap<ParcelServiceUpdateDTO, ParcelService>().ReverseMap();
 

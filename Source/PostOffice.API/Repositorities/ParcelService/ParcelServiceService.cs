@@ -11,6 +11,7 @@ namespace PostOffice.API.Repositories.ParcelService
     using System;
     using PostOffice.API.DTOs.ParcelService;
     using AutoMapper;
+    using PostOffice.API.DTOs.ParcelServicePrice;
 
     public class ParcelServiceService : IParcelServiceRepository
     {
@@ -21,13 +22,6 @@ namespace PostOffice.API.Repositories.ParcelService
             _context = context;
             _mapper = mapper;
         }
-        public async Task<ParcelServiceBaseDTO> GetParcelServiceList()
-        {
-            var parcelservices = _context.ParcelServices.ToList();
-            var parcelserviceDtos = _mapper.Map<ParcelServiceBaseDTO>(parcelservices);
-
-            return parcelserviceDtos;
-        }
 
         public async Task<ParcelService> AddParcelService(ParcelServiceCreateDTO parcelServiceCreateDTO)
         {
@@ -37,18 +31,18 @@ namespace PostOffice.API.Repositories.ParcelService
             return parcelService;
         }
 
-        public async Task<bool> UpdateParcelService(int id, ParcelServiceUpdateDTO parcelServiceUpdateDTO)
+        public async Task<ParcelService> UpdateParcelService(int id,ParcelServiceUpdateDTO parcelServiceUpdateDTO)
         {
-            var parcelservice = _context.ParcelServices.SingleOrDefault(p => p.service_id == id);
+            var parcelservice = await _context.ParcelServices.SingleOrDefaultAsync(p => p.service_id == id);
             if (parcelservice == null)
             {
-                return false;
+                throw new Exception("Not found");
             }
-            _mapper.Map(parcelServiceUpdateDTO, parcelservice);
+           _mapper.Map(parcelServiceUpdateDTO, parcelservice);
 
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
 
-            return true;
+            return parcelservice;
         }
 
         public async Task<ParcelServiceBaseDTO> GetParcelServiceById(int id)
@@ -61,5 +55,7 @@ namespace PostOffice.API.Repositories.ParcelService
             }
             return parcelServiceDto;
         }
+
+
     }
 }

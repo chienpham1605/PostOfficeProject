@@ -78,5 +78,10 @@ namespace PostOffice.API.Repositories.WeightScope
         {
             throw new NotImplementedException();
         }
+
+        public Task<WeightScope> GetPriceWeight(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

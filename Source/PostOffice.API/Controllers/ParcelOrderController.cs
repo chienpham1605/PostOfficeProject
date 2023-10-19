@@ -35,7 +35,8 @@ namespace PostOffice.API.Controllers
             var records = _mapper.Map<List<ParcelOrderBase>>(areas);
             return Ok(records);
         }
-        [HttpGet("parcelorders/{id}", Name = "GetParcelOrderById")]
+        [HttpGet("{id}")]
+       
         public async Task<IActionResult> GetParcelOrderById(int id)
         {
             var parcelOrderDto = await _repository.GetParcelOrderById(id);

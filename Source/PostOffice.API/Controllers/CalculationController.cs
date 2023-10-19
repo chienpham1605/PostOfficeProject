@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PostOffice.API.Data.Context;
+using PostOffice.API.Data.Models;
+using PostOffice.API.DTOs.ParcelOrder;
+using PostOffice.API.DTOs.Pincode;
 
 namespace PostOffice.API.Controllers
 {
@@ -28,6 +31,12 @@ namespace PostOffice.API.Controllers
         //    decimal totalFee = weightscope.Fee + parcelService.;
 
         //    return totalFee;
+        //}
+        //public async Task<IActionResult> CalculationFee(PincodeBaseDTO sender_pincode,PincodeBaseDTO receiver_pincode, ParcelInfo parcelInfo, int service_id, int parcel_type_id ) 
+        //{
+        //    var zonetype = 0;
+        //    if (sender_pincode ==receiver_pincode) { zonetype =1};
+        
         //}
     }
 }

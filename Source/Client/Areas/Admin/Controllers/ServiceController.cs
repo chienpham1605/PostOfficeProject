@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostOffice.API.Data.Models;
-using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelService;
 using System.Text;
 
@@ -21,19 +20,11 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            List <ParcelServiceBaseDTO> parcelServices = new List<ParcelServiceBaseDTO>();
+            List<ParcelServiceBaseDTO> parcelServices = new List<ParcelServiceBaseDTO>();
             try
             {
-                HttpResponseMessage response = await _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelService/GetAllService");
-                if (response.IsSuccessStatusCode)
-                {
-                    string data = await response.Content.ReadAsStringAsync();
-                    parcelServices = JsonConvert.DeserializeObject<List<ParcelServiceBaseDTO>>(data);
-                }
-                else
-                {
-                    throw new Exception("Error Message");
-                }
+                string data = await _httpClient.GetStringAsync(_httpClient.BaseAddress + "/ParcelService/GetAllService");
+                parcelServices = JsonConvert.DeserializeObject<List<ParcelServiceBaseDTO>>(data);
             }
             catch (Exception ex)
             {
@@ -65,12 +56,12 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         {
             try
             {
-                ParcelServiceBaseDTO parcelService = new ParcelServiceBaseDTO();
+                ParcelServiceUpdateDTO parcelService = new ParcelServiceUpdateDTO();
                 HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelOrder/GetServiceById/services" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    parcelService = JsonConvert.DeserializeObject<ParcelServiceBaseDTO>(data);
+                    parcelService = JsonConvert.DeserializeObject<ParcelServiceUpdateDTO>(data);
 
                 }
                 return View(parcelService);

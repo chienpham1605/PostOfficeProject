@@ -13,6 +13,7 @@
             <th>@Html.DisplayNameFor(model => model.receiver_email)</th>
             <th>@Html.DisplayNameFor(model => model.order_status)</th>
             <th>@Html.DisplayNameFor(model => model.note)</th>
+            <th>Details</th>
         </tr>
     </thead>
     <tbody>
@@ -26,7 +27,7 @@
             <td>@item.receiver_email</td>
             <td>@item.order_status</td>
             <td>@item.note</td>
-
+            <td>@Html.ActionLink("Shipping","Shipping",new {id = item.id})</td>
         </tr>
         }
     </tbody>
