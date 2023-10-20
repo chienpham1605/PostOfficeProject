@@ -10,6 +10,16 @@
 *.userosscache
 *.sln.docstates
 
+
+.vs/
+Client/bin/
+Client/obj/
+Client/Migrations/*.cs
+
+PostOffice.API/bin/
+PostOffice.API/obj/
+PostOffice.API/Migrations/*.cs
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

@@ -25,4 +25,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+
+    <Reference Include="ClassLibrary3">
+      <HintPath>..\..\..\..\dotnet\Test\ClassLibrary3\bin\Debug\net6.0\ClassLibrary3.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
