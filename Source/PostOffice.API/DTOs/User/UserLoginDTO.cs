@@ -8,5 +8,7 @@ namespace PostOffice.API.DTOs.User
         public string Email { get; set; } = null!;
         [Required]
         public string Password { get; set; } = null!;
+        [Required]
+        public bool RememberMe { get; set; }
     }
 }

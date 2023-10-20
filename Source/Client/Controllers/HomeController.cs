@@ -15,10 +15,10 @@ namespace Client.Controllers
         }
         [HttpGet]
         public IActionResult Index()
-        {
+        {             
             return View();
-        }
-        [HttpGet]
+        }         
+
         public IActionResult Contact()
         {
             return View();

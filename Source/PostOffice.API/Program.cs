@@ -12,6 +12,11 @@ using PostOffice.API.Repositories.ParcelService;
 using PostOffice.API.Repositories.ParcelServicePrice;
 using PostOffice.API.Repositories.ParcelType;
 using PostOffice.API.Repositories.WeightScope;
+using PostOffice.API.Repositorities.MoneyOrder;
+using PostOffice.API.Repositorities.MoneyScope;
+using PostOffice.API.Repositorities.MoneyServicePrice;
+using PostOffice.API.Repositorities.Pincode;
+using PostOffice.API.Repositorities.User;
 using PostOffice.API.Repositorities.WeightScope;
 using PostOffice.API.Utilities.Mail.Models;
 using PostOffice.API.Utilities.Mail.Services;
@@ -90,6 +95,21 @@ builder.Services.AddScoped<IParcelOrderRepository, ParcelOrderService>();
 builder.Services.AddScoped<IParcelTypeRepository, ParcelTypeService>();
 builder.Services.AddScoped<IWeightScopeRepository, WeightScopeService>();
 builder.Services.AddScoped<IParcelServiceRepository, ParcelServiceService>();
+builder.Services.AddScoped<IMoneyOrderRepository, MoneyOrderRepository>();
+builder.Services.AddScoped<IMoneyServiceRepository, MoneyServiceRepository>();
+builder.Services.AddScoped<IMoneyScopeRepository, MoneyScopeRepository>();
+builder.Services.AddScoped<IPincodeRepository, PincodeRepository>();
+builder.Services.AddScoped<IMoneyServiceRepository, MoneyServiceRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+
+
+
+
+
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });
