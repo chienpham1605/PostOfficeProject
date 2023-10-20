@@ -15,6 +15,15 @@ PostOffice.API/bin/
 PostOffice.API/obj/
 PostOffice.API/Migrations/*.cs
 
+PostOffice.Client/bin/
+PostOffice.Client/obj/
+PostOffice.Client/Migrations/*.cs
+
+PostOffice.API/bin/
+PostOffice.API/obj/
+PostOffice.API/Migrations/*.cs
+
+
 
 *.rsuser
 *.suo
