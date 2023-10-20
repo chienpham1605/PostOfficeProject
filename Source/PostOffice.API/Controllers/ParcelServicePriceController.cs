@@ -15,7 +15,7 @@ using System.Security.Policy;
 
 namespace PostOffice.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ParcelServicePriceController : ControllerBase
     {
@@ -46,6 +46,13 @@ namespace PostOffice.API.Controllers
             return Ok(servicePriceCreateDTO);
 
         }
+        [HttpGet("id")]
+        public async Task<IActionResult> GetPriceById(int id)
+        {
+            var serviceById = await _repository.GetServicePriceById(id);
+            return Ok(serviceById);
+        }
+
         [HttpPut]
         public async Task<IActionResult> UpdateServicePrice(int id, [FromBody] ServicePriceUpdateDTO servicePriceUpdateDTO)
         {
@@ -58,6 +65,27 @@ namespace PostOffice.API.Controllers
 
             return NoContent();
 
+        }
+
+        [HttpGet("Express")]
+        public async Task<IActionResult> GetServiceExpress()
+        {
+            var prices = from p in _context.ServicePrices
+                         join w in _context.WeightScopes on p.scope_weight_id equals w.id
+                         join z in _context.ZoneTypes on p.zone_type_id equals z.id
+                         join s in _context.ParcelServices on p.service_id equals s.service_id
+                         where w.id == p.scope_weight_id && z.id == p.zone_type_id
+                         orderby s.service_id == 1, z.zone_description
+                         select new ServicePriceExpress
+                         {
+                             id = p.parcel_price_id,
+                             Name = s.name,
+                             ServicePrice = (decimal)p.service_price,
+                             Description = w.description,
+                             ZoneDescription = z.zone_description
+                         };
+
+            return Ok(await prices.ToListAsync());
         }
 
 

@@ -1,17 +1,22 @@
-﻿using PostOffice.Client.Areas.Client.Models;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using PostOffice.API.Data.Context;
+using PostOffice.Client.Models;
 
 namespace Client.Controllers
 {
    
     public class HomeController : Controller
     {
+        
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            
         }
         [HttpGet]
         public IActionResult Index()
@@ -37,15 +42,17 @@ namespace Client.Controllers
         {
             return View();
         }
+        public IActionResult ExpressService()
+        {
+            
+            return View();
+        }
         [HttpGet]
         public IActionResult FinacialDetail()
         {
             return View();
         }
-        public IActionResult ExpressService()
-        {
-            return View();
-        }
+        
         [HttpGet]
         public IActionResult MoneyService()
         {

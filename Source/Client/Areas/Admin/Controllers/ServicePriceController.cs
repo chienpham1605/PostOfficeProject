@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostOffice.API.DTOs.ParcelOrder;
+using PostOffice.API.DTOs.ParcelService;
 using PostOffice.API.DTOs.ParcelServicePrice;
 using System.Net.Http;
+using System.Text;
 
 namespace PostOffice.Client.Areas.Admin.Controllers
 {
@@ -20,14 +22,14 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            List<ServicePriceBaseDTO> servicePrice = new List<ServicePriceBaseDTO>();
+            List<ServicePriceExpress> servicePrice = new List<ServicePriceExpress>();
             try
             {
-                HttpResponseMessage response = await _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelServicePrice/GetPrices");
+                HttpResponseMessage response = await _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelServicePrice/GetServiceExpress/Express");
                 if (response.IsSuccessStatusCode)
                 {
                     string data = await response.Content.ReadAsStringAsync();
-                    servicePrice = JsonConvert.DeserializeObject<List<ServicePriceBaseDTO>>(data);
+                    servicePrice = JsonConvert.DeserializeObject<List<ServicePriceExpress>>(data);
                 }
                 else
                 {
@@ -39,6 +41,39 @@ namespace PostOffice.Client.Areas.Admin.Controllers
                 // Handle exception, e.g., log error, set ViewBag message, etc.
             }
             return View(servicePrice);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            try
+            {
+                ServicePriceUpdateDTO servicePrice = new ServicePriceUpdateDTO();
+                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelOrder/GetPriceById/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    servicePrice = JsonConvert.DeserializeObject<ServicePriceUpdateDTO>(data);
+
+                }
+                return View(servicePrice);
+            }
+            catch (Exception ex)
+            {
+
+                return PartialView();
+            }
+        }
+        [HttpPost]
+        public IActionResult Edit(ParcelServiceUpdateDTO parcelServiceUpdate)
+        {
+            string data = JsonConvert.SerializeObject(parcelServiceUpdate);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelOrder/UpdateParcelService", content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("/Admin/Service/Index");
+            }
+            return View();
         }
     }
 }

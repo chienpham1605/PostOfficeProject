@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PostOffice.API.Data.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PostOffice.API.Data.Models
@@ -11,7 +12,7 @@ namespace PostOffice.API.Data.Models
         public string name { get; set; }
         public string description { get; set; }    
         
-        public string status { get; set; }
+        public bool status { get; set; }
 
         public int delivery_time { get; set; }
 

@@ -1,4 +1,4 @@
-﻿ @model IEnumerable<PostOffice.API.DTOs.ParcelServicePrice.ServicePriceBaseDTO>
+﻿@model IEnumerable<PostOffice.API.DTOs.ParcelServicePrice.ServicePriceExpress>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -13,25 +13,26 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Task</th>
-                    <th>Progress</th>
-                    <th style="width: 40px">Label</th>
+                    <th>Weight Scope</th>
+                    <th>Zone</th>
+                    <th style="width: 40px">Price</th>
+                    <th>Action</th>
                 </tr>
             </thead>
+            @foreach(var item in Model)
+            {
+                
             <tbody>
                 <tr>
-                    <td>1.</td>
-                    <td>Update software</td>
-                    <td>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-danger">55%</span></td>
+                    <td>@item.Description</td>
+                    <td>@item.ZoneDescription</td>
+                    <td>@item.ServicePrice</td>
+                    <td>@Html.ActionLink("Edit", "Edit", new {id = item.parcel_price_id})</td>
+
                 </tr>
                 
             </tbody>
+            }
         </table>
     </div>
     <!-- /.card-body -->
