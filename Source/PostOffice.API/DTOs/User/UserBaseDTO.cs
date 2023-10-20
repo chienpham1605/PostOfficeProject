@@ -11,7 +11,8 @@
         public string? PhoneNumber { get; set; }
         public string? Address { get; set; }
 
-        public string Role { get; set; }
+        public string AccessToken { get; set; }
+        public DateTime TokenExpire { get; set; }
         public string? Status { get; set; }
     }
 }
