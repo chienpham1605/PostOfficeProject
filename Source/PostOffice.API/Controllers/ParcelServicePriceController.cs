@@ -8,6 +8,8 @@ using PostOffice.API.DTOs.Area;
 using PostOffice.API.DTOs.ParcelService;
 using PostOffice.API.DTOs.ParcelServicePrice;
 using PostOffice.API.DTOs.ParcelType;
+using PostOffice.API.DTOs.WeightScope;
+
 using PostOffice.API.Repositories.ParcelServicePrice;
 using System.Security.Policy;
 
@@ -20,7 +22,7 @@ namespace PostOffice.API.Controllers
         private readonly IServicePriceRepository _repository;
         private readonly IMapper _mapper;
         private readonly AppDbContext _context;
-        public ParcelServicePriceController(IServicePriceRepository repository, AppDbContext context, IMapper mapper) 
+        public ParcelServicePriceController(IServicePriceRepository repository, AppDbContext context, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -45,7 +47,7 @@ namespace PostOffice.API.Controllers
 
         }
         [HttpPut]
-        public async Task<IActionResult> UpdateServicePrice(int id,[FromBody] ServicePriceUpdateDTO servicePriceUpdateDTO)
+        public async Task<IActionResult> UpdateServicePrice(int id, [FromBody] ServicePriceUpdateDTO servicePriceUpdateDTO)
         {
             var feeUpdated = await _repository.UpdateServicePrice(id, servicePriceUpdateDTO);
 
@@ -61,3 +63,4 @@ namespace PostOffice.API.Controllers
 
     }
 }
+

@@ -28,6 +28,11 @@ namespace PostOffice.API.Helpers
 
             CreateMap<ServicePriceBaseDTO, ParcelServicePrice>().ReverseMap();
 
+            CreateMap<ServicePriceCreateDTO, ParcelServicePrice>();
+            CreateMap<ServicePriceUpdateDTO, ParcelServicePrice>();
+            CreateMap<ServicePriceWeight, ParcelServicePrice>().ReverseMap();
+
+
             CreateMap< ParcelService, ParcelServiceBaseDTO>().ReverseMap(); 
             CreateMap<ParcelServiceCreateDTO, ParcelService>();
             CreateMap<ParcelServiceUpdateDTO, ParcelService>().ReverseMap();
@@ -46,8 +51,6 @@ namespace PostOffice.API.Helpers
             CreateMap<ParcelOrder, ParcelOrderCreateDTO>().ReverseMap();
             CreateMap<ParcelOrderUpdateDTO, ParcelOrder>().ReverseMap();
 
-            CreateMap<ServicePriceCreateDTO, ParcelServicePrice>();
-            CreateMap<ServicePriceUpdateDTO, ParcelServicePrice>();
         }
     }
 }
