@@ -12,7 +12,11 @@ namespace PostOffice.API.Data.Models
         public string name { get; set; }
         public string description { get; set; }    
         
+<<<<<<< Updated upstream
         public bool status { get; set; }
+=======
+        public ServiceStatus status { get; set; }
+>>>>>>> Stashed changes
 
         public int delivery_time { get; set; }
 

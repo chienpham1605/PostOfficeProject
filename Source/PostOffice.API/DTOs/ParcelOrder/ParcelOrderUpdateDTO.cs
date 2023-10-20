@@ -1,8 +1,10 @@
-﻿namespace PostOffice.API.DTOs.ParcelOrder
+﻿using PostOffice.API.Data.Enums;
+
+namespace PostOffice.API.DTOs.ParcelOrder
 {
     public class ParcelOrderUpdateDTO
     {
-        public string? order_status { get; set; }
+        public OrderStatus order_status { get; set; }
 
         //datetime infor
         public DateTime send_date { get; set; }

@@ -1,4 +1,5 @@
-﻿using PostOffice.API.DTOs.Pincode;
+﻿using PostOffice.API.Data.Enums;
+using PostOffice.API.DTOs.Pincode;
 
 namespace PostOffice.API.DTOs.ParcelOrder
 {
@@ -19,7 +20,7 @@ namespace PostOffice.API.DTOs.ParcelOrder
         public string? receiver_email { get; set; }
 
         //parcel infor
-        public string? order_status { get; set; }
+        public OrderStatus order_status { get; set; }
         public string? description { get; set; }
         public string? note { get; set; }
         public float? parcel_length { get; set; }
