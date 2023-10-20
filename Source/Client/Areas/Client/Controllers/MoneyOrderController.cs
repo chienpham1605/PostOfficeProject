@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -6,7 +6,7 @@ using PostOffice.API.DTOs.MoneyOrder;
 using PostOffice.API.DTOs.MoneyScope;
 using PostOffice.API.DTOs.MoneyServicePrice;
 using PostOffice.API.DTOs.Pincode;
-
+using System.Security.Claims;
 namespace PostOffice.Client.Areas.Client.Controllers
 {
     [Area("Client")]
@@ -19,6 +19,12 @@ namespace PostOffice.Client.Areas.Client.Controllers
         private readonly string moneyorderURL = "https://localhost:7053/api/MoneyOrder/";
         private readonly string moneyserviceURL = "https://localhost:7053/api/MoneyService/";
         [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return View();
+        }
+
         public IActionResult Create()
         {
             List<PincodeBaseDTO>? pincodeList = JsonConvert.DeserializeObject<List<PincodeBaseDTO>>(
@@ -31,6 +37,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
         [HttpPost]
         public IActionResult CreateMoneyOrder(MoneyOrderBaseDTO moneyOrderCreateDTO)
         {
+            ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             Guid guid = Guid.Parse("49BD714F-9576-45BA-B5B7-F00649BE00DE");
             moneyOrderCreateDTO.user_id = guid;
             var test = httpClient.PostAsJsonAsync<MoneyOrderBaseDTO>(moneyorderURL, moneyOrderCreateDTO).Result;

@@ -72,7 +72,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    parcelService = JsonConvert.DeserializeObject<ParcelServiceBaseDTO>(data);
+                    parcelService = JsonConvert.DeserializeObject<ParcelServiceUpdateDTO>(data);
 
                 }
                 return View(parcelService);

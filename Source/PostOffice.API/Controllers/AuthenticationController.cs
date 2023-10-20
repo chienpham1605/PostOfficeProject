@@ -13,7 +13,7 @@ using System.Text;
 
 namespace PostOffice.API.Controllers
 {
-    [Route("api/[controller]")]
+   /* [Route("api/[controller]")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
@@ -142,10 +142,18 @@ namespace PostOffice.API.Controllers
                 var jwtToken = GetToken(authClaims);
 
                 //return the token
-                return Ok(new
+                return Ok(new UserBaseDTO
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(jwtToken),
-                    expiration = jwtToken.ValidTo
+                    AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtToken),
+                    TokenExpire = jwtToken.ValidTo,
+                    Id = user.Id,
+                    LastName = user.LastName,
+                    FirstName = user.FirstName,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Address = user.Address,
+                    PhoneNumber = user.PhoneNumber,
+                    Create_date = user.Create_date
                 });
             }
             return Unauthorized();
@@ -231,5 +239,5 @@ namespace PostOffice.API.Controllers
                 );
             return token;
         }
-    }
+    }*/
 }

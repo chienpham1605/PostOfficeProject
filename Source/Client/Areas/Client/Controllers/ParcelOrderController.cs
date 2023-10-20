@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using PostOffice.API.DTOs.ParcelOrder;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text;
 
 
@@ -21,6 +22,8 @@ namespace PostOffice.Client.Areas.Client.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
             List<ParcelOrderBase> parcelOrders = new List<ParcelOrderBase>();
             try
             {
