@@ -19,8 +19,7 @@ using PostOffice.API.Repositorities.MoneyServicePrice;
 using PostOffice.API.Repositorities.Pincode;
 using PostOffice.API.Repositorities.User;
 using PostOffice.API.Repositorities.WeightScope;
-using PostOffice.API.Utilities.Mail.Models;
-using PostOffice.API.Utilities.Mail.Services;
+
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -81,12 +80,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //add email config
-var emailConfig = configuration
-        .GetSection("EmailConfiguration")
-        .Get<EmailConfiguration>();
-builder.Services.AddSingleton(emailConfig);
 
-builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -141,11 +135,11 @@ builder.Services.AddSwaggerGen(opt =>
 });
 
 //CORS
-builder.Services.AddCors(options => options.AddPolicy(name: "FrontEndUI", 
+builder.Services.AddCors(options => options.AddPolicy(name: "FrontEndUI",
           policy =>
           {
               policy.WithOrigins("https://localhost:7077").AllowAnyMethod().AllowAnyHeader();
-          }      
+          }
    ));
 
 var app = builder.Build();

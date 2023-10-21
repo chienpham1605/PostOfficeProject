@@ -408,3 +408,5 @@ FodyWeavers.xsd
 *.sln.iml
 /Source/PostOffice.API/Migrations/AppDbContextModelSnapshot.cs
 /Source/PostOffice.API/Migrations/*.cs
+/Source/Client/appsettings.json
+/Source/PostOffice.API/appsettings.json

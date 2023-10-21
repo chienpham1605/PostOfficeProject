@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using PostOffice.API.Data.Enums;
 using PostOffice.API.DTOs.MoneyOrder;
 using PostOffice.API.DTOs.MoneyScope;
 using PostOffice.API.DTOs.MoneyServicePrice;
@@ -33,26 +34,30 @@ namespace PostOffice.Client.Areas.Client.Controllers
                     httpClient.GetStringAsync(pincodeURL + "PincodeList").Result
                 );
             ViewBag.PincodeList = pincodeList;
+            string json = await httpClient.GetStringAsync(pincodeURL + "PincodeList");
+
             return View();
         }
-
         [HttpPost]
-        public IActionResult CreateMoneyOrder(MoneyOrderBaseDTO moneyOrderCreateDTO)
+        public IActionResult CreateMoneyOrder(MoneyOrderCreateDTO moneyOrderCreateDTO)
         {
             ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             Guid guid = Guid.Parse("49BD714F-9576-45BA-B5B7-F00649BE00DE");
             moneyOrderCreateDTO.user_id = guid;
-            var test = httpClient.PostAsJsonAsync<MoneyOrderBaseDTO>(moneyorderURL, moneyOrderCreateDTO).Result;
-            return BadRequest(test);
-        }
+            moneyOrderCreateDTO.send_date = DateTime.Now;
+            moneyOrderCreateDTO.receive_date = DateTime.Now.AddDays(3);
+            moneyOrderCreateDTO.transfer_status = API.Data.Enums.TransferStatus.Pending;
 
+            var test = httpClient.PostAsJsonAsync<MoneyOrderCreateDTO>(moneyorderURL, moneyOrderCreateDTO).Result;
+            return RedirectToAction("Create");
+        }
+        //caculate moneyscope and zonetype dbo.moneyservice
         [HttpPost]
         public async Task<IActionResult> ScopeFilter(float transfer_value, string sendPin, string recPin)
         {
-            //caculate moneyscope and zonetype dbo.moneyservice
             int zone_id;
             float total_charge;
-            if (sendPin == recPin)
+            if (sendPin == recPin && sendPin != null && recPin != null)
             {
                 zone_id = 1;
             }
@@ -71,23 +76,22 @@ namespace PostOffice.Client.Areas.Client.Controllers
             }
             var temp = await httpClient.GetStringAsync(moneyScopeURL + "ScopeValue" + "?value=" + transfer_value.ToString());
             MoneyScopeBaseDTO? moneyscope = JsonConvert.DeserializeObject<MoneyScopeBaseDTO>(temp);
-
             if (moneyscope == null)
             {
-                
+
             }
 
             temp = httpClient.GetStringAsync(moneyserviceURL + "ZoneNScope" + "?zone=" + zone_id.ToString() + "&scope=" + moneyscope.id.ToString()).Result;
             MServicePriceBaseDTO? mServicePriceBaseDTO = JsonConvert.DeserializeObject<MServicePriceBaseDTO>(temp);
 
-                total_charge = transfer_value + mServicePriceBaseDTO.fee;
+            total_charge = transfer_value + mServicePriceBaseDTO.fee;
             return Json(new
             {
                 order_fee = mServicePriceBaseDTO.fee,
                 description = moneyscope.description,
-                total_charge = total_charge
+                total_charge = total_charge,
+
             });
         }
-
     }
 }

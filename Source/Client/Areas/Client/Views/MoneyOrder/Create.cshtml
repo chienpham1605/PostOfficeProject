@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "MoneyOrderCreate";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var pincodeList = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.PinCodeList);
 }
 <style>
     .selectpicker + button.btn {
@@ -83,136 +84,187 @@
     <div class="card-header">
         Please enter <strong>Sender & Receiver </strong> Details in Required Fields Below
     </div>
-    <div class="card-body card-block">
+    <div class="card-body card-block need-validation" novalidate>
         <form asp-action="CreateMoneyOrder" asp-area="Client" asp-controller="MoneyOrder" method="post" enctype="multipart/form-data" class="form-horizontal">
 
             @*   Sender User *@
             <fieldset class="border border-3 rounded shadow-lg mb-5 mt-2 pt-5">
                 <legend class="bg-custom-blue text-light rounded"> Sender User </legend>
 
-               @*  <div class="row">
-                    <div class="col-3 form-group">
-                        <div class="col col-md-3"><label for="contact" class=" form-control-label">User Name</label></div>
-                    </div>
-                    <div class="row col-9 form-group">
-                        <div class=" col-4 mb-2">
-                            <input type="text" asp-for="user.fullname" id="sender_phone" placeholder="Full Name" class="form-control">
-                        </div>
-                        @* <div class="col-8 row mb-2 ml-2 pr-05rem">
-                        <input type="text" asp-for="user.lastname" id="sender_name" placeholder="Last Name" class="col-9 form-control border-left-only rounded-left">
-
-                        </div> 
-
-                    </div>
+                @*  <div class="row">
+                <div class="col-3 form-group">
+                <div class="col col-md-3"><label for="contact" class=" form-control-label">User Name</label></div>
+                </div>
+                <div class="row col-9 form-group">
+                <div class=" col-4 mb-2">
+                <input type="text" asp-for="user.fullname" id="sender_phone" placeholder="Full Name" class="form-control">
+                </div>
+                @* <div class="col-8 row mb-2 ml-2 pr-05rem">
+                <input type="text" asp-for="user.lastname" id="sender_name" placeholder="Last Name" class="col-9 form-control border-left-only rounded-left">
+                </div>
+                </div>
                 </div> *@
-
                 <div class="row form-group">
-                    <div class="col-3 form-group">
-                        <div class="col col-md-4"><label for="contact" class=" form-control-label">Sender Pincode</label></div>
-                    </div>
-                    <div class="col-9 form-group">
-                        <input asp-for="sender_pincode" class="form-control" list="datalistOptions" id="sender_pincode" placeholder="Type to search...">
-                       
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="sender_address" class=" form-control-label">Sender Address</label></div>
-                    <div class="col-12 col-md-9">
-                        <input type="text" asp-for="sender_address" id="sender_address" placeholder=" No., Street, Ward " class="form-control"><small class="form-text text-muted">Example: 275, Nguyen Van Dau, Phuong 11</small>
-                    </div>
-                </div>
-              @*   <div class="row">
-                    <div class="col-3 form-group">
-                        <div class="col col-md-3"><label for="contact" class=" form-control-label">Contact</label></div>
-                    </div>
-                    <div class="row col-9 form-group">
-                        <div class=" col-4 mb-2">
-                            <input type="text" asp-for="sender_phone" id="sender_phone" placeholder="Your Number" class="form-control">
+                    <div class="col col-md-3">
+                        <div class="col-12 col-md-9">
+                            <label for="contact" class="form-control-label">User Info</label>
                         </div>
-                        <div class="col-8 row mb-2">
-                            <div class="col-7">
-                                <input type="text" asp-for="user_email" id="sender_name" placeholder="Your Email" class="form-control border-left-only rounded-left">
+                    </div>
+                    <div class="col col-md-9">
+                        <div class="row g-3">
+                            <div class="col-md-4 mb-2">
+                                <label for="firstname" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstname" required />
                             </div>
-                            <button type="submit" class="btn btn-primary col-3 pb-1 rounded-right ">Confirm</button>
+                            <div class="col-md-4 mb-2">
+                                <label for="lastname" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastname" required />
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <div class="col-12 col-md-9">
+                            <label for="contact" class="form-control-label">Sender Pincode</label>
+                        </div>
+                    </div>
+                    <div class=" col col-md-9">
+                        <div class="row g-3">
+                            <div class="col-md-4 mb-2">
+                                <input asp-for="sender_pincode" class="form-control" list="datalistOptions"
+                                       id="sender_pincode" placeholder="Your Area" onchange="transferRemove(this)" required />
+                                <div id="city_name_send"</div>
+                            </div>
+                           @*  <div class="col-md-4 mb-2">
+                                <input asp-for="sender_pincode" type="text" class="form-control" id="city_name_send" required />
+                            </div> *@
+                              
+                        </div>
+                    </div>
+                </div>
+                @*  <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="City Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <span class="input-group-text" id="city_name_send"></span>
+                </div> *@
+
+                @* <div class="row form-group">
+                <div class="col col-md-3">
+                <div class="col-12 col-md-9">
+                <label for="contact" class="form-control-label">Sender Pincode</label></div>
+                </div>
+                <div class="col-9 form-group">
+                <input asp-for="sender_pincode" class="form-control" list="datalistOptions" id="sender_pincode" placeholder="Type to search...">
+                </div>
+                </div> *@
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="sender_address" class="form-control-label">Sender Address</label></div>
+                    <div class="col-12 col-md-9">
+                        <input type="text" asp-for="sender_address" id="sender_address" placeholder=" No., Street, Ward " class="form-control" required>
+                        <small class="form-text text-muted">Example: 275, Nguyen Van Dau, Phuong 11</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3 form-group">
+                        <div class="col col-md-3"><label for="contact" class="form-control-label">Contact</label></div>
+                    </div>
+                    <div class="row col-9 form-group">
+                        <div class=" col-4 mb-2">
+                            <input type="text" asp-for="sender_phone" id="sender_phone" placeholder="Your Number" class="form-control" required>
+                        </div>
+                        @*  <div class="col-8 row mb-2">
+                        <div class="col-7">
+                        <input type="text"  id="sender_name" placeholder="Your Email" class="form-control border-left-only rounded-left">
+                        </div>
+                        <button type="submit" class="btn btn-primary col-3 pb-1 rounded-right ">Confirm</button>
+                        </div> *@
 
                     </div>
-                </div> *@
+                </div>
 
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="sender_national_identity_number" class=" form-control-label">National Number</label></div>
                     <div class="col-12 col-md-9">
-                        <input type="text" asp-for="sender_national_identity_number" id="sender_national_identity_number" placeholder="your national identity number" class="form-control"><small class="form-text text-muted">Get information</small>
+                        <input type="text" asp-for="sender_national_identity_number" id="sender_national_identity_number" placeholder="your national identity number" class="form-control" required>
                     </div>
                 </div>
             </fieldset>
 
-            @* Receiver User *@
+            @* Receiver User  *@
 
-            <fieldset class="border border-3 rounded shadow mb-5  mt-2 m-1 pt-5">
+            <fieldset class="border border-3 rounded shadow-lg mb-5  mt-2 m-1 pt-5">
                 <legend class="bg-custom-blue text-light rounded">Receiver User</legend>
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="receiver_name" class=" form-control-label">Receiver Name</label></div>
-                    <div class="col-12 col-md-9">
-                        <input type="text" asp-for="receiver_name" id="receiver_name" placeholder="receiver name" class="form-control">
+                    <div class="col-12 col-md-9 mb-2">
+                        <input type="text" asp-for="receiver_name" id="receiver_name" placeholder="receiver name" class="form-control" required>
+                        <small class="form-text text-muted">Please enter correctly his/her name in citizen ID card</small>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col col-md-3"><label for="receiver_pincode" class=" form-control-label">Receiver Pincode></label></div>
-                    <div class="col-9 form-group">
-                        <input asp-for="receiver_pincode" class="form-control" list="datalistOptions" id="receiver_pincode" placeholder="Type to search...">
+                    <div class="col col-md-3"><label for="receiver_pincode" class=" form-control-label">Receiver Pincode</label></div>
+                    <div class="col-md-4 mb-2">
+                        <input asp-for="receiver_pincode" class="form-control" list="datalistOptions"
+                               id="receiver_pincode" placeholder="Your Area" onchange="transferRemove(this)" required />
+                        <div id="city_name_rec"></div>
                     </div>
+
                 </div>
 
                 <div class="row form-group">
-                    <div class="col col-md-3"><label for="receiver_phone" class=" form-control-label">Receiver Phone</label></div>
-                    <div class="col-12 col-md-9">
-                        <input type="text" asp-for="receiver_phone" id="receiver_phone" placeholder="receiver phone" class="form-control">
+                    <div class="col col-md-3"><label for="receiver_address" class="form-control-label">Receiver Address</label></div>
+                    <div class="col-12 col-md-9 mb-2">
+                        <input type="text" asp-for="receiver_address" id="sender_address" placeholder=" No., Street, Ward " class="form-control" required>
+                        <small class="form-text text-muted">Example: 275, Nguyen Van Dau, Phuong 11</small>
                     </div>
-                </div>
 
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="receiver_national_identity_number" class=" form-control-label">Receiver National Number</label></div>
-                    <div class="col-12 col-md-9">
-                        <input type="text" asp-for="receiver_national_identity_number" id="receiver_national_identity_number" placeholder="his/her national identity number" class="form-control"><small class="form-text text-muted">Get information</small>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="receiver_phone" class=" form-control-label">Receiver Phone</label></div>
+                        <div class="col-12 col-md-9 mb-2">
+                            <input type="text" asp-for="receiver_phone" id="receiver_phone" placeholder="His/her phone number" class="form-control" required>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="receiver_national_identity_number" class=" form-control-label">Receiver National Number</label></div>
+                        <div class="col-12 col-md-9 mb-2">
+                            <input type="text" asp-for="receiver_national_identity_number" id="receiver_national_identity_number" placeholder="his/her national identity number" class="form-control">
+                        </div>
+                    </div>
 
             </fieldset>
 
-
-
-
             @*  Money - Order - Fee *@
 
-            <fieldset class="border border-3 rounded shadow mb-5  mt-2 m-1 pt-5">
+            <fieldset class="border border-3 rounded shadow-lg mb-5  mt-2 m-1 pt-5">
                 <legend class="bg-custom-blue text-light rounded">Money Transfer & Fee</legend>
 
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="selectSm" class=" form-control-label">Transfer Value</label></div>
-                    <div class="col-12 col-md-9">
-                        <input type="number" min="0" asp-for="transfer_value" id="transfer_value" placeholder="transfer value" class="form-control" onchange="filter()">
-                        <div id="display_value"></div>
-                        <div id="description_value"></div>
+                    <div class="col-12 col-md-9 mb-2">
+                        <input type="number" min="0" asp-for="transfer_value" id="transfer_value" placeholder="transfer value" class="form-control" onkeyup="filter()" disabled>
+                        <a class="text-danger" id="display_value"></a>
                     </div>
                 </div>
 
 
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="money_order_fee" class=" form-control-label">Order Fee</label></div>
-                    <div class="col-12 col-md-9">
+                    <div class="col-12 col-md-9 mb-2">
                         <input readonly type="text" asp-for="transfer_fee" id="money_order_fee" placeholder="order fee" class="form-control">
+                        <div id="description_value"></div>
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="money_transfer" class=" form-control-label">Fee Payer</label></div>
                     <div class="d-flex flex-row mb-3">
                         <label class="w-15">
-                            <input type="radio" asp-for="payer"  value="sender" class="card-input-gender-element" checked required />
+                            <input type="radio" asp-for="payer" value="sender" class="card-input-gender-element" checked required />
                             <div class="card card-input px-0">
                                 <div class="card-body row fs-5">
                                     <div class="col-9 text-center">
-                                        Sender Pay 
+                                        Sender Pay
                                     </div>
                                     <span class="col-3 gender-check float-start">&#10004;</span>
                                 </div>
@@ -223,7 +275,7 @@
                             <div class="card card-input px-0">
                                 <div class="card-body row fs-5">
                                     <div class="col-lg-9 col-12 text-center">
-                                        Receiver Pay 
+                                        Receiver Pay
                                     </div>
                                     <span class="col-lg-3 col-12 gender-check float-start">&#10004;</span>
                                 </div>
@@ -233,94 +285,136 @@
                 </div>
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="total_charge" class=" form-control-label">Total Charge</label></div>
-                    <div class="col-12 col-md-9">
-                        <input type="number" asp-for="total_charge" id="total_charge" placeholder="money order charge" class="form-control">
+                    <div class="col-12 col-md-9 mb-2">
+
+                        <input type="number" asp-for="total_charge" id="total_charge" placeholder="money order charge" class="form-control" readonly>
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="transfer_description" class=" form-control-label">Transfer Description</label></div>
-                    <div class="col-12 col-md-9"><textarea id="number-input" rows="9" placeholder="Content..." class="form-control"></textarea></div>
+                    <div class="col-12 col-md-9"><textarea id="number-input" rows="9" placeholder="Example: Bring your citizen ID card to receive money" class="form-control"></textarea></div>
+                </div>
+                <!-- Button Confirm -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmmoney">
+                    Confirm!!!
+                </button>
+                <button type="reset" class="btn btn-danger ">
+                    <i class="fa fa-dot-circle-o"></i> Reset
+                </button>
+
+                <!-- Modal of Confirm -->
+                <div class="modal fade" id="confirmmoney" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">CAUTION !!!</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>1. Your transfer amount will be transferred within 3 days from the date of confirmation.</p>
+                                <p>
+                                    2. The recipient must go to the nearest post office and bring their citizen identification
+                                    card/ID card for confirmation.
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-dot-circle-o"></i> Submit
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </fieldset>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary btn-sm">
-                    <i class="fa fa-dot-circle-o"></i> Submit
-                </button>
-                <button type="reset" class="btn btn-danger btn-sm">
-                    <i class="fa fa-ban"></i> Reset
-                </button>
-            </div>
+
         </form>
     </div>
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var inputElement = document.getElementById("transfer_value");
-        var displayElement = document.getElementById("display_value");
-        inputElement.addEventListener("input", function () {
-            var inputValue = inputElement.value;
-            if (!isNaN(inputValue)) {
-                var formattedValue = convertToWords(inputValue);
-                displayElement.innerText = formattedValue;
-            } else {
-                displayElement.innerText = "";
-            }
-        });
-
-        function convertToWords(number) {
-            var words = ["", "Thousand", "Million", "Billion"];
-            var num = parseInt(number, 10);
-            var result = "";
-
-            if (num === 0) {
-                return "Zero";
-            }
-
-            var i = 0;
-            while (num > 0) {
-                var chunk = num % 1000;
-                if (chunk > 0) {
-                    result = convertChunkToWords(chunk) + " " + words[i] + " " + result;
-                }
-                num = Math.floor(num / 1000);
-                i++;
-            }
-
-            return result.trim();
-        }
-
-        function convertChunkToWords(chunk) {
-            var ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
-            var teens = ["", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
-            var tens = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
-            var result = "";
-
-            var hundreds = Math.floor(chunk / 100);
-            var tensAndOnes = chunk % 100;
-
-            if (hundreds > 0) {
-                result += ones[hundreds] + " Hundred ";
-            }
-
-            if (tensAndOnes > 0) {
-                if (tensAndOnes < 10) {
-                    result += ones[tensAndOnes];
-                } else if (tensAndOnes < 20) {
-                    result += teens[tensAndOnes - 10];
-                } else {
-                    result += tens[Math.floor(tensAndOnes / 10)] + " " + ones[tensAndOnes % 10];
-                }
-            }
-
-            return result.trim();
+    const transfer_input = document.getElementById("transfer_value");
+    const sendpin_input = document.getElementById("sender_pincode");
+    const recpin_input = document.getElementById("receiver_pincode");
+    const citySendDiv = document.getElementById('city_name_send');
+    const cityRecDiv = document.getElementById('city_name_rec');
+    const pincodeData = @Html.Raw(pincodeList);
+    const inputElement = document.getElementById("transfer_value");
+    const displayElement = document.getElementById("display_value");
+    inputElement.addEventListener("input", function () {
+        let inputValue = inputElement.value;
+        if (!isNaN(inputValue)) {
+            let formattedValue = convertToWords(inputValue);
+            displayElement.innerText = formattedValue + "  VNĐ";
+        } else {
+            displayElement.innerText = "";
         }
     });
+    function convertToWords(number) {
+        let words = ["", "Thousand", "Million", "Billion"];
+        let num = parseInt(number, 10);
+        let result = "";
 
-    function filter(){
-        const transfer_input = document.getElementById("transfer_value");
-        const sendpin_input = document.getElementById("sender_pincode");
-        const recpin_input = document.getElementById("receiver_pincode");
+        if (num === 0) {
+            return "Zero";
+        }
+        let i = 0;
+        while (num > 0) {
+            let chunk = num % 1000;
+            if (chunk > 0) {
+                result = convertChunkToWords(chunk) + " " + words[i] + " " + result;
+            }
+            num = Math.floor(num / 1000);
+            i++;
+        }
+        return result.trim();
+    }
+    function convertChunkToWords(chunk) {
+        let ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+        let teens = ["", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+        let tens = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+        let result = "";
+        let hundreds = Math.floor(chunk / 100);
+        let tensAndOnes = chunk % 100;
+        if (hundreds > 0) {
+            result += ones[hundreds] + " Hundred ";
+        }
+        if (tensAndOnes > 0) {
+            if (tensAndOnes < 10) {
+                result += ones[tensAndOnes];
+            } else if (tensAndOnes < 20) {
+                result += teens[tensAndOnes - 10];
+            } else {
+                result += tens[Math.floor(tensAndOnes / 10)] + " " + ones[tensAndOnes % 10];
+            }
+        }
+        return result.trim();
+    }
+    function transferRemove(input) {
+        if (sendpin_input.value != "" && recpin_input.value != "") {
+            transfer_input.disabled = false;
+        }
+        const inputValue = input.value;
+        // Find the matching city_name for the entered pincode
+        const matchingCity = pincodeData.find(function (item) {
+            return item.pincode === inputValue;
+        });
+        if (matchingCity) {
+            if (input.id == "sender_pincode") {
+                citySendDiv.innerText = matchingCity.city_name;
+            }
+            if (input.id == "receiver_pincode") {
+                cityRecDiv.innerText = matchingCity.city_name;
+            }
+            // If a match is found, display the city_name
+        } else {
+            // If no match is found, you can display a message or clear the city_name div
+            cityDiv.innerText = "City not found";
+        }
+        return;
+    }
+    function filter() {
         $.ajax({
             url: "/Client/MoneyOrder/ScopeFilter",
             type: "post",
@@ -329,13 +423,12 @@
                 sendPin: sendpin_input.value,
                 recPin: recpin_input.value
             },
-            success: function (response) { 
-                document.getElementById("description_value").textContent = response.description;
+            success: function (response) {
+                document.getElementById("description_value").textContent = "Fee order to  " + response.description;
                 document.getElementById("money_order_fee").value = response.order_fee;
                 document.getElementById("total_charge").value = response.total_charge;
-            }
+            },
         })
     }
-
 </script>
 

@@ -1,4 +1,5 @@
-﻿using PostOffice.API.Data.Models;
+﻿using PostOffice.API.Data.Enums;
+using PostOffice.API.Data.Models;
 
 namespace PostOffice.API.DTOs.MoneyOrder
 {
@@ -34,7 +35,7 @@ namespace PostOffice.API.DTOs.MoneyOrder
         public DateTime? receive_date { get; set; }
 
 
-
+        public TransferStatus transfer_status { get; set; }
         //charge infor         
         public float total_charge { get; set; }
 
