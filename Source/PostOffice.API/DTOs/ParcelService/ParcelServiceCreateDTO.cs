@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PostOffice.API.Data.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace PostOffice.API.DTOs.ParcelService
 {
@@ -8,7 +9,7 @@ namespace PostOffice.API.DTOs.ParcelService
         public string? name { get; set; }
         public string description { get; set; }
         [Required]
-        public string status { get; set; }
+        public bool status { get; set; }
 
         [Required]
         public int delivery_time { get; set; }

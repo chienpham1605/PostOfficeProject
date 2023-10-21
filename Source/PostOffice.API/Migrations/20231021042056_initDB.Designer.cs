@@ -12,14 +12,14 @@ using PostOffice.API.Data.Context;
 namespace PostOffice.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231017040630_initDB")]
+    [Migration("20231021042056_initDB")]
     partial class initDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.22")
+                .HasAnnotation("ProductVersion", "6.0.23")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -178,7 +178,7 @@ namespace PostOffice.API.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "0e9b3bc4-e035-4810-ad26-5ca48fba57f9",
+                            ConcurrencyStamp = "5fa87506-cb95-45a9-9a09-853d5f37faba",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "ADMIN"
@@ -186,7 +186,7 @@ namespace PostOffice.API.Migrations
                         new
                         {
                             Id = new Guid("79bd714f-9576-45ba-b5b7-f00649be00de"),
-                            ConcurrencyStamp = "c4a3f0b2-d567-45f8-a552-1961d3bc36b7",
+                            ConcurrencyStamp = "81c8c541-521a-4f10-b809-9ed8e010bf6c",
                             Description = "Employee role",
                             Name = "employee",
                             NormalizedName = "EMPLOYEE"
@@ -194,7 +194,7 @@ namespace PostOffice.API.Migrations
                         new
                         {
                             Id = new Guid("0d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "33002cd5-8d49-4455-811f-de5f20ce6de5",
+                            ConcurrencyStamp = "48dfc5cb-49f7-44b6-ae1d-69a2bad71b12",
                             Description = "Customer role",
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
@@ -290,7 +290,7 @@ namespace PostOffice.API.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0a59926d-a276-4faf-a7da-836fb6fb0a9b",
+                            ConcurrencyStamp = "8e895fa1-6546-4c8c-995b-8fe28af66ae8",
                             Create_date = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "onlinepostofficegroup4@gmail.com",
                             EmailConfirmed = true,
@@ -299,7 +299,7 @@ namespace PostOffice.API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "onlinepostofficegroup4@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGcMFavAzEL3Qc3aRS6PFpPzTRcnvO1+6zZQbSY/JOxEI6eMKGNT5+xVWHThyUmXqg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIBw2Zv0V+hNoUCl3oxZi7kbzhVGA9XQUUownIS/gJFHG2gHWmJNsmyFa5ipnCxiyw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -309,7 +309,7 @@ namespace PostOffice.API.Migrations
                         {
                             Id = new Guid("59bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b7a479b8-7a54-4740-9051-d9c0225c5711",
+                            ConcurrencyStamp = "38211eed-842c-42c0-99a6-ea55bfe35195",
                             Create_date = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nguyenphuonghoa0709@gmail.com",
                             EmailConfirmed = true,
@@ -318,7 +318,7 @@ namespace PostOffice.API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "nguyenphuonghoa0709@gmail.com",
                             NormalizedUserName = "HOANP",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB1JmvrkdCO7I/tdIOnTpLnVr0ktRcjWPMOPSQ9Aj1JuOHv6QJlbUl0eaHA/1It6gg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECLruET+9yPPQ24hnffNBnqewkHEo2CX51gu3g6DbazBN9B/4A+xT+DVQw2tMeRwAQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -328,7 +328,7 @@ namespace PostOffice.API.Migrations
                         {
                             Id = new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8d08f5f4-87c3-47c1-bfb0-401f53690d41",
+                            ConcurrencyStamp = "2fae0b30-1ead-49e7-bcfd-664c27238894",
                             Create_date = new DateTime(2021, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hoanguyen@gmail.com",
                             EmailConfirmed = true,
@@ -337,7 +337,7 @@ namespace PostOffice.API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hoanguyen@gmail.com",
                             NormalizedUserName = "HOANG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIl/NKjS2JZkZeCERmyyKU7qdTk6G1ZjGUtiXiNstLmp2FVK0nw6p4tYdd+xIwbrhA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDj99hi9w25I1mcfqFDCGm0C12R1gF/dM9c6O+8QpRkH8/4oC/O6y/28PEkqyIw94A==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -795,9 +795,9 @@ namespace PostOffice.API.Migrations
                         .HasMaxLength(5000)
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("order_status")
+                    b.Property<int>("order_status")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("int");
 
                     b.Property<float>("parcel_height")
                         .HasColumnType("real");
@@ -914,7 +914,7 @@ namespace PostOffice.API.Migrations
                             id = 1,
                             description = "2 books, 5 pencils",
                             note = "birthday presents",
-                            order_status = "received",
+                            order_status = 2,
                             parcel_height = 25f,
                             parcel_length = 20f,
                             parcel_type_id = 2,
@@ -960,9 +960,8 @@ namespace PostOffice.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("status")
+                        .HasColumnType("bit");
 
                     b.HasKey("service_id");
 
@@ -975,7 +974,7 @@ namespace PostOffice.API.Migrations
                             delivery_time = 3,
                             description = "These services are cost-effective but might take longer for delivery, especially for longer distances.",
                             name = "Economy",
-                            status = "in bussiness"
+                            status = true
                         },
                         new
                         {
@@ -983,7 +982,7 @@ namespace PostOffice.API.Migrations
                             delivery_time = 1,
                             description = "Fast delivery services that promise quick delivery, often within one day or overnight, regardless of distance.",
                             name = "Express",
-                            status = "in bussiness"
+                            status = true
                         });
                 });
 
