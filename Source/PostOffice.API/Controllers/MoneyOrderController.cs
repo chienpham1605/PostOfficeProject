@@ -31,26 +31,50 @@ namespace PostOffice.API.Controllers
             return Ok(moneyOrderDto);
         }
 
+        [HttpGet("MoneyorderList", Name = "GetMoneyOrders")]
+        public async Task<IActionResult> MoneyOrders()
+        {
+            var moneyorderDTOs = await _repository.MoneyOrders();
+            if (moneyorderDTOs == null)
+            {
+                return NotFound();
+            }
+            return Ok(moneyorderDTOs);
+        }
+
+        [HttpGet("StatusList", Name = "GetTransferStatus")]
+        public async Task<IActionResult> GetStatus()
+        {
+            var status = await _repository.GetStatus();
+            if (status == null)
+            {
+                return NotFound();
+            }
+            return Ok(status);
+        }
 
         [HttpPost]
-        public async Task<bool> CreateMoneyOrder(MoneyOrderBaseDTO moneyOrderDto)
+        public async Task<bool> CreateMoneyOrder(MoneyOrderCreateDTO moneyOrderDto)
         {
             await _repository.CreateMoneyOrder(moneyOrderDto);
             return true;
         }
 
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateMoneyOrder(int id, MoneyOrderBaseDTO moneyOrderUpdateDTO)
+
+        [HttpPost("UpdateMoneyManage", Name = "UpdateStatus")]
+        public async Task<bool> UpdateMoneyOrder(MoneyOrderUpdateDTO moneyOrderUpdateDTO, bool isStatus = false)
         {
-            var isUpdated = await _repository.UpdateMoneyOrder(id, moneyOrderUpdateDTO);
+            var isUpdated = await _repository.UpdateMoneyOrder(moneyOrderUpdateDTO, isStatus);
             if (!isUpdated)
             {
 
-                return NotFound();
+                return false;
             }
-            return NoContent();
+            return isUpdated;
         }
+
+
 
     }
 }

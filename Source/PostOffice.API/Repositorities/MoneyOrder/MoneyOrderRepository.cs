@@ -7,6 +7,11 @@ namespace PostOffice.API.Repositorities.MoneyOrder
     using PostOffice.API.Data.Context;
     using PostOffice.API.DTOs.MoneyOrder;
     using PostOffice.API.Repositories.MoneyOrder;
+    using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore;
+    using PostOffice.API.Data.Enums;
+  
+
     public class MoneyOrderRepository : IMoneyOrderRepository
     {
         private readonly AppDbContext _context;
@@ -16,18 +21,9 @@ namespace PostOffice.API.Repositorities.MoneyOrder
             _context = context;
             _mapper = mapper;
         }
-
-        public async Task<bool> CreateMoney(MoneyOrderCreateDTO moneyOrderCreateDTO)
+        public async Task<bool> CreateMoneyOrder(MoneyOrderCreateDTO moneyOrderDto)
         {
-           var moneycreate = _mapper.Map<MoneyOrderCreateDTO>(moneyOrderCreateDTO);
-            await _context.AddAsync(moneycreate);
-            await _context.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<bool> CreateMoneyOrder(MoneyOrderBaseDTO moneyOrderDTO)
-        {
-            var moneyOrder = _mapper.Map<MoneyOrder>(moneyOrderDTO);
+            var moneyOrder = _mapper.Map<MoneyOrder>(moneyOrderDto);
             await _context.MoneyOrders.AddAsync(moneyOrder);
             await _context.SaveChangesAsync();
             return true;
@@ -42,17 +38,52 @@ namespace PostOffice.API.Repositorities.MoneyOrder
 
         }
 
-        public async Task<bool> UpdateMoneyOrder(int id, MoneyOrderBaseDTO moneyOrderUpdateDTO)
+
+        public async Task<List<MoneyOrderBaseDTO>> MoneyOrders()
         {
-            var moneyorders = _context.MoneyOrders.SingleOrDefault(p => p.id == id);
+            var moneyorders = await _context.MoneyOrders.ToListAsync();
+            var moneyorderDTOs = _mapper.Map<List<MoneyOrderBaseDTO>>(moneyorders);
+            return moneyorderDTOs;
+        }
+
+        public async Task<bool> UpdateMoneyOrder(MoneyOrderUpdateDTO moneyOrderUpdateDTO, bool isStatus = false)
+        {
+
+            MoneyOrder moneyorders = _context.MoneyOrders.SingleOrDefault(p => p.id == moneyOrderUpdateDTO.id);
             if (moneyorders == null)
             {
                 return false;
             }
-            _mapper.Map(moneyorders, moneyOrderUpdateDTO);
-            _context.SaveChanges();
 
+            if (isStatus == true)
+            {
+                moneyorders.transfer_status = moneyOrderUpdateDTO.transfer_status;
+            }
+            else
+            {
+                _mapper.Map(moneyOrderUpdateDTO, moneyorders);
+            }
+
+            _context.SaveChanges();
             return true;
         }
+
+        public async Task<List<string>> GetStatus()
+        {
+            var enumValues = Enum.GetValues(typeof(TransferStatus));
+            var enumValueDtoList = new List<string>();
+
+            foreach (var value in enumValues)
+            {
+
+                enumValueDtoList.Add(value.ToString());
+            }
+
+            return enumValueDtoList;
+        }
+
+
+
+
     }
 }

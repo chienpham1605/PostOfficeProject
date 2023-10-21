@@ -326,7 +326,7 @@ namespace PostOffice.API.Data.Extensions
                     receiver_email = "lvbay@gmail.com",
                     receiver_national_identity_number = "0789262637",
 
-                    transfer_status = "pending",
+                    transfer_status = Enums.TransferStatus.Pending,
                     note ="pay for home rental",
                     transfer_value = 30000000,
                     transfer_fee = 15000,

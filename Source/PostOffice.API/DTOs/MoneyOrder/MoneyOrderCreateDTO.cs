@@ -1,4 +1,6 @@
-﻿namespace PostOffice.API.DTOs.MoneyOrder
+﻿using PostOffice.API.Data.Enums;
+
+namespace PostOffice.API.DTOs.MoneyOrder
 {
     public class MoneyOrderCreateDTO
     {
@@ -20,6 +22,14 @@
         public string? receiver_phone { get; set; }
         public string? receiver_email { get; set; }
         public string? receiver_national_identity_number { get; set; }
+
+        public TransferStatus transfer_status { get; set; }
+
+        //datetime infor
+        public DateTime send_date { get; set; }
+        public DateTime? receive_date { get; set; }
+
+        public string? payer { get; set; }
 
         //money order infor
 
