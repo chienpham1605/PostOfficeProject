@@ -1,13 +1,13 @@
 ﻿using PostOffice.API.Data.Models;
+using PostOffice.API.DTOs.WeightScope;
 
 namespace PostOffice.API.DTOs.ParcelServicePrice
 {
     public class ServicePriceEconomy
     {
         public int id {  get; set; }
-        public string Name { get; set; }
-        public decimal ServicePrice { get; set; }
-        public string Description { get; set; }
-        public string ZoneDescription { get; set; }
+        public float ServicePrice { get; set; }
+        public WeightScopeBaseDTO weightScope{ get; set; }
+        public ZoneType ZoneType { get; set; }
     }
 }
