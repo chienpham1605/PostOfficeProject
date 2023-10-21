@@ -5,7 +5,6 @@ using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelService;
 using System.Text;
 
-
 namespace PostOffice.Client.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -43,7 +42,6 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             return View(parcelServices);
         }
         [HttpGet]
-
         public IActionResult Create()
         {
             return View();
@@ -91,7 +89,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             HttpResponseMessage response = _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelOrder/UpdateParcelService", content).Result;
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("/Admin/Service/Index");
             }
             return View();
         }

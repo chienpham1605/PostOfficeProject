@@ -8,6 +8,7 @@ namespace PostOffice.API.Repositories.ParcelServciePrice
     using Microsoft.AspNetCore.Mvc;
     using PostOffice.API.Data.Context;
     using PostOffice.API.Data.Models;
+    using PostOffice.API.DTOs.ParcelService;
     using PostOffice.API.DTOs.ParcelServicePrice;
     using PostOffice.API.Repositories.ParcelServicePrice;
     using System.Collections.Generic;
@@ -34,7 +35,16 @@ namespace PostOffice.API.Repositories.ParcelServciePrice
             return servicePriceEntity;
         }
 
-
+        public async Task<ServicePriceBaseDTO> GetServicePriceById(int id)
+        {
+            var servicePriceId = _context.ServicePrices.SingleOrDefault(p => p.parcel_type_id == id);
+            var servicePriceDto = _mapper.Map<ServicePriceBaseDTO>(servicePriceId);
+            if (servicePriceDto == null)
+            {
+                throw new KeyNotFoundException();
+            }
+            return servicePriceDto;
+        }
         public async Task<bool> UpdateServicePrice(int id, ServicePriceUpdateDTO servicePriceUpdateDTO)
         {
             var fee = await _context.ServicePrices.SingleOrDefaultAsync(p => p.parcel_price_id == id);
@@ -51,6 +61,7 @@ namespace PostOffice.API.Repositories.ParcelServciePrice
 
             return true;
         }
+
     }
     
 }

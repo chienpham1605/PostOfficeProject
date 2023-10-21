@@ -1,16 +1,16 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Razor;
 using PostOffice.Client.Services;
+using Microsoft.EntityFrameworkCore;
+using PostOffice.API.Data.Context;
+using System.Configuration;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-
 builder.Services.AddHttpClient();
-
-
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
          options =>
          {
@@ -29,7 +29,6 @@ builder.Services.AddSession(options =>
 
 //DI
 builder.Services.AddTransient<IUserAPIClient, UserAPIClient>();
-
 
 var app = builder.Build();
 

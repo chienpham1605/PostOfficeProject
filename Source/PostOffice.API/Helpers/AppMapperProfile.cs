@@ -19,6 +19,7 @@ namespace PostOffice.API.Helpers
         public AppMapperProfile()
         {
             CreateMap<PincodeBaseDTO, Pincode>();
+
             CreateMap<AreaBaseDTO, Area>().ReverseMap(); 
             CreateMap<AreaCreateDTO, Area>();
             CreateMap<AreaUpdateDTO, Area>();
@@ -30,7 +31,11 @@ namespace PostOffice.API.Helpers
 
             CreateMap<ServicePriceBaseDTO, ParcelServicePrice>().ReverseMap();
 
-            CreateMap<ParcelServiceBaseDTO, ParcelService>().ReverseMap();
+            CreateMap<ServicePriceCreateDTO, ParcelServicePrice>();
+            CreateMap<ServicePriceUpdateDTO, ParcelServicePrice>();
+
+
+            CreateMap< ParcelService, ParcelServiceBaseDTO>().ReverseMap(); 
             CreateMap<ParcelServiceCreateDTO, ParcelService>();
             CreateMap<ParcelServiceUpdateDTO, ParcelService>().ReverseMap();
 
@@ -47,7 +52,6 @@ namespace PostOffice.API.Helpers
             CreateMap<ParcelOrderBase, ParcelOrder>().ReverseMap();
             CreateMap<ParcelOrder, ParcelOrderCreateDTO>().ReverseMap();
             CreateMap<ParcelOrderUpdateDTO, ParcelOrder>().ReverseMap();
-
             CreateMap<ServicePriceCreateDTO, ParcelServicePrice>();
             CreateMap<ServicePriceUpdateDTO, ParcelServicePrice>();
 
@@ -64,8 +68,6 @@ namespace PostOffice.API.Helpers
             CreateMap<MServicePriceUpdateDTO, MoneyServicePrice>().ReverseMap();
 
             CreateMap<PincodeBaseDTO, Pincode>().ReverseMap();
-
-
 
         }
     }

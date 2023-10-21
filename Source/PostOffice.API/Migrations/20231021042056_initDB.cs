@@ -90,7 +90,7 @@ namespace PostOffice.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    status = table.Column<bool>(type: "bit", nullable: false),
                     delivery_time = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -425,7 +425,7 @@ namespace PostOffice.API.Migrations
                     receiver_address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     receiver_phone = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     receiver_email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    order_status = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    order_status = table.Column<int>(type: "int", maxLength: 10, nullable: false),
                     description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     note = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: true),
                     parcel_length = table.Column<float>(type: "real", nullable: false),
@@ -525,9 +525,9 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("0d04dce2-969a-435d-bba4-df3f325983dc"), "0fa6daec-b21b-4ce5-ac44-842369e95ff4", "Customer role", "customer", "CUSTOMER" },
-                    { new Guid("79bd714f-9576-45ba-b5b7-f00649be00de"), "7da2111e-50ff-45cb-92ee-fc41db2e69d8", "Employee role", "employee", "EMPLOYEE" },
-                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "5fca8ad3-5e77-4a24-bff1-d5f1b4b70140", "Administrator role", "admin", "ADMIN" }
+                    { new Guid("0d04dce2-969a-435d-bba4-df3f325983dc"), "48dfc5cb-49f7-44b6-ae1d-69a2bad71b12", "Customer role", "customer", "CUSTOMER" },
+                    { new Guid("79bd714f-9576-45ba-b5b7-f00649be00de"), "81c8c541-521a-4f10-b809-9ed8e010bf6c", "Employee role", "employee", "EMPLOYEE" },
+                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "5fa87506-cb95-45a9-9a09-853d5f37faba", "Administrator role", "admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -535,9 +535,9 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Create_date", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "5c6d2e90-219a-42d0-a7a0-49c253c03722", new DateTime(2021, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "hoanguyen@gmail.com", true, "Nguyen", "Hoa", false, null, "hoanguyen@gmail.com", "HOANG", "AQAAAAEAACcQAAAAENqCcyeAFecA6oq5W7fVj1RcFEj4NpFQ24YyDG+hUVlAZ3+vLXgQNrUPJI3/ozs5TQ==", null, false, "", null, false, "hoang" },
-                    { new Guid("59bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "d1f37d00-9e36-40c1-bda0-e3abf601a46d", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyenphuonghoa0709@gmail.com", true, "Nguyen", "Phuong Hoa", false, null, "nguyenphuonghoa0709@gmail.com", "HOANP", "AQAAAAEAACcQAAAAENRBAhIzQM/VE5bGRgAzXRT3jwprxhFuqniN7OaE0AAipsVXB6q2eqhpl7Rfy9KLtg==", null, false, "", null, false, "hoanp" },
-                    { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "5efda701-929b-4d3a-88f2-8ec16f0f00b0", new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "onlinepostofficegroup4@gmail.com", true, "Pham", "Chien", false, null, "onlinepostofficegroup4@gmail.com", "admin", "AQAAAAEAACcQAAAAEPIAggmKMvkn1uEO5Mf4dpTwf0P9g4dBzo8CJ0G8r78Kqu8cYyVCM7lP+RItJrt6IA==", null, false, "", null, false, "admin" }
+                    { new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "2fae0b30-1ead-49e7-bcfd-664c27238894", new DateTime(2021, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "hoanguyen@gmail.com", true, "Nguyen", "Hoa", false, null, "hoanguyen@gmail.com", "HOANG", "AQAAAAEAACcQAAAAEDj99hi9w25I1mcfqFDCGm0C12R1gF/dM9c6O+8QpRkH8/4oC/O6y/28PEkqyIw94A==", null, false, "", null, false, "hoang" },
+                    { new Guid("59bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "38211eed-842c-42c0-99a6-ea55bfe35195", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyenphuonghoa0709@gmail.com", true, "Nguyen", "Phuong Hoa", false, null, "nguyenphuonghoa0709@gmail.com", "HOANP", "AQAAAAEAACcQAAAAECLruET+9yPPQ24hnffNBnqewkHEo2CX51gu3g6DbazBN9B/4A+xT+DVQw2tMeRwAQ==", null, false, "", null, false, "hoanp" },
+                    { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "8e895fa1-6546-4c8c-995b-8fe28af66ae8", new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "onlinepostofficegroup4@gmail.com", true, "Pham", "Chien", false, null, "onlinepostofficegroup4@gmail.com", "admin", "AQAAAAEAACcQAAAAEIBw2Zv0V+hNoUCl3oxZi7kbzhVGA9XQUUownIS/gJFHG2gHWmJNsmyFa5ipnCxiyw==", null, false, "", null, false, "admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -567,8 +567,8 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "service_id", "delivery_time", "description", "name", "status" },
                 values: new object[,]
                 {
-                    { 1, 3, "These services are cost-effective but might take longer for delivery, especially for longer distances.", "Economy", "in bussiness" },
-                    { 2, 1, "Fast delivery services that promise quick delivery, often within one day or overnight, regardless of distance.", "Express", "in bussiness" }
+                    { 1, 3, "These services are cost-effective but might take longer for delivery, especially for longer distances.", "Economy", true },
+                    { 2, 1, "Fast delivery services that promise quick delivery, often within one day or overnight, regardless of distance.", "Express", true }
                 });
 
             migrationBuilder.InsertData(
@@ -757,7 +757,7 @@ namespace PostOffice.API.Migrations
             migrationBuilder.InsertData(
                 table: "ParcelOrder",
                 columns: new[] { "id", "description", "note", "order_status", "parcel_height", "parcel_length", "parcel_type_id", "parcel_weight", "parcel_width", "payer", "payment_method", "receiver_address", "receiver_email", "receiver_name", "receiver_phone", "receiver_pincode", "sender_address", "sender_email", "sender_name", "sender_phone", "sender_pincode", "service_id", "total_charge", "user_id", "vpp_value" },
-                values: new object[] { 1, "2 books, 5 pencils", "birthday presents", "received", 25f, 20f, 2, 0f, 30f, "sender", "Cash", "100 Truong Chinh, Ward 11, Tan Binh District", "lvbay@gmail.com", "Le Van Bay", "097631370", "70000", "40 Nguyen Ba Ngoc, Ward 5, Ba Dinh District", "ttbinh@gmail.com", "Tran Van Quang", "023591330", "40000", 1, 36000f, new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"), 0f });
+                values: new object[] { 1, "2 books, 5 pencils", "birthday presents", 2, 25f, 20f, 2, 0f, 30f, "sender", "Cash", "100 Truong Chinh, Ward 11, Tan Binh District", "lvbay@gmail.com", "Le Van Bay", "097631370", "70000", "40 Nguyen Ba Ngoc, Ward 5, Ba Dinh District", "ttbinh@gmail.com", "Tran Van Quang", "023591330", "40000", 1, 36000f, new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"), 0f });
 
             migrationBuilder.InsertData(
                 table: "TrackHistories",

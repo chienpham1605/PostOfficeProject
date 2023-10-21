@@ -26,4 +26,12 @@
   </ItemGroup>
 
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\chien\Downloads\Project-Sem III\Source\PostOffice.API\DTOs\ParcelOrder\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\chien\Downloads\Project-Sem III\Source\PostOffice.API\DTOs\ParcelOrder\.editorconfig" />
+  </ItemGroup>
+
 </Project>

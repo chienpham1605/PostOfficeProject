@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<PostOffice.Client.Models.ServiceOrderExpress>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <main id="main">
@@ -43,6 +44,27 @@
                 </ul>
             </div>
 
+        </div>
+        <div class="col-lg-6 position-relative align-self-start order-lg-last order-first">
+            
+            <table class="table">
+                <thead class="table-light">
+                <th>Zone</th>
+                <th>WeightScope</th>
+                <th>Price</th>
+                </thead>
+                @foreach (var item in Model)
+                {
+                <tbody>
+                    <tr>
+                        <td>@item.ZoneDescription</td>
+                        <td>@item.WeightScope</td>
+                        <td>@item.ServicePrice</td>
+                    </tr>
+                </tbody> 
+                }
+            </table>
+           
         </div>
 
     </div>

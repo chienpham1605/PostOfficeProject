@@ -1,8 +1,65 @@
-﻿
+﻿@model PostOffice.API.DTOs.ParcelService.ParcelServiceCreateDTO
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Create</h1>
-
+<div class="card card-warning">
+    <div class="card-header">
+        <h3 class="card-title">Create the services</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form asp-action="Create" asp-controller="Service" method="post">
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" asp-for="name" class="form-control" placeholder="Enter ...">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Delivery time</label>
+                        <input type="text" asp-for="delivery_time" class="form-control" placeholder="Enter ...">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- textarea -->
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" rows="3" asp-for="description" placeholder="Enter ..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- textarea -->
+                    <div class="form-group">
+                        <label>Status</label>
+                        <textarea class="form-control" rows="3" asp-for="status" placeholder="Enter ..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- select -->
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="form-control">
+                            <option value="In Business">In Business</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" value="Create" class="btn btn-block btn-warning">Add</button>
+        </form>
+    </div>
+    <!-- /.card-body -->
+</div>

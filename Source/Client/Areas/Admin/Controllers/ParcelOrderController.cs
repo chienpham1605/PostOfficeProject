@@ -4,7 +4,6 @@ using PostOffice.API.DTOs.ParcelOrder;
 using System.Net.Http;
 using System.Text;
 
-
 namespace PostOffice.Client.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -41,7 +40,6 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             }
             return View(parcelOrders);
         }
-
         [HttpGet("id")]
         public IActionResult Edit(int id)
         {
@@ -49,6 +47,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             {
                 ParcelOrderUpdateDTO parcelOrder = new ParcelOrderUpdateDTO();
                 HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelOrder/GetParcelOrderById/" + id).Result;
+
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;

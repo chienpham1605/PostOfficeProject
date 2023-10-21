@@ -4,8 +4,6 @@ using PostOffice.API.DTOs.ParcelOrder;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
-
-
 namespace PostOffice.Client.Areas.Client.Controllers
 {
     [Area("Client")]
@@ -23,6 +21,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
             List<ParcelOrderBase> parcelOrders = new List<ParcelOrderBase>();
             try
             {
@@ -64,6 +63,28 @@ namespace PostOffice.Client.Areas.Client.Controllers
         public IActionResult Edit()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Shipping(int id)
+        {
+            try
+            {
+                ParcelOrderBase parcelOrder = new ParcelOrderBase();
+                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelOrder/GetParcelOrderById/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    parcelOrder = JsonConvert.DeserializeObject<ParcelOrderBase>(data);
+
+                }
+                return View(parcelOrder);
+            }
+            catch (Exception ex)
+            {
+
+                return View();
+            }
         }
     }
 }

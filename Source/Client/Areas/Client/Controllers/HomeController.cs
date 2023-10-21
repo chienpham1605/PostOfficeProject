@@ -22,5 +22,6 @@ namespace PostOffice.Client.Areas.Client.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToPage("/Home/Index");
         }
+
     }
 }

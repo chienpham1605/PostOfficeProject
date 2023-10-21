@@ -11,6 +11,8 @@ namespace PostOffice.API.Repositorities.WeightScope
         public Task<WeightScope>AddAsync(WeightScopeCreateDTO weightScope); // Thêm weight scope mới
         public Task<WeightScope> UpdateAsync(WeightScopeUpdateDTO weightScopeUpdate); // Cập nhật weight scope hiện có
         public Task DeleteAsync(int id); // Xóa weight scope theo id
+
+        public Task<WeightScope> GetPriceWeight(int id);
     }
 
 }

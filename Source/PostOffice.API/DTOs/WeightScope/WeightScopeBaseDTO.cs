@@ -6,6 +6,6 @@ namespace PostOffice.API.DTOs.WeightScope
         public int id { get; set; }
         public float min_weight { get; set; }
         public float max_weight { get; set; }
-        public string? description { get; set; }
+        public string description { get; set; }
     }
 }
