@@ -25,10 +25,13 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+
   <ItemGroup>
-    <Reference Include="ClassLibrary3">
-      <HintPath>..\..\..\..\dotnet\Test\ClassLibrary3\bin\Debug\net6.0\ClassLibrary3.dll</HintPath>
-    </Reference>
+    <EditorConfigFiles Remove="C:\Users\chien\Downloads\Project-Sem III\Source\PostOffice.API\DTOs\ParcelOrder\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\chien\Downloads\Project-Sem III\Source\PostOffice.API\DTOs\ParcelOrder\.editorconfig" />
   </ItemGroup>
 
 </Project>

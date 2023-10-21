@@ -17,6 +17,7 @@ using PostOffice.API.Repositorities.MoneyOrder;
 using PostOffice.API.Repositorities.MoneyScope;
 using PostOffice.API.Repositorities.MoneyServicePrice;
 using PostOffice.API.Repositorities.Pincode;
+using PostOffice.API.Repositorities.User;
 using PostOffice.API.Repositorities.WeightScope;
 
 using System.Text;
@@ -94,6 +95,15 @@ builder.Services.AddScoped<IMoneyServiceRepository, MoneyServiceRepository>();
 builder.Services.AddScoped<IMoneyScopeRepository, MoneyScopeRepository>();
 builder.Services.AddScoped<IPincodeRepository, PincodeRepository>();
 builder.Services.AddScoped<IMoneyServiceRepository, MoneyServiceRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+
+
+
+
 
 builder.Services.AddSwaggerGen(opt =>
 {

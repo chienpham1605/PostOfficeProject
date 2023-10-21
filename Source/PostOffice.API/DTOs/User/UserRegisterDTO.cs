@@ -13,12 +13,16 @@ namespace PostOffice.API.DTOs.User
         public string Email { get; set; } = null!;
         [Required]
         public string Password { get; set; } = null!;
+
+        [Required]
+        public string ConfirmPassword { get; set; } = null!;
+
         [Required]
         public string Username { get; set; }
         [Required]
-        public DateTime Create_date { get; set; }
-
+        public string PhoneNumber { get; set; } = null!;
         [Required]
-        public string Roles { get; set; } = null!;
+        public DateTime Create_date { get; set; }
+        
     }
 }

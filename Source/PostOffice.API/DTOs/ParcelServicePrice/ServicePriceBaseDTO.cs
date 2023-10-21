@@ -1,4 +1,6 @@
-﻿namespace PostOffice.API.DTOs.ParcelServicePrice
+﻿using PostOffice.API.DTOs.WeightScope;
+
+namespace PostOffice.API.DTOs.ParcelServicePrice
 {
     public class ServicePriceBaseDTO
     {
@@ -8,6 +10,8 @@
         public int parcel_type_id { get; set; }
         public int scope_weight_id { get; set; }
         public float service_price { get; set; }
+
+        public WeightScopeBaseDTO WeightScope { get; set; }
 
     }
 }

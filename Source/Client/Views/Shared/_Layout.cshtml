@@ -5,10 +5,13 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Welcome to TARS Delivery</title>
+    <title>TARS Delivery</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
+    <!-- Favicons -->
+    <link href="~/home/assets/img/favicon.png" rel="icon">
+    <link href="~/home/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +40,6 @@
 
     <!-- Template Main CSS File -->
     <link href="~/home/assets/css/main.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -46,8 +48,9 @@
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-            <a asp-controller="Home" asp-action="Index" class="logo d-flex align-items-center">
-
+            <a href="index.html" class="logo d-flex align-items-center">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1>TARS Delivery</h1>
             </a>
 
@@ -55,51 +58,39 @@
             <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
             <nav id="navbar" class="navbar">
                 <ul>
-
-                    <li><a asp-controller="Home" asp-action="about">About us</a></li>
-                    <ul>
-                        <li class="dropdown">
-                            <a asp-controller="Home" asp-action="service"><span>Services</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                            <ul>
-                                <li><a asp-controller="Home" asp-action="ExpressService">Express Delivery</a></li>
-                                <li><a asp-controller="Home" asp-action="FinacialDetail">Saving Delievery</a></li>
-                                <li><a asp-controller="home" asp-action="ServiceDetail">Standard Delivery</a></li>
-                                <li><a asp-controller="home" asp-action="MoneyService">Money Order Service</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a asp-controller="Home" asp-action="About">About</a></li>
                     <li><a href="pricing.html">Search Pincode</a></li>
+                    <li class="dropdown">
+                        <a href="#"><span>Services</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <ul>
+                            <li class="dropdown">
+                                <a asp-controller="Home" asp-action="service"><span>Parcel</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                                <ul>
+                                    <li><a asp-controller="Home" asp-action="ExpressService">Express Delivery</a></li>
+                                    <li><a asp-controller="Home" asp-action="FinacialDetail">Saving Delievery</a></li>
+                                    <li><a asp-controller="home" asp-action="ServiceDetail">Standard Delivery</a></li>                                   
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a asp-controller="Home" asp-action="service"><span>Money</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                                <ul>
+                                    <li><a asp-controller="Home" asp-action="MoneyService">Express Delivery</a></li>                                                                        
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
-                    <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a class="get-a-quote" asp-area="Authentication" asp-controller="Login" asp-action="Index">Login</a></li>
+                    <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>                    
+                        <li>
+                            <a href="/Account/Login" class="get-a-quote">Login</a>
+                        </li>
                 </ul>
             </nav><!-- .navbar -->
 
         </div>
     </header><!-- End Header -->
     <!-- End Header -->
-    <!-- ======= Hero Section ======= -->
-    <section id="hero" class="hero d-flex align-items-center">
-        <div class="container">
-            <div class="row gy-4 d-flex justify-content-between">
-                <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                    <h2 data-aos="fade-up">Our Fast Delivery give you satisfaction and convience </h2>
-                    <p data-aos="fade-up" data-aos-delay="100">
-                        TARS Delivery has developed within 10 years with a goal that giving best thing to our kings and queens
-                </div>
-
-                <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-                    <img src="~/home/assets/img/hero-img.svg" class="img-fluid mb-3 mb-lg-0" alt="">
-                </div>
-
-            </div>
-        </div>
-    </section><!-- End Hero Section -->
-
-    <main id="main">
-        @RenderBody()
-
-    </main><!-- End #main -->
+    @RenderBody()
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
 
@@ -107,9 +98,11 @@
             <div class="row gy-4">
                 <div class="col-lg-5 col-md-12 footer-info">
                     <a href="index.html" class="logo d-flex align-items-center">
-                        <span>TARS Delivery System</span>
+                        <span>TARS Delivery</span>
                     </a>
-
+                    <p>
+                        TARS Delivery is a post office that provides mail services, such as accepting letters and parcels, providing post office boxes, and selling postage stamps, packaging, and stationery. Our mission is to provide you with the best possible service at an affordable price.
+                    </p>
                     <div class="social-links d-flex mt-4">
                         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -118,14 +111,31 @@
                     </div>
                 </div>
 
+                <div class="col-lg-2 col-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Services</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="#">Parcel Order</a></li>
+                        <li><a href="#">Money Order</a></li>
+                    </ul>
+                </div>
+
                 <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
                     <h4>Contact Us</h4>
                     <p>
                         275 Nguyen Van Dau <br>
-                        Binh Thanh Dítrict, HCM 0900<br>
-                        United States <br><br>
-                        <strong>Phone:</strong> +84 91651177<br>
-                        <strong>Email:</strong> tar.devlivery@example.com<br>
+                        Binh Thanh District<br>
+                        Ho Chi Minh City <br><br>
+                        <strong>Phone:</strong> +1 5589 55488 55<br>
+                        <strong>Email:</strong> onlinepostofficegroup4@gmail.com<br>
                     </p>
 
                 </div>
@@ -135,7 +145,10 @@
 
         <div class="container mt-4">
             <div class="copyright">
-                Copyright <strong><span>TARS Delivery</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>TARS Delivery</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by FPT Aptech Group 4
             </div>
         </div>
 
@@ -147,8 +160,6 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/home/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/home/assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="~/home/assets/vendor/glightbox/js/glightbox.min.js"></script>

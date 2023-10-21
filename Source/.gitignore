@@ -5,10 +5,12 @@
 
 # User-specific files
 
+
 .vs/
-bin/
+/bin/
 /obj/
 /Migrations/*.cs
+
 
 *.rsuser
 *.suo
