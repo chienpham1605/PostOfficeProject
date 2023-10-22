@@ -54,7 +54,7 @@
             <div class="row form-group">
                 <div class="col col-md-3"><label for="selectSm" class=" form-control-label">The receiver's city</label></div>
                 <div class="col-12 col-md-9">
-                    <select asp-for="receiver_address" id="select" class="form-control">
+                    <select asp-for="receiver_pincode" id="select" class="form-control">
                         @await Component.InvokeAsync("Pincode")
                         </select>
                 </div>

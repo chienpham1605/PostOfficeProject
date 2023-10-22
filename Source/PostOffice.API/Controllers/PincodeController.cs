@@ -4,7 +4,7 @@ using PostOffice.API.Repositorities.Pincode;
 
 namespace PostOffice.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PincodeController : ControllerBase
     {
@@ -26,7 +26,7 @@ namespace PostOffice.API.Controllers
 
         }
 
-        [HttpGet("PincodeList", Name = "GetPincodes")]
+        [HttpGet]
         public async Task<IActionResult> GetPincodes()
         {
             var pincodeDtos = await _repository.GetPincodes();

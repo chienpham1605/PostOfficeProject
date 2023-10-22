@@ -69,9 +69,10 @@ namespace PostOffice.Client.Areas.Client.Controllers
             parcelorder.receive_date = DateTime.Now.AddDays(3);
             parcelorder.order_status = API.Data.Enums.OrderStatus.Pending;
 
-            var test = _httpClient.PostAsJsonAsync<ParcelOrderCreateDTO>(parcelOrderURL, parcelorder).Result;
+            var test = _httpClient.PostAsJsonAsync<ParcelOrderCreateDTO>(parcelOrderURL , parcelorder).Result;
             return RedirectToAction("Index", "ParcelOrder");
             
+
 
         }
         public IActionResult Edit()

@@ -46,7 +46,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/ParcelService/Add", content);
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","ParcelOrder");
             }
             return View();
 
