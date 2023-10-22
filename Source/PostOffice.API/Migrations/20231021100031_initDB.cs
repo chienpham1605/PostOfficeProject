@@ -356,7 +356,7 @@ namespace PostOffice.API.Migrations
                     receiver_phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     receiver_email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     receiver_national_identity_number = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    transfer_status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    transfer_status = table.Column<int>(type: "int", nullable: false),
                     note = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     transfer_value = table.Column<float>(type: "real", nullable: false),
                     transfer_fee = table.Column<float>(type: "real", nullable: false),
@@ -525,9 +525,9 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("0d04dce2-969a-435d-bba4-df3f325983dc"), "48dfc5cb-49f7-44b6-ae1d-69a2bad71b12", "Customer role", "customer", "CUSTOMER" },
-                    { new Guid("79bd714f-9576-45ba-b5b7-f00649be00de"), "81c8c541-521a-4f10-b809-9ed8e010bf6c", "Employee role", "employee", "EMPLOYEE" },
-                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "5fa87506-cb95-45a9-9a09-853d5f37faba", "Administrator role", "admin", "ADMIN" }
+                    { new Guid("0d04dce2-969a-435d-bba4-df3f325983dc"), "44f3e4c5-b9c9-44c8-9983-48aa0461f95e", "Customer role", "customer", "CUSTOMER" },
+                    { new Guid("79bd714f-9576-45ba-b5b7-f00649be00de"), "c2b42503-8d05-4f33-ba3c-b6403eb9654c", "Employee role", "employee", "EMPLOYEE" },
+                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "c5afd085-ab76-4a80-9e35-f948be95f4a0", "Administrator role", "admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -535,9 +535,9 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Create_date", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "2fae0b30-1ead-49e7-bcfd-664c27238894", new DateTime(2021, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "hoanguyen@gmail.com", true, "Nguyen", "Hoa", false, null, "hoanguyen@gmail.com", "HOANG", "AQAAAAEAACcQAAAAEDj99hi9w25I1mcfqFDCGm0C12R1gF/dM9c6O+8QpRkH8/4oC/O6y/28PEkqyIw94A==", null, false, "", null, false, "hoang" },
-                    { new Guid("59bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "38211eed-842c-42c0-99a6-ea55bfe35195", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyenphuonghoa0709@gmail.com", true, "Nguyen", "Phuong Hoa", false, null, "nguyenphuonghoa0709@gmail.com", "HOANP", "AQAAAAEAACcQAAAAECLruET+9yPPQ24hnffNBnqewkHEo2CX51gu3g6DbazBN9B/4A+xT+DVQw2tMeRwAQ==", null, false, "", null, false, "hoanp" },
-                    { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "8e895fa1-6546-4c8c-995b-8fe28af66ae8", new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "onlinepostofficegroup4@gmail.com", true, "Pham", "Chien", false, null, "onlinepostofficegroup4@gmail.com", "admin", "AQAAAAEAACcQAAAAEIBw2Zv0V+hNoUCl3oxZi7kbzhVGA9XQUUownIS/gJFHG2gHWmJNsmyFa5ipnCxiyw==", null, false, "", null, false, "admin" }
+                    { new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "597e45fe-1079-4aa0-9121-73ef12a1cb06", new DateTime(2021, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "hoanguyen@gmail.com", true, "Nguyen", "Hoa", false, null, "hoanguyen@gmail.com", "HOANG", "AQAAAAEAACcQAAAAEIA8aeCZezc7nCj1tB2klt98xxnL4NLFr8kTsms5NfLhXqHllbgC9/mz9pNdtvJwrw==", null, false, "", null, false, "hoang" },
+                    { new Guid("59bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "76f8ddcc-0333-4bd4-a583-14bd128f5b4b", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyenphuonghoa0709@gmail.com", true, "Nguyen", "Phuong Hoa", false, null, "nguyenphuonghoa0709@gmail.com", "HOANP", "AQAAAAEAACcQAAAAENrnwab8qSASwcL5RxDewTZhmHlFoKcd3zFQn8aKejXdOfSM9PXjZvQ/yHQlu2VrsA==", null, false, "", null, false, "hoanp" },
+                    { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "0d5fe7d1-fba8-4fb6-bcc2-90d719e33ad9", new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "onlinepostofficegroup4@gmail.com", true, "Pham", "Chien", false, null, "onlinepostofficegroup4@gmail.com", "admin", "AQAAAAEAACcQAAAAECZ74f+O1jEkQl4IEd2QKrrM7MVwHpw22mtuJcoI1eP4I13ePOq/SFKxsbG2B2P87Q==", null, false, "", null, false, "admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -545,9 +545,9 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "id", "area_name" },
                 values: new object[,]
                 {
-                    { 1, "Local" },
-                    { 2, "Regional" },
-                    { 3, "National" }
+                    { 1, "The North" },
+                    { 2, "The Central" },
+                    { 3, "The South" }
                 });
 
             migrationBuilder.InsertData(
@@ -557,9 +557,9 @@ namespace PostOffice.API.Migrations
                 {
                     { 1, "Under one million", 1000000f, 1f },
                     { 2, "1 - 5 million", 5000000f, 1000001f },
-                    { 3, "5 -20 million", 20000000f, 50000000f },
-                    { 4, "20 -50 million", 500000000f, 200000000f },
-                    { 5, "Over 50 million", 1E+09f, 500000000f }
+                    { 3, "5 -20 million", 20000000f, 5000001f },
+                    { 4, "20 -50 million", 50000000f, 20000000f },
+                    { 5, "50 - 100 million", 100000000f, 50000000f }
                 });
 
             migrationBuilder.InsertData(
@@ -597,9 +597,9 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "id", "zone_description" },
                 values: new object[,]
                 {
-                    { 1, "The North" },
-                    { 2, "The Central" },
-                    { 3, "The South" }
+                    { 1, "Local" },
+                    { 2, "Regional" },
+                    { 3, "National" }
                 });
 
             migrationBuilder.InsertData(
@@ -617,21 +617,21 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "id", "fee", "money_scope_id", "zone_type_id" },
                 values: new object[,]
                 {
-                    { 1, 100000f, 1, 1 },
-                    { 2, 150000f, 1, 2 },
-                    { 3, 220000f, 1, 3 },
-                    { 4, 230000f, 2, 1 },
-                    { 5, 270000f, 2, 2 },
-                    { 6, 300000f, 2, 3 },
-                    { 7, 300000f, 3, 1 },
-                    { 8, 340000f, 3, 2 },
-                    { 9, 440000f, 3, 3 },
-                    { 10, 500000f, 4, 1 },
-                    { 11, 550000f, 4, 2 },
-                    { 12, 590000f, 4, 3 },
-                    { 13, 600000f, 5, 1 },
-                    { 14, 660000f, 5, 2 },
-                    { 15, 700000f, 5, 3 }
+                    { 1, 50000f, 1, 1 },
+                    { 2, 75000f, 1, 2 },
+                    { 3, 100000f, 1, 3 },
+                    { 4, 100000f, 2, 1 },
+                    { 5, 125000f, 2, 2 },
+                    { 6, 150000f, 2, 3 },
+                    { 7, 150000f, 3, 1 },
+                    { 8, 175000f, 3, 2 },
+                    { 9, 200000f, 3, 3 },
+                    { 10, 200000f, 4, 1 },
+                    { 11, 225000f, 4, 2 },
+                    { 12, 250000f, 4, 3 },
+                    { 13, 250000f, 5, 1 },
+                    { 14, 275000f, 5, 2 },
+                    { 15, 300000f, 5, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -743,7 +743,7 @@ namespace PostOffice.API.Migrations
             migrationBuilder.InsertData(
                 table: "MoneyOrder",
                 columns: new[] { "id", "note", "payer", "receive_date", "receiver_address", "receiver_email", "receiver_name", "receiver_national_identity_number", "receiver_phone", "receiver_pincode", "send_date", "sender_address", "sender_email", "sender_name", "sender_national_identity_number", "sender_phone", "sender_pincode", "total_charge", "transfer_fee", "transfer_status", "transfer_value", "user_id" },
-                values: new object[] { 1, "pay for home rental", "sender", null, "105 Cong Hoa, Tan Binh District", "lvbay@gmail.com", "Le Van Bay", "0789262637", "055591370", "70000", new DateTime(2022, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "40 Nguyen Ba Ngoc, Ba Dinh District", "ttbinh@gmail.com", "Tran Thi Binh", "0256214637", "023591330", "40000", 30015000f, 15000f, "pending", 30000000f, new Guid("49bd714f-9576-45ba-b5b7-f00649be00de") });
+                values: new object[] { 1, "pay for home rental", "sender", null, "105 Cong Hoa, Tan Binh District", "lvbay@gmail.com", "Le Van Bay", "0789262637", "055591370", "70000", new DateTime(2022, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "40 Nguyen Ba Ngoc, Ba Dinh District", "ttbinh@gmail.com", "Tran Thi Binh", "0256214637", "023591330", "40000", 30015000f, 15000f, 0, 30000000f, new Guid("49bd714f-9576-45ba-b5b7-f00649be00de") });
 
             migrationBuilder.InsertData(
                 table: "OfficeBranchs",

@@ -12,7 +12,7 @@ using PostOffice.API.Data.Context;
 namespace PostOffice.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231021042056_initDB")]
+    [Migration("20231021100031_initDB")]
     partial class initDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -178,7 +178,7 @@ namespace PostOffice.API.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "5fa87506-cb95-45a9-9a09-853d5f37faba",
+                            ConcurrencyStamp = "c5afd085-ab76-4a80-9e35-f948be95f4a0",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "ADMIN"
@@ -186,7 +186,7 @@ namespace PostOffice.API.Migrations
                         new
                         {
                             Id = new Guid("79bd714f-9576-45ba-b5b7-f00649be00de"),
-                            ConcurrencyStamp = "81c8c541-521a-4f10-b809-9ed8e010bf6c",
+                            ConcurrencyStamp = "c2b42503-8d05-4f33-ba3c-b6403eb9654c",
                             Description = "Employee role",
                             Name = "employee",
                             NormalizedName = "EMPLOYEE"
@@ -194,7 +194,7 @@ namespace PostOffice.API.Migrations
                         new
                         {
                             Id = new Guid("0d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "48dfc5cb-49f7-44b6-ae1d-69a2bad71b12",
+                            ConcurrencyStamp = "44f3e4c5-b9c9-44c8-9983-48aa0461f95e",
                             Description = "Customer role",
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
@@ -290,7 +290,7 @@ namespace PostOffice.API.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8e895fa1-6546-4c8c-995b-8fe28af66ae8",
+                            ConcurrencyStamp = "0d5fe7d1-fba8-4fb6-bcc2-90d719e33ad9",
                             Create_date = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "onlinepostofficegroup4@gmail.com",
                             EmailConfirmed = true,
@@ -299,7 +299,7 @@ namespace PostOffice.API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "onlinepostofficegroup4@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIBw2Zv0V+hNoUCl3oxZi7kbzhVGA9XQUUownIS/gJFHG2gHWmJNsmyFa5ipnCxiyw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECZ74f+O1jEkQl4IEd2QKrrM7MVwHpw22mtuJcoI1eP4I13ePOq/SFKxsbG2B2P87Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -309,7 +309,7 @@ namespace PostOffice.API.Migrations
                         {
                             Id = new Guid("59bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "38211eed-842c-42c0-99a6-ea55bfe35195",
+                            ConcurrencyStamp = "76f8ddcc-0333-4bd4-a583-14bd128f5b4b",
                             Create_date = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nguyenphuonghoa0709@gmail.com",
                             EmailConfirmed = true,
@@ -318,7 +318,7 @@ namespace PostOffice.API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "nguyenphuonghoa0709@gmail.com",
                             NormalizedUserName = "HOANP",
-                            PasswordHash = "AQAAAAEAACcQAAAAECLruET+9yPPQ24hnffNBnqewkHEo2CX51gu3g6DbazBN9B/4A+xT+DVQw2tMeRwAQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENrnwab8qSASwcL5RxDewTZhmHlFoKcd3zFQn8aKejXdOfSM9PXjZvQ/yHQlu2VrsA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -328,7 +328,7 @@ namespace PostOffice.API.Migrations
                         {
                             Id = new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2fae0b30-1ead-49e7-bcfd-664c27238894",
+                            ConcurrencyStamp = "597e45fe-1079-4aa0-9121-73ef12a1cb06",
                             Create_date = new DateTime(2021, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hoanguyen@gmail.com",
                             EmailConfirmed = true,
@@ -337,7 +337,7 @@ namespace PostOffice.API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hoanguyen@gmail.com",
                             NormalizedUserName = "HOANG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDj99hi9w25I1mcfqFDCGm0C12R1gF/dM9c6O+8QpRkH8/4oC/O6y/28PEkqyIw94A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIA8aeCZezc7nCj1tB2klt98xxnL4NLFr8kTsms5NfLhXqHllbgC9/mz9pNdtvJwrw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -365,17 +365,17 @@ namespace PostOffice.API.Migrations
                         new
                         {
                             id = 1,
-                            area_name = "Local"
+                            area_name = "The North"
                         },
                         new
                         {
                             id = 2,
-                            area_name = "Regional"
+                            area_name = "The Central"
                         },
                         new
                         {
                             id = 3,
-                            area_name = "National"
+                            area_name = "The South"
                         });
                 });
 
@@ -483,9 +483,8 @@ namespace PostOffice.API.Migrations
                     b.Property<float>("transfer_fee")
                         .HasColumnType("real");
 
-                    b.Property<string>("transfer_status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("transfer_status")
+                        .HasColumnType("int");
 
                     b.Property<float>("transfer_value")
                         .HasColumnType("real");
@@ -524,7 +523,7 @@ namespace PostOffice.API.Migrations
                             sender_pincode = "40000",
                             total_charge = 30015000f,
                             transfer_fee = 15000f,
-                            transfer_status = "pending",
+                            transfer_status = 0,
                             transfer_value = 30000000f,
                             user_id = new Guid("49bd714f-9576-45ba-b5b7-f00649be00de")
                         });
@@ -576,21 +575,21 @@ namespace PostOffice.API.Migrations
                             id = 3,
                             description = "5 -20 million",
                             max_value = 20000000f,
-                            min_value = 50000000f
+                            min_value = 5000001f
                         },
                         new
                         {
                             id = 4,
                             description = "20 -50 million",
-                            max_value = 500000000f,
-                            min_value = 200000000f
+                            max_value = 50000000f,
+                            min_value = 20000000f
                         },
                         new
                         {
                             id = 5,
-                            description = "Over 50 million",
-                            max_value = 1E+09f,
-                            min_value = 500000000f
+                            description = "50 - 100 million",
+                            max_value = 100000000f,
+                            min_value = 50000000f
                         });
                 });
 
@@ -623,105 +622,105 @@ namespace PostOffice.API.Migrations
                         new
                         {
                             id = 1,
-                            fee = 100000f,
+                            fee = 50000f,
                             money_scope_id = 1,
                             zone_type_id = 1
                         },
                         new
                         {
                             id = 2,
-                            fee = 150000f,
+                            fee = 75000f,
                             money_scope_id = 1,
                             zone_type_id = 2
                         },
                         new
                         {
                             id = 3,
-                            fee = 220000f,
+                            fee = 100000f,
                             money_scope_id = 1,
                             zone_type_id = 3
                         },
                         new
                         {
                             id = 4,
-                            fee = 230000f,
+                            fee = 100000f,
                             money_scope_id = 2,
                             zone_type_id = 1
                         },
                         new
                         {
                             id = 5,
-                            fee = 270000f,
+                            fee = 125000f,
                             money_scope_id = 2,
                             zone_type_id = 2
                         },
                         new
                         {
                             id = 6,
-                            fee = 300000f,
+                            fee = 150000f,
                             money_scope_id = 2,
                             zone_type_id = 3
                         },
                         new
                         {
                             id = 7,
-                            fee = 300000f,
+                            fee = 150000f,
                             money_scope_id = 3,
                             zone_type_id = 1
                         },
                         new
                         {
                             id = 8,
-                            fee = 340000f,
+                            fee = 175000f,
                             money_scope_id = 3,
                             zone_type_id = 2
                         },
                         new
                         {
                             id = 9,
-                            fee = 440000f,
+                            fee = 200000f,
                             money_scope_id = 3,
                             zone_type_id = 3
                         },
                         new
                         {
                             id = 10,
-                            fee = 500000f,
+                            fee = 200000f,
                             money_scope_id = 4,
                             zone_type_id = 1
                         },
                         new
                         {
                             id = 11,
-                            fee = 550000f,
+                            fee = 225000f,
                             money_scope_id = 4,
                             zone_type_id = 2
                         },
                         new
                         {
                             id = 12,
-                            fee = 590000f,
+                            fee = 250000f,
                             money_scope_id = 4,
                             zone_type_id = 3
                         },
                         new
                         {
                             id = 13,
-                            fee = 600000f,
+                            fee = 250000f,
                             money_scope_id = 5,
                             zone_type_id = 1
                         },
                         new
                         {
                             id = 14,
-                            fee = 660000f,
+                            fee = 275000f,
                             money_scope_id = 5,
                             zone_type_id = 2
                         },
                         new
                         {
                             id = 15,
-                            fee = 700000f,
+                            fee = 300000f,
                             money_scope_id = 5,
                             zone_type_id = 3
                         });
@@ -1738,17 +1737,17 @@ namespace PostOffice.API.Migrations
                         new
                         {
                             id = 1,
-                            zone_description = "The North"
+                            zone_description = "Local"
                         },
                         new
                         {
                             id = 2,
-                            zone_description = "The Central"
+                            zone_description = "Regional"
                         },
                         new
                         {
                             id = 3,
-                            zone_description = "The South"
+                            zone_description = "National"
                         });
                 });
 

@@ -12,6 +12,7 @@ using PostOffice.API.Repositories.ParcelService;
 using PostOffice.API.Repositories.ParcelServicePrice;
 using PostOffice.API.Repositories.ParcelType;
 using PostOffice.API.Repositories.WeightScope;
+using PostOffice.API.Repositorities.Pincode;
 using PostOffice.API.Repositorities.WeightScope;
 using PostOffice.API.Utilities.Mail.Models;
 using PostOffice.API.Utilities.Mail.Services;
@@ -90,6 +91,8 @@ builder.Services.AddScoped<IParcelOrderRepository, ParcelOrderService>();
 builder.Services.AddScoped<IParcelTypeRepository, ParcelTypeService>();
 builder.Services.AddScoped<IWeightScopeRepository, WeightScopeService>();
 builder.Services.AddScoped<IParcelServiceRepository, ParcelServiceService>();
+builder.Services.AddScoped<IPincodeRepository, PincodeRepository>();
+
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });

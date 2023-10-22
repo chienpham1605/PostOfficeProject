@@ -1,9 +1,15 @@
-﻿@model PostOffice.API.DTOs.ParcelOrder.ParcelOrderCreateDTO
+﻿@using PostOffice.API.DTOs.ParcelService;
+@model PostOffice.API.DTOs.ParcelOrder.ParcelOrderCreateDTO
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
 }
-
+<datalist id="datalistOptions">
+    @foreach (var item in ViewBag.PinCodeList)
+    {
+        <option value="@item.pincode">@item.city_name</option>
+    }
+</datalist>
 <div class="card">
     <div class="card-header">
         <strong>Parcel Orders</strong>
@@ -25,47 +31,31 @@
             <div class="row form-group">
                 <div class="col col-md-3"><label for="selectSm" class=" form-control-label">City</label></div>
                 <div class="col-12 col-md-9">
-                    <select name="selectSm" id="SelectLm" class="form-control-sm form-control">
-                        <option value="0">Please select</option>
-                        <option value="1">Ho Chi Minh</option>
-                        <option value="2">Ha Noi</option>
-                        <option value="3">Hai Phong</option>
-                        <option value="4">Da Nang</option>
-                    </select>
+                    <input asp-for="sender_pincode" class="form-control" list="datalistOptions" id="sender_pincode">
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Pincode</label></div>
-                <div class="col-12 col-md-9"><input asp-for="sender_pincode" type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
-            </div>
-            <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">The receiver's name</label></div>
-                <div class="col-12 col-md-9"><input asp-for="receiver_name" type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                <div class="col-12 col-md-9"><input asp-for="receiver_name" type="text" id="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">The receiver's email </label></div>
-                <div class="col-12 col-md-9"><input asp-for="receiver_email" type="email" id="email-input" name="email-input" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
+                <div class="col-12 col-md-9"><input asp-for="receiver_email" type="email" id="email-input" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">The receiver's address</label></div>
-                <div class="col-12 col-md-9"><input asp-for="receiver_address" type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                <div class="col-12 col-md-9"><input asp-for="receiver_address" type="text" id="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="selectSm" class=" form-control-label">The receiver's city</label></div>
                 <div class="col-12 col-md-9">
-                    <select name="selectSm" id="SelectLm" class="form-control-sm form-control">
-                        <option value="0">Please select</option>
-                        <option value="1">Ho Chi Minh</option>
-                        <option value="2">Ha Noi</option>
-                        <option value="3">Hai Phong</option>
-                        <option value="4">Da Nang</option>
-                    </select>
+                    <input asp-for="receiver_pincode" class="form-control" list="datalistOptions" id="sender_pincode" placeholder="Type to search...">
                 </div>
             </div>
-            <div class="row form-group">
+@*             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">The receiver's Pincode</label></div>
                 <div class="col-12 col-md-9"><input asp-for="receiver_pincode" type="text" id="text-input" name="text-input" placeholder="Please enter your name" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
-            </div>
+            </div> *@
             @* <div class="row form-group">
             <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">Disabled Input</label></div>
             <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled="" class="form-control"></div>
@@ -81,12 +71,24 @@
             <div class="row form-group">
                 <div class="col col-md-3"><label for="select" class=" form-control-label">Choose the service</label></div>
                 <div class="col-12 col-md-9">
-                    <select name="select" id="select" class="form-control">
-                        <option value="1">Express</option>
-                        <option value="2">Standard</option>
-                        <option value="3">Saving</option>
-                    </select>
+
                 </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-md-3"><label for="email-input" class=" form-control-label">Weight </label></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_weight" type="ưext" id="weight-input" name="weight-input" placeholder="Enter Weight" class="form-control"><small class="help-block form-text"></small></div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-md-3"><label for="email-input" class=" form-control-label">Height </label></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_height" type="ưext" id="weight-input" name="weight-input" placeholder="Enter Weight" class="form-control"><small class="help-block form-text"></small></div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-md-3"><label for="email-input" class=" form-control-label">Height </label></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_height" type="ưext" id="height-input" name="height-input" placeholder="Enter height" class="form-control"><small class="help-block form-text"></small></div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-md-3"><label for="email-input" class=" form-control-label">Width </label></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_width" type="ưext" id="width-input" name="height-input" placeholder="Enter width" class="form-control"><small class="help-block form-text"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="selectLg" class=" form-control-label">Select Large</label></div>
