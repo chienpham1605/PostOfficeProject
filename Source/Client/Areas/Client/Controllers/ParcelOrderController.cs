@@ -16,6 +16,8 @@ namespace PostOffice.Client.Areas.Client.Controllers
         Uri baseAddress = new Uri("https://localhost:7053/api");
         private readonly HttpClient _httpClient;
         private readonly string pincodeURL = "https://localhost:7053/api/Pincode/";
+        private readonly string parcelOrderURL = "https://localhost:7053/api/ParcelOrder/";
+
         public ParcelOrderController() 
         {
             _httpClient = new HttpClient();
@@ -48,24 +50,29 @@ namespace PostOffice.Client.Areas.Client.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            List<PincodeBaseDTO>? pincodeList = JsonConvert.DeserializeObject<List<PincodeBaseDTO>>(
-                    _httpClient.GetStringAsync(pincodeURL + "PincodeList").Result
-                );
-            ViewBag.PincodeList = pincodeList;
             return View();
         }
         [HttpPost]
         [ActionName("Create")]
         public async Task<IActionResult> Create(ParcelOrderCreateDTO parcelorder)
         {
-            string data = JsonConvert.SerializeObject(parcelorder);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/ParcelOrder/AddParcelOrder", content);
-            if (response.IsSuccessStatusCode)
+            
+            if (parcelorder == null)
             {
-                return RedirectToAction("Index");
+                return BadRequest("Parcel order cannot be null");
             }
-            return View();
+
+            // Assuming you have a method to get the current user's ID
+            Guid guid = Guid.Parse("49BD714F-9576-45BA-B5B7-F00649BE00DE");
+            parcelorder.user_id = guid;
+            parcelorder.send_date = DateTime.Now;
+            parcelorder.receive_date = DateTime.Now.AddDays(3);
+            parcelorder.order_status = API.Data.Enums.OrderStatus.Pending;
+
+            var test = _httpClient.PostAsJsonAsync<ParcelOrderCreateDTO>(parcelOrderURL, parcelorder).Result;
+            return RedirectToAction("Index", "ParcelOrder");
+            
+
         }
         public IActionResult Edit()
         {
@@ -93,54 +100,5 @@ namespace PostOffice.Client.Areas.Client.Controllers
                 return View();
             }
         }
-        //[HttpPost]
-        //public async Task<IActionResult> ScopeFilter(string sendPin, string recPin, int parcel_type_id, ParcelInfo parcelInfo, float servicefee, int service_id)
-        //{
-        //    int zone_id;
-        //    float total_charge;
-
-        //    if (sendPin == recPin)
-        //    {
-        //        zone_id = 1;
-        //    }
-        //    else
-        //    {
-        //        int send_area = JsonConvert.DeserializeObject<PincodeBaseDTO>(_httpClient.GetStringAsync(pincodeURL + "PincodeById?id=" + sendPin).Result)!.area_id;
-        //        int rec_area = JsonConvert.DeserializeObject<PincodeBaseDTO>(_httpClient.GetStringAsync(pincodeURL + "PincodeById?id=" + recPin).Result)!.area_id;
-        //        if (send_area != rec_area)
-        //        {
-        //            zone_id = 3;
-        //        }
-        //        else
-        //        {
-        //            zone_id = 2;
-        //        }
-        //    }
-        //    var temp = await _httpClient.GetStringAsync(weightScopeURL + "ScopeValue" + "?value=" + parcelTypeURL + "ParcelTypeValue" + +servicefee.ToString());
-        //    ServicePriceBaseDTO?  = JsonConvert.DeserializeObject<>(temp);
-        //    if (moneyscope == null)
-        //    {
-        //    }
-
-        //    temp = httpClient.GetStringAsync(moneyserviceURL + "ZoneNScope" + "?zone=" + zone_id.ToString() + "&scope=" + moneyscope.id.ToString()).Result;
-        //    MServicePriceBaseDTO? mServicePriceBaseDTO = JsonConvert.DeserializeObject<MServicePriceBaseDTO>(temp);
-
-        //    total_charge = transfer_value + mServicePriceBaseDTO.fee;
-        //    return Json(new
-        //    {
-        //        order_fee = mServicePriceBaseDTO.fee,
-        //        description = moneyscope.description,
-        //        total_charge = total_charge,
-
-        //    });
-
-
-
-        //}
-
-        //public IActionResult submit(string successful)
-        //{
-        //    return View();
-        //}
     }
 }
