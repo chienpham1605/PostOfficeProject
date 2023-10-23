@@ -94,7 +94,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             HttpResponseMessage response = _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelServicePrice/UpdateServicePrice", content).Result;
             if (response.IsSuccessStatusCode)
             {
-                return Redirect("/Admin/ServicePrice/Index");
+                return RedirectToAction("Index", "ServicePrice");
             }
             return View();
         }

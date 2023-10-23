@@ -55,7 +55,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/ParcelService/Add", content);
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Service");
             }
             return View();
 
@@ -89,7 +89,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             HttpResponseMessage response = _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelOrder/UpdateParcelService", content).Result;
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("/Admin/Service/Index");
+                return RedirectToAction("Index", "Service");
             }
             return View();
         }

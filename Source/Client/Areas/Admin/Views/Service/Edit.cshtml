@@ -1,4 +1,5 @@
-﻿
+﻿@using PostOffice.API.Data.Enums;
+
 @model PostOffice.API.DTOs.ParcelService.ParcelServiceUpdateDTO
 @{
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -11,7 +12,12 @@
         <form action="Edit" method="post" class="form-horizontal">
             <div class="row form-group">
                 <div class="col col-sm-5"><label for="input-normal" class=" form-control-label">Status</label></div>
-                <div class="col col-sm-6"></div>
+                <div class="col col-sm-6">
+                    @Html.DropDownList("Status",
+                    new SelectList(Enum.GetValues(typeof(ServiceStatus))),
+                    "Select Status",
+                    new { @class = "form-control" })
+                </div>
             </div>
             <div class="row form-group">
                 <div class="col col-sm-5"><label for="input-normal" class=" form-control-label">Delivery Time</label></div>

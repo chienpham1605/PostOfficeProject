@@ -64,14 +64,14 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(ParcelOrderUpdateDTO parcelOrderUpdate) 
+        public async Task<IActionResult> Edit(ParcelOrderUpdateDTO parcelOrderUpdate) 
         {
             string data = JsonConvert.SerializeObject(parcelOrderUpdate);
             StringContent content = new StringContent(data, Encoding.UTF8,"application/json");
-            HttpResponseMessage response = _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelOrder/UpdateParcelOrder", content).Result;
+            HttpResponseMessage response = await _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelOrder/UpdateParcelOrder", content);
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","ParcelOrder");
             }
             return View();
         }

@@ -171,10 +171,8 @@ namespace PostOffice.API.Data.Extensions
 
             //parcel service
             modelBuilder.Entity<ParcelService>().HasData(
-                new ParcelService { service_id = 1, name = "Economy", description = "These services are cost-effective but might take longer for delivery, especially for longer distances.", status = true, delivery_time = 3 },
-                new ParcelService { service_id = 2, name = "Express", description = "Fast delivery services that promise quick delivery, often within one day or overnight, regardless of distance.", status = true, delivery_time = 1 }
-
-                
+                new ParcelService { service_id = 1, name = "Economy", description = "These services are cost-effective but might take longer for delivery, especially for longer distances.", status = Enums.ServiceStatus.Active, delivery_time = 3 },
+                new ParcelService { service_id = 2, name = "Express", description = "Fast delivery services that promise quick delivery, often within one day or overnight, regardless of distance.", status = Enums.ServiceStatus.Active, delivery_time = 1 }
                 );
 
             //parcel service price
@@ -380,8 +378,7 @@ namespace PostOffice.API.Data.Extensions
                     vpp_value = 0,
                     send_date = new DateTime(2023, 01, 14),
                     receive_date = new DateTime(2023, 01, 18),
-
-                    order_status = Data.Enums.OrderStatus.Completed,
+                    order_status = Enums.OrderStatus.Completed,
                     total_charge = 36000
                 }
                 );

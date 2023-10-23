@@ -6,16 +6,15 @@ namespace PostOffice.API.DTOs.ParcelOrder
 {
     public class ParcelOrderCreateDTO
     {
-        //personal infor
-        //personal infor
+
         [Required]
+        public Guid user_id { get; set; }
         public string? sender_name { get; set; }
         [Required]
         public string? sender_pincode { get; set; }
         [Required]
         public string? sender_address { get; set; }
         [Required]
-        [Range(9,12, ErrorMessage = "Phone should be between 9 and 12 digits")]
         public string? sender_phone { get; set; }
         [Required]
         [EmailAddress]
@@ -29,7 +28,7 @@ namespace PostOffice.API.DTOs.ParcelOrder
         [Required]
         public string? receiver_address { get; set; }
         [Required]
-        [Range(9, 12, ErrorMessage = "Phone should be between 9 and 12 digits")]
+
         public string? receiver_phone { get; set; }
         [Required]
         [EmailAddress]
@@ -46,9 +45,9 @@ namespace PostOffice.API.DTOs.ParcelOrder
         //payment infor
         public string? payer { get; set; }
         public string? payment_method { get; set; }
-        
+        public int service_id { get; set; }
         public int parcel_type_id { get; set; }
-        public TransferStatus order_status { get; set; }
+        public OrderStatus order_status { get; set; }
         //datetime infor
         public DateTime send_date { get; set; }
         public DateTime receive_date { get; set; }
