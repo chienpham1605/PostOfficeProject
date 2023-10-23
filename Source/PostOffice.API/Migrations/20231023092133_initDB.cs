@@ -90,7 +90,7 @@ namespace PostOffice.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    status = table.Column<bool>(type: "bit", nullable: false),
+                    status = table.Column<int>(type: "int", nullable: false),
                     delivery_time = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -255,7 +255,7 @@ namespace PostOffice.API.Migrations
                 columns: table => new
                 {
                     pincode = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    city_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    city_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     area_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -525,9 +525,9 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("0d04dce2-969a-435d-bba4-df3f325983dc"), "44f3e4c5-b9c9-44c8-9983-48aa0461f95e", "Customer role", "customer", "CUSTOMER" },
-                    { new Guid("79bd714f-9576-45ba-b5b7-f00649be00de"), "c2b42503-8d05-4f33-ba3c-b6403eb9654c", "Employee role", "employee", "EMPLOYEE" },
-                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "c5afd085-ab76-4a80-9e35-f948be95f4a0", "Administrator role", "admin", "ADMIN" }
+                    { new Guid("0d04dce2-969a-435d-bba4-df3f325983dc"), "115048cb-d76f-4a1a-a063-cc536261e13a", "Customer role", "customer", "CUSTOMER" },
+                    { new Guid("79bd714f-9576-45ba-b5b7-f00649be00de"), "9db4f1b8-e1d6-427a-8c54-7145be8a2751", "Employee role", "employee", "EMPLOYEE" },
+                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "5aa5e496-0727-41ec-9660-1f6a75558117", "Administrator role", "admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -535,9 +535,9 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Create_date", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "597e45fe-1079-4aa0-9121-73ef12a1cb06", new DateTime(2021, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "hoanguyen@gmail.com", true, "Nguyen", "Hoa", false, null, "hoanguyen@gmail.com", "HOANG", "AQAAAAEAACcQAAAAEIA8aeCZezc7nCj1tB2klt98xxnL4NLFr8kTsms5NfLhXqHllbgC9/mz9pNdtvJwrw==", null, false, "", null, false, "hoang" },
-                    { new Guid("59bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "76f8ddcc-0333-4bd4-a583-14bd128f5b4b", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyenphuonghoa0709@gmail.com", true, "Nguyen", "Phuong Hoa", false, null, "nguyenphuonghoa0709@gmail.com", "HOANP", "AQAAAAEAACcQAAAAENrnwab8qSASwcL5RxDewTZhmHlFoKcd3zFQn8aKejXdOfSM9PXjZvQ/yHQlu2VrsA==", null, false, "", null, false, "hoanp" },
-                    { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "0d5fe7d1-fba8-4fb6-bcc2-90d719e33ad9", new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "onlinepostofficegroup4@gmail.com", true, "Pham", "Chien", false, null, "onlinepostofficegroup4@gmail.com", "admin", "AQAAAAEAACcQAAAAECZ74f+O1jEkQl4IEd2QKrrM7MVwHpw22mtuJcoI1eP4I13ePOq/SFKxsbG2B2P87Q==", null, false, "", null, false, "admin" }
+                    { new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "616ba093-846d-47fd-941e-30e4501bd3e7", new DateTime(2021, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "hoanguyen@gmail.com", true, "Nguyen", "Hoa", false, null, "hoanguyen@gmail.com", "HOANG", "AQAAAAEAACcQAAAAEDA/J5C4bw2VUXSLCQWVTSogBtANhyGQNVA/0iS7N7YvHdnaf3vH0FKy4fYUUgQl6g==", null, false, "", null, false, "hoang" },
+                    { new Guid("59bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "b1036039-7c4c-4d0e-9782-e0ae7ec44712", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyenphuonghoa0709@gmail.com", true, "Nguyen", "Phuong Hoa", false, null, "nguyenphuonghoa0709@gmail.com", "HOANP", "AQAAAAEAACcQAAAAEMMrDjm7LIc8hzQgsDG8TrP7Wkze28lg3YKllY21hf2euC9rPvzF1h5xktUe3u4Xeg==", null, false, "", null, false, "hoanp" },
+                    { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, "3add1be5-a2b9-459e-b008-e5d156e0ff8d", new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "onlinepostofficegroup4@gmail.com", true, "Pham", "Chien", false, null, "onlinepostofficegroup4@gmail.com", "admin", "AQAAAAEAACcQAAAAEO5KkoCoHvV+K9WhBRmbPHa0AQBWTCWc27FIA6qNdrZk9XvKB8stFKdN0wdXHixr9A==", null, false, "", null, false, "admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -567,8 +567,8 @@ namespace PostOffice.API.Migrations
                 columns: new[] { "service_id", "delivery_time", "description", "name", "status" },
                 values: new object[,]
                 {
-                    { 1, 3, "These services are cost-effective but might take longer for delivery, especially for longer distances.", "Economy", true },
-                    { 2, 1, "Fast delivery services that promise quick delivery, often within one day or overnight, regardless of distance.", "Express", true }
+                    { 1, 3, "These services are cost-effective but might take longer for delivery, especially for longer distances.", "Economy", 1 },
+                    { 2, 1, "Fast delivery services that promise quick delivery, often within one day or overnight, regardless of distance.", "Express", 1 }
                 });
 
             migrationBuilder.InsertData(

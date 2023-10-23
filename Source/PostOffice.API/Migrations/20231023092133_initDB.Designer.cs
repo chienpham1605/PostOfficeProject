@@ -12,7 +12,7 @@ using PostOffice.API.Data.Context;
 namespace PostOffice.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231021100031_initDB")]
+    [Migration("20231023092133_initDB")]
     partial class initDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -178,7 +178,7 @@ namespace PostOffice.API.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "c5afd085-ab76-4a80-9e35-f948be95f4a0",
+                            ConcurrencyStamp = "5aa5e496-0727-41ec-9660-1f6a75558117",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "ADMIN"
@@ -186,7 +186,7 @@ namespace PostOffice.API.Migrations
                         new
                         {
                             Id = new Guid("79bd714f-9576-45ba-b5b7-f00649be00de"),
-                            ConcurrencyStamp = "c2b42503-8d05-4f33-ba3c-b6403eb9654c",
+                            ConcurrencyStamp = "9db4f1b8-e1d6-427a-8c54-7145be8a2751",
                             Description = "Employee role",
                             Name = "employee",
                             NormalizedName = "EMPLOYEE"
@@ -194,7 +194,7 @@ namespace PostOffice.API.Migrations
                         new
                         {
                             Id = new Guid("0d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "44f3e4c5-b9c9-44c8-9983-48aa0461f95e",
+                            ConcurrencyStamp = "115048cb-d76f-4a1a-a063-cc536261e13a",
                             Description = "Customer role",
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
@@ -290,7 +290,7 @@ namespace PostOffice.API.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0d5fe7d1-fba8-4fb6-bcc2-90d719e33ad9",
+                            ConcurrencyStamp = "3add1be5-a2b9-459e-b008-e5d156e0ff8d",
                             Create_date = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "onlinepostofficegroup4@gmail.com",
                             EmailConfirmed = true,
@@ -299,7 +299,7 @@ namespace PostOffice.API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "onlinepostofficegroup4@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAECZ74f+O1jEkQl4IEd2QKrrM7MVwHpw22mtuJcoI1eP4I13ePOq/SFKxsbG2B2P87Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO5KkoCoHvV+K9WhBRmbPHa0AQBWTCWc27FIA6qNdrZk9XvKB8stFKdN0wdXHixr9A==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -309,7 +309,7 @@ namespace PostOffice.API.Migrations
                         {
                             Id = new Guid("59bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "76f8ddcc-0333-4bd4-a583-14bd128f5b4b",
+                            ConcurrencyStamp = "b1036039-7c4c-4d0e-9782-e0ae7ec44712",
                             Create_date = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nguyenphuonghoa0709@gmail.com",
                             EmailConfirmed = true,
@@ -318,7 +318,7 @@ namespace PostOffice.API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "nguyenphuonghoa0709@gmail.com",
                             NormalizedUserName = "HOANP",
-                            PasswordHash = "AQAAAAEAACcQAAAAENrnwab8qSASwcL5RxDewTZhmHlFoKcd3zFQn8aKejXdOfSM9PXjZvQ/yHQlu2VrsA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMMrDjm7LIc8hzQgsDG8TrP7Wkze28lg3YKllY21hf2euC9rPvzF1h5xktUe3u4Xeg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -328,7 +328,7 @@ namespace PostOffice.API.Migrations
                         {
                             Id = new Guid("49bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "597e45fe-1079-4aa0-9121-73ef12a1cb06",
+                            ConcurrencyStamp = "616ba093-846d-47fd-941e-30e4501bd3e7",
                             Create_date = new DateTime(2021, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hoanguyen@gmail.com",
                             EmailConfirmed = true,
@@ -337,7 +337,7 @@ namespace PostOffice.API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hoanguyen@gmail.com",
                             NormalizedUserName = "HOANG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIA8aeCZezc7nCj1tB2klt98xxnL4NLFr8kTsms5NfLhXqHllbgC9/mz9pNdtvJwrw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDA/J5C4bw2VUXSLCQWVTSogBtANhyGQNVA/0iS7N7YvHdnaf3vH0FKy4fYUUgQl6g==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -959,8 +959,8 @@ namespace PostOffice.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("status")
-                        .HasColumnType("bit");
+                    b.Property<int>("status")
+                        .HasColumnType("int");
 
                     b.HasKey("service_id");
 
@@ -973,7 +973,7 @@ namespace PostOffice.API.Migrations
                             delivery_time = 3,
                             description = "These services are cost-effective but might take longer for delivery, especially for longer distances.",
                             name = "Economy",
-                            status = true
+                            status = 1
                         },
                         new
                         {
@@ -981,7 +981,7 @@ namespace PostOffice.API.Migrations
                             delivery_time = 1,
                             description = "Fast delivery services that promise quick delivery, often within one day or overnight, regardless of distance.",
                             name = "Express",
-                            status = true
+                            status = 1
                         });
                 });
 
@@ -1224,7 +1224,6 @@ namespace PostOffice.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("city_name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("pincode");

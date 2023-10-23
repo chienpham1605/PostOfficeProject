@@ -21,11 +21,11 @@ namespace PostOffice.Client.Areas.Client.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
-            List<PincodeBaseDTO>? typeList = JsonConvert.DeserializeObject<List<PincodeBaseDTO>>(
-                               _httpClient.GetStringAsync(pincodeURL + "GetPincodes").Result
-                           );
+            List<PincodeBaseDTO>? pincodeList = JsonConvert.DeserializeObject<List<PincodeBaseDTO>>(
+                              _httpClient.GetStringAsync(pincodeURL + "GetPincodes").Result
+                          );
 
-            return View(typeList);
+            return View(pincodeList);
         }
     }
 }

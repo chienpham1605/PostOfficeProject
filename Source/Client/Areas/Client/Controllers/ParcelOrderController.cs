@@ -4,8 +4,10 @@ using PostOffice.API.Data.Models;
 using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelServicePrice;
 using PostOffice.API.DTOs.Pincode;
+using PostOffice.API.Repositories.ParcelOrder;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text;
 
 namespace PostOffice.Client.Areas.Client.Controllers
@@ -15,13 +17,13 @@ namespace PostOffice.Client.Areas.Client.Controllers
     {
         Uri baseAddress = new Uri("https://localhost:7053/api");
         private readonly HttpClient _httpClient;
-        private readonly string pincodeURL = "https://localhost:7053/api/Pincode/";
         private readonly string parcelOrderURL = "https://localhost:7053/api/ParcelOrder/";
-
+       
         public ParcelOrderController() 
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = baseAddress;
+            
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -56,24 +58,21 @@ namespace PostOffice.Client.Areas.Client.Controllers
         [ActionName("Create")]
         public async Task<IActionResult> Create(ParcelOrderCreateDTO parcelorder)
         {
-            
-            if (parcelorder == null)
-            {
-                return BadRequest("Parcel order cannot be null");
-            }
-
-            // Assuming you have a method to get the current user's ID
+            ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             Guid guid = Guid.Parse("49BD714F-9576-45BA-B5B7-F00649BE00DE");
             parcelorder.user_id = guid;
             parcelorder.send_date = DateTime.Now;
-            parcelorder.receive_date = DateTime.Now.AddDays(3);
+            parcelorder.receive_date = DateTime.Now;
             parcelorder.order_status = API.Data.Enums.OrderStatus.Pending;
-
-            var test = _httpClient.PostAsJsonAsync<ParcelOrderCreateDTO>(parcelOrderURL , parcelorder).Result;
-            return RedirectToAction("Index", "ParcelOrder");
             
-
-
+            string data = JsonConvert.SerializeObject(parcelorder);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/ParcelOrder/AddParcelOrder", content);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index","ParcelOrder");
+            }
+            return View("Create");
         }
         public IActionResult Edit()
         {

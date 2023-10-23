@@ -2,33 +2,40 @@
 @{
     Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
 }
+@foreach(var item in Model){
+    <aside class="profile-nav alt">
+<section class="card">
+    <div class="card-header user-header alt bg-dark">
+        <div class="media">
+            <a href="#">
+                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;">
+            </a>
+            <div class="media-body">
+                <h2 class="text-light display-6">@item.sender_name</h2>
+                <p>Order NO.@item.id</p>
+            </div>
+        </div>
+    </div>
 
-<table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.sender_name)</th>
-            <th>@Html.DisplayNameFor(model => model.receiver_name)</th>
-            <th>@Html.DisplayNameFor(model => model.receiver_address)</th>
-            <th>@Html.DisplayNameFor(model => model.receiver_phone)</th>
-            <th>@Html.DisplayNameFor(model => model.receiver_email)</th>
-            <th>@Html.DisplayNameFor(model => model.order_status)</th>
-            <th>@Html.DisplayNameFor(model => model.note)</th>
-            <th>Details</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>@item.sender_name</td>
-            <td>@item.receiver_name</td>
-            <td>@item.receiver_address</td>
-            <td>@item.receiver_phone</td>
-            <td>@item.receiver_email</td>
-            <td>@item.order_status</td>
-            <td>@item.note</td>
-            <td>@Html.ActionLink("Shipping","Shipping",new {id = item.id})</td>
-        </tr>
-        }
-    </tbody>
-</table>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <a href="#">Receiver Name <span class="badge badge-primary pull-right">@item.receiver_name</span></a>
+        </li>
+        <li class="list-group-item">
+            <a href="#"> Receiver Address<span class="badge badge-danger pull-right">@item.receiver_address</span></a>
+        </li>
+        <li class="list-group-item">
+            <a href="#">Payer <span class="badge badge-success pull-right">@item.payer</span></a>
+        </li>
+        <li class="list-group-item">
+            <a href="#"> <i class="fa fa-comments-o"></i> Message <span class="badge badge-warning pull-right r-activity">03</span></a>
+        </li>
+        <li class="list-group-item">
+                @Html.ActionLink("Shipping", "Shipping", new {id = item.id})
+        </li>
+    </ul>
+
+</section>
+    </aside>
+}

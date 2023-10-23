@@ -2,22 +2,22 @@
 using Newtonsoft.Json;
 using PostOffice.API.DTOs.ParcelService;
 
-namespace PostOffice.Client.Areas.Client.ViewComponents
+namespace PostOffice.Client.Areas.Admin.ViewComponents
 {
-    public class ParcelServiceViewComponent:ViewComponent
+    public class ServicePriceViewComponent:ViewComponent
     {
-        private readonly string serviceURL = "https://localhost:7053/api/ParcelService/";
+        private readonly string servicePriceURL = "https://localhost:7053/api/ParcelServicePrice/";
         Uri baseAddress = new Uri("https://localhost:7053/api");
         private readonly HttpClient _httpClient;
-        public ParcelServiceViewComponent()
+        public ServicePriceViewComponent()
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = baseAddress;
         }
         public IViewComponentResult Invoke()
         {
-            List<ParcelServiceBaseDTO>? serviceList = JsonConvert.DeserializeObject<List<ParcelServiceBaseDTO>>(
-                               _httpClient.GetStringAsync(serviceURL + "GetAllService").Result
+            List<ParcelServiceUpdateDTO>? serviceList = JsonConvert.DeserializeObject<List<ParcelServiceUpdateDTO>>(
+                               _httpClient.GetStringAsync(servicePriceURL + "GetParcelServices").Result
                            );
 
             return View(serviceList);
