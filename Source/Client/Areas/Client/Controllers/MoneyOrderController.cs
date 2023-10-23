@@ -28,7 +28,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
             ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return View();
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             List<PincodeBaseDTO>? pincodeList = JsonConvert.DeserializeObject<List<PincodeBaseDTO>>(
                     httpClient.GetStringAsync(pincodeURL + "PincodeList").Result

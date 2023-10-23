@@ -24,7 +24,24 @@
 </div>
 
 <div>
+    User Id: 
     @ViewData["UserId"]
+</div>
+<div>
+    User Postal Code:
+    @ViewData["UserPinCode"]
+</div>
+<div>
+    Street Address:
+    @ViewData["StreetAddress"]
+</div>
+<div>
+    PhoneNumber:
+    @ViewData["PhoneNumber"]
+</div>
+<div>
+    Email:
+    @ViewData["Email"]
 </div>
 
 <a asp-action="ParselCreate" asp-controller="Home">Create new order</a>

@@ -55,6 +55,9 @@ namespace PostOffice.API.Data.Extensions
                 SecurityStamp = string.Empty,
                 FirstName = "Pham",
                 LastName = "Chien",
+                PhoneNumber = "0950003946",
+                PincodeId = "70000",
+                Address = "150 Cong Hoa, Tan Binh District",
                 Create_date = new DateTime(2019, 12, 01)
             });
 
@@ -77,6 +80,9 @@ namespace PostOffice.API.Data.Extensions
                 SecurityStamp = string.Empty,
                 FirstName = "Nguyen",
                 LastName = "Phuong Hoa",
+                PhoneNumber = "0119703946",
+                PincodeId = "70000",
+                Address = "15 Nguyen Van Dau, Binh Thanh District",
                 Create_date = new DateTime(2020, 01, 31)
             });
 
@@ -98,6 +104,9 @@ namespace PostOffice.API.Data.Extensions
                 SecurityStamp = string.Empty,
                 FirstName = "Nguyen",
                 LastName = "Hoa",
+                PhoneNumber = "0933739406",
+                PincodeId = "70000",
+                Address = "70 Cong Hoa, Tan Binh District",
                 Create_date = new DateTime(2021, 07, 12)
             });
 
