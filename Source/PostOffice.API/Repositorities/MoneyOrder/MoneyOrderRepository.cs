@@ -42,6 +42,7 @@ namespace PostOffice.API.Repositorities.MoneyOrder
         public async Task<List<MoneyOrderBaseDTO>> MoneyOrders()
         {
             var moneyorders = await _context.MoneyOrders.ToListAsync();
+            var te = 1;
             var moneyorderDTOs = _mapper.Map<List<MoneyOrderBaseDTO>>(moneyorders);
             return moneyorderDTOs;
         }

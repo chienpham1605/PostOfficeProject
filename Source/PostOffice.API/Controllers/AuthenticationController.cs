@@ -5,8 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using PostOffice.API.Data.Models;
 using PostOffice.API.DTOs.User;
 using PostOffice.API.Utilities;
-using PostOffice.API.Utilities.Mail.Models;
-using PostOffice.API.Utilities.Mail.Services;
+
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

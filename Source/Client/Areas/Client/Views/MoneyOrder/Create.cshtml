@@ -1,7 +1,7 @@
 ﻿@model PostOffice.API.DTOs.MoneyOrder.MoneyOrderCreateDTO
 @{
     ViewData["Title"] = "MoneyOrderCreate";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
     var pincodeList = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.PinCodeList);
 }
 <style>
@@ -89,20 +89,6 @@
             @*   Sender User *@
             <fieldset class="border border-3 rounded shadow-lg mb-5 mt-2 pt-5">
                 <legend class="bg-custom-blue text-light rounded"> Sender User </legend>
-
-                @*  <div class="row">
-                <div class="col-3 form-group">
-                <div class="col col-md-3"><label for="contact" class=" form-control-label">User Name</label></div>
-                </div>
-                <div class="row col-9 form-group">
-                <div class=" col-4 mb-2">
-                <input type="text" asp-for="user.fullname" id="sender_phone" placeholder="Full Name" class="form-control">
-                </div>
-                @* <div class="col-8 row mb-2 ml-2 pr-05rem">
-                <input type="text" asp-for="user.lastname" id="sender_name" placeholder="Last Name" class="col-9 form-control border-left-only rounded-left">
-                </div>
-                </div>
-                </div> *@
                 <div class="row form-group">
                     <div class="col col-md-3">
                         <div class="col-12 col-md-9">
@@ -122,69 +108,43 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row form-group">
                     <div class="col col-md-3">
-                        <div class="col-12 col-md-9">
-                            <label for="contact" class="form-control-label">Sender Pincode</label>
-                        </div>
+                        <label for="contact" class="form-control-label">Sender Pincode</label>
                     </div>
-                    <div class=" col col-md-9">
-                        <div class="row g-3">
-                            <div class="col-md-4 mb-2">
-                                <input asp-for="sender_pincode" class="form-control" list="datalistOptions"
+                    <div class="col col-md-6">
+                          <input asp-for="sender_pincode" class="form-control" list="datalistOptions"
                                        id="sender_pincode" placeholder="Your Area" onchange="transferRemove(this)" required />
-                                <div id="city_name_send"</div>
-                            </div>
-                           @*  <div class="col-md-4 mb-2">
-                                <input asp-for="sender_pincode" type="text" class="form-control" id="city_name_send" required />
-                            </div> *@
-                              
-                        </div>
                     </div>
+                     <input class="col-md-2 form-control" id="city_name_send" disabled/>
                 </div>
-                @*  <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="City Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <span class="input-group-text" id="city_name_send"></span>
-                </div> *@
-
-                @* <div class="row form-group">
-                <div class="col col-md-3">
-                <div class="col-12 col-md-9">
-                <label for="contact" class="form-control-label">Sender Pincode</label></div>
-                </div>
-                <div class="col-9 form-group">
-                <input asp-for="sender_pincode" class="form-control" list="datalistOptions" id="sender_pincode" placeholder="Type to search...">
-                </div>
-                </div> *@
                 <div class="row form-group">
-                    <div class="col col-md-3"><label for="sender_address" class="form-control-label">Sender Address</label></div>
-                    <div class="col-12 col-md-9">
+                    <div class="col col-md-3">
+                        <label for="sender_address" class="form-control-label">Sender Address</label>
+                    </div>
+                    <div class="col-12 col-md-9 mb-2">
                         <input type="text" asp-for="sender_address" id="sender_address" placeholder=" No., Street, Ward " class="form-control" required>
                         <small class="form-text text-muted">Example: 275, Nguyen Van Dau, Phuong 11</small>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-3 form-group">
-                        <div class="col col-md-3"><label for="contact" class="form-control-label">Contact</label></div>
-                    </div>
-                    <div class="row col-9 form-group">
-                        <div class=" col-4 mb-2">
-                            <input type="text" asp-for="sender_phone" id="sender_phone" placeholder="Your Number" class="form-control" required>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="contact" class="form-control-label">Contact</label></div>
+                    <div class="col col-md-9">
+                        <div class="row g-3">
+                            <div class="col-md-4 mb-2">
+                                <label for="your_number" class="form-label">Your Phone Number</label>
+                                <input type="text" asp-for="sender_phone" class="form-control" id="your_number" placeholder="Your Phone Number" />
+                            </div>
+                            <div class="col-md-5 mb-2">
+                                <label for="email" class="form-label">Your Email</label>
+                                <input type="text" asp-for="sender_email" class="form-control" id="email" required />
+                            </div>
                         </div>
-                        @*  <div class="col-8 row mb-2">
-                        <div class="col-7">
-                        <input type="text"  id="sender_name" placeholder="Your Email" class="form-control border-left-only rounded-left">
-                        </div>
-                        <button type="submit" class="btn btn-primary col-3 pb-1 rounded-right ">Confirm</button>
-                        </div> *@
-
                     </div>
                 </div>
-
                 <div class="row form-group">
-                    <div class="col col-md-3"><label for="sender_national_identity_number" class=" form-control-label">National Number</label></div>
-                    <div class="col-12 col-md-9">
+                    <div class="col col-md-3"><label for="sender_national_identity_number" class="form-control-label">National Number</label></div>
+                    <div class="col-12 col-md-9 mb-2">
                         <input type="text" asp-for="sender_national_identity_number" id="sender_national_identity_number" placeholder="your national identity number" class="form-control" required>
                     </div>
                 </div>
@@ -202,13 +162,14 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col col-md-3"><label for="receiver_pincode" class=" form-control-label">Receiver Pincode</label></div>
-                    <div class="col-md-4 mb-2">
+                    <div class="col col-md-3">
+                        <label for="contact" class="form-control-label">Receiver Pincode</label>
+                    </div>
+                    <div class="col col-md-6">
                         <input asp-for="receiver_pincode" class="form-control" list="datalistOptions"
                                id="receiver_pincode" placeholder="Your Area" onchange="transferRemove(this)" required />
-                        <div id="city_name_rec"></div>
                     </div>
-
+                    <input class="col-md-2 form-control" id="city_name_rec" disabled />
                 </div>
 
                 <div class="row form-group">
@@ -217,21 +178,21 @@
                         <input type="text" asp-for="receiver_address" id="sender_address" placeholder=" No., Street, Ward " class="form-control" required>
                         <small class="form-text text-muted">Example: 275, Nguyen Van Dau, Phuong 11</small>
                     </div>
+                </div>
 
-                    <div class="row form-group">
-                        <div class="col col-md-3"><label for="receiver_phone" class=" form-control-label">Receiver Phone</label></div>
-                        <div class="col-12 col-md-9 mb-2">
-                            <input type="text" asp-for="receiver_phone" id="receiver_phone" placeholder="His/her phone number" class="form-control" required>
-                        </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="receiver_phone" class=" form-control-label">Receiver Phone</label></div>
+                    <div class="col-12 col-md-9 mb-2">
+                        <input type="text" asp-for="receiver_phone" id="receiver_phone" placeholder="His/her phone number" class="form-control" required>
                     </div>
+                </div>
 
-                    <div class="row form-group">
-                        <div class="col col-md-3"><label for="receiver_national_identity_number" class=" form-control-label">Receiver National Number</label></div>
-                        <div class="col-12 col-md-9 mb-2">
-                            <input type="text" asp-for="receiver_national_identity_number" id="receiver_national_identity_number" placeholder="his/her national identity number" class="form-control">
-                        </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="receiver_national_identity_number" class=" form-control-label">Receiver National Number</label></div>
+                    <div class="col-12 col-md-9 mb-2">
+                        <input type="text" asp-for="receiver_national_identity_number" id="receiver_national_identity_number" placeholder="his/her national identity number" class="form-control">
                     </div>
-
+                </div>
             </fieldset>
 
             @*  Money - Order - Fee *@
@@ -246,8 +207,6 @@
                         <a class="text-danger" id="display_value"></a>
                     </div>
                 </div>
-
-
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="money_order_fee" class=" form-control-label">Order Fee</label></div>
                     <div class="col-12 col-md-9 mb-2">
@@ -293,21 +252,23 @@
                     <div class="col col-md-3"><label for="transfer_description" class=" form-control-label">Transfer Description</label></div>
                     <div class="col-12 col-md-9"><textarea id="number-input" rows="9" placeholder="Example: Bring your citizen ID card to receive money" class="form-control"></textarea></div>
                 </div>
-                <!-- Button Confirm -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmmoney">
-                    Confirm!!!
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmnoney">
+                    Confirm
                 </button>
                 <button type="reset" class="btn btn-danger ">
-                    <i class="fa fa-dot-circle-o"></i> Reset
+                    Reset
                 </button>
-
-                <!-- Modal of Confirm -->
-                <div class="modal fade" id="confirmmoney" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                <!-- Modal -->
+                <div class="modal fade" id="confirmnoney" tabindex="-1" role="dialog" aria-labelledby="confirmnoney" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">CAUTION !!!</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h5 class="modal-title" id="confirmnoney">CAUTION!!!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
                             <div class="modal-body">
                                 <p>1. Your transfer amount will be transferred within 3 days from the date of confirmation.</p>
@@ -317,11 +278,8 @@
                                 </p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-dot-circle-o"></i> Submit
-                                </button>
-
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Accept</button>
                             </div>
                         </div>
                     </div>
@@ -370,7 +328,7 @@
         return result.trim();
     }
     function convertChunkToWords(chunk) {
-        let ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+        let ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
         let teens = ["", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
         let tens = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
         let result = "";
@@ -380,16 +338,24 @@
             result += ones[hundreds] + " Hundred ";
         }
         if (tensAndOnes > 0) {
-            if (tensAndOnes < 10) {
+            if (tensAndOnes === 10) { // Handle 10 separately
+                result += "Ten";
+            } else if (tensAndOnes < 10) {
                 result += ones[tensAndOnes];
             } else if (tensAndOnes < 20) {
                 result += teens[tensAndOnes - 10];
             } else {
-                result += tens[Math.floor(tensAndOnes / 10)] + " " + ones[tensAndOnes % 10];
+                if (tensAndOnes % 10 === 0) {
+                    result += tens[Math.floor(tensAndOnes / 10)];
+                } else {
+                    result += tens[Math.floor(tensAndOnes / 10)] + " " + ones[tensAndOnes % 10];
+                }
             }
         }
         return result.trim();
     }
+
+
     function transferRemove(input) {
         if (sendpin_input.value != "" && recpin_input.value != "") {
             transfer_input.disabled = false;
@@ -401,10 +367,10 @@
         });
         if (matchingCity) {
             if (input.id == "sender_pincode") {
-                citySendDiv.innerText = matchingCity.city_name;
+                citySendDiv.value = matchingCity.city_name;
             }
             if (input.id == "receiver_pincode") {
-                cityRecDiv.innerText = matchingCity.city_name;
+                cityRecDiv.value = matchingCity.city_name;
             }
             // If a match is found, display the city_name
         } else {
@@ -424,6 +390,7 @@
             },
             success: function (response) {
                 document.getElementById("description_value").textContent = "Fee order to  " + response.description;
+                // document.getElementById("transfer_value").textContent = "Accept to 1 - 100million  " + response.transfer_value;
                 document.getElementById("money_order_fee").value = response.order_fee;
                 document.getElementById("total_charge").value = response.total_charge;
             },

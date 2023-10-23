@@ -22,10 +22,10 @@
 
 
     <link rel="stylesheet"
-          href="~/AdminLibrary/AdminLibrary/assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css" />
+          href="/AdminLibrary/assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css" />
 
     <link rel="stylesheet"
-          href="~/AdminLibrary/AdminLibrary/assets/compiled/css/table-datatable-jquery.css" />
+          href="/AdminLibrary/assets/compiled/css/table-datatable-jquery.css" />
 
     <!-- Include Bootstrap Datepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -158,7 +158,8 @@
     <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <div id="preloader"></div>
-
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Vendor JS Files -->
     <script src="~/home/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/home/assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -171,7 +172,7 @@
     <!-- File JS Search Statistic -->
 
     <script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
-    <script src="~/AdminLibrary/AdminLibrary/assets/static/js/pages/datatables.js"></script>
+    <script src="/AdminLibrary/assets/static/js/pages/datatables.js"></script>
 
     <!-- File JS MoneyOrderCreate -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.js"></script>
@@ -180,7 +181,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Template Main JS File -->
     <script src="~/home/assets/js/main.js"></script>
-
+    @await RenderSectionAsync("Script", required: false)
 </body>
 
 </html>
