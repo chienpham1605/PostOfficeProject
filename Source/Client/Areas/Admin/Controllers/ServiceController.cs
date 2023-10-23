@@ -66,7 +66,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             try
             {
                 ParcelServiceUpdateDTO parcelService = new ParcelServiceUpdateDTO();
-                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelOrder/GetServiceById/services" + id).Result;
+                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelOrder/GetServiceById/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;

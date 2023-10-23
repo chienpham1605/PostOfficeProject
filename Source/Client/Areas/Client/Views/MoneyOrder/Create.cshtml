@@ -1,9 +1,9 @@
-
 @model PostOffice.API.DTOs.MoneyOrder.MoneyOrderBaseDTO
 @{
     ViewData["Title"] = "MoneyOrderCreate";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var pincodeList = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.PinCodeList);
+
 }
 <style>
     .selectpicker + button.btn {

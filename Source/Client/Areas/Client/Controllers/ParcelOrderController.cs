@@ -52,6 +52,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return View();
         }
         [HttpPost]
