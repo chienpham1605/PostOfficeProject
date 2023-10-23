@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostOffice.API;
 using PostOffice.API.Data.Enums;
@@ -10,6 +12,7 @@ using System.Net.Http.Json;
 namespace PostOffice.Client.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "admin")]
     public class MoneyManageController : Controller
     {
         HttpClient httpClient = new HttpClient();
@@ -34,14 +37,21 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         {
             MoneyOrderUpdateDTO isStatused = new MoneyOrderUpdateDTO();
             isStatused.id = id;
-            if (option == "Approve")
+            if (option == "Process")
+
             {
                 isStatused.transfer_status = TransferStatus.Processing;
             }
 
+
             if (option == "Deny")
             {
                 isStatused.transfer_status = TransferStatus.Failed;
+            }
+            if (option == "Success")
+            {
+                isStatused.transfer_status = TransferStatus.Successfull;
+
             }
 
             var isStatus = await httpClient.PostAsJsonAsync<MoneyOrderUpdateDTO>("https://localhost:7053/api/MoneyOrder/UpdateMoneyManage?isStatus=true", isStatused);

@@ -1,4 +1,5 @@
-﻿  using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostOffice.API.DTOs.ParcelServicePrice;
 using System.Net.Http;
@@ -59,6 +60,5 @@ namespace PostOffice.Client.Areas.Client.Controllers
                 // Handle exception, e.g., log error, set ViewBag message, etc.
             }
             return View(servicePrice);
-        }
-    }
+
 }

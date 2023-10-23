@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -20,16 +20,30 @@ namespace PostOffice.Client.Areas.Client.Controllers
         private readonly string pincodeURL = "https://localhost:7053/api/Pincode/";
         private readonly string moneyorderURL = "https://localhost:7053/api/MoneyOrder/";
         private readonly string moneyserviceURL = "https://localhost:7053/api/MoneyService/";
-        [HttpGet]
 
-
+        [HttpGet]   
         public async Task<IActionResult> Index()
+
         {
             ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ViewData["StreetAddress"] = User.FindFirst(ClaimTypes.StreetAddress)?.Value;
+            ViewData["Email"] = User.FindFirst(ClaimTypes.Email).Value;
+            ViewData["PhoneNumber"] = User.FindFirst(ClaimTypes.MobilePhone)?.Value;
+            ViewData["LastName"] = User.FindFirst(ClaimTypes.Name)?.Value;
+            ViewData["FirstName"] = User.FindFirst(ClaimTypes.GivenName)?.Value;
             return View();
         }
+        [Authorize(Roles = "customer")]
+        [HttpGet]
         public async Task<IActionResult> Create()
         {
+            ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ViewData["StreetAddress"] = User.FindFirst(ClaimTypes.StreetAddress)?.Value;
+            ViewData["Email"] = User.FindFirst(ClaimTypes.Email).Value;
+            ViewData["PhoneNumber"] = User.FindFirst(ClaimTypes.MobilePhone)?.Value;
+            ViewData["LastName"] = User.FindFirst(ClaimTypes.Name)?.Value;
+            ViewData["FirstName"] = User.FindFirst(ClaimTypes.GivenName)?.Value;
+
             List<PincodeBaseDTO>? pincodeList = JsonConvert.DeserializeObject<List<PincodeBaseDTO>>(
                     httpClient.GetStringAsync(pincodeURL + "PincodeList").Result
                 );
@@ -41,15 +55,18 @@ namespace PostOffice.Client.Areas.Client.Controllers
         [HttpPost]
         public IActionResult CreateMoneyOrder(MoneyOrderCreateDTO moneyOrderCreateDTO)
         {
-            ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            Guid guid = Guid.Parse("49BD714F-9576-45BA-B5B7-F00649BE00DE");
-            moneyOrderCreateDTO.user_id = guid;
+            moneyOrderCreateDTO.user_id = new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            moneyOrderCreateDTO.sender_name = User.FindFirst(ClaimTypes.Name)?.Value + " " +User.FindFirst(ClaimTypes.GivenName)?.Value;
+            moneyOrderCreateDTO.sender_email = User.FindFirst(ClaimTypes.Email).Value;
+            moneyOrderCreateDTO.sender_address = User.FindFirst(ClaimTypes.StreetAddress)?.Value;
+            moneyOrderCreateDTO.sender_phone = User.FindFirst(ClaimTypes.MobilePhone)?.Value;
+
             moneyOrderCreateDTO.send_date = DateTime.Now;
             moneyOrderCreateDTO.receive_date = DateTime.Now.AddDays(3);
             moneyOrderCreateDTO.transfer_status = API.Data.Enums.TransferStatus.Pending;
 
             var test = httpClient.PostAsJsonAsync<MoneyOrderCreateDTO>(moneyorderURL, moneyOrderCreateDTO).Result;
-            return RedirectToAction("Create");
+            return Json(new { });
         }
         //caculate moneyscope and zonetype dbo.moneyservice
         [HttpPost]
@@ -78,7 +95,10 @@ namespace PostOffice.Client.Areas.Client.Controllers
             MoneyScopeBaseDTO? moneyscope = JsonConvert.DeserializeObject<MoneyScopeBaseDTO>(temp);
             if (moneyscope == null)
             {
-
+                return Json(new
+                {
+                    transfer_value = transfer_value,
+                });
             }
 
             temp = httpClient.GetStringAsync(moneyserviceURL + "ZoneNScope" + "?zone=" + zone_id.ToString() + "&scope=" + moneyscope.id.ToString()).Result;
@@ -93,5 +113,11 @@ namespace PostOffice.Client.Areas.Client.Controllers
 
             });
         }
+
+        public IActionResult submit(string successful)
+        {
+            return View();
+        }
+
     }
 }

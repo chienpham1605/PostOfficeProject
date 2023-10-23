@@ -6,6 +6,7 @@
     var processing = PostOffice.API.Data.Enums.TransferStatus.Processing;
     var success = PostOffice.API.Data.Enums.TransferStatus.Successfull;
     var failed = PostOffice.API.Data.Enums.TransferStatus.Failed;
+
 }
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -134,8 +135,10 @@
                                                 <input type="hidden" name="id" value="@item.id" />
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="submit" class="btn btn-success" name="option" value="Approve" />
-                                                    <input type="submit" class="btn btn-danger" name="option" value="Deny" />
+
+                                                    <input type="submit" class="btn btn-success" name="option" value="Process" />
+                                                    <input type="submit" class="btn btn-danger" name="option" value="Success" />
+
                                                 </div>
                                             </form>
                                         </div>

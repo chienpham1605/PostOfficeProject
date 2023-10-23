@@ -9,12 +9,14 @@ namespace PostOffice.API.DTOs.ParcelOrder
 
         [Required]
         public Guid user_id { get; set; }
+
         public string? sender_name { get; set; }
         [Required]
         public string? sender_pincode { get; set; }
         [Required]
         public string? sender_address { get; set; }
         [Required]
+        [Range(9,12, ErrorMessage = "Phone should be between 9 and 12 digits")]
         public string? sender_phone { get; set; }
         [Required]
         [EmailAddress]
@@ -28,6 +30,7 @@ namespace PostOffice.API.DTOs.ParcelOrder
         [Required]
         public string? receiver_address { get; set; }
         [Required]
+        [Range(9, 12, ErrorMessage = "Phone should be between 9 and 12 digits")]
 
         public string? receiver_phone { get; set; }
         [Required]

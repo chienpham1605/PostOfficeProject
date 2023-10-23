@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sufee Admin - HTML5 Admin Template</title>
+    <title>Client</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-icon.png">
@@ -27,6 +27,25 @@
     <link rel="stylesheet" href="~/client/assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="~/home/assets/img/favicon.png" rel="icon">
+    <link href="~/home/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.css" />
+
+
+    <link rel="stylesheet"
+          href="/AdminLibrary/assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css" />
+
+    <link rel="stylesheet"
+          href="/AdminLibrary/assets/compiled/css/table-datatable-jquery.css" />
+
+    <!-- Include Bootstrap Datepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -50,14 +69,11 @@
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
-
-
                     </li>
                     <h3 class="menu-title">My Order</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Parcel Order</a>
                         <ul class="sub-menu children dropdown-menu">
-
                             <li><i class="fa fa-plus"></i><a href="ui-buttons.html">Create new order</a></li>
                             <li><i class="fa fa-eye"></i><a href="ui-badges.html">View my order</a></li>
                         </ul>
@@ -65,8 +81,7 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-money"></i>Money Order</a>
                         <ul class="sub-menu children dropdown-menu">                           
-                            <li><i class="fa fa-eye"></i><a href="ui-badges.html">View my order</a></li>
-
+                            <li><i class="fa fa-eye"></i><a asp-controller="Statistic" asp-action="Index">View my order</a></li>
                         </ul>
                     </li>
 
@@ -130,9 +145,12 @@
                                 <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
                                 <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
                             </form>
+
                         </div>
                     </div>
+
                 </div>
+
 
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
@@ -164,6 +182,10 @@
 
     </div><!-- /#right-panel -->
     <!-- Right Panel -->
+    </div><!-- /#right-panel -->
+    <!-- Right Panel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script src="~/client/vendors/jquery/dist/jquery.min.js"></script>
     <script src="~/client/vendors/popper.js/dist/umd/popper.min.js"></script>
     <script src="~/client/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -176,6 +198,7 @@
     <script src="~/client/vendors/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="~/client/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="~/client/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         (function ($) {
             "use strict";
@@ -193,6 +216,21 @@
                 normalizeFunction: 'polynomial'
             });
         })(jQuery);
+
+        <!--File JS Search Statistic-- >
+
+            <script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js" ></script>
+    <script src="/AdminLibrary/assets/static/js/pages/datatables.js"></script>
+
+    <!-- File JS MoneyOrderCreate -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.js"></script>
+
+    <!-- Include Bootstrap Datepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Template Main JS File -->
+    <script src="~/home/assets/js/main.js"></script>
+
+    @await RenderSectionAsync("Script", required: false)
     </script>
 
 </body>
