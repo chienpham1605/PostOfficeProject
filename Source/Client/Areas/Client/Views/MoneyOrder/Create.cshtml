@@ -3,6 +3,7 @@
     ViewData["Title"] = "MoneyOrderCreate";
     Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
     var pincodeList = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.PinCodeList);
+    
 }
 <style>
     .selectpicker + button.btn {
@@ -84,7 +85,7 @@
         Please enter <strong>Sender & Receiver </strong> Details in Required Fields Below
     </div>
     <div class="card-body card-block need-validation" novalidate>
-        <form asp-action="CreateMoneyOrder" asp-area="Client" asp-controller="MoneyOrder" method="post" enctype="multipart/form-data" class="form-horizontal">
+        <form id="form-submit"  class="form-horizontal">
 
             @*   Sender User *@
             <fieldset class="border border-3 rounded shadow-lg mb-5 mt-2 pt-5">
@@ -99,11 +100,11 @@
                         <div class="row g-3">
                             <div class="col-md-4 mb-2">
                                 <label for="firstname" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="firstname" required />
+                                <input value="@ViewData["FirstName"]" type="text" class="form-control" id="firstname" readonly />
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="lastname" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lastname" required />
+                                <input value="@ViewData["LastName"]" type="text" class="form-control" id="lastname" readonly />
                             </div>
                         </div>
                     </div>
@@ -123,7 +124,7 @@
                         <label for="sender_address" class="form-control-label">Sender Address</label>
                     </div>
                     <div class="col-12 col-md-9 mb-2">
-                        <input type="text" asp-for="sender_address" id="sender_address" placeholder=" No., Street, Ward " class="form-control" required>
+                        <input value="@ViewData["StreetAddress"]" id="sender_address" placeholder=" No., Street, Ward " class="form-control" readonly>
                         <small class="form-text text-muted">Example: 275, Nguyen Van Dau, Phuong 11</small>
                     </div>
                 </div>
@@ -133,11 +134,11 @@
                         <div class="row g-3">
                             <div class="col-md-4 mb-2">
                                 <label for="your_number" class="form-label">Your Phone Number</label>
-                                <input type="text" asp-for="sender_phone" class="form-control" id="your_number" placeholder="Your Phone Number" />
+                                <input value="@ViewData["PhoneNumber"]" class="form-control" id="your_number" placeholder="Your Phone Number" />
                             </div>
                             <div class="col-md-5 mb-2">
                                 <label for="email" class="form-label">Your Email</label>
-                                <input type="text" asp-for="sender_email" class="form-control" id="email" required />
+                                <input value="@ViewData["Email"]" class="form-control" id="email" readonly />
                             </div>
                         </div>
                     </div>
@@ -178,34 +179,20 @@
                         <input type="text" asp-for="receiver_address" id="sender_address" placeholder=" No., Street, Ward " class="form-control" required>
                         <small class="form-text text-muted">Example: 275, Nguyen Van Dau, Phuong 11</small>
                     </div>
-                    <div class="col col-md-6">
-                        <input asp-for="receiver_pincode" class="form-control" list="datalistOptions"
-                               id="receiver_pincode" placeholder="Your Area" onchange="transferRemove(this)" required />
-                    </div>
-                    <input class="col-md-2 form-control" id="city_name_rec" disabled />
-                </div>
-
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="receiver_address" class="form-control-label">Receiver Address</label></div>
-                    <div class="col-12 col-md-9 mb-2">
-                        <input type="text" asp-for="receiver_address" id="sender_address" placeholder=" No., Street, Ward " class="form-control" required>
-                        <small class="form-text text-muted">Example: 275, Nguyen Van Dau, Phuong 11</small>
-                    </div>
-
                 </div>
 
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="receiver_phone" class=" form-control-label">Receiver Phone</label></div>
-                    <div class="col-12 col-md-9 mb-2">
+                    <div class="col-md-4 mb-2">
                         <input type="text" asp-for="receiver_phone" id="receiver_phone" placeholder="His/her phone number" class="form-control" required>
                     </div>
-
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="receiver_national_identity_number" class=" form-control-label">Receiver National Number</label></div>
-                    <div class="col-12 col-md-9 mb-2">
-                        <input type="text" asp-for="receiver_national_identity_number" id="receiver_national_identity_number" placeholder="his/her national identity number" class="form-control">
                     </div>
-                </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="receiver_national_identity_number" class="form-control-label">Receiver National Number</label></div>
+                        <div class="col-12 col-md-9 mb-2">
+                            <input type="text" asp-for="receiver_national_identity_number" id="receiver_national_identity_number" placeholder="his/her national identity number" class="form-control" required>
+                        </div>
+                    </div>
             </fieldset>
 
             @*  Money - Order - Fee *@
@@ -267,7 +254,7 @@
                 </div>
 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmnoney">
+                <button type="button" id="confirmrequired" class="btn btn-primary" data-toggle="modal" data-target="#confirmnoney">
                     Confirm
                 </button>
                 <button type="reset" class="btn btn-danger ">
@@ -292,7 +279,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Accept</button>
+                                <button type="submit" id="submit-button" class="btn btn-primary" disabled>Accept</button>
                             </div>
                         </div>
                     </div>
@@ -303,6 +290,7 @@
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     const transfer_input = document.getElementById("transfer_value");
     const sendpin_input = document.getElementById("sender_pincode");
@@ -312,6 +300,55 @@
     const pincodeData = @Html.Raw(pincodeList);
     const inputElement = document.getElementById("transfer_value");
     const displayElement = document.getElementById("display_value");
+    const confirmRequired = document.getElementById("confirmrequired");
+
+    const submitBtn = document.getElementById("submit-button");
+    submitBtn.addEventListener("click", function (e) { 
+        e.preventDefault();
+        $.ajax({
+            url: "/Client/MoneyOrder/CreateMoneyOrder",
+            type: "post",
+            data: $("#form-submit").serialize(),
+            success: function (response) {
+                let timerInterval;
+                Swal.fire({
+                    title: 'Automatically move to Statistic Page',
+                    html: 'I will move in <b></b> milliseconds.',
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            b.textContent = Swal.getTimerLeft()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                    window.location.href = "/Client/Statistic/Index";
+                })
+            },
+        })
+    });
+
+   confirmRequired.addEventListener("click", function () {
+        let allFieldsFilled = true;
+        $("#form-submit input").each(function () {
+            
+            if ($(this).val() === "") {
+                console.log($(this).get(0))
+                allFieldsFilled = false;
+                return false;
+            }
+        });
+       console.log(allFieldsFilled);
+        if (allFieldsFilled) {
+            $(submitBtn).prop("disabled", false);
+        }
+        return true;
+    });
     inputElement.addEventListener("input", function () {
         let inputValue = inputElement.value;
         if (!isNaN(inputValue)) {
