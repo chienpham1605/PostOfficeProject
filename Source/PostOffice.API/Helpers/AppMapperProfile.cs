@@ -5,6 +5,7 @@ using PostOffice.API.DTOs.Branch;
 using PostOffice.API.DTOs.MoneyOrder;
 using PostOffice.API.DTOs.MoneyScope;
 using PostOffice.API.DTOs.MoneyServicePrice;
+using PostOffice.API.DTOs.OrderStatus;
 using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelService;
 using PostOffice.API.DTOs.ParcelServicePrice;
@@ -48,7 +49,7 @@ namespace PostOffice.API.Helpers
             CreateMap<ParcelTypeBaseDTO, ParcelType>().ReverseMap();
             CreateMap<ParcelTypeCreateDTO, ParcelType>();
             CreateMap<ParcelTypeUpdateDTO, ParcelType>();
-
+            CreateMap<OrderStatusBase, OrderStatus>().ReverseMap();
             CreateMap<ParcelOrderBase, ParcelOrder>().ReverseMap();
             CreateMap<ParcelOrder, ParcelOrderCreateDTO>().ReverseMap();
             CreateMap<ParcelOrderUpdateDTO, ParcelOrder>().ReverseMap();

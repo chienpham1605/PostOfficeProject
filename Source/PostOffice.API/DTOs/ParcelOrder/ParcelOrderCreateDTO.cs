@@ -50,7 +50,7 @@ namespace PostOffice.API.DTOs.ParcelOrder
         public string? payment_method { get; set; }
         public int service_id { get; set; }
         public int parcel_type_id { get; set; }
-        public OrderStatus order_status { get; set; }
+        public int order_status { get; set; }
         //datetime infor
         public DateTime send_date { get; set; }
         public DateTime receive_date { get; set; }

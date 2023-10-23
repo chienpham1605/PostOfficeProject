@@ -60,5 +60,6 @@ namespace PostOffice.Client.Areas.Client.Controllers
                 // Handle exception, e.g., log error, set ViewBag message, etc.
             }
             return View(servicePrice);
-
+        }
+    }
 }

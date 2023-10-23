@@ -20,7 +20,7 @@ namespace PostOffice.API.DTOs.ParcelOrder
         public string? receiver_email { get; set; }
 
         //parcel infor
-        public OrderStatus order_status { get; set; }
+        public int order_status { get; set; }
         public string? description { get; set; }
         public string? note { get; set; }
         public float? parcel_length { get; set; }

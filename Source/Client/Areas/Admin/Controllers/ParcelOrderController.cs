@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostOffice.API.DTOs.ParcelOrder;
+using System.Data;
 using System.Net.Http;
 using System.Text;
 
 namespace PostOffice.Client.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "admin")]
     public class ParcelOrderController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:7053/api");
@@ -63,7 +66,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost] 
         public async Task<IActionResult> Edit(ParcelOrderUpdateDTO parcelOrderUpdate) 
         {
             string data = JsonConvert.SerializeObject(parcelOrderUpdate);

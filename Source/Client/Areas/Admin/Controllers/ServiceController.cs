@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostOffice.API.Data.Models;
 using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelService;
+using System.Data;
 using System.Text;
 
 namespace PostOffice.Client.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "admin")]
     public class ServiceController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:7053/api");

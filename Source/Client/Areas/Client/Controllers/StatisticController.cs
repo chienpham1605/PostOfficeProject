@@ -15,7 +15,6 @@ namespace PostOffice.Client.Areas.Client.Controllers
 
         private readonly string moneyorderURL = "https://localhost:7053/api/MoneyOrder/";
         private readonly string _viewPath = "../Areas/Client/View/Statistic";
-        private readonly string moneyorderURL = "https://localhost:7053/api/MoneyOrder/";
         [HttpGet]
 
         public IActionResult Index()

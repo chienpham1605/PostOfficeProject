@@ -24,7 +24,7 @@ namespace PostOffice.API.Data.Models
         public string receiver_email { get; set; }
 
         //parcel infor
-        public OrderStatus order_status { get; set; }
+        public int order_status { get; set; }
         public string? description { get; set; }
         public string? note { get; set; }
         public float parcel_length { get; set; }
@@ -50,7 +50,7 @@ namespace PostOffice.API.Data.Models
 
         public ParcelService? ParcelService { get; set; }
         public ParcelType? ParcelType { get; set; }
-
+        public OrderStatus? OrderStatus { get; set; }
         public Pincode? ParcelSenderPincode { get; set; }
         public Pincode? ParcelReceiverPincode { get; set; }
 

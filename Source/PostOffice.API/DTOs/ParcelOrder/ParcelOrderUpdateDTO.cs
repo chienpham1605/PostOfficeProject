@@ -4,7 +4,7 @@ namespace PostOffice.API.DTOs.ParcelOrder
 {
     public class ParcelOrderUpdateDTO
     {
-        public OrderStatus order_status { get; set; }
+        public int order_status { get; set; }
 
         //datetime infor
         public DateTime send_date { get; set; }

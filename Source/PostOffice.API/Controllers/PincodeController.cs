@@ -13,7 +13,7 @@ using System.Security.Policy;
 
 namespace PostOffice.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PincodeController : ControllerBase
     {
@@ -35,7 +35,7 @@ namespace PostOffice.API.Controllers
 
         }
 
-        [HttpGet("PincodeList",Name = "GetPincodes")]
+        [HttpGet("PincodeList")]
         public async Task<IActionResult> GetPincodes()
         {
             var pincodeDtos = await _repository.GetPincodes();
@@ -46,48 +46,7 @@ namespace PostOffice.API.Controllers
             return Ok(pincodeDtos);
 
         }
-        //[HttpGet("ScopeFilter")]
-        //public async Task<IActionResult> ScopeFilter( string sendPin, string recPin)
-        //{
-        //    // Calculate money scope and zone type dbo.moneyservice
-        //    ZoneType zone_type_id;
-        //    float total_charge;
 
-        //    var sender = await _context.Pincodes.FirstOrDefaultAsync(p => p.pincode == sendPin);
-        //    var receiver = await _context.Pincodes.FirstOrDefaultAsync(p => p.pincode == recPin);
-
-        //    if (sender == null || receiver == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (sender.pincode == receiver.pincode)
-        //    {
-        //        zone_type_id = 1;
-        //    }
-        //    else if (sender.area_id != receiver.area_id)
-        //    {
-        //        zone_type_id = 3;
-        //    }
-        //    else
-        //    {
-        //        zone_type_id = 2;
-        //    }
-
-        //    return Ok();
-        //}
-
-        [HttpGet]
-        public async Task<IActionResult> GetPincodeAsync()
-        {
-            var pincodeDtos = await _repository.GetPincodes();
-            if (pincodeDtos.Count() <= 0)
-            {
-                return NotFound();
-            }
-            return Ok(pincodeDtos);
-
-        }
 
 
     }
