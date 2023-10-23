@@ -47,7 +47,10 @@ namespace PostOffice.API.Repositorities.User
                 new Claim(ClaimTypes.GivenName, user.FirstName),
                 new Claim(ClaimTypes.Role, string.Join(";", roles)),
                 new Claim(ClaimTypes.Name, user.LastName),                
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.PostalCode, user.PincodeId),
+                new Claim(ClaimTypes.StreetAddress, user.Address),
+                new Claim(ClaimTypes.MobilePhone, user.PhoneNumber)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Secret"]));

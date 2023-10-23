@@ -14,9 +14,10 @@ namespace PostOffice.API.Data.Configurations
             builder.Property(p => p.city_name);     
             builder.HasOne(p => p.Area).WithMany(a => a.Pincodes).HasForeignKey(a =>a.area_id);
             builder.HasMany(p => p.OfficeBranches).WithOne(a => a.Pincode)
-                .HasForeignKey(a => a.pincode);           
-           
+                .HasForeignKey(a => a.pincode);
 
+            builder.HasMany(p => p.AppUsers).WithOne(a => a.Pincode)
+                .HasForeignKey(a => a.PincodeId);
         }
     }
 }
