@@ -10,6 +10,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
     public class StatisticController : Controller
     {
         HttpClient httpClient = new HttpClient();
+        private readonly string _viewPath = "../Areas/Client/View/Statistic";
         private readonly string moneyorderURL = "https://localhost:7053/api/MoneyOrder/";
         public IActionResult Index()
         {

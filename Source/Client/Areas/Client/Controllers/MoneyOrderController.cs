@@ -20,7 +20,8 @@ namespace PostOffice.Client.Areas.Client.Controllers
         private readonly string pincodeURL = "https://localhost:7053/api/Pincode/";
         private readonly string moneyorderURL = "https://localhost:7053/api/MoneyOrder/";
         private readonly string moneyserviceURL = "https://localhost:7053/api/MoneyService/";
-        [HttpGet]
+     
+       
 
 
         public async Task<IActionResult> Index()
@@ -28,6 +29,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
             ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> Create()
         {
             List<PincodeBaseDTO>? pincodeList = JsonConvert.DeserializeObject<List<PincodeBaseDTO>>(
@@ -78,7 +80,10 @@ namespace PostOffice.Client.Areas.Client.Controllers
             MoneyScopeBaseDTO? moneyscope = JsonConvert.DeserializeObject<MoneyScopeBaseDTO>(temp);
             if (moneyscope == null)
             {
-
+                return Json(new
+                {
+                    transfer_value = transfer_value,
+                }) ;
             }
 
             temp = httpClient.GetStringAsync(moneyserviceURL + "ZoneNScope" + "?zone=" + zone_id.ToString() + "&scope=" + moneyscope.id.ToString()).Result;
@@ -92,6 +97,11 @@ namespace PostOffice.Client.Areas.Client.Controllers
                 total_charge = total_charge,
 
             });
+        }
+
+        public IActionResult submit(string successful)
+        {
+            return View();
         }
     }
 }

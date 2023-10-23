@@ -34,14 +34,14 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         {
             MoneyOrderUpdateDTO isStatused = new MoneyOrderUpdateDTO();
             isStatused.id = id;
-            if (option == "Approve")
+            if (option == "Process")
             {
                 isStatused.transfer_status = TransferStatus.Processing;
             }
 
-            if (option == "Deny")
+            if (option == "Success")
             {
-                isStatused.transfer_status = TransferStatus.Failed;
+                isStatused.transfer_status = TransferStatus.Successfull;
             }
 
             var isStatus = await httpClient.PostAsJsonAsync<MoneyOrderUpdateDTO>("https://localhost:7053/api/MoneyOrder/UpdateMoneyManage?isStatus=true", isStatused);
