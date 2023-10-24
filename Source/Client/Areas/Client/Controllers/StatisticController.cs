@@ -11,8 +11,9 @@ namespace PostOffice.Client.Areas.Client.Controllers
     public class StatisticController : Controller
     {
         HttpClient httpClient = new HttpClient();
-        private readonly string _viewPath = "../Areas/Client/View/Statistic";
+
         private readonly string moneyorderURL = "https://localhost:7053/api/MoneyOrder/";
+        private readonly string _viewPath = "../Areas/Client/View/Statistic";
         [HttpGet]
         public IActionResult Index()
         {
@@ -26,7 +27,6 @@ namespace PostOffice.Client.Areas.Client.Controllers
         [HttpPost]
         public IActionResult Statistic(string option)
         {
-
 
             return View();
         }

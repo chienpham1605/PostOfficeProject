@@ -68,18 +68,6 @@ namespace PostOffice.API.Controllers
 
             return NoContent();
         }
-        [HttpGet("price")]
-        public async Task<IActionResult> GetOrderByFee(int id, [FromBody]ParcelOrderFeeShippingDTO parcelOrderFeeShipping)
-        {
-            var parcelOrderDto = await _repository.GetOrderWithFee(id, parcelOrderFeeShipping);
-
-            if (parcelOrderDto == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(parcelOrderDto);
-        }
 
     }
 }

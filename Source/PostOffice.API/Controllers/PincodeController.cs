@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PostOffice.API.Repositories.MoneyOrder;
 using PostOffice.API.Repositorities.Pincode;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PostOffice.API.Data.Context;
 using PostOffice.API.Data.Models;
-using PostOffice.API.DTOs.ParcelServicePrice;
+using System.Security.Policy;
 using PostOffice.API.DTOs.Pincode;
 using System.Net.Http;
 using System.Security.Policy;
+
 
 namespace PostOffice.API.Controllers
 {
@@ -22,20 +22,20 @@ namespace PostOffice.API.Controllers
         {
             _repository = repository;
         }
-
         [HttpGet("PincodeById", Name= "GetPincodebyId")]
         public async Task<IActionResult> GetPincodeById(string id)
         {
             var pincodeDto = await _repository.GetPincodeById(id);
-            if(pincodeDto == null)
+
             {
                 return NotFound();
             }
             return Ok(pincodeDto);
 
+
         }
 
-        [HttpGet("PincodeList",Name = "GetPincodes")]
+        [HttpGet("PincodeList")]
         public async Task<IActionResult> GetPincodes()
         {
             var pincodeDtos = await _repository.GetPincodes();
@@ -46,36 +46,8 @@ namespace PostOffice.API.Controllers
             return Ok(pincodeDtos);
 
         }
-        //[HttpGet("ScopeFilter")]
-        //public async Task<IActionResult> ScopeFilter( string sendPin, string recPin)
-        //{
-        //    // Calculate money scope and zone type dbo.moneyservice
-        //    ZoneType zone_type_id;
-        //    float total_charge;
 
-        //    var sender = await _context.Pincodes.FirstOrDefaultAsync(p => p.pincode == sendPin);
-        //    var receiver = await _context.Pincodes.FirstOrDefaultAsync(p => p.pincode == recPin);
 
-        //    if (sender == null || receiver == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (sender.pincode == receiver.pincode)
-        //    {
-        //        zone_type_id = 1;
-        //    }
-        //    else if (sender.area_id != receiver.area_id)
-        //    {
-        //        zone_type_id = 3;
-        //    }
-        //    else
-        //    {
-        //        zone_type_id = 2;
-        //    }
-
-        //    return Ok();
-        //}
 
     }
 }

@@ -5,7 +5,6 @@
     var pending = PostOffice.API.Data.Enums.TransferStatus.Pending;
     var processing = PostOffice.API.Data.Enums.TransferStatus.Processing;
     var success = PostOffice.API.Data.Enums.TransferStatus.Successfull;
-   
 }
 
 <style>
@@ -22,8 +21,6 @@
     </div>
     <div class="card-body card-block">
         <form asp-action="Statistic" asp-controller="Statistic" method="post" enctype="multipart/form-data" class="form-horizontal">
-           
-      
         <section class="section">
             <div class="card">
                 <div class="card-header">Health Policy</div>
@@ -56,7 +53,9 @@
                                             </script>
                                         </td>
                                         <td>
+
                                             <span class="text-white badge bg-@(item.transfer_status == processing ? "success" :
+
                                     (item.transfer_status == pending ? "primary" :
                                     (item.transfer_status == success ? "warning" : "danger")
                                     ))">@item.transfer_status</span>

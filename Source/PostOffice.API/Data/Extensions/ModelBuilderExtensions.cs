@@ -173,8 +173,6 @@ namespace PostOffice.API.Data.Extensions
             modelBuilder.Entity<ParcelService>().HasData(
                 new ParcelService { service_id = 1, name = "Economy", description = "These services are cost-effective but might take longer for delivery, especially for longer distances.", status = true, delivery_time = 3 },
                 new ParcelService { service_id = 2, name = "Express", description = "Fast delivery services that promise quick delivery, often within one day or overnight, regardless of distance.", status = true, delivery_time = 1 }
-
-                
                 );
 
             //parcel service price
@@ -219,7 +217,11 @@ namespace PostOffice.API.Data.Extensions
                 new ZoneType { id = 2, zone_description = "Regional" },
                 new ZoneType { id = 3, zone_description = "National" }
                );
-
+            modelBuilder.Entity<OrderStatus>().HasData(
+                new OrderStatus { Id = 1, Status = "Completed" },
+                new OrderStatus { Id = 2, Status = "Shipping" },
+                new OrderStatus { Id = 3, Status = "Pending" }
+                );
             //area
             modelBuilder.Entity<Area>().HasData(
                 new Area { id = 1, area_name = "The North" },
@@ -380,8 +382,7 @@ namespace PostOffice.API.Data.Extensions
                     vpp_value = 0,
                     send_date = new DateTime(2023, 01, 14),
                     receive_date = new DateTime(2023, 01, 18),
-
-                    order_status = Data.Enums.OrderStatus.Completed,
+                    order_status = 1,
                     total_charge = 36000
                 }
                 );

@@ -1,9 +1,9 @@
-﻿@model PostOffice.API.DTOs.MoneyOrder.MoneyOrderCreateDTO
+
+@model PostOffice.API.DTOs.MoneyOrder.MoneyOrderCreateDTO
 @{
     ViewData["Title"] = "MoneyOrderCreate";
     Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
     var pincodeList = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.PinCodeList);
-    
 }
 <style>
     .selectpicker + button.btn {
@@ -279,7 +279,6 @@
                     <div class="col col-md-3"><label for="transfer_description" class=" form-control-label">Transfer Description</label></div>
                     <div class="col-12 col-md-9"><textarea id="number-input" rows="9" placeholder="Example: Bring your citizen ID card to receive money" class="form-control"></textarea></div>
                 </div>
-
                 <!-- Button trigger modal -->
                 <button type="button" id="confirmrequired" class="btn btn-primary" data-toggle="modal" data-target="#confirmnoney">
                     Confirm
@@ -434,7 +433,6 @@
         }
         return result.trim();
     }
-
 
     function transferRemove(input) {
         if (sendpin_input.value != "" && recpin_input.value != "") {

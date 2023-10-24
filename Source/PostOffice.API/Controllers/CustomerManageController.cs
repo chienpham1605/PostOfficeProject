@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 namespace PostOffice.API.Controllers
 {
     public class CustomerManageController : Controller

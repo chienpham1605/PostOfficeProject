@@ -35,6 +35,7 @@ namespace PostOffice.API.Data.Context
 
             builder.ApplyConfiguration(new ZoneTypeConfig());
             builder.ApplyConfiguration(new HistoryEmployeeConfig());
+            builder.ApplyConfiguration(new OrderStatusConfig());
 
             builder.ApplyConfiguration(new AppUserConfig());
             builder.ApplyConfiguration(new AppRoleConfig());
@@ -77,6 +78,7 @@ namespace PostOffice.API.Data.Context
         public virtual DbSet<WeightScope> WeightScopes { get; set; }
 
         public virtual DbSet<ZoneType> ZoneTypes { get; set; }
+        public virtual DbSet<OrderStatus> OrderStatuss { get; set; }
         public virtual DbSet<AppUser> AppUsers { get; set; }
 
         public virtual DbSet<AppRole> AppRoles { get; set; }

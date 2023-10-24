@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostOffice.API.Data.Models;
 using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelService;
+using System.Data;
 using System.Text;
 
 namespace PostOffice.Client.Areas.Admin.Controllers
@@ -55,7 +57,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/ParcelService/Add", content);
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Service");
             }
             return View();
 
@@ -66,7 +68,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             try
             {
                 ParcelServiceUpdateDTO parcelService = new ParcelServiceUpdateDTO();
-                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelOrder/GetServiceById/services" + id).Result;
+                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelService/GetServiceById/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
@@ -86,10 +88,12 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         {
             string data = JsonConvert.SerializeObject(parcelServiceUpdate);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelOrder/UpdateParcelService", content).Result;
+            HttpResponseMessage response =  _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelService/UpdateParcelService", content).Result;
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("/Admin/Service/Index");
+
+                return RedirectToAction("Index", "Service");
+
             }
             return View();
         }

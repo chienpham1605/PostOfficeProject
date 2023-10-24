@@ -26,46 +26,11 @@ namespace PostOffice.API.Repositories.ParcelOrder
         {
             var parcelOrder = _mapper.Map<ParcelOrder>(parcelOrderDTO);
 
-            _context.ParcelOrders.AddAsync(parcelOrder);
+            await _context.ParcelOrders.AddAsync(parcelOrder);
             await _context.SaveChangesAsync();
             return parcelOrder;
         }
 
-        public async Task<ParcelOrderFeeShippingDTO> GetOrderWithFee(int id, ParcelOrderFeeShippingDTO dto)
-        {
-            var order = await _context.ParcelOrders.Include(o => o.ParcelType).Include(o => o.ParcelService).ThenInclude(s => s.ParcelServicePrice).FirstOrDefaultAsync(o => o.id == id);
-            if (order == null)
-            {
-                return null;
-            }
-
-            var fee = CalculateShippingFee(order);
-            dto = _mapper.Map<ParcelOrderFeeShippingDTO>(order);
-            dto.total_charge = (float)(float?)fee;
-
-            return dto;
-        }
-        private double CalculateShippingFee(ParcelOrder order)
-        {
-
-            var servicePrice = order.ParcelService.ParcelServicePrice.FirstOrDefault(f => f.parcel_type_id == order.parcel_type_id);
-            return servicePrice?.service_price ?? 0;
-        }
-
-        //private double GetZoneFactor(Zone zone)
-        //{
-        //    // Logic để xác định hệ số cho từng khu vực
-        //    // Ví dụ: Liên miền = 1.0, Liên tỉnh = 0.8, ...
-        //    switch (zone.Name)
-        //    {
-        //        case "Liên miền":
-        //            return 1.0;
-        //        case "Liên tỉnh":
-        //            return 0.8;
-        //        default:
-        //            return 1.0;
-        //    }
-        //}
 
     public async Task<ParcelOrderBase> GetParcelOrderById(int id)
         {

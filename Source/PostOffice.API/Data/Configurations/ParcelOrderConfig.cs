@@ -23,8 +23,7 @@ namespace PostOffice.API.Data.Configurations
             builder.Property(e => e.send_date)
                 .IsRowVersion()
                 .IsConcurrencyToken();
-            builder.Property(e => e.order_status)
-                .HasMaxLength(10);
+            builder.Property(e => e.order_status);
             builder.Property(e => e.parcel_height);
             builder.Property(e => e.parcel_height);
             builder.Property(e => e.parcel_type_id);
@@ -69,7 +68,7 @@ namespace PostOffice.API.Data.Configurations
 
             builder.HasOne(d => d.ParcelType).WithMany(d => d.ParcelOrders).HasForeignKey(d => d.parcel_type_id);
             builder.HasOne(d => d.ParcelService).WithMany(d => d.ParcelOrders).HasForeignKey(d => d.service_id);
-
+            builder.HasOne(d => d.OrderStatus).WithMany(d => d.ParcelOrders).HasForeignKey(d => d.order_status);
 
         }
     }

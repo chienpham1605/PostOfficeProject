@@ -90,6 +90,7 @@ builder.Services.AddScoped<IParcelOrderRepository, ParcelOrderService>();
 builder.Services.AddScoped<IParcelTypeRepository, ParcelTypeService>();
 builder.Services.AddScoped<IWeightScopeRepository, WeightScopeService>();
 builder.Services.AddScoped<IParcelServiceRepository, ParcelServiceService>();
+
 builder.Services.AddScoped<IMoneyOrderRepository, MoneyOrderRepository>();
 builder.Services.AddScoped<IMoneyServiceRepository, MoneyServiceRepository>();
 builder.Services.AddScoped<IMoneyScopeRepository, MoneyScopeRepository>();
@@ -100,9 +101,6 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
-
-
-
 
 
 builder.Services.AddSwaggerGen(opt =>
