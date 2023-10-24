@@ -26,9 +26,9 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(60);
 });
 
-
 //DI
-builder.Services.AddTransient<IUserAPIClient, UserAPIClient>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 
 var app = builder.Build();
 

@@ -9,6 +9,7 @@ namespace PostOffice.API.Controllers
     using PostOffice.API.Data.Models;
     using PostOffice.API.DTOs.Area;
     using PostOffice.API.DTOs.ParcelOrder;
+    using PostOffice.API.DTOs.User;
     using PostOffice.API.Repositories.ParcelOrder;
 
     [Route("api/[controller]/[Action]")]
@@ -79,6 +80,13 @@ namespace PostOffice.API.Controllers
             }
 
             return Ok(parcelOrderDto);
+        }
+
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetParcelOrderPagingRequest request)
+        {
+            var products = await _repository.GetAllParcelOrderPaging(request);
+            return Ok(products);
         }
 
     }
