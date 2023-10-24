@@ -71,7 +71,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(ParcelOrderCreateDTO parcelorder)
+        public async Task<IActionResult> Create(ParcelOrderCreateDTO parcelorder)
         {
             parcelorder.user_id = new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             parcelorder.sender_name = User.FindFirst(ClaimTypes.Name)?.Value + " " + User.FindFirst(ClaimTypes.GivenName)?.Value;
@@ -83,8 +83,14 @@ namespace PostOffice.Client.Areas.Client.Controllers
             parcelorder.receive_date = DateTime.Now.AddDays(5);
             parcelorder.order_status = 1;
 
-            var test = _httpClient.PostAsJsonAsync<ParcelOrderCreateDTO>(parcelOrderURL, parcelorder).Result;
-            return Json(new { });
+            string data = JsonConvert.SerializeObject(parcelorder);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/ParcelOrder/AddParcelOrder", content);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "ParcelOrder");
+            }
+            return View(parcelorder);
         }
         public IActionResult Edit()
         {
@@ -113,9 +119,25 @@ namespace PostOffice.Client.Areas.Client.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Calculate(Calculation calculation, ParcelOrderBase parcelOrderBase) 
+        public async Task<IActionResult> Calculate(Calculation calculation) 
         {
+            var request = new HttpRequestMessage(HttpMethod.Post, "");
 
+            // Thiết lập nội dung của yêu cầu.
+            request.Content = new StringContent(JsonConvert.SerializeObject(calculation), Encoding.UTF8, "application/json");
+
+            // Gửi yêu cầu và nhận phản hồi.
+            var response = await _httpClient.SendAsync(request);
+
+            // Nếu yêu cầu thành công, hãy trả về giá của dịch vụ.
+            if (response.IsSuccessStatusCode)
+            {
+                var price = await response.Content.ReadAsStringAsync();
+                return Ok(price);
+            }
+
+            // Nếu yêu cầu thất bại, hãy trả về lỗi.
+            return BadRequest();
             return View();
         
         }

@@ -45,24 +45,15 @@
                     <!-- textarea -->
                     <div class="form-group">
                     <select asp-for="status" class="form-control">
-                            <option value="">-- Select Gender --</option>
+                            <option value="true">active</option>
+                            <option value="false">Inactive</option>
+
                      </select>
-                        <label>Status</label>
-                        <textarea class="form-control" rows="3" asp-for="status" placeholder="Enter ..."></textarea>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <!-- select -->
-                    <div class="form-group">
-                        <label>Status</label>
-                        <select class="form-control">
-                            <option value="In Business">In Business</option>
-                            <option value="Inactive">Inactive</option>
-                        </select>
-                    </div>
-                </div>
+              <div class="row">
+                
                 <button type="submit" value="Create" class="btn btn-block btn-warning">Add</button>
         </form>
     </div>

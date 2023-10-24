@@ -73,9 +73,9 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             HttpResponseMessage response = await _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelOrder/UpdateParcelOrder", content);
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index","ParcelOrder");
+                return RedirectToAction("Index","ParcelOrder", new {area = "Admin"});
             }
-            return View();
+            return View("Edit");
         }
     }
 }

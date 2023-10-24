@@ -52,6 +52,7 @@ namespace PostOffice.API.DTOs.ParcelOrder
         public DateTime send_date { get; set; }
         public DateTime receive_date { get; set; }
 
+        public float total_charge { get; set; }
         //public float total_charge { get; set; }
 
     }

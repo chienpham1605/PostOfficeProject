@@ -68,7 +68,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             try
             {
                 ParcelServiceUpdateDTO parcelService = new ParcelServiceUpdateDTO();
-                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelOrder/GetServiceById/" + id).Result;
+                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelService/GetServiceById/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
@@ -88,7 +88,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         {
             string data = JsonConvert.SerializeObject(parcelServiceUpdate);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelOrder/UpdateParcelService", content).Result;
+            HttpResponseMessage response =  _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelService/UpdateParcelService", content).Result;
             if (response.IsSuccessStatusCode)
             {
 
