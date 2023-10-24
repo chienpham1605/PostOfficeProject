@@ -54,6 +54,6 @@ namespace PostOffice.API.DTOs.ParcelOrder
 
         public float total_charge { get; set; }
         //public float total_charge { get; set; }
-
+        
     }
 }

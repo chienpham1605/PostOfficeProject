@@ -90,7 +90,7 @@
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Width(cm) </label></div>
-                <div class="col-12 col-md-9"><input asp-for="parcel_width" type="text"   placeholder="Enter width" class="form-control"><small class="help-block form-text"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_width" type="text"  placeholder="Enter width" class="form-control"><small class="help-block form-text"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">payer </label></div>
@@ -117,9 +117,9 @@
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col col-md-3"><label for="email-input" class=" form-control-label">payment</label></div>
-                <div class="col-12 col-md-9"><input asp-for="total_charge" type="text" placeholder="Enter payment" class="form-control" onkeyup="calculateFee()"
-                ><small class="help-block form-text"></small></div>
+                <div class="col col-md-3"><label for="email-input" class=" form-control-label">Total Charge</label></div>
+                <div class="col-12 col-md-9">
+                    <input asp-for="total_charge" id="total_charge" type="text" placeholder="Enter payment" class="form-control" onkeyup="filter()"><small class="help-block form-text"></small></div>
             </div>
     <div class="card-footer">
         <input type="submit" id="submit-button" value="Create" class="btn btn-primary btn-sm"/>
@@ -129,31 +129,26 @@
 </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-        function calculateFee() {
-            var sender_pincode = document.getElementById("sender_pincode").value;
-            var receiver_pincode = document.getElementById("receiver_pincode").value;
-            var weight = document.getElementById("weight").value;
-            var service_id = document.getElementById("service_id").value;
-            var parcel_type_id = document.getElementById("parcel_type_id").value;
 
-            var calculation = {
-                sender_pincode: sender_pincode,
-                receiver_pincode: receiver_pincode,
-                weight: weight,
-                service_id: service_id,
-                parcel_type_id: parcel_type_id
-            };
+        const service_input = document.getElementById("service_id");
+        const sendpin_input = document.getElementById("sender_pincode");
+        const recpin_input = document.getElementById("receiver_pincode");
+        const type_input = document.getElementById("parcel_type_id");
+        const weight_input = document.getElementById("weight");
 
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "https://localhost:7053/api/Calculation/CalculationFee", true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var result = JSON.parse(xhr.responseText);
-                    document.getElementById("fee").innerHTML = result;
-                }
-            };
-            xhr.send(JSON.stringify(calculation));
+        function filter() {
+            $.ajax({
+                url: "/Client/ParcelOrder/Calculate",
+                data: {
+                    service: service_input.value,
+                    sendPin: sendpin_input.value,
+                    recPin: recpin_input.value,
+                    type: type_input.value,
+                    weight: weight_input.value
+                },
+                success: function (response) {
+                    document.getElementById("total_charge").value = response.total_charge;
+                },
+            })
         }
-
 </script>

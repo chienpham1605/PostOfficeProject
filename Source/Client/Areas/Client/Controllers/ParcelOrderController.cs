@@ -6,6 +6,7 @@ using PostOffice.API.DTOs;
 using PostOffice.API.DTOs.MoneyOrder;
 using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelServicePrice;
+using PostOffice.API.DTOs.ParcelType;
 using PostOffice.API.DTOs.Pincode;
 using PostOffice.API.Repositories.ParcelOrder;
 using System.Data;
@@ -119,27 +120,32 @@ namespace PostOffice.Client.Areas.Client.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Calculate(Calculation calculation) 
+        public async Task<IActionResult> Calculate(ParcelOrderCreateDTO parcelOrder)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "");
+            var calculation = new Calculation
+            {
+                weight = (float)parcelOrder.parcel_weight,
+                parcel_type_id = parcelOrder.parcel_type_id,
+                service_id = parcelOrder.service_id,
+                sender_pincode = parcelOrder.sender_pincode,
+                receiver_pincode = parcelOrder.receiver_pincode
+            };
 
-            // Thiết lập nội dung của yêu cầu.
-            request.Content = new StringContent(JsonConvert.SerializeObject(calculation), Encoding.UTF8, "application/json");
+            string data = JsonConvert.SerializeObject(calculation);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/Calculation/CaculationFee", content);
 
-            // Gửi yêu cầu và nhận phản hồi.
-            var response = await _httpClient.SendAsync(request);
-
-            // Nếu yêu cầu thành công, hãy trả về giá của dịch vụ.
             if (response.IsSuccessStatusCode)
             {
-                var price = await response.Content.ReadAsStringAsync();
-                return Ok(price);
+                var resultString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<double>(resultString);
+                parcelOrder.total_charge = (float)result;
             }
-
-            // Nếu yêu cầu thất bại, hãy trả về lỗi.
-            return BadRequest();
-            return View();
-        
+            else
+            {
+                throw new Exception("NO data");
+            }
+            return View(parcelOrder);
         }
     }
 }

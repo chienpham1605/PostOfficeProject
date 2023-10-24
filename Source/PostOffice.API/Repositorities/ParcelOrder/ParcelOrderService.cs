@@ -84,5 +84,10 @@ namespace PostOffice.API.Repositories.ParcelOrder
             };
             return new ApiSuccessResult<PagedResult<ParcelOrderBase>>(pagedResult);
         }
+
+        public Task<ParcelOrderFeeShippingDTO> GetOrderWithFee(int id, ParcelOrderFeeShippingDTO dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
