@@ -134,7 +134,7 @@
                         <div class="row g-3">
                             <div class="col-md-4 mb-2">
                                 <label for="your_number" class="form-label">Your Phone Number</label>
-                                <input value="@ViewData["PhoneNumber"]" class="form-control" id="your_number" placeholder="Your Phone Number" />
+                                <input value="@ViewData["PhoneNumber"]" class="form-control" id="your_number" placeholder="Your Phone Number" disabled />
                             </div>
                             <div class="col-md-5 mb-2">
                                 <label for="email" class="form-label">Your Email</label>
@@ -146,7 +146,7 @@
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="sender_national_identity_number" class="form-control-label">National Number</label></div>
                     <div class="col-12 col-md-9 mb-2">
-                        <input type="text" asp-for="sender_national_identity_number" id="sender_national_identity_number" placeholder="your national identity number" class="form-control" required>
+                        <input type="number" asp-for="sender_national_identity_number" id="sender_national_identity_number" placeholder="your national identity number" class="form-control" required>
                     </div>
                 </div>
             </fieldset>
@@ -192,19 +192,32 @@
                         <input type="text" asp-for="receiver_address" id="sender_address" placeholder=" No., Street, Ward " class="form-control" required>
                         <small class="form-text text-muted">Example: 275, Nguyen Van Dau, Phuong 11</small>
                     </div>
+                    <div class="col col-md-6">
+                        <input asp-for="receiver_pincode" class="form-control" list="datalistOptions"
+                               id="receiver_pincode" placeholder="Your Area" onchange="transferRemove(this)" required />
+                    </div>
+                    <input class="col-md-2 form-control" id="city_name_rec" disabled />
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="receiver_address" class="form-control-label">Receiver Address</label></div>
+                    <div class="col-12 col-md-9 mb-2">
+                        <input type="text" asp-for="receiver_address" id="sender_address" placeholder=" No., Street, Ward " class="form-control" required>
+                        <small class="form-text text-muted">Example: 275, Nguyen Van Dau, Phuong 11</small>
+                    </div>
 
                 </div>
 
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="receiver_phone" class=" form-control-label">Receiver Phone</label></div>
                     <div class="col-md-4 mb-2">
-                        <input type="text" asp-for="receiver_phone" id="receiver_phone" placeholder="His/her phone number" class="form-control" required>
+                        <input type="number" asp-for="receiver_phone" id="receiver_phone" placeholder="His/her phone number" class="form-control" required>
                     </div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="receiver_national_identity_number" class="form-control-label">Receiver National Number</label></div>
                         <div class="col-12 col-md-9 mb-2">
-                            <input type="text" asp-for="receiver_national_identity_number" id="receiver_national_identity_number" placeholder="his/her national identity number" class="form-control" required>
+                            <input type="number" asp-for="receiver_national_identity_number" id="receiver_national_identity_number" placeholder="his/her national identity number" class="form-control" required>
                         </div>
                     </div>
             </fieldset>
