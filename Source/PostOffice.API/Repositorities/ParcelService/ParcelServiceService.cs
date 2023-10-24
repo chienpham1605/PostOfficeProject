@@ -47,7 +47,7 @@ namespace PostOffice.API.Repositories.ParcelService
 
         public async Task<ParcelServiceBaseDTO> GetParcelServiceById(int id)
         {
-            var parcelserviceByid = _context.ParcelServices.SingleOrDefault(p => p.service_id == id);
+            var parcelserviceByid = _context.ParcelServices.SingleOrDefaultAsync(p => p.service_id == id);
             var parcelServiceDto = _mapper.Map<ParcelServiceBaseDTO>(parcelserviceByid);
             if (parcelServiceDto == null)
             {

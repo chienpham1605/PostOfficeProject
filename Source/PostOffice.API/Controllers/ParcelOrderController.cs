@@ -9,8 +9,12 @@ namespace PostOffice.API.Controllers
     using PostOffice.API.Data.Models;
     using PostOffice.API.DTOs.Area;
     using PostOffice.API.DTOs.ParcelOrder;
+    using PostOffice.API.DTOs.ParcelServicePrice;
     using PostOffice.API.DTOs.User;
+    using PostOffice.API.DTOs.WeightScope;
     using PostOffice.API.Repositories.ParcelOrder;
+    using PostOffice.API.Repositories.ParcelService;
+    using PostOffice.API.Repositories.ParcelType;
 
     [Route("api/[controller]/[Action]")]
     [ApiController]
@@ -76,6 +80,19 @@ namespace PostOffice.API.Controllers
             var products = await _repository.GetAllParcelOrderPaging(request);
             return Ok(products);
         }
-
+        [HttpGet]
+        public IActionResult OrderDetails(int id)
+        {
+            var detail = from s in _context.ParcelOrders
+                         join w in _context.OrderStatuss on s.order_status equals w.Id
+                         join p in _context.ParcelServices on s.service_id equals p.service_id
+                         join t in _context.ParcelTypes on s.parcel_type_id equals t.id
+                         where s.id == id select new ParcelInfo(
+                             id = s.id,
+                             
+                             
+                             );
+            return Ok(detail);
+        }
     }
 }
