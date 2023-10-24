@@ -32,6 +32,11 @@ namespace PostOffice.Client.Areas.Client.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ViewData["StreetAddress"] = User.FindFirst(ClaimTypes.StreetAddress)?.Value;
+            ViewData["Email"] = User.FindFirst(ClaimTypes.Email).Value;
+            ViewData["PhoneNumber"] = User.FindFirst(ClaimTypes.MobilePhone)?.Value;
+            ViewData["LastName"] = User.FindFirst(ClaimTypes.Name)?.Value;
+            ViewData["FirstName"] = User.FindFirst(ClaimTypes.GivenName)?.Value;
 
             List<ParcelOrderBase> parcelOrders = new List<ParcelOrderBase>();
             try
@@ -58,7 +63,6 @@ namespace PostOffice.Client.Areas.Client.Controllers
         public async Task<IActionResult> Create()
         {
             ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ViewData["StreetAddress"] = User.FindFirst(ClaimTypes.StreetAddress)?.Value;
             ViewData["Email"] = User.FindFirst(ClaimTypes.Email).Value;
             ViewData["PhoneNumber"] = User.FindFirst(ClaimTypes.MobilePhone)?.Value;
@@ -67,8 +71,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
             return View();
         }
         [HttpPost]
-        [ActionName("Create")]
-        public async Task<IActionResult> Create(ParcelOrderCreateDTO parcelorder)
+        public IActionResult Create(ParcelOrderCreateDTO parcelorder)
         {
             parcelorder.user_id = new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             parcelorder.sender_name = User.FindFirst(ClaimTypes.Name)?.Value + " " + User.FindFirst(ClaimTypes.GivenName)?.Value;
@@ -77,17 +80,11 @@ namespace PostOffice.Client.Areas.Client.Controllers
             parcelorder.sender_phone = User.FindFirst(ClaimTypes.MobilePhone)?.Value;
 
             parcelorder.send_date = DateTime.Now;
-            parcelorder.receive_date = DateTime.Now;
+            parcelorder.receive_date = DateTime.Now.AddDays(5);
             parcelorder.order_status = 1;
-            
-            string data = JsonConvert.SerializeObject(parcelorder);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/ParcelOrder/AddParcelOrder", content);
-            if (response.IsSuccessStatusCode)
-            {
-                return Json(new { });
-            }
-            return View("Create");
+
+            var test = _httpClient.PostAsJsonAsync<ParcelOrderCreateDTO>(parcelOrderURL, parcelorder).Result;
+            return Json(new { });
         }
         public IActionResult Edit()
         {
@@ -118,7 +115,8 @@ namespace PostOffice.Client.Areas.Client.Controllers
         [HttpPost]
         public async Task<IActionResult> Calculate(Calculation calculation, ParcelOrderBase parcelOrderBase) 
         {
-            return View()
+
+            return View();
         
         }
     }

@@ -11,32 +11,36 @@
     <div class="card-body card-block">
         <form asp-action="Create" asp-area="Client" asp-controller="ParcelOrder" method="post" enctype="multipart/form-data" class="form-horizontal">
             <div class="row form-group">
-                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Your Name</label></div>
-                <div class="col-12 col-md-9"><input asp-for="sender_name" type="text" placeholder="Please enter your full name" class="form-control"><small class="form-text text-muted"></small></div>
+                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Your First Name</label></div>
+                <div class="col-12 col-md-9"><input value="@ViewData["FirstName"]" type="text" placeholder="Please enter your full name" class="form-control"><small class="form-text text-muted"></small></div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Your Last Name</label></div>
+                <div class="col-12 col-md-9"><input value="@ViewData["LastName"]" type="text" placeholder="Please enter your full name" class="form-control"><small class="form-text text-muted"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Address</label></div>
-                <div class="col-12 col-md-9"><input asp-for="sender_address" type="text" class="form-control"><small class="form-text text-muted">Exmaple: 123 Nguyen Van Dau Street, Ward 6, Binh Thanh District</small></div>
+                <div class="col-12 col-md-9"><input value="@ViewData["StreetAddress"]" type="text" class="form-control"><small class="form-text text-muted">Exmaple: 123 Nguyen Van Dau Street, Ward 6, Binh Thanh District</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Email</label></div>
-                <div class="col-12 col-md-9"><input asp-for="sender_email" type="text" id="text-input" class="form-control"><small class="form-text text-muted">Please enter your email</small></div>
+                <div class="col-12 col-md-9"><input value="@ViewData["Email"]" type="text" id="text-input" class="form-control"><small class="form-text text-muted">Please enter your email</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Phone</label></div>
-                <div class="col-12 col-md-9"><input asp-for="sender_phone" type="text"  class="form-control"><small class="form-text text-muted"></small></div>
+                <div class="col-12 col-md-9"><input value="@ViewData["PhoneNumber"]" type="text" class="form-control"><small class="form-text text-muted"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="inputSm" class=" form-control-label">City</label></div>
                 <div class="col-12 col-md-9">
-                    <input asp-for="sender_pincode" list="datalistOptionsPincode" class="form-control">
+                    <input asp-for="sender_pincode" list="datalistOptionsPincode" id="sender_pincode" class="form-control">
                     @await Component.InvokeAsync("Pincode")
                     </input>
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">The receiver's name</label></div>
-                <div class="col-12 col-md-9"><input asp-for="receiver_name" type="text"  class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                <div class="col-12 col-md-9"><input asp-for="receiver_name" type="text"  class="form-control"><small class="form-text text-muted">Enter your receiver</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">The receiver's email </label></div>
@@ -53,7 +57,7 @@
             <div class="row form-group">
                 <div class="col col-md-3"><label for="inputSm" class=" form-control-label">The receiver's city</label></div>
                 <div class="col-12 col-md-9">
-                    <input asp-for="receiver_pincode" list="datalistOptionsPincode" id="input" class="form-control">
+                    <input asp-for="receiver_pincode" list="datalistOptionsPincode" id="receiver_pincode" class="form-control">
                         @await Component.InvokeAsync("Pincode")
                         </input>
                 </div>
@@ -74,7 +78,7 @@
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Weight </label></div>
-                <div class="col-12 col-md-9"><input asp-for="parcel_weight" type="text"  placeholder="Enter Weight" class="form-control"><small class="help-block form-text"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_weight" id="weight" type="text"  placeholder="Enter Weight" class="form-control"><small class="help-block form-text"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Height </label></div>
@@ -90,16 +94,16 @@
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">payer </label></div>
-                <div class="col-12 col-md-9"><input asp-for="payer" type="text" placeholder="Enter width" class="form-control"><small class="help-block form-text"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="payer" type="text" placeholder="Enter payer" class="form-control"><small class="help-block form-text"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">payment</label></div>
-                <div class="col-12 col-md-9"><input asp-for="payment_method" type="text" placeholder="Enter width" class="form-control"><small class="help-block form-text"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="payment_method" type="text" placeholder="Enter payment" class="form-control"><small class="help-block form-text"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label class=" form-control-label">Choose the parcel type</div>
                 <div class="col col-md-9">
-                    <input asp-for="parcel_type_id" list="datalistOptionsType" class="form-control">
+                    <input asp-for="parcel_type_id" list="datalistOptionsType" id="parcel_type_id" class="form-control">
                             @await Component.InvokeAsync("ParcelType")
                   </input>
                 </div>
@@ -107,14 +111,76 @@
             <div class="row form-group">
                 <div class="col col-md-3"><label class=" form-control-label">Choose the service</div>
                 <div class="col col-md-9">
-                    <input asp-for="service_id" list="datalistOptionsService" class="form-control">
+                    <input asp-for="service_id" list="datalistOptionsService" id="service_id" class="form-control">
                     @await Component.InvokeAsync("ParcelService")
                     </input>
                 </div>
             </div>
+         
     <div class="card-footer">
-        <input type="submit" value="Create" class="btn btn-primary btn-sm"/>
+        <input type="submit" id="submit-button" value="Create" class="btn btn-primary btn-sm"/>
         <input type="reset" class="btn btn-danger btn-sm"/>
     </div> 
     </form>
 </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+        const submitBtn = document.getElementById("submit-button");
+        submitBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "/Client/ParcelOrder/Create",
+                type: "post",
+                data: $("#form-submit").serialize(),
+                success: function (response) {
+                    let timerInterval;
+                    Swal.fire({
+                        title: 'Automatically move to Index Page',
+                        html: 'I will move in <b></b> milliseconds.',
+                        timer: 5000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                b.textContent = Swal.getTimerLeft()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                        }
+                    }).then((result) => {
+                        window.location.href = "/Client/ParcelOrder/Index";
+                    })
+                },
+            })
+        });
+
+        function calculateFee() {
+            var sender_pincode = document.getElementById("sender_pincode").value;
+            var receiver_pincode = document.getElementById("receiver_pincode").value;
+            var weight = document.getElementById("weight").value;
+            var service_id = document.getElementById("service_id").value;
+            var parcel_type_id = document.getElementById("parcel_type_id").value;
+
+            var calculation = {
+                sender_pincode: sender_pincode,
+                receiver_pincode: receiver_pincode,
+                weight: weight,
+                service_id: service_id,
+                parcel_type_id: parcel_type_id
+            };
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/api/Calculation/CalculationFee", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var result = JSON.parse(xhr.responseText);
+                    document.getElementById("fee").innerHTML = result;
+                }
+            };
+            xhr.send(JSON.stringify(calculation));
+        }
+
+</script>
