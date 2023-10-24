@@ -47,7 +47,7 @@ builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
 
 //Add Config for Required Email
 builder.Services.Configure<IdentityOptions>(
-    options => options.SignIn.RequireConfirmedEmail = true
+    options => options.SignIn.RequireConfirmedEmail = false     //set true if required confirm mail after register
     );
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(options
