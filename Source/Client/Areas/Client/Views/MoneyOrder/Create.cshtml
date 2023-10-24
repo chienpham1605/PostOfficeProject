@@ -221,7 +221,7 @@
                             <input type="radio" asp-for="payer" value="sender" class="card-input-gender-element" checked required />
                             <div class="card card-input px-0">
                                 <div class="card-body row fs-5">
-                                    <div class="col-9 text-center">
+                                    <div class="col-11 text-center">
                                         Sender Pay
                                     </div>
                                     <span class="col-3 gender-check float-start">&#10004;</span>
@@ -232,7 +232,7 @@
                             <input type="radio" asp-for="payer" value="receiver" class="card-input-gender-element" required />
                             <div class="card card-input px-0">
                                 <div class="card-body row fs-5">
-                                    <div class="col-lg-9 col-12 text-center">
+                                    <div class="col-12 text-center">
                                         Receiver Pay
                                     </div>
                                     <span class="col-lg-3 col-12 gender-check float-start">&#10004;</span>
@@ -278,6 +278,7 @@
                                 </p>
                             </div>
                             <div class="modal-footer">
+                                <p class="text-danger">Enter complete information to display button "Accept"</p>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" id="submit-button" class="btn btn-primary" disabled>Accept</button>
                             </div>
@@ -314,7 +315,7 @@
                 Swal.fire({
                     title: 'Automatically move to Statistic Page',
                     html: 'I will move in <b></b> milliseconds.',
-                    timer: 5000,
+                    timer: 3000,
                     timerProgressBar: true,
                     didOpen: () => {
                         Swal.showLoading()
@@ -332,6 +333,8 @@
             },
         })
     });
+
+
 
    confirmRequired.addEventListener("click", function () {
         let allFieldsFilled = true;
