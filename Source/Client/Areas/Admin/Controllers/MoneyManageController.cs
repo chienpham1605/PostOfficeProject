@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostOffice.API;
 using PostOffice.API.Data.Enums;
@@ -10,6 +11,7 @@ using System.Net.Http.Json;
 namespace PostOffice.Client.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "admin")]
     public class MoneyManageController : Controller
     {
         HttpClient httpClient = new HttpClient();
