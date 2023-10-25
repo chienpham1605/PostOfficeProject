@@ -4,7 +4,7 @@ using PostOffice.Client.Services;
 using Microsoft.EntityFrameworkCore;
 using PostOffice.API.Data.Context;
 using System.Configuration;
-
+using PostOffice.Admin.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +29,7 @@ builder.Services.AddSession(options =>
 //DI
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
-
+builder.Services.AddTransient<IParcelServiceAPIAdmin, ParcelServiceAPIAdmin>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

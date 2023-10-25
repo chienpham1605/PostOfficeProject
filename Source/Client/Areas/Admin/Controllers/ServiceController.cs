@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using PostOffice.API.Data.Models;
 using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelService;
+using PostOffice.Client.Services;
 using System.Data;
 using System.Text;
 
@@ -14,11 +15,14 @@ namespace PostOffice.Client.Areas.Admin.Controllers
     {
         Uri baseAddress = new Uri("https://localhost:7053/api");
         private readonly HttpClient _httpClient;
-
-        public ServiceController()
+        private readonly IParcelServiceAPIAdmin _parcelServiceAPIAdmin;
+        private readonly IConfiguration _configuration;
+        public ServiceController(IParcelServiceAPIAdmin parcelServiceAPIAdmin, IConfiguration configuration)
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = baseAddress;
+            _configuration = configuration;
+            _parcelServiceAPIAdmin = parcelServiceAPIAdmin;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -65,37 +69,33 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            try
+            var result = await _parcelServiceAPIAdmin.GetById(id);
+            if (result.IsSuccessed)
             {
-                ParcelServiceUpdateDTO parcelService = new ParcelServiceUpdateDTO();
-                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelService/GetServiceById/" + id).Result;
-                if (response.IsSuccessStatusCode)
+                var parcelService = result.ResultObj;
+                var updateRequest = new ParcelServiceUpdateDTO()
                 {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    parcelService = JsonConvert.DeserializeObject<ParcelServiceUpdateDTO>(data);
-
-                }
-                return View(parcelService);
+                    delivery_time = parcelService.delivery_time
+                };
+                return View(updateRequest);
             }
-            catch (Exception ex)
-            {
-
-                return View();
-            }
+            return RedirectToAction("Error", "Service");
         }
         [HttpPost]
-        public IActionResult Edit(ParcelServiceUpdateDTO parcelServiceUpdate)
+        public async Task<IActionResult> Edit(ParcelServiceUpdateDTO request, int id)
         {
-            string data = JsonConvert.SerializeObject(parcelServiceUpdate);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response =  _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelService/UpdateParcelService", content).Result;
-            if (response.IsSuccessStatusCode)
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _parcelServiceAPIAdmin.UpdateParcelService(id, request);
+            if (result.IsSuccessed)
             {
-
-                return RedirectToAction("Index", "Service");
-
+                TempData["result"] = "Update successfully";
+                return RedirectToAction("Index","Service");
             }
-            return View();
+
+            ModelState.AddModelError("", result.Message);
+            return View(request);
         }
     }
 }
