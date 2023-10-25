@@ -41,7 +41,17 @@ namespace PostOffice.API.Controllers
             }
             return await _repository.GetAllParcelTypes();
         }
+        [HttpGet("id")]
+        public async Task<IActionResult> GetParcelTypeById(int id) 
+        {
+            var typeDto = await _repository.GetParcelTypeById(id);
+            if (typeDto == null)
+            {
+                return NotFound();
+            }
+            return Ok(typeDto);
 
+        }
 
 
         // PUT: api/ParcelTypes/5

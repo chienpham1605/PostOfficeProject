@@ -10,5 +10,6 @@ namespace PostOffice.API.Repositories.ParcelType
 
         Task<ParcelTypeBaseDTO> GetParcelType(int id);
         Task<List<ParcelTypeBaseDTO>> GetAllParcelTypes();
+        Task<ParcelTypeBaseDTO> GetParcelTypeById(int id);
     }
 }

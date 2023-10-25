@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Ocsp;
 using PostOffice.API.Data.Models;
 using PostOffice.API.DTOs;
 using PostOffice.API.DTOs.MoneyOrder;
@@ -42,12 +44,6 @@ namespace PostOffice.Client.Areas.Client.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            ViewData["StreetAddress"] = User.FindFirst(ClaimTypes.StreetAddress)?.Value;
-            ViewData["Email"] = User.FindFirst(ClaimTypes.Email).Value;
-            ViewData["PhoneNumber"] = User.FindFirst(ClaimTypes.MobilePhone)?.Value;
-            ViewData["LastName"] = User.FindFirst(ClaimTypes.Name)?.Value;
-            ViewData["FirstName"] = User.FindFirst(ClaimTypes.GivenName)?.Value;
 
             List<ParcelOrderBase> parcelOrders = new List<ParcelOrderBase>();
             try
@@ -94,14 +90,8 @@ namespace PostOffice.Client.Areas.Client.Controllers
             parcelorder.receive_date = DateTime.Now.AddDays(5);
             parcelorder.order_status = 1;
 
-            string data = JsonConvert.SerializeObject(parcelorder);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/ParcelOrder/AddParcelOrder", content);
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index", "ParcelOrder");
-            }
-            return View(parcelorder);
+            var test = _httpClient.PostAsJsonAsync<ParcelOrderCreateDTO>(parcelOrderURL, parcelorder).Result;
+            return Json(new{ });
         }
         public IActionResult Edit()
         {
@@ -129,77 +119,84 @@ namespace PostOffice.Client.Areas.Client.Controllers
                 return View();
             }
         }
-        [HttpPost]
-        public async Task<IActionResult> Calculate(ParcelOrderCreateDTO parcelOrder)
-        {
-            var calculation = new Calculation
-            {
-                weight = (float)parcelOrder.parcel_weight,
-                parcel_type_id = parcelOrder.parcel_type_id,
-                service_id = parcelOrder.service_id,
-                sender_pincode = parcelOrder.sender_pincode,
-                receiver_pincode = parcelOrder.receiver_pincode
-            };
-
-            string data = JsonConvert.SerializeObject(calculation);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/Calculation/CalculationFee", content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var resultString = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<double>(resultString);
-                parcelOrder.total_charge = (float)result;
-            }
-            else
-            {
-                throw new Exception("NO data");
-            }
-            return View(parcelOrder);
-        }
         //[HttpPost]
-        //public async Task<IActionResult> ScopeFilter(float weight, string sender_pincode, string receiver_pincode, int parcel_type_id, int service_id)
+        //public async Task<IActionResult> Calculate(ParcelOrderCreateDTO parcelOrder)
         //{
-        //    int zone_id;
-        //    float total_charge;
-        //    if (sender_pincode == receiver_pincode && sender_pincode != null && receiver_pincode != null)
+        //    var calculation = new Calculation
         //    {
-        //        zone_id = 1;
+        //        weight = (float)parcelOrder.parcel_weight,
+        //        parcel_type_id = parcelOrder.parcel_type_id,
+        //        service_id = parcelOrder.service_id,
+        //        sender_pincode = parcelOrder.sender_pincode,
+        //        receiver_pincode = parcelOrder.receiver_pincode
+        //    };
+
+        //    string data = JsonConvert.SerializeObject(calculation);
+        //    StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+        //    HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/Calculation/CalculationFee", content);
+
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var resultString = await response.Content.ReadAsStringAsync();
+        //        var result = JsonConvert.DeserializeObject<double>(resultString);
+        //        parcelOrder.total_charge = (float)result;
         //    }
         //    else
         //    {
-        //        int send_area = JsonConvert.DeserializeObject<PincodeBaseDTO>(_httpClient.GetStringAsync(pincodeURL + "PincodeById?id=" + sender_pincode).Result)!.area_id;
-        //        int rec_area = JsonConvert.DeserializeObject<PincodeBaseDTO>(_httpClient.GetStringAsync(pincodeURL + "PincodeById?id=" + receiver_pincode).Result)!.area_id;
-        //        if (send_area != rec_area)
-        //        {
-        //            zone_id = 3;
-        //        }
-        //        else
-        //        {
-        //            zone_id = 2;
-        //        }
+        //        throw new Exception("NO data");
         //    }
-        //    var temp = await _httpClient.GetStringAsync(weightScopeURL + "ScopeValue" + "?value=" + weight.ToString());
-        //    WeightScopeBaseDTO? weightScope = JsonConvert.DeserializeObject<WeightScopeBaseDTO>(temp);
-        //    if (weightScope == null)
-        //    {
-        //        return Json(new
-        //        {
-        //            weight = weight,
-        //        });
-        //    }
-
-        //    temp = _httpClient.GetStringAsync(parcelServiceURL + "ZoneNScope" + "?zone=" + zone_id.ToString() + "&scope=" + weight.id.ToString()).Result;
-        //    ParcelServiceBaseDTO? servicePriceBaseDTO = JsonConvert.DeserializeObject<MServicePriceBaseDTO>(temp);
-
-        //    total_charge = transfer_value + mServicePriceBaseDTO.fee;
-        //    return Json(new
-        //    {
-        //        order_fee = mServicePriceBaseDTO.fee,
-        //        description = moneyscope.description,
-        //        total_charge = total_charge,
-
-        //    });
+        //    return View(parcelOrder);
         //}
+        [HttpPost]
+        public async Task<IActionResult> ScopeFilter(double weight, string sender_pincode, string receiver_pincode, int parcel_type_id, int service_id)
+        {
+
+
+            // Lấy thông tin về dịch vụ và loại hàng hóa
+            var service = JsonConvert.DeserializeObject<ParcelServiceBaseDTO>(await _httpClient.GetStringAsync(parcelServiceURL + "GetServiceById?id=" + service_id));
+            var parcelType = JsonConvert.DeserializeObject<ParcelTypeBaseDTO>(await _httpClient.GetStringAsync(parcelTypeURL + "GetParcelTypeById?id=" + parcel_type_id));
+
+            // Lấy thông tin về mã pin của người gửi và người nhận
+            int zone_id;
+            
+            if (sender_pincode == receiver_pincode && sender_pincode != null && receiver_pincode != null)
+            {
+                zone_id = 1;
+            }
+            else
+            {
+                int send_area = JsonConvert.DeserializeObject<PincodeBaseDTO>(_httpClient.GetStringAsync(pincodeURL + "PincodeById?id=" + sender_pincode).Result)!.area_id;
+                int rec_area = JsonConvert.DeserializeObject<PincodeBaseDTO>(_httpClient.GetStringAsync(pincodeURL + "PincodeById?id=" + receiver_pincode).Result)!.area_id;
+                if (send_area != rec_area)
+                {
+                    zone_id = 3;
+                }
+                else
+                {
+                    zone_id = 2;
+                }
+            }
+
+            // Lấy thông tin về phạm vi trọng lượng
+            var weightScope = JsonConvert.DeserializeObject<WeightScopeBaseDTO>(_httpClient.GetStringAsync(weightScopeURL + "getWeightRange?weight=" + weight).Result);
+
+            // Lấy thông tin về giá dịch vụ
+            var priceResponse = _httpClient.GetStringAsync(parcelServicePriceURL + "ZoneNScope" + "?zone=" + zone_id.ToString() + "&scope=" + weightScope.id.ToString() + "&service=" + service.service_id.ToString() + "&parcelType=" + parcelType.id.ToString()).Result;
+
+            ServicePriceBaseDTO? servicePrice = JsonConvert.DeserializeObject<ServicePriceBaseDTO>(priceResponse);
+
+            // Tính toán total_charge
+            float total_charge = 0;
+            if (servicePrice != null)
+            {
+                total_charge = (float)(weight + servicePrice.service_price);
+            }
+
+            return Json(new { total_charge = total_charge });
+        }
+        public IActionResult submit(string successful)
+        {
+            return View();
+        }
     }
 }

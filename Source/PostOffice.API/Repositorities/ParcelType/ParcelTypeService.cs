@@ -8,6 +8,7 @@ namespace PostOffice.API.Repositories.ParcelType
     using PostOffice.API.DTOs.MoneyOrder;
     using PostOffice.API.DTOs.ParcelService;
     using PostOffice.API.DTOs.ParcelType;
+    using PostOffice.API.DTOs.Pincode;
 
     public class ParcelTypeService : IParcelTypeRepository
     {
@@ -46,6 +47,14 @@ namespace PostOffice.API.Repositories.ParcelType
                 throw new KeyNotFoundException();
             }
             return parcelTypeDto;
+        }
+
+        public async Task<ParcelTypeBaseDTO> GetParcelTypeById(int id)
+        {
+            var type = await _context.ParcelTypes.FindAsync(id);
+            var typeDTO = _mapper.Map<ParcelTypeBaseDTO>(type);
+
+            return typeDTO;
         }
 
         public async Task<ParcelType> UpdateParcelType(ParcelTypeUpdateDTO parcelTypeUpdateDTO)
