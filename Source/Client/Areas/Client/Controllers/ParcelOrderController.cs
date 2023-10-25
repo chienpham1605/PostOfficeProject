@@ -17,6 +17,7 @@ using System.Text;
 namespace PostOffice.Client.Areas.Client.Controllers
 {
     [Area("Client")]
+    [Authorize(Roles = "customer")]
     public class ParcelOrderController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:7053/api");
