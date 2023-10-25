@@ -410,3 +410,5 @@ FodyWeavers.xsd
 /Source/PostOffice.API/Migrations/*.cs
 /Source/Client/appsettings.json
 /Source/PostOffice.API/appsettings.json
+/Source/Client/appsettings.json
+/Source/PostOffice.API/appsettings.json

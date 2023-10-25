@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Org.BouncyCastle.Asn1.Ocsp;
 using PostOffice.API.Data.Models;
+using PostOffice.API.DTOs.Common;
 using PostOffice.API.DTOs.User;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -28,7 +31,7 @@ namespace PostOffice.API.Repositorities.User
 
         }
 
-        public async Task<string> Authenticate(UserLoginDTO userLogin)
+        public async Task<ApiResult<string>> Authenticate(UserLoginDTO userLogin)
         {
             var user = await _userManager.FindByEmailAsync(userLogin.Email);
             if (user == null)  return null;
@@ -62,27 +65,142 @@ namespace PostOffice.API.Repositorities.User
                expires: DateTime.Now.AddHours(3),
                signingCredentials: creds);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new ApiSuccessResult<string>(new JwtSecurityTokenHandler().WriteToken(token));
+        }         
 
-
-        }
-
-        public async Task<bool> Register(UserRegisterDTO userRegister)
+        public async Task<ApiResult<bool>> RegisterUser([FromBody]UserRegisterDTO userRegister)
         {
-           var user = new AppUser()
+            var user = await _userManager.FindByNameAsync(userRegister.UserName);
+            if (user != null)
             {
+                return new ApiErrorResult<bool>("This username has been existed");
+            }
+            if (await _userManager.FindByEmailAsync(userRegister.Email) != null)
+            {
+                return new ApiErrorResult<bool>("This email has been existed");
+            }
+
+            user = new AppUser()
+            {
+                Create_date = userRegister.Create_date,
                 Email = userRegister.Email,
                 FirstName = userRegister.FirstName,
                 LastName = userRegister.LastName,
-                UserName = userRegister.Username,
-                PhoneNumber = userRegister.PhoneNumber
+                UserName = userRegister.UserName,
+                PhoneNumber = userRegister.PhoneNumber,
+                PincodeId = userRegister.PincodeId,
+                Address = userRegister.Address
             };
-            var result = await _userManager.CreateAsync(user, userRegister.Password);
+
+            if(await _roleManager.RoleExistsAsync(userRegister.Role))
+            {
+                var result = await _userManager.CreateAsync(user, userRegister.Password);
+
+                if(!result.Succeeded)
+                {
+                    return new ApiErrorResult<bool>("Register failed");
+                }
+                //add role
+                await _userManager.AddToRoleAsync(user, userRegister.Role);
+                return new ApiSuccessResult<bool>();
+            }
+            else
+            {
+                return new ApiErrorResult<bool>("Role is not exist"); 
+            }
+
+/*
+            if (result.Succeeded)
+            {                 
+                return new ApiSuccessResult<bool>();
+            }
+            return new ApiErrorResult<bool>("Register failed");*/
+        }
+
+        public async Task<ApiResult<PagedResult<UserViewDTO>>> GetsUserPaging(GetUserPagingRequest request)
+        {
+            var query = _userManager.Users;
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.Email.Contains(request.Keyword)
+                 || x.PhoneNumber.Contains(request.Keyword)
+                 || x.FirstName.Contains(request.Keyword)
+                 || x.LastName.Contains(request.Keyword)
+                 || x.UserName.Contains(request.Keyword)
+                 );
+            }
+
+            //3. Paging
+            int totalRow = await query.CountAsync();
+
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize).Select(x => new UserViewDTO()
+            {
+                Id = x.Id,
+                UserName = x.UserName,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                PhoneNumber = x.PhoneNumber,
+                Email = x.Email,
+                Address = x.Address,
+                Create_date = x.Create_date,
+            }).ToListAsync();
+
+            //4. Select and projection
+            var pagedResult = new PagedResult<UserViewDTO>()
+            {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                TotalRecords = totalRow,
+                Items = data
+            };
+            return new ApiSuccessResult<PagedResult<UserViewDTO>>(pagedResult);
+        }
+
+        public async Task<ApiResult<UserViewDTO>> GetById(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return new ApiErrorResult<UserViewDTO>("User không tồn tại");
+            }
+            var roles = await _userManager.GetRolesAsync(user);
+            var userVm = new UserViewDTO()
+            {
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                FirstName = user.FirstName,
+                Create_date = user.Create_date,
+                Id = user.Id,
+                LastName = user.LastName,
+                UserName = user.UserName,
+                PincodeId = user.PincodeId,
+                Address = user.Address,
+                Roles = roles
+            };
+            return new ApiSuccessResult<UserViewDTO>(userVm);
+        }
+        public async Task<ApiResult<bool>> Update(Guid id, UserUpdateDTO request)
+        {
+            if (await _userManager.Users.AnyAsync(x => x.UserName == request.UserName && x.Id != id))
+            {
+                return new ApiErrorResult<bool>("UserName đã tồn tại");
+            }
+            var user = await _userManager.FindByIdAsync(id.ToString());
+           
+           
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.PhoneNumber = request.PhoneNumber;
+            user.UserName = request.UserName;
+            user.PincodeId = request.PincodeId;
+            user.Address = request.Address;
+
+            var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
-                return true;
+                return new ApiSuccessResult<bool>();
             }
-            return false;
+            return new ApiErrorResult<bool>("Cập nhật không thành công");
         }
     }
 }

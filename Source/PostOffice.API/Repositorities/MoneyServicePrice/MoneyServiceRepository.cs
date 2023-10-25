@@ -44,7 +44,7 @@ namespace PostOffice.API.Repositorities.MoneyServicePrice
 
         public async Task<bool> UpdateMoneyService(int id, MServicePriceUpdateDTO mServicePriceUpdateDTO)
         {
-            var moneyservices = _context.MoneyServices.SingleOrDefault(p => p.id == id);
+            MoneyServicePrice moneyservices = _context.MoneyServices.SingleOrDefault(p => p.id == id);
             if (moneyservices == null)
             {
                 return false;

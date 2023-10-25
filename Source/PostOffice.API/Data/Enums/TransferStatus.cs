@@ -1,13 +1,13 @@
 ﻿using System;
-namespace PostOffice.API.Data.Enums{
-
-public enum TransferStatus
+namespace PostOffice.API.Data.Enums
 {
 
-    Pending,
-    Processing,
-    Successfull,
-}
+    public enum TransferStatus
+    {
+
+        Pending,
+        Processing,
+        Successfull,
+    }
 
 }
-

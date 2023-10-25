@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -12,6 +12,7 @@ using System.Security.Claims;
 namespace PostOffice.Client.Areas.Client.Controllers
 {
     [Area("Client")]
+    [Authorize(Roles = "customer")]
     public class MoneyOrderController : Controller
     {
         HttpClient httpClient = new HttpClient();
@@ -20,11 +21,10 @@ namespace PostOffice.Client.Areas.Client.Controllers
         private readonly string pincodeURL = "https://localhost:7053/api/Pincode/";
         private readonly string moneyorderURL = "https://localhost:7053/api/MoneyOrder/";
         private readonly string moneyserviceURL = "https://localhost:7053/api/MoneyService/";
-     
-       
-        
 
+        [HttpGet]   
         public async Task<IActionResult> Index()
+
         {
             ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ViewData["StreetAddress"] = User.FindFirst(ClaimTypes.StreetAddress)?.Value;
@@ -34,7 +34,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
             ViewData["FirstName"] = User.FindFirst(ClaimTypes.GivenName)?.Value;
             return View();
         }
-        [Authorize(Roles = "customer")]
+        
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -99,7 +99,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
                 return Json(new
                 {
                     transfer_value = transfer_value,
-                }) ;
+                });
             }
 
             temp = httpClient.GetStringAsync(moneyserviceURL + "ZoneNScope" + "?zone=" + zone_id.ToString() + "&scope=" + moneyscope.id.ToString()).Result;

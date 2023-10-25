@@ -1,14 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelService;
 using PostOffice.API.DTOs.ParcelServicePrice;
+using System.Data;
 using System.Net.Http;
 using System.Text;
 
 namespace PostOffice.Client.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles ="admin")]
     public class ServicePriceController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:7053/api");
@@ -94,7 +97,9 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             HttpResponseMessage response = _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelServicePrice/UpdateServicePrice", content).Result;
             if (response.IsSuccessStatusCode)
             {
-                return Redirect("/Admin/ServicePrice/Index");
+
+                return RedirectToAction("Index", "ServicePrice");
+
             }
             return View();
         }

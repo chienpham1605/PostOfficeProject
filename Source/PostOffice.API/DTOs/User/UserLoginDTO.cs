@@ -9,6 +9,7 @@ namespace PostOffice.API.DTOs.User
         [Required]
         public string Password { get; set; } = null!;
         [Required]
-        public bool RememberMe { get; set; }
+        public bool RememberMe { get; set; }            
+
     }
 }

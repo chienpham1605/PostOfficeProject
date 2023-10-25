@@ -26,9 +26,9 @@ namespace PostOffice.API.Data.Models
         public string? receiver_email { get; set; }
         public string? receiver_national_identity_number { get; set; }
 
-        //money order infor
         public TransferStatus transfer_status { get; set; }
         public string? note { get; set; }
+
         public float transfer_value { get; set; }
         public float transfer_fee { get; set; }         
 

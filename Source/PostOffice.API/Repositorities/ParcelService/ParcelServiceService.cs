@@ -31,23 +31,23 @@ namespace PostOffice.API.Repositories.ParcelService
             return parcelService;
         }
 
-        public async Task<ParcelService> UpdateParcelService(int id,ParcelServiceUpdateDTO parcelServiceUpdateDTO)
+        public async Task<bool> UpdateParcelService(int id,ParcelServiceUpdateDTO parcelServiceUpdateDTO)
         {
             var parcelservice = await _context.ParcelServices.SingleOrDefaultAsync(p => p.service_id == id);
             if (parcelservice == null)
             {
-                throw new Exception("Not found");
+                return false;
             }
            _mapper.Map(parcelServiceUpdateDTO, parcelservice);
 
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
 
-            return parcelservice;
+            return true;
         }
 
         public async Task<ParcelServiceBaseDTO> GetParcelServiceById(int id)
         {
-            var parcelserviceByid = _context.ParcelServices.SingleOrDefault(p => p.service_id == id);
+            var parcelserviceByid = await _context.ParcelServices.SingleOrDefaultAsync(p => p.service_id == id);
             var parcelServiceDto = _mapper.Map<ParcelServiceBaseDTO>(parcelserviceByid);
             if (parcelServiceDto == null)
             {

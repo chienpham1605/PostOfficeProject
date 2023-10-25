@@ -37,7 +37,7 @@
                 <thead>
                     <tr>
                         <th>ID_MoneyOrder</th>
-                        <th>User Send</th>
+                        <th>Sender Name</th>
                         <th>Send Date</th>
                         <th>Receive Date</th>
                         <th>Total charge</th>
@@ -50,7 +50,7 @@
                     {
                         <tr>
                             <td>@item.id</td>
-                            <td>@item.user_id</td>
+                            <td>@item.sender_name</td>
                             <td>@item.send_date</td>
                             <td>@item.receive_date</td>
                             <td class="total-charge-td-@item.id">
@@ -84,6 +84,12 @@
                                                 <table>
 
                                                     <tr>
+                                                        <th>Sender Name</th>
+                                                        <td>@item.sender_name</td>
+                                                    </tr><tr>
+                                                        <th>Sender Phone</th>
+                                                        <td>@item.sender_phone</td>
+                                                    </tr><tr>
                                                         <th>Sender Pincode</th>
                                                         <td>@item.sender_pincode</td>
                                                     </tr>

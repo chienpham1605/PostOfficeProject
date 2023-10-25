@@ -15,7 +15,7 @@ using PostOffice.API.Repositories.ParcelType;
 
 namespace PostOffice.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ParcelTypesController : ControllerBase
     {

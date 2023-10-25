@@ -101,7 +101,7 @@ namespace PostOffice.API.Controllers
                              id = p.parcel_price_id,
                              weightScope = new WeightScopeBaseDTO { description = w.description },
                              ZoneType = z,
-                             ServicePrice = p.service_price
+                             service_price = p.service_price
                          };
 
             return Ok(await prices.ToListAsync());
