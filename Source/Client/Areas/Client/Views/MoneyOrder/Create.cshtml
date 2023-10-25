@@ -85,7 +85,8 @@
         Please enter <strong>Sender & Receiver </strong> Details in Required Fields Below
     </div>
     <div class="card-body card-block need-validation" novalidate>
-        <form asp-action="CreateMoneyOrder" asp-area="Client" asp-controller="MoneyOrder" method="post" enctype="multipart/form-data" class="form-horizontal">
+        <form id="form-submit"  class="form-horizontal">
+
             @*   Sender User *@
             <fieldset class="border border-3 rounded shadow-lg mb-5 mt-2 pt-5">
                 <legend class="bg-custom-blue text-light rounded"> Sender User </legend>
@@ -99,79 +100,6 @@
                         <div class="row g-3">
                             <div class="col-md-4 mb-2">
                                 <label for="firstname" class="form-label">First Name</label>
-<!-- 
-                                <input type="text" class="form-control" id="firstname" required />
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <label for="lastname" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lastname" required />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row form-group">
-                    <div class="col col-md-3">
-                        <div class="col-12 col-md-9">
-                            <label for="contact" class="form-control-label">Sender Pincode</label>
-                        </div>
-                    </div>
-                    <div class=" col col-md-9">
-                        <div class="row g-3">
-                            <div class="col-md-4 mb-2">
-                                <input asp-for="sender_pincode" class="form-control" list="datalistOptions"
-                                       id="sender_pincode" placeholder="Your Area" onchange="transferRemove(this)" required />
-                                <div id="city_name_send"</div>
-                            </div>
-                           @*  <div class="col-md-4 mb-2">
-                                <input asp-for="sender_pincode" type="text" class="form-control" id="city_name_send" required />
-                            </div> *@
-                              
-                        </div>
-                    </div>
-                </div>
-                @*  <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="City Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <span class="input-group-text" id="city_name_send"></span>
-                </div> *@
-
-                @* <div class="row form-group">
-                <div class="col col-md-3">
-                <div class="col-12 col-md-9">
-                <label for="contact" class="form-control-label">Sender Pincode</label></div>
-                </div>
-                <div class="col-9 form-group">
-                <input asp-for="sender_pincode" class="form-control" list="datalistOptions" id="sender_pincode" placeholder="Type to search...">
-                </div>
-                </div> *@
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="sender_address" class="form-control-label">Sender Address</label></div>
-                    <div class="col-12 col-md-9">
-                        <input type="text" asp-for="sender_address" id="sender_address" placeholder=" No., Street, Ward " class="form-control" required>
-                        <small class="form-text text-muted">Example: 275, Nguyen Van Dau, Phuong 11</small>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3 form-group">
-                        <div class="col col-md-3"><label for="contact" class="form-control-label">Contact</label></div>
-                    </div>
-                    <div class="row col-9 form-group">
-                        <div class=" col-4 mb-2">
-                            <input type="text" asp-for="sender_phone" id="sender_phone" placeholder="Your Number" class="form-control" required>
-                        </div>
-                        @*  <div class="col-8 row mb-2">
-                        <div class="col-7">
-                        <input type="text"  id="sender_name" placeholder="Your Email" class="form-control border-left-only rounded-left">
-                        </div>
-                        <button type="submit" class="btn btn-primary col-3 pb-1 rounded-right ">Confirm</button>
-                        </div> *@
-
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="sender_national_identity_number" class=" form-control-label">National Number</label></div>
-                    <div class="col-12 col-md-9"> -->
-
                                 <input value="@ViewData["FirstName"]" type="text" class="form-control" id="firstname" readonly />
                             </div>
                             <div class="col-md-4 mb-2">
@@ -206,7 +134,7 @@
                         <div class="row g-3">
                             <div class="col-md-4 mb-2">
                                 <label for="your_number" class="form-label">Your Phone Number</label>
-                                <input value="@ViewData["PhoneNumber"]" class="form-control" id="your_number" placeholder="Your Phone Number" />
+                                <input value="@ViewData["PhoneNumber"]" class="form-control" id="your_number" placeholder="Your Phone Number" disabled />
                             </div>
                             <div class="col-md-5 mb-2">
                                 <label for="email" class="form-label">Your Email</label>
@@ -218,7 +146,7 @@
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="sender_national_identity_number" class="form-control-label">National Number</label></div>
                     <div class="col-12 col-md-9 mb-2">
-                        <input type="text" asp-for="sender_national_identity_number" id="sender_national_identity_number" placeholder="your national identity number" class="form-control" required>
+                        <input type="number" asp-for="sender_national_identity_number" id="sender_national_identity_number" placeholder="your national identity number" class="form-control" required>
                     </div>
                 </div>
             </fieldset>
@@ -250,21 +178,21 @@
                     <div class="col-12 col-md-9 mb-2">
                         <input type="text" asp-for="receiver_address" id="sender_address" placeholder=" No., Street, Ward " class="form-control" required>
                         <small class="form-text text-muted">Example: 275, Nguyen Van Dau, Phuong 11</small>
-
                     </div>
-
                 </div>
+
+               
 
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="receiver_phone" class=" form-control-label">Receiver Phone</label></div>
                     <div class="col-md-4 mb-2">
-                        <input type="text" asp-for="receiver_phone" id="receiver_phone" placeholder="His/her phone number" class="form-control" required>
+                        <input type="number" asp-for="receiver_phone" id="receiver_phone" placeholder="His/her phone number" class="form-control" required>
                     </div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="receiver_national_identity_number" class="form-control-label">Receiver National Number</label></div>
                         <div class="col-12 col-md-9 mb-2">
-                            <input type="text" asp-for="receiver_national_identity_number" id="receiver_national_identity_number" placeholder="his/her national identity number" class="form-control" required>
+                            <input type="number" asp-for="receiver_national_identity_number" id="receiver_national_identity_number" placeholder="his/her national identity number" class="form-control" required>
                         </div>
                     </div>
             </fieldset>
@@ -351,7 +279,7 @@
                                 </p>
                             </div>
                             <div class="modal-footer">
-                                <p class="text-danger">Enter complete information to display button "Accept"</p>
+                                <p class="text-danger">Please fulfill your information before "Accept"</p>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" id="submit-button" class="btn btn-primary" disabled>Accept</button>
                             </div>
@@ -377,6 +305,29 @@
     const confirmRequired = document.getElementById("confirmrequired");
 
     const submitBtn = document.getElementById("submit-button");
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const receiverPhoneInput = document.getElementById("receiver_phone");
+
+        receiverPhoneInput.addEventListener("input", function () {
+            let inputValue = receiverPhoneInput.value.trim();
+            // Loại bỏ bất kỳ ký tự không phải số nào khỏi chuỗi
+            inputValue = inputValue.replace(/\D/g, '');
+
+            // Kiểm tra xem độ dài của chuỗi và bắt đầu bằng số 0
+            if (inputValue.length > 0) {
+                // Nếu có ít nhất một số, hãy đảm bảo số đầu tiên là 0
+                if (inputValue.charAt(0) === '0') {
+                    // Giới hạn chuỗi thành 10 số nếu nó dài hơn
+                    receiverPhoneInput.value = inputValue.substring(0, 10);
+                } else {
+                    // Nếu số đầu tiên không phải là 0, xóa tất cả và bắt đầu từ 0
+                    receiverPhoneInput.value = '0';
+                }
+            }
+        });
+    });
+
     submitBtn.addEventListener("click", function (e) { 
         e.preventDefault();
         $.ajax({
@@ -515,6 +466,7 @@
             },
             success: function (response) {
                 document.getElementById("description_value").textContent = "Fee order to  " + response.description;
+                // document.getElementById("transfer_value").textContent = "Accept to 1 - 100million  " + response.transfer_value;
                 document.getElementById("money_order_fee").value = response.order_fee;
                 document.getElementById("total_charge").value = response.total_charge;
             },

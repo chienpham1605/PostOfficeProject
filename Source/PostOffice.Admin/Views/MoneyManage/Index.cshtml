@@ -1,11 +1,10 @@
 ﻿@model List<PostOffice.API.DTOs.MoneyOrder.MoneyOrderUpdateDTO>
 @{
-    ViewData["Title"] = "UpdateMoneyService";
+    ViewData["Title"] = "UpdateStatus";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var pending = PostOffice.API.Data.Enums.TransferStatus.Pending;
     var processing = PostOffice.API.Data.Enums.TransferStatus.Processing;
     var success = PostOffice.API.Data.Enums.TransferStatus.Successfull;
-    var failed = PostOffice.API.Data.Enums.TransferStatus.Failed;
 
 }
 <!-- Content Header (Page header) -->
@@ -52,7 +51,7 @@
                     {
                         <tr>
                             <td>@item.id</td>
-                            <td>@item.user_id</td>
+                            <td>@item.sender_name</td>
                             <td>@item.send_date</td>
                             <td>@item.receive_date</td>
                             <td class="total-charge-td-@item.id">
@@ -85,6 +84,14 @@
                                             <div class="modal-body">
                                                 <table>
 
+                                                    <tr>
+                                                        <th>Sender Name</th>
+                                                        <td>@item.sender_name</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Sender Phone</th>
+                                                        <td>@item.sender_phone</td>
+                                                    </tr>
                                                     <tr>
                                                         <th>Sender Pincode</th>
                                                         <td>@item.sender_pincode</td>
@@ -131,7 +138,7 @@
                                                     </tr>
                                                 </table>
                                             </div>
-                                            <form method="post" asp-area="Admin" asp-action="Detail" asp-controller="MoneyManage">
+                                            <form method="post" asp-action="Detail" asp-controller="MoneyManage">
                                                 <input type="hidden" name="id" value="@item.id" />
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -154,20 +161,25 @@
     </div>
 
 </section>
-<script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+
+@section Script{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false, "order": [0, 'desc'],
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
-    });
-</script>
+
+        @*
+        $(function () {
+        $("#example1").DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidth": true,
+        "aaSorting": [],
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        }); *@
+    </script>
+}

@@ -10,7 +10,7 @@ namespace PostOffice.API.Repositorities.MoneyServicePrice
 
         Task<MoneyServicePrice> CreateMoneyServicePrice(MServicePriceCreateDTO mServicePriceCreateDTO);
 
-        Task<bool> UpdateMoneyService (int id, MServicePriceUpdateDTO mServicePriceUpdateDTO);
+        Task<bool> UpdateMoneyService(int id, MServicePriceUpdateDTO mServicePriceUpdateDTO);
 
         Task<MServicePriceBaseDTO>  GetByZoneNScope(int zone, int scope);
 

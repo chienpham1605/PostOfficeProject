@@ -1,4 +1,3 @@
-
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -38,20 +37,13 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             MoneyOrderUpdateDTO isStatused = new MoneyOrderUpdateDTO();
             isStatused.id = id;
             if (option == "Process")
-
             {
                 isStatused.transfer_status = TransferStatus.Processing;
             }
 
-
-            if (option == "Deny")
-            {
-                isStatused.transfer_status = TransferStatus.Failed;
-            }
             if (option == "Success")
             {
                 isStatused.transfer_status = TransferStatus.Successfull;
-
             }
 
             var isStatus = await httpClient.PostAsJsonAsync<MoneyOrderUpdateDTO>("https://localhost:7053/api/MoneyOrder/UpdateMoneyManage?isStatus=true", isStatused);
