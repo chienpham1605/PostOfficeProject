@@ -29,7 +29,7 @@ builder.Services.AddSession(options =>
 //DI
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
-builder.Services.AddTransient<IParcelOrderManageClient, ParcelOrderManageClient>();
+builder.Services.AddTransient<IParcelOrderApiClient, ParcelOrderApiClient>();
 
 
 var app = builder.Build();

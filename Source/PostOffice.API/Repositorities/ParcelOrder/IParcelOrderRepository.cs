@@ -11,10 +11,14 @@ namespace PostOffice.API.Repositories.ParcelOrder
         Task<ParcelOrder> AddParcelOrderAsync(ParcelOrderCreateDTO parcelOrderDTO);
         Task<bool> UpdateParcelOrder(int id, ParcelOrderUpdateDTO parcelOrderUpdateDTO);
 
-
         Task<ParcelOrderBase> GetParcelOrderById(int id);            
         Task<ParcelOrderFeeShippingDTO> GetOrderWithFee(int id, ParcelOrderFeeShippingDTO dto);
 
-        Task<ApiResult<PagedResult<ParcelOrderBase>>> GetAllParcelOrderPaging(GetParcelOrderPagingRequest request);
+
+
+        Task<ApiResult<ParcelOrderViewDTO>> GetById(int id);
+        Task<ApiResult<bool>> Update(int id, ParcelOrderUpdateDTO request);
+
+        Task<ApiResult<PagedResult<ParcelOrderViewDTO>>> GetAllParcelOrderPaging(GetParcelOrderPagingRequest request);
     }
 }

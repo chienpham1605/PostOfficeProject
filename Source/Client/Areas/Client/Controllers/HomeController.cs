@@ -14,6 +14,8 @@ namespace PostOffice.Client.Areas.Client.Controllers
         public IActionResult Index()
         {
             ViewData["UserId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ViewData["UserFirstName"] = User.FindFirst(ClaimTypes.GivenName)?.Value;
+            ViewData["UserLastName"] = User.FindFirst(ClaimTypes.Name)?.Value;              
             ViewData["UserPinCode"] = User.FindFirst(ClaimTypes.PostalCode)?.Value;
             ViewData["StreetAddress"] = User.FindFirst(ClaimTypes.StreetAddress)?.Value;
             ViewData["Email"] = User.FindFirst(ClaimTypes.Email)?.Value;
@@ -26,7 +28,10 @@ namespace PostOffice.Client.Areas.Client.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToPage("/Home/Index");
-        }
+        }       
+
+
+
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Org.BouncyCastle.Asn1.Ocsp;
@@ -108,13 +109,6 @@ namespace PostOffice.API.Repositorities.User
             {
                 return new ApiErrorResult<bool>("Role is not exist"); 
             }
-
-/*
-            if (result.Succeeded)
-            {                 
-                return new ApiSuccessResult<bool>();
-            }
-            return new ApiErrorResult<bool>("Register failed");*/
         }
 
         public async Task<ApiResult<PagedResult<UserViewDTO>>> GetsUserPaging(GetUserPagingRequest request)
@@ -161,7 +155,7 @@ namespace PostOffice.API.Repositorities.User
             var user = await _userManager.FindByIdAsync(id.ToString());
             if (user == null)
             {
-                return new ApiErrorResult<UserViewDTO>("User không tồn tại");
+                return new ApiErrorResult<UserViewDTO>("User is not exist");
             }
             var roles = await _userManager.GetRolesAsync(user);
             var userVm = new UserViewDTO()
@@ -183,7 +177,7 @@ namespace PostOffice.API.Repositorities.User
         {
             if (await _userManager.Users.AnyAsync(x => x.UserName == request.UserName && x.Id != id))
             {
-                return new ApiErrorResult<bool>("UserName đã tồn tại");
+                return new ApiErrorResult<bool>("UserName have already exist");
             }
             var user = await _userManager.FindByIdAsync(id.ToString());
            
@@ -200,7 +194,32 @@ namespace PostOffice.API.Repositorities.User
             {
                 return new ApiSuccessResult<bool>();
             }
-            return new ApiErrorResult<bool>("Cập nhật không thành công");
+            return new ApiErrorResult<bool>("Update failed");
+        }
+
+        public async Task<ApiResult<bool>> UserChangePassword(UserChangePasswordDTO request)
+        {
+
+            var user = await _userManager.FindByEmailAsync(request.Email);
+
+                 if (user == null)
+                {
+                return new ApiErrorResult<bool>("Email is not exist");
+                }
+                //check old password
+                if(string.Compare(request.NewPassword, request.ConfirmNewPassword) != 0)
+            {
+                return new ApiErrorResult<bool>("New Password and Confirm New Password does not match");
+            }
+
+               var result = await _userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);            
+                if (result.Succeeded)
+                {
+                return new ApiSuccessResult<bool>();
+            }
+            return new ApiErrorResult<bool>("Update failed");
+
+
         }
     }
 }

@@ -4,12 +4,11 @@ using PostOffice.API.DTOs.User;
 
 namespace PostOffice.Admin.Services
 {
-    public interface IParcelOrderManageClient
+    public interface IParcelOrderApiClient
     {
-        Task<ApiResult<PagedResult<ParcelOrderBase>>> GetAllParcelOrderPagings(GetUserPagingRequest request);
-        Task<ApiResult<ParcelOrderBase>> GetById(int id);
+        Task<ApiResult<PagedResult<ParcelOrderViewDTO>>> GetAllParcelOrderPaging(GetUserPagingRequest request);
+        Task<ApiResult<ParcelOrderViewDTO>> GetById(int id);
         Task<ApiResult<bool>> UpdateParcelOrder(int id, ParcelOrderUpdateDTO request);
-
         
     }
 }

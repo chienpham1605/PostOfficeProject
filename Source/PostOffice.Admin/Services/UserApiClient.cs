@@ -21,7 +21,6 @@ namespace PostOffice.Admin.Services
             _httpContextAccessor = httpContextAccessor;
             _httpClientFactory = httpClientFactory;
         }
-
         public async Task<ApiResult<string>> Authenticate(UserLoginDTO request)
         {
             var json = JsonConvert.SerializeObject(request);
@@ -34,37 +33,8 @@ namespace PostOffice.Admin.Services
             {
                 return JsonConvert.DeserializeObject<ApiSuccessResult<string>>(await response.Content.ReadAsStringAsync());
             }
-
             return JsonConvert.DeserializeObject<ApiErrorResult<string>>(await response.Content.ReadAsStringAsync());
-        }              
-
-        public async Task<ApiResult<bool>> Delete(Guid id)
-        {
-            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
-            var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-            var response = await client.DeleteAsync($"/api/users/{id}");
-            var body = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(body);
-
-            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(body);
-        }
-
-        public async Task<ApiResult<UserViewDTO>> GetById(Guid id)
-        {
-            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
-            var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-            var response = await client.GetAsync($"/api/users/{id}");
-            var body = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<ApiSuccessResult<UserViewDTO>>(body);
-
-            return JsonConvert.DeserializeObject<ApiErrorResult<UserViewDTO>>(body);
-        }
+        }            
 
         public async Task<ApiResult<PagedResult<UserViewDTO>>> GetUsersPagings(GetUserPagingRequest request)
         {
@@ -84,57 +54,41 @@ namespace PostOffice.Admin.Services
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
-
             var json = JsonConvert.SerializeObject(registerRequest);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-
             var response = await client.PostAsync($"/api/users/register", httpContent);
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
-
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
-        }               
+        }
 
+        public async Task<ApiResult<UserViewDTO>> GetById(Guid id)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/users/{id}");
+            var body = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<ApiSuccessResult<UserViewDTO>>(body);
+            return JsonConvert.DeserializeObject<ApiErrorResult<UserViewDTO>>(body);
+        }
         public async Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateDTO request)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
-
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-
             var json = JsonConvert.SerializeObject(request);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-
             var response = await client.PutAsync($"/api/users/{id}", httpContent);
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
-
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
-
-
-       /* public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
-        {
-            var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
-            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-
-            var json = JsonConvert.SerializeObject(request);
-            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await client.PutAsync($"/api/users/{id}/roles", httpContent);
-            var result = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
-
-            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
-        }*/
-
     }
 }
 

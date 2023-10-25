@@ -8,13 +8,13 @@ using System.Text;
 
 namespace PostOffice.Admin.Services
 {
-    public class ParcelOrderManageClient : IParcelOrderManageClient
+    public class ParcelOrderApiClient : IParcelOrderApiClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ParcelOrderManageClient(IHttpClientFactory httpClientFactory,
+        public ParcelOrderApiClient(IHttpClientFactory httpClientFactory,
                    IHttpContextAccessor httpContextAccessor,
                     IConfiguration configuration)
         {
@@ -23,32 +23,32 @@ namespace PostOffice.Admin.Services
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<ApiResult<PagedResult<ParcelOrderBase>>> GetAllParcelOrderPagings(GetUserPagingRequest request)
+        public async Task<ApiResult<PagedResult<ParcelOrderViewDTO>>> GetAllParcelOrderPaging(GetUserPagingRequest request)
         {
             var client = _httpClientFactory.CreateClient();
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
 
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-            var response = await client.GetAsync($"/api/users/paging?pageIndex=" +
+            var response = await client.GetAsync($"/api/ParcelOrder/GetAll/paging?pageIndex=" +
                 $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
             var body = await response.Content.ReadAsStringAsync();
-            var orders = JsonConvert.DeserializeObject<ApiSuccessResult<PagedResult<ParcelOrderBase>>>(body);
+            var orders = JsonConvert.DeserializeObject<ApiSuccessResult<PagedResult<ParcelOrderViewDTO>>>(body);
             return orders;
         }
 
-        public async Task<ApiResult<ParcelOrderBase>> GetById(int id)
+        public async Task<ApiResult<ParcelOrderViewDTO>> GetById(int id)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-            var response = await client.GetAsync($"/api/ParcelOrder/GetParcelOrderById/{id}");
+            var response = await client.GetAsync($"/api/ParcelOrder/GetById/{id}");
             var body = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<ApiSuccessResult<ParcelOrderBase>>(body);
+                return JsonConvert.DeserializeObject<ApiSuccessResult<ParcelOrderViewDTO>>(body);
 
-            return JsonConvert.DeserializeObject<ApiErrorResult<ParcelOrderBase>>(body);
+            return JsonConvert.DeserializeObject<ApiErrorResult<ParcelOrderViewDTO>>(body);
         }
        
 
@@ -63,12 +63,13 @@ namespace PostOffice.Admin.Services
             var json = JsonConvert.SerializeObject(request);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PutAsync($"/api/ParcelOrder/UpdateParcelOrder/{id}", httpContent);
+            var response = await client.PutAsync($"/api/ParcelOrder/Update/{id}", httpContent);
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
 
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
+       
     }
 }

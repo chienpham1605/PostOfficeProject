@@ -71,11 +71,37 @@ namespace PostOffice.API.Controllers
         }
 
         [HttpGet("paging")]
-        public async Task<IActionResult> GetAllPaging([FromQuery] GetParcelOrderPagingRequest request)
+        public async Task<IActionResult> GetAll([FromQuery] GetParcelOrderPagingRequest request)
         {
-            var products = await _repository.GetAllParcelOrderPaging(request);
-            return Ok(products);
+            var parcelOrder = await _repository.GetAllParcelOrderPaging(request);
+            return Ok(parcelOrder);
         }
+
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var parcelOrder = await _repository.GetById(id);
+            return Ok(parcelOrder);
+        }
+
+
+        //PUT: http://localhost/api/ParcelOrder/id
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] ParcelOrderUpdateDTO request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _repository.Update(id, request);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+
 
     }
 }
