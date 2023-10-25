@@ -23,5 +23,13 @@ namespace PostOffice.API.Controllers
             var moneyServiceDto = await _repository.GetByZoneNScope(zone, scope);
             return moneyServiceDto;
         }
+
+        [HttpPut("UpdateMoneyService", Name ="Update")]
+        public async Task<bool> UpdateMoneyService(int id, MServicePriceUpdateDTO mServicePriceUpdateDTO)
+        {
+            var mServicePriceUpdate = await _repository.UpdateMoneyService(id, mServicePriceUpdateDTO);
+            return mServicePriceUpdate;
+        }
+
     }
 }

@@ -26,7 +26,7 @@ namespace PostOffice.API.Controllers
         public async Task<IActionResult> GetPincodeById(string id)
         {
             var pincodeDto = await _repository.GetPincodeById(id);
-
+            if(pincodeDto == null)
             {
                 return NotFound();
             }
