@@ -33,7 +33,7 @@ namespace PostOffice.API.Controllers
 
         // GET: api/ParcelTypes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ParcelType>>> GetParcelTypes()
+        public async Task<ActionResult<IEnumerable<ParcelTypeBaseDTO>>> GetParcelTypes()
         {
             if (_repository.GetAllParcelTypes == null)
             {

@@ -5,6 +5,7 @@ namespace PostOffice.API.Repositories.ParcelType
    
     using PostOffice.API.Data.Context;
     using PostOffice.API.Data.Models;
+    using PostOffice.API.DTOs.MoneyOrder;
     using PostOffice.API.DTOs.ParcelService;
     using PostOffice.API.DTOs.ParcelType;
 
@@ -29,17 +30,11 @@ namespace PostOffice.API.Repositories.ParcelType
 
         }
 
-        public async Task<List<ParcelType>> GetAllParcelTypes()
+        public async Task<List<ParcelTypeBaseDTO>> GetAllParcelTypes()
         {
-            var parceltype = await _context.ParcelTypes.ToListAsync();
-
-            return parceltype.Select(p => new ParcelType
-            {
-                name=p.name,
-                max_height=p.max_height,
-                max_length = p.max_length,
-                max_width = p.max_width
-            }).ToList();
+            var parcelTypes = await _context.ParcelTypes.ToListAsync();
+            var parcelTypeDTOs = _mapper.Map<List<ParcelTypeBaseDTO>>(parcelTypes);
+            return parcelTypeDTOs;
         }
 
         public async Task<ParcelTypeBaseDTO> GetParcelType(int id)

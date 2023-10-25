@@ -4,10 +4,14 @@ using Newtonsoft.Json;
 using PostOffice.API.Data.Models;
 using PostOffice.API.DTOs;
 using PostOffice.API.DTOs.MoneyOrder;
+using PostOffice.API.DTOs.MoneyScope;
+using PostOffice.API.DTOs.MoneyServicePrice;
 using PostOffice.API.DTOs.ParcelOrder;
+using PostOffice.API.DTOs.ParcelService;
 using PostOffice.API.DTOs.ParcelServicePrice;
 using PostOffice.API.DTOs.ParcelType;
 using PostOffice.API.DTOs.Pincode;
+using PostOffice.API.DTOs.WeightScope;
 using PostOffice.API.Repositories.ParcelOrder;
 using System.Data;
 using System.Net.Http;
@@ -23,7 +27,12 @@ namespace PostOffice.Client.Areas.Client.Controllers
         Uri baseAddress = new Uri("https://localhost:7053/api");
         private readonly HttpClient _httpClient;
         private readonly string parcelOrderURL = "https://localhost:7053/api/ParcelOrder/";
-       
+        private readonly string pincodeURL = "https://localhost:7053/api/Pincode/";
+        private readonly string parcelServiceURL = "https://localhost:7053/api/ParcelService/";
+        private readonly string weightScopeURL = "https://localhost:7053/api/WeightScopes/";
+        private readonly string parcelServicePriceURL = "https://localhost:7053/api/ParcelServicePrice/";
+        private readonly string parcelTypeURL = "https://localhost:7053/api/ParcelTypes/";
+
         public ParcelOrderController() 
         {
             _httpClient = new HttpClient();
@@ -134,7 +143,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
 
             string data = JsonConvert.SerializeObject(calculation);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/Calculation/CaculationFee", content);
+            HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/Calculation/CalculationFee", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -146,7 +155,51 @@ namespace PostOffice.Client.Areas.Client.Controllers
             {
                 throw new Exception("NO data");
             }
-            return (IActionResult)parcelOrder;
+            return View(parcelOrder);
         }
+        //[HttpPost]
+        //public async Task<IActionResult> ScopeFilter(float weight, string sender_pincode, string receiver_pincode, int parcel_type_id, int service_id)
+        //{
+        //    int zone_id;
+        //    float total_charge;
+        //    if (sender_pincode == receiver_pincode && sender_pincode != null && receiver_pincode != null)
+        //    {
+        //        zone_id = 1;
+        //    }
+        //    else
+        //    {
+        //        int send_area = JsonConvert.DeserializeObject<PincodeBaseDTO>(_httpClient.GetStringAsync(pincodeURL + "PincodeById?id=" + sender_pincode).Result)!.area_id;
+        //        int rec_area = JsonConvert.DeserializeObject<PincodeBaseDTO>(_httpClient.GetStringAsync(pincodeURL + "PincodeById?id=" + receiver_pincode).Result)!.area_id;
+        //        if (send_area != rec_area)
+        //        {
+        //            zone_id = 3;
+        //        }
+        //        else
+        //        {
+        //            zone_id = 2;
+        //        }
+        //    }
+        //    var temp = await _httpClient.GetStringAsync(weightScopeURL + "ScopeValue" + "?value=" + weight.ToString());
+        //    WeightScopeBaseDTO? weightScope = JsonConvert.DeserializeObject<WeightScopeBaseDTO>(temp);
+        //    if (weightScope == null)
+        //    {
+        //        return Json(new
+        //        {
+        //            weight = weight,
+        //        });
+        //    }
+
+        //    temp = _httpClient.GetStringAsync(parcelServiceURL + "ZoneNScope" + "?zone=" + zone_id.ToString() + "&scope=" + weight.id.ToString()).Result;
+        //    ParcelServiceBaseDTO? servicePriceBaseDTO = JsonConvert.DeserializeObject<MServicePriceBaseDTO>(temp);
+
+        //    total_charge = transfer_value + mServicePriceBaseDTO.fee;
+        //    return Json(new
+        //    {
+        //        order_fee = mServicePriceBaseDTO.fee,
+        //        description = moneyscope.description,
+        //        total_charge = total_charge,
+
+        //    });
+        //}
     }
 }

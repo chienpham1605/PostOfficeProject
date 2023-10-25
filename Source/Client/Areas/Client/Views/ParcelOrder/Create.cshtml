@@ -113,10 +113,10 @@
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Total Charge</label></div>
                 <div class="col-12 col-md-9">
-                    <input asp-for="total_charge" id="total_charge" class="form-control" ><small class="help-block form-text"></small></div>
+                    <input asp-for="total_charge" id="total_charge" class="form-control" readonly ><small class="help-block form-text"></small></div>
             </div>
     <div class="card-footer">
-        <input type="submit" id="submit-button" value="submit" class="btn btn-primary btn-sm"/>
+        <input type="submit" id="submit-button" value="Create" class="btn btn-primary btn-sm"/>
         <input type="reset" class="btn btn-danger btn-sm"/>
     </div> 
     </form>
@@ -131,29 +131,31 @@
         // const type_input = document.getElementById("parcel_type_id");
         // const weight_input = document.getElementById("weight");
 
-        $("#parcelForm").submit(function (e) {
-            e.preventDefault();
+        $(document).ready(function () {
+            $('#parcelForm').on('submit', function (e) {
+                e.preventDefault();
 
-            var parcelOrder = {
-                parcel_weight: $("#parcel_weight").val(),
-                parcel_type_id: $("#parcel_type_id").val(),
-                service_id: $("#service_id").val(),
-                sender_pincode: $("#sender_pincode").val(),
-                receiver_pincode: $("#receiver_pincode").val()
-            };
-            $.ajax({
-                type: "POST",
-                url: "Client/ParceOrder/Calculate",
-                data: JSON.stringify(parcelOrder),
-                contentType: "application/json",
-                success: function (response) {
-                    console.log(response);
-                    $("#total_charge").val(response.total_charge);
-                },
-                error: function (error) {
-                    // Handle error here
-                    console.log(error);
-                }
+                var parcelOrder = {
+                    weight: $('#weight').val(),
+                    parcel_type_id: $('#parcel_type_id').val(),
+                    service_id: $('#service_id').val(),
+                    sender_pincode: $('#sender_pincode').val(),
+                    receiver_pincode: $('#receiver_pincode').val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url:'Client/ParcelOrder/Calculation',
+                    data: JSON.stringify(parcelOrder),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        // Update the total charge in your form
+                        $('#total_charge').val(data);
+                        // Display the result on the form
+                    error: function () {
+                        alert('No data');
+                    }
+                });
             });
         });
 </script>

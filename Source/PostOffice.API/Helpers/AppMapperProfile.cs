@@ -49,6 +49,7 @@ namespace PostOffice.API.Helpers
             CreateMap<ParcelTypeBaseDTO, ParcelType>().ReverseMap();
             CreateMap<ParcelTypeCreateDTO, ParcelType>();
             CreateMap<ParcelTypeUpdateDTO, ParcelType>();
+
             CreateMap<OrderStatusBase, OrderStatus>().ReverseMap();
             CreateMap<ParcelOrderBase, ParcelOrder>().ReverseMap();
             CreateMap<ParcelOrder, ParcelOrderCreateDTO>().ReverseMap();
