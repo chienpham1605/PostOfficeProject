@@ -5,6 +5,7 @@ namespace PostOffice.API.Repositories.ParcelType
    
     using PostOffice.API.Data.Context;
     using PostOffice.API.Data.Models;
+    using PostOffice.API.DTOs.ParcelService;
     using PostOffice.API.DTOs.ParcelType;
 
     public class ParcelTypeService : IParcelTypeRepository
@@ -39,6 +40,17 @@ namespace PostOffice.API.Repositories.ParcelType
                 max_length = p.max_length,
                 max_width = p.max_width
             }).ToList();
+        }
+
+        public async Task<ParcelTypeBaseDTO> GetParcelType(int id)
+        {
+            var parceltypeByid = await _context.ParcelTypes.FindAsync(id);
+            var parcelTypeDto =  _mapper.Map<ParcelTypeBaseDTO>(parceltypeByid);
+            if (parcelTypeDto == null)
+            {
+                throw new KeyNotFoundException();
+            }
+            return parcelTypeDto;
         }
 
         public async Task<ParcelType> UpdateParcelType(ParcelTypeUpdateDTO parcelTypeUpdateDTO)

@@ -1,4 +1,5 @@
-﻿@model PostOffice.API.DTOs.ParcelOrder.ParcelOrderBase
+﻿@using PostOffice.API.DTOs.OrderStatus
+@model PostOffice.API.DTOs.ParcelOrder.ParcelOrderBase
 @{
     ViewData["Title"] = "Shipping";
     Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
@@ -75,7 +76,7 @@
                             <td>@Model.parcel_width</td>
                             <td>@Model.parcel_height</td>
                             <td>@Model.note</td>
-                            <td>@Model.order_status</td>
+                            <td>@(Model.OrderStatusBase?.Status)</td>
                         </tr>
 
                     </tbody>

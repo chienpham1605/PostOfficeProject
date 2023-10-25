@@ -9,7 +9,7 @@
         <strong>Parcel Orders</strong>
     </div>
     <div class="card-body card-block">
-        <form asp-action="Create" asp-area="Client" asp-controller="ParcelOrder" method="post" enctype="multipart/form-data" class="form-horizontal">
+        <form asp-action="Create" asp-area="Client" asp-controller="ParcelOrder" method="post" enctype="multipart/form-data" class="form-horizontal" id="parcelForm">
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Your First Name</label></div>
                 <div class="col-12 col-md-9"><input value="@ViewData["FirstName"]" type="text" placeholder="Please enter your full name" class="form-control"><small class="form-text text-muted"></small></div>
@@ -71,14 +71,8 @@
                 <div class="col-12 col-md-9"><textarea asp-for="description"  rows="9" placeholder="Content..." class="form-control"></textarea></div>
             </div>
             <div class="row form-group">
-                <div class="col col-md-3"><label for="input" class=" form-control-label">Choose the service</label></div>
-                <div class="col-12 col-md-9">
-
-                </div>
-            </div>
-            <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Weight(cm) </label></div>
-                <div class="col-12 col-md-9"><input asp-for="parcel_weight" id="weight" type="text"  placeholder="Enter Weight" class="form-control"><small class="help-block form-text"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_weight" id="weight" type="text" placeholder="Enter Weight" class="form-control"><small class="help-block form-text" onkeyup="filter()"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Height(cm) </label></div>
@@ -90,7 +84,7 @@
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Width(cm) </label></div>
-                <div class="col-12 col-md-9"><input asp-for="parcel_width" type="text"   placeholder="Enter width" class="form-control"><small class="help-block form-text"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_width" type="text"  placeholder="Enter width" class="form-control"><small class="help-block form-text"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">payer </label></div>
@@ -117,43 +111,49 @@
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col col-md-3"><label for="email-input" class=" form-control-label">payment</label></div>
-                <div class="col-12 col-md-9"><input asp-for="total_charge" type="text" placeholder="Enter payment" class="form-control" onkeyup="calculateFee()"
-                ><small class="help-block form-text"></small></div>
+                <div class="col col-md-3"><label for="email-input" class=" form-control-label">Total Charge</label></div>
+                <div class="col-12 col-md-9">
+                    <input asp-for="total_charge" id="total_charge" class="form-control" ><small class="help-block form-text"></small></div>
             </div>
     <div class="card-footer">
-        <input type="submit" id="submit-button" value="Create" class="btn btn-primary btn-sm"/>
+        <input type="submit" id="submit-button" value="submit" class="btn btn-primary btn-sm"/>
         <input type="reset" class="btn btn-danger btn-sm"/>
     </div> 
     </form>
 </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-        function calculateFee() {
-            var sender_pincode = document.getElementById("sender_pincode").value;
-            var receiver_pincode = document.getElementById("receiver_pincode").value;
-            var weight = document.getElementById("weight").value;
-            var service_id = document.getElementById("service_id").value;
-            var parcel_type_id = document.getElementById("parcel_type_id").value;
 
-            var calculation = {
-                sender_pincode: sender_pincode,
-                receiver_pincode: receiver_pincode,
-                weight: weight,
-                service_id: service_id,
-                parcel_type_id: parcel_type_id
+        // const service_input = document.getElementById("service_id");
+        // const sendpin_input = document.getElementById("sender_pincode");
+        // const recpin_input = document.getElementById("receiver_pincode");
+        // const type_input = document.getElementById("parcel_type_id");
+        // const weight_input = document.getElementById("weight");
+
+        $("#parcelForm").submit(function (e) {
+            e.preventDefault();
+
+            var parcelOrder = {
+                parcel_weight: $("#parcel_weight").val(),
+                parcel_type_id: $("#parcel_type_id").val(),
+                service_id: $("#service_id").val(),
+                sender_pincode: $("#sender_pincode").val(),
+                receiver_pincode: $("#receiver_pincode").val()
             };
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "https://localhost:7053/api/Calculation/CalculationFee", true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var result = JSON.parse(xhr.responseText);
-                    document.getElementById("fee").innerHTML = result;
+            $.ajax({
+                type: "POST",
+                url: "Client/ParceOrder/Calculate",
+                data: JSON.stringify(parcelOrder),
+                contentType: "application/json",
+                success: function (response) {
+                    console.log(response);
+                    $("#total_charge").val(response.total_charge);
+                },
+                error: function (error) {
+                    // Handle error here
+                    console.log(error);
                 }
-            };
-            xhr.send(JSON.stringify(calculation));
-        }
-
+            });
+        });
 </script>
