@@ -9,6 +9,7 @@ using System.Text;
 namespace PostOffice.Client.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles ="admin")]
     public class ParcelOrderController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:7053/api");

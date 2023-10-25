@@ -12,6 +12,7 @@ using System.Security.Claims;
 namespace PostOffice.Client.Areas.Client.Controllers
 {
     [Area("Client")]
+    [Authorize(Roles = "customer")]
     public class MoneyOrderController : Controller
     {
         HttpClient httpClient = new HttpClient();
@@ -33,7 +34,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
             ViewData["FirstName"] = User.FindFirst(ClaimTypes.GivenName)?.Value;
             return View();
         }
-        [Authorize(Roles = "customer")]
+        
         [HttpGet]
         public async Task<IActionResult> Create()
         {

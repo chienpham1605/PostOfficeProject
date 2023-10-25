@@ -1,4 +1,7 @@
 ﻿using PostOffice.API.Data.Enums;
+using PostOffice.API.DTOs.OrderStatus;
+using PostOffice.API.DTOs.ParcelService;
+using PostOffice.API.DTOs.ParcelType;
 using PostOffice.API.DTOs.Pincode;
 
 namespace PostOffice.API.DTOs.ParcelOrder
@@ -40,6 +43,9 @@ namespace PostOffice.API.DTOs.ParcelOrder
         //charge infor
         public float? vpp_value { get; set; }
         public float? total_charge { get; set; }
+        public OrderStatusBase OrderStatusBase { get; set; }
+        public ParcelTypeBaseDTO ParcelTypeBase { get; set; }
+        public ParcelServiceBaseDTO ParcelServiceBase { get; set; }
         public List<PincodeBaseDTO> PincodeBaseDTOs { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using PostOffice.API.Data.Context;
 using PostOffice.API.Data.Models;
 using PostOffice.API.Repositories.MoneyOrder;
+using PostOffice.API.Repositories.OrderStatus;
 using PostOffice.API.Repositories.ParcelOrder;
 using PostOffice.API.Repositories.ParcelServciePrice;
 using PostOffice.API.Repositories.ParcelService;
@@ -47,7 +48,7 @@ builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
 
 //Add Config for Required Email
 builder.Services.Configure<IdentityOptions>(
-    options => options.SignIn.RequireConfirmedEmail = true
+    options => options.SignIn.RequireConfirmedEmail = false     //set true if required confirm mail after register
     );
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(options
@@ -90,7 +91,7 @@ builder.Services.AddScoped<IParcelOrderRepository, ParcelOrderService>();
 builder.Services.AddScoped<IParcelTypeRepository, ParcelTypeService>();
 builder.Services.AddScoped<IWeightScopeRepository, WeightScopeService>();
 builder.Services.AddScoped<IParcelServiceRepository, ParcelServiceService>();
-
+builder.Services.AddScoped<IOrderStatusRepository, OrderStatusService>();
 builder.Services.AddScoped<IMoneyOrderRepository, MoneyOrderRepository>();
 builder.Services.AddScoped<IMoneyServiceRepository, MoneyServiceRepository>();
 builder.Services.AddScoped<IMoneyScopeRepository, MoneyScopeRepository>();

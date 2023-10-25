@@ -25,13 +25,13 @@ namespace PostOffice.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var resultToken = await _userRepository.Authenticate(userLoginDTO);
+            var result = await _userRepository.Authenticate(userLoginDTO);
 
-            if (string.IsNullOrEmpty(resultToken))
+            if (string.IsNullOrEmpty(result.ResultObj))
             {
-                return BadRequest("email or password is incorrect.");
+                return BadRequest(result);
             }
-            return Ok(resultToken);
+            return Ok(result);
         }
 
         [HttpPost("register")]
@@ -41,12 +41,44 @@ namespace PostOffice.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _userRepository.Register(userRegisterDTO);
-            if (!result)
+            var result = await _userRepository.RegisterUser(userRegisterDTO);
+            if (!result.IsSuccessed)
             {
-                return BadRequest("Register is unsucessfull.");
+                return BadRequest(result);
             }
-            return Ok();
+            return Ok(result);
         }
+
+        //PUT: http://localhost/api/users/id
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] UserUpdateDTO request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userRepository.Update(id, request);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }           
+
+        //http://localhost/api/users/paging?pageIndex=1&pageSize=10&keyword=
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetUserPagingRequest request)
+        {
+            var products = await _userRepository.GetsUserPaging(request);
+            return Ok(products);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var user = await _userRepository.GetById(id);
+            return Ok(user);
+        }
+
+       
     }
 }

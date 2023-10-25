@@ -18,6 +18,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
             ViewData["StreetAddress"] = User.FindFirst(ClaimTypes.StreetAddress)?.Value;
             ViewData["Email"] = User.FindFirst(ClaimTypes.Email)?.Value;
             ViewData["PhoneNumber"] = User.FindFirst(ClaimTypes.MobilePhone)?.Value;
+            ViewData["Role"] = User.FindFirst(ClaimTypes.Role)?.Value;
             return View();
         }
         [HttpPost]

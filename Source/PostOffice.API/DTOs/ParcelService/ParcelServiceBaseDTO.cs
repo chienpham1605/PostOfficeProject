@@ -1,4 +1,4 @@
-﻿using PostOffice.API.Data.Enums;
+﻿
 
 namespace PostOffice.API.DTOs.ParcelService
 {
