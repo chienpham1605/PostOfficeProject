@@ -145,7 +145,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
             {
                 throw new Exception("NO data");
             }
-            return View(parcelOrder);
+            return (IActionResult)parcelOrder;
         }
     }
 }

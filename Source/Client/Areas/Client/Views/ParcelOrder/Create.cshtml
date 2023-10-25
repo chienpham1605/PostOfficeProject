@@ -71,12 +71,6 @@
                 <div class="col-12 col-md-9"><textarea asp-for="description"  rows="9" placeholder="Content..." class="form-control"></textarea></div>
             </div>
             <div class="row form-group">
-                <div class="col col-md-3"><label for="input" class=" form-control-label">Choose the service</label></div>
-                <div class="col-12 col-md-9">
-
-                </div>
-            </div>
-            <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Weight(cm) </label></div>
                 <div class="col-12 col-md-9"><input asp-for="parcel_weight" id="weight" type="text" placeholder="Enter Weight" class="form-control"><small class="help-block form-text" onkeyup="filter()"></small></div>
             </div>
@@ -119,7 +113,7 @@
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Total Charge</label></div>
                 <div class="col-12 col-md-9">
-                    <input asp-for="total_charge" id="total_charge" type="text" placeholder="Enter payment" class="form-control" ><small class="help-block form-text"></small></div>
+                    <input asp-for="total_charge" id="total_charge" class="form-control" ><small class="help-block form-text"></small></div>
             </div>
     <div class="card-footer">
         <input type="submit" id="submit-button" value="submit" class="btn btn-primary btn-sm"/>
@@ -153,9 +147,7 @@
                 data: JSON.stringify(parcelOrder),
                 contentType: "application/json",
                 success: function (response) {
-                    // Handle the response here
                     console.log(response);
-                    // Update the total_charge field in your form
                     $("#total_charge").val(response.total_charge);
                 },
                 error: function (error) {
