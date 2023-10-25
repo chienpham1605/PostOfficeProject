@@ -150,13 +150,8 @@ namespace PostOffice.Client.Areas.Client.Controllers
         [HttpPost]
         public async Task<IActionResult> ScopeFilter(double weight, string sender_pincode, string receiver_pincode, int parcel_type_id, int service_id)
         {
-
-
-            // Lấy thông tin về dịch vụ và loại hàng hóa
             var service = JsonConvert.DeserializeObject<ParcelServiceBaseDTO>(await _httpClient.GetStringAsync(parcelServiceURL + "GetServiceById?id=" + service_id));
             var parcelType = JsonConvert.DeserializeObject<ParcelTypeBaseDTO>(await _httpClient.GetStringAsync(parcelTypeURL + "GetParcelTypeById?id=" + parcel_type_id));
-
-            // Lấy thông tin về mã pin của người gửi và người nhận
             int zone_id;
             
             if (sender_pincode == receiver_pincode && sender_pincode != null && receiver_pincode != null)
@@ -176,8 +171,6 @@ namespace PostOffice.Client.Areas.Client.Controllers
                     zone_id = 2;
                 }
             }
-
-            // Lấy thông tin về phạm vi trọng lượng
             var weightScope = JsonConvert.DeserializeObject<WeightScopeBaseDTO>(_httpClient.GetStringAsync(weightScopeURL + "getWeightRange?weight=" + weight).Result);
 
             // Lấy thông tin về giá dịch vụ
