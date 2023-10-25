@@ -17,9 +17,10 @@ namespace PostOffice.Client.Areas.Client.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+
             List<MoneyOrderBaseDTO>? statistic = JsonConvert.DeserializeObject<List<MoneyOrderBaseDTO>>(
                              httpClient.GetStringAsync(moneyorderURL + "MoneyorderList").Result);
-
+            
             statistic = statistic.Where(m => m.user_id == new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value)).ToList();
             return View("Statistic", statistic);
 

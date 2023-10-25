@@ -279,7 +279,7 @@
                                 </p>
                             </div>
                             <div class="modal-footer">
-                                <p class="text-danger">Enter complete information to display button "Accept"</p>
+                                <p class="text-danger">Please fulfill your information before "Accept"</p>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" id="submit-button" class="btn btn-primary" disabled>Accept</button>
                             </div>
@@ -305,6 +305,29 @@
     const confirmRequired = document.getElementById("confirmrequired");
 
     const submitBtn = document.getElementById("submit-button");
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const receiverPhoneInput = document.getElementById("receiver_phone");
+
+        receiverPhoneInput.addEventListener("input", function () {
+            let inputValue = receiverPhoneInput.value.trim();
+            // Loại bỏ bất kỳ ký tự không phải số nào khỏi chuỗi
+            inputValue = inputValue.replace(/\D/g, '');
+
+            // Kiểm tra xem độ dài của chuỗi và bắt đầu bằng số 0
+            if (inputValue.length > 0) {
+                // Nếu có ít nhất một số, hãy đảm bảo số đầu tiên là 0
+                if (inputValue.charAt(0) === '0') {
+                    // Giới hạn chuỗi thành 10 số nếu nó dài hơn
+                    receiverPhoneInput.value = inputValue.substring(0, 10);
+                } else {
+                    // Nếu số đầu tiên không phải là 0, xóa tất cả và bắt đầu từ 0
+                    receiverPhoneInput.value = '0';
+                }
+            }
+        });
+    });
+
     submitBtn.addEventListener("click", function (e) { 
         e.preventDefault();
         $.ajax({
