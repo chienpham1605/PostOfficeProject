@@ -3,13 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostOffice.API.Data.Models;
 using PostOffice.API.DTOs.ParcelService;
-using PostOffice.Client.Services;
+using PostOffice.Admin.Services;
 using System.Data;
 using System.Text;
 
-namespace PostOffice.Client.Areas.Admin.Controllers
+namespace PostOffice.Admin.Controllers
 {
-    [Area("Admin")]
     [Authorize(Roles = "admin")]
     public class ServiceController : Controller
     {
@@ -57,7 +56,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
             if (result != null &&  result.IsSuccessed)
             {
                 var parcelService = result.ResultObj;
-                var updateRequest = new ParcelServiceUpdateDTO()
+                var updateRequest = new ParcelServiceBaseDTO()
                 {
                     delivery_time = (int)parcelService.delivery_time
                 };

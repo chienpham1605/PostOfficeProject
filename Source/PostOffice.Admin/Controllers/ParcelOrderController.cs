@@ -6,9 +6,8 @@ using System.Data;
 using System.Net.Http;
 using System.Text;
 
-namespace PostOffice.Client.Areas.Admin.Controllers
+namespace PostOffice.Admin.Controllers
 {
-    [Area("Admin")]
     [Authorize(Roles ="admin")]
     public class ParcelOrderController : Controller
     {

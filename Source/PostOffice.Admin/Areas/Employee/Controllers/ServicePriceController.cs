@@ -8,10 +8,9 @@ using System.Data;
 using System.Net.Http;
 using System.Text;
 
-namespace PostOffice.Client.Areas.Admin.Controllers
+namespace PostOffice.Admin.Areas.Employee.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles ="admin")]
+    [Area("Employee")]
     public class ServicePriceController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:7053/api");

@@ -1,22 +1,26 @@
-﻿@{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+﻿@model PostOffice.API.DTOs.MoneyServicePrice.MServicePriceUpdateDTO
+@{
+    ViewData["Title"] = "GetMoneyOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Parcel Order Update</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Parcel Order Update</li>
-                    </ol>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
 
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Money Order Update</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Money Order Update</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<form asp-action="UpdateMoneyService" asp-area="Admin" asp-controller="MoneyService" method="post">
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -60,7 +64,7 @@
                     </div>
                     <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
+
             </div>
             <div class="col-md-6">
                 <div class="card card-secondary">
@@ -173,3 +177,4 @@
         </div>
     </section>
     <!-- /.content -->
+</form>

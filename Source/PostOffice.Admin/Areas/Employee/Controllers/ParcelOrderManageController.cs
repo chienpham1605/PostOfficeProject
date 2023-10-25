@@ -30,7 +30,7 @@ namespace PostOffice.Admin.Areas.Employee.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var result = await _parcelOrderManageClient.GetById(id);
-            if (result != null && result.IsSuccessed)
+            if (result.IsSuccessed)
             {
                 var parcelOrder = result.ResultObj;
                 var updateRequest = new ParcelOrderUpdateDTO()
