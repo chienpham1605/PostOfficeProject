@@ -74,6 +74,7 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-money"></i>Money Order</a>
                         <ul class="sub-menu children dropdown-menu">                           
+                            <li><i class="fa fa-plus"></i><a asp-controller="MoneyOrder" asp-action="Create">View my order</a></li>
                             <li><i class="fa fa-eye"></i><a asp-controller="Statistic" asp-action="Index">View my order</a></li>
                         </ul>
                     </li>
@@ -175,10 +176,7 @@
 
     </div><!-- /#right-panel -->
     <!-- Right Panel -->
-    </div><!-- /#right-panel -->
-    <!-- Right Panel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script src="~/client/vendors/jquery/dist/jquery.min.js"></script>
     <script src="~/client/vendors/popper.js/dist/umd/popper.min.js"></script>
     <script src="~/client/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -210,10 +208,11 @@
             });
         })(jQuery);
 
-        <!--File JS Search Statistic-- >
+        // <!-- File JS Search Statistic -->
 
             <script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js" ></script>
-    <script src="/AdminLibrary/assets/static/js/pages/datatables.js"></script>
+    <script src="AdminLibrary/assets/static/js/pages/datatables.js"></script>
+
 
     <!-- File JS MoneyOrderCreate -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.js"></script>
@@ -222,7 +221,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Template Main JS File -->
     <script src="~/home/assets/js/main.js"></script>
-
     @await RenderSectionAsync("Script", required: false)
     </script>
 

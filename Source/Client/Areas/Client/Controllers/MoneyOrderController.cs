@@ -119,6 +119,5 @@ namespace PostOffice.Client.Areas.Client.Controllers
         {
             return View();
         }
-
     }
 }

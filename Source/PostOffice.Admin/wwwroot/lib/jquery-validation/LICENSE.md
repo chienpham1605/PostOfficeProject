@@ -1,7 +1,6 @@
 The MIT License (MIT)
-=====================
 
-Copyright Jörn Zaefferer
+Copyright (c) 2019-2021 The Bootstrap Authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

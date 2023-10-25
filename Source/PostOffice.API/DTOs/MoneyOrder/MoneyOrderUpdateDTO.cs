@@ -11,6 +11,7 @@ namespace PostOffice.API.DTOs.MoneyOrder
         public int id { get; set; }
 
         public Guid user_id { get; set; }
+        public string? sender_name { get; set; }
         public string? sender_pincode { get; set; }
         public string? sender_address { get; set; }
         public string? sender_phone { get; set; }
