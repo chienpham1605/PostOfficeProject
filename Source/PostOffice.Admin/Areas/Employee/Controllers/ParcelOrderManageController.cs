@@ -30,7 +30,7 @@ namespace PostOffice.Admin.Areas.Employee.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var result = await _parcelOrderManageClient.GetById(id);
-            if (result.IsSuccessed)
+            if (result != null && result.IsSuccessed)
             {
                 var parcelOrder = result.ResultObj;
                 var updateRequest = new ParcelOrderUpdateDTO()
@@ -53,7 +53,7 @@ namespace PostOffice.Admin.Areas.Employee.Controllers
                 return View();
 
             var result = await _parcelOrderManageClient.UpdateParcelOrder(id, request);
-            if (result.IsSuccessed)
+            if (result != null && result.IsSuccessed)
             {
                 TempData["result"] = "Update successfully";
                 return RedirectToAction("Index");

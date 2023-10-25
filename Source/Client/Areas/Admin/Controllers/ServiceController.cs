@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostOffice.API.Data.Models;
+using PostOffice.API.DTOs.MoneyOrder;
 using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelService;
 using PostOffice.Client.Services;
@@ -13,39 +14,22 @@ namespace PostOffice.Client.Areas.Admin.Controllers
     [Area("Admin")]
     public class ServiceController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:7053/api");
+        HttpClient httpClient = new HttpClient();
+        private readonly string servicerURL = "https://localhost:7053/api/ParcelService/";
         private readonly HttpClient _httpClient;
         private readonly IParcelServiceAPIAdmin _parcelServiceAPIAdmin;
         private readonly IConfiguration _configuration;
         public ServiceController(IParcelServiceAPIAdmin parcelServiceAPIAdmin, IConfiguration configuration)
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = baseAddress;
             _configuration = configuration;
             _parcelServiceAPIAdmin = parcelServiceAPIAdmin;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            List <ParcelServiceBaseDTO> parcelServices = new List<ParcelServiceBaseDTO>();
-            try
-            {
-                HttpResponseMessage response = await _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelService/GetAllService");
-                if (response.IsSuccessStatusCode)
-                {
-                    string data = await response.Content.ReadAsStringAsync();
-                    parcelServices = JsonConvert.DeserializeObject<List<ParcelServiceBaseDTO>>(data);
-                }
-                else
-                {
-                    throw new Exception("Error Message");
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exception, e.g., log error, set ViewBag message, etc.
-            }
-            return View(parcelServices);
+            List<ParcelServiceBaseDTO>? servicemanage = JsonConvert.DeserializeObject<List<ParcelServiceBaseDTO>>(
+                                        httpClient.GetStringAsync(servicerURL + "GetAllService").Result);
+            return View(servicemanage);
         }
         [HttpGet]
         public IActionResult Create()
