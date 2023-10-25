@@ -32,6 +32,9 @@ builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 builder.Services.AddTransient<IParcelOrderManageClient, ParcelOrderManageClient>();
 builder.Services.AddTransient<IParcelServiceAPIAdmin, ParcelServiceAPIAdmin>();
 
+builder.Services.AddTransient<IParcelOrderApiClient, ParcelOrderApiClient>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

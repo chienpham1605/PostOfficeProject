@@ -10,5 +10,7 @@ namespace PostOffice.API.Repositorities.User
         Task<ApiResult<PagedResult<UserViewDTO>>> GetsUserPaging(GetUserPagingRequest request);
         Task<ApiResult<UserViewDTO>> GetById(Guid id);
         Task<ApiResult<bool>> Update(Guid id, UserUpdateDTO request);
+
+        Task<ApiResult<bool>> UserChangePassword(UserChangePasswordDTO request);
     }
 }

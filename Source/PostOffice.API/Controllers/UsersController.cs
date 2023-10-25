@@ -79,6 +79,20 @@ namespace PostOffice.API.Controllers
             return Ok(user);
         }
 
-       
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword([FromBody] UserChangePasswordDTO request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userRepository.UserChangePassword(request);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+
     }
 }

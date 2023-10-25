@@ -2,7 +2,7 @@
 
 namespace PostOffice.Admin.Areas.Employee.Controllers
 {
-    public class MoneyController : Controller
+    public class MoneyOrderManageController : Controller
     {
         public IActionResult Index()
         {
