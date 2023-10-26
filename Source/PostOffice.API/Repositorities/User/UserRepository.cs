@@ -217,7 +217,7 @@ namespace PostOffice.API.Repositorities.User
                 {
                 return new ApiSuccessResult<bool>();
             }
-            return new ApiErrorResult<bool>("Update failed");
+            return new ApiErrorResult<bool>("Old Password is incorrect");
 
 
         }

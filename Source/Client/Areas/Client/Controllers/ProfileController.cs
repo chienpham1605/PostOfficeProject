@@ -85,7 +85,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
             var result = await _userApiClient.ChangePassword(request);
             if (result.IsSuccessed)
             {
-                TempData["result"] = "Change Password successfully";
+                TempData["result_change_pass"] = "Change Password successfully";
                 return View();
             }
 

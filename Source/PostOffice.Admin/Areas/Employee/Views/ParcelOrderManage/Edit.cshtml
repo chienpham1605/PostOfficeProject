@@ -49,7 +49,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="sender_pincode" class="control-label"></label>
-                                    <input asp-for="sender_pincode" type="text" class="form-control" />
+                                    <input asp-for="sender_pincode" list="datalistOptionsPincode" type="number" id="PincodeId" class="form-control" required>
+                                    @await Component.InvokeAsync("Pincode")
+                                    </input>
                                     <span asp-validation-for="sender_pincode" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
@@ -74,7 +76,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="receiver_pincode" class="control-label"></label>
-                                    <input asp-for="receiver_pincode" type="text" class="form-control" />
+                                    <input asp-for="receiver_pincode" list="datalistOptionsPincode" type="number" id="PincodeId" class="form-control" required>
+                                    @await Component.InvokeAsync("Pincode")
+                                    </input>
                                     <span asp-validation-for="receiver_pincode" class="text-danger"></span>
                                 </div>
                                  <div class="form-group">
@@ -161,11 +165,9 @@
                                     <label asp-for="order_status" class="control-label"></label>
                                     <input asp-for="order_status" type="number" class="form-control" />
                                     <span asp-validation-for="order_status" class="text-danger"></span>
-                                </div>
-                                                                                  
+                                </div>                                                                                  
                             </div>
                             <!-- /.card-body -->
-
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
