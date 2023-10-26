@@ -76,21 +76,18 @@
                         <ul class="sub-menu children dropdown-menu">                           
                             <li><i class="fa fa-plus"></i><a asp-controller="MoneyOrder" asp-action="Create">View my order</a></li>
                             <li><i class="fa fa-eye"></i><a asp-controller="Statistic" asp-action="Index">View my order</a></li>
-                            <li><i class="fa fa-plus"></i><a asp-controller="MoneyOrder" asp-action="Create">Create new order</a></li>
+@*                            <li><i class="fa fa-plus"></i><a asp-controller="MoneyOrder" asp-action="Create">Create new order</a></li>*@
                         </ul>                         
                     </li>
 
 
 
                     <h3 class="menu-title">Search</h3><!-- /.menu-title -->
-                    <li>
-                        <a href="widgets.html"> <i class="menu-icon fa fa-map-pin"></i>Office Branch </a>
-                    </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-calculator"></i>Calculation Fee</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-calculator"></i>Services </a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-truck"></i><a href=" page-register.html">Parcel Service</a></li>
-                            <li><i class="menu-icon fa fa-money"></i><a href="page-register.html">Money Service</a></li>
+                            <li><i class="menu-icon fa fa-truck"></i><a asp-controller="ServicePrice" asp-action="IndexEconomy" asp-area="Client">Economy Service Service</a></li>
+                            <li><i class="menu-icon fa fa-money"></i><a asp-controller="ServicePrice" asp-action="Index" asp-area="Client">Express Service</a></li>
                         </ul>
                     </li>
 

@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostOffice.API.DTOs.ParcelServicePrice;
@@ -6,6 +7,8 @@ using System.Net.Http;
 
 namespace PostOffice.Client.Areas.Client.Controllers
 {
+    [Area("Client")]
+    [Authorize(Roles ="customer")]
     public class ServicePriceController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:7053/api");

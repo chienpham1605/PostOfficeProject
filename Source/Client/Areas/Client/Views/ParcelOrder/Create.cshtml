@@ -71,33 +71,33 @@
                 <div class="col-12 col-md-9"><textarea asp-for="description"  rows="9" placeholder="Content..." class="form-control"></textarea></div>
             </div>
             <div class="row form-group">
-                <div class="col col-md-3"><label for="email-input" class=" form-control-label">Weight(cm) </label></div>
+                <div class="col col-md-3"><label for="email-input" class=" form-control-label">Weight(kg) </label></div>
                 <div class="col-12 col-md-9"><input asp-for="parcel_weight" id="weight" type="number" placeholder="Enter Weight" class="form-control" onkeyup="filter()"><small class="help-block form-text" onchange="filter()"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Height(cm) </label></div>
-                <div class="col-12 col-md-9"><input asp-for="parcel_height" type="text"  placeholder="Enter Weight" class="form-control"><small class="help-block form-text"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_height" type="number" placeholder="Enter Weight" class="form-control"><small class="help-block form-text"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Length(cm) </label></div>
-                <div class="col-12 col-md-9"><input asp-for="parcel_length" type="text"   placeholder="Enter height" class="form-control"><small class="help-block form-text"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_length" type="number" placeholder="Enter height" class="form-control"><small class="help-block form-text"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Width(cm) </label></div>
-                <div class="col-12 col-md-9"><input asp-for="parcel_width" type="text"  placeholder="Enter width" class="form-control"><small class="help-block form-text"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_width" type="number" placeholder="Enter width" class="form-control"><small class="help-block form-text"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">payer </label></div>
-                <div class="col-12 col-md-9"><input asp-for="payer" type="text" placeholder="Enter payer" class="form-control"><small class="help-block form-text"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="payer" type="number" placeholder="Enter payer" class="form-control"><small class="help-block form-text"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Send Date</label></div>
-                <div class="col-12 col-md-9"><input asp-for="send_date" type="text" value="@DateTime.Now"class="form-control"></div>
+                <div class="col-12 col-md-9"><input asp-for="send_date" type="number" value="@DateTime.Now" class="form-control"></div>
 
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">payment</label></div>
-                <div class="col-12 col-md-9"><input asp-for="payment_method" type="text" placeholder="Enter payment" class="form-control" required><small class="help-block form-text"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="payment_method" type="number" placeholder="Enter payment" class="form-control" required><small class="help-block form-text"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label class=" form-control-label">Choose the parcel type</div>
