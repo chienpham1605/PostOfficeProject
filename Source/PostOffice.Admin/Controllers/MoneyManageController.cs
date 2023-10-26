@@ -11,7 +11,7 @@ using System.Net.Http.Json;
 namespace PostOffice.Client.Areas.Admin.Controllers
 {
 
-    [Authorize(Roles = "admin")]
+    
     public class MoneyManageController : Controller
     {
         HttpClient httpClient = new HttpClient();
@@ -22,6 +22,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Index()
         {
            
@@ -33,6 +34,7 @@ namespace PostOffice.Client.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Detail(int id, string option)
 
         {

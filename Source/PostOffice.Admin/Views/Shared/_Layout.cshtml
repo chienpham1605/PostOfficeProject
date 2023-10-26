@@ -132,12 +132,6 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-action="Index" asp-controller="ParcelOrder" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Parcel Order</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a asp-action="Index" asp-controller="MoneyManage" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Money Order</p>
@@ -227,13 +221,10 @@
             <!-- /.sidebar -->
         </aside>
 
-
-        @RenderBody()
-
-
-
-
-
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+   
         <footer class="main-footer">
             <strong>Copyright &copy; 2023 <a href="https://adminlte.io">TARS Delivery</a>.</strong>
             All rights reserved.

@@ -12,59 +12,59 @@
         <form asp-action="Create" asp-controller="ParcelOrder" method="post" class="form-horizontal" id="form-submit">
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Your First Name</label></div>
-                <div class="col-12 col-md-9"><input value="@ViewData["FirstName"]" type="text" placeholder="Please enter your full name" class="form-control"><small class="form-text text-muted"></small></div>
+                <div class="col-12 col-md-9"><input value="@ViewData["FirstName"]" type="text" placeholder="Please enter your full name" class="form-control" required><small class="form-text text-muted"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Your Last Name</label></div>
-                <div class="col-12 col-md-9"><input value="@ViewData["LastName"]" type="text" placeholder="Please enter your full name" class="form-control"><small class="form-text text-muted"></small></div>
+                <div class="col-12 col-md-9"><input value="@ViewData["LastName"]" type="text" placeholder="Please enter your full name" class="form-control" required><small class="form-text text-muted"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Address</label></div>
-                <div class="col-12 col-md-9"><input value="@ViewData["StreetAddress"]" type="text" class="form-control"><small class="form-text text-muted">Exmaple: 123 Nguyen Van Dau Street, Ward 6, Binh Thanh District</small></div>
+                <div class="col-12 col-md-9"><input value="@ViewData["StreetAddress"]" type="text" class="form-control" required><small class="form-text text-muted">Exmaple: 123 Nguyen Van Dau Street, Ward 6, Binh Thanh District</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Email</label></div>
-                <div class="col-12 col-md-9"><input value="@ViewData["Email"]" type="text" id="text-input" class="form-control"><small class="form-text text-muted">Please enter your email</small></div>
+                <div class="col-12 col-md-9"><input value="@ViewData["Email"]" type="text" id="text-input" class="form-control" required><small class="form-text text-muted">Please enter your email</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Phone</label></div>
-                <div class="col-12 col-md-9"><input value="@ViewData["PhoneNumber"]" type="text" class="form-control"><small class="form-text text-muted"></small></div>
+                <div class="col-12 col-md-9"><input value="@ViewData["PhoneNumber"]" type="text" class="form-control" required><small class="form-text text-muted"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="inputSm" class=" form-control-label">City</label></div>
                 <div class="col-12 col-md-9">
-                    <input asp-for="sender_pincode" list="datalistOptionsPincode" id="sender_pincode" class="form-control">
+                    <input asp-for="sender_pincode" list="datalistOptionsPincode" id="sender_pincode" class="form-control" required>
                     @await Component.InvokeAsync("Pincode")
                     </input>
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">The receiver's name</label></div>
-                <div class="col-12 col-md-9"><input asp-for="receiver_name" type="text"  class="form-control"><small class="form-text text-muted">Enter your receiver</small></div>
+                <div class="col-12 col-md-9"><input asp-for="receiver_name" type="text" class="form-control" required><small class="form-text text-muted">Enter your receiver</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">The receiver's email </label></div>
-                <div class="col-12 col-md-9"><input asp-for="receiver_email" type="email"  placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
+                <div class="col-12 col-md-9"><input asp-for="receiver_email" type="email" placeholder="Enter Email" class="form-control" required><small class="help-block form-text">Please enter your email</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">The receiver's address</label></div>
-                <div class="col-12 col-md-9"><input asp-for="receiver_address" type="text"  class="form-control"><small class="form-text text-muted">Exmaple: 123 Nguyen Van Dau Street, Ward 6, Binh Thanh District</small></div>
+                <div class="col-12 col-md-9"><input asp-for="receiver_address" type="text" class="form-control" required><small class="form-text text-muted">Exmaple: 123 Nguyen Van Dau Street, Ward 6, Binh Thanh District</small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">The receiver phone</label></div>
-                <div class="col-12 col-md-9"><input asp-for="receiver_phone" type="text" class="form-control"><small class="form-text text-muted"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="receiver_phone" type="text" class="form-control"><small class="form-text text-muted" required></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="inputSm" class=" form-control-label">The receiver's city</label></div>
                 <div class="col-12 col-md-9">
-                    <input asp-for="receiver_pincode" list="datalistOptionsPincode" id="receiver_pincode" class="form-control">
+                    <input asp-for="receiver_pincode" list="datalistOptionsPincode" id="receiver_pincode" class="form-control" required>
                         @await Component.InvokeAsync("Pincode")
                         </input>
                 </div>
             </div> 
             <div class="row form-group">
                 <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Note</label></div>
-                <div class="col-12 col-md-9"><textarea asp-for="note"  rows="9" placeholder="Please put your note of the parcel." class="form-control"></textarea></div>
+                <div class="col-12 col-md-9"><textarea asp-for="note" rows="9" placeholder="Please put your note of the parcel." class="form-control" required></textarea></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description</label></div>
@@ -97,12 +97,12 @@
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">payment</label></div>
-                <div class="col-12 col-md-9"><input asp-for="payment_method" type="text" placeholder="Enter payment" class="form-control"><small class="help-block form-text"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="payment_method" type="text" placeholder="Enter payment" class="form-control" required><small class="help-block form-text"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label class=" form-control-label">Choose the parcel type</div>
                 <div class="col col-md-9">
-                    <input asp-for="parcel_type_id" list="datalistOptionsType" id="parcel_type_id" class="form-control">
+                    <input asp-for="parcel_type_id" list="datalistOptionsType" id="parcel_type_id" class="form-control" required>
                             @await Component.InvokeAsync("ParcelType")
                   </input>
                 </div>
@@ -110,7 +110,7 @@
             <div class="row form-group">
                 <div class="col col-md-3"><label class=" form-control-label">Choose the service</div>
                 <div class="col col-md-9">
-                    <input asp-for="service_id" list="datalistOptionsService" id="service_id" class="form-control">
+                    <input asp-for="service_id" list="datalistOptionsService" id="service_id" class="form-control" required>
                     @await Component.InvokeAsync("ParcelService")
                     </input>
                 </div>

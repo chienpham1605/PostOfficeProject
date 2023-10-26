@@ -7,7 +7,7 @@ namespace PostOffice.Admin.Areas.Employee.Controllers
 {
     [Area("Employee")]
    
-    public class HomeController : BaseEmployeeController
+    public class HomeController : Controller
     {
         [Authorize(Roles = "employee")]
         public IActionResult Index()
