@@ -9,9 +9,8 @@ using System.Data;
 using System.Net.Http;
 using System.Text;
 
-namespace PostOffice.Admin.Areas.Employee.Controllers
+namespace PostOffice.Admin.Controllers
 {
-    [Area("Employee")]
     public class ServicePriceController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:7053/api");
@@ -109,18 +108,18 @@ namespace PostOffice.Admin.Areas.Employee.Controllers
         //    return View();
         //}
         [HttpGet]
-        [Authorize(Roles = "employee")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int parcel_price_id)
         {
             var result = await _servicePriceApiClient.GetById(parcel_price_id);
             if (result.IsSuccessed)
             {
-                var servicePriceDTO= result.ResultObj;
+                var servicePriceDTO = result.ResultObj;
                 var updateRequest = new ServicePriceUpdateDTO()
                 {
                     parcel_price_id = servicePriceDTO.parcel_price_id,
                     service_price = servicePriceDTO.service_price
-                    
+
                 };
                 return View(updateRequest);
             }
@@ -128,7 +127,7 @@ namespace PostOffice.Admin.Areas.Employee.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "employee")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(ServicePriceUpdateDTO request, int parcel_price_id)
         {
             if (!ModelState.IsValid)
@@ -139,7 +138,7 @@ namespace PostOffice.Admin.Areas.Employee.Controllers
             if (result.IsSuccessed)
             {
                 TempData["result"] = "Update successfully";
-                return RedirectToAction("Index","ServicePrice");
+                return RedirectToAction("Index", "ServicePrice");
             }
 
             ModelState.AddModelError("", result.Message);

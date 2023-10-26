@@ -191,7 +191,29 @@ namespace PostOffice.API.Data.Extensions
                new ParcelServicePrice { parcel_price_id = 12, zone_type_id = 3, scope_weight_id = 4,service_id = 1, parcel_type_id =1,service_price = 59000 },
                new ParcelServicePrice { parcel_price_id = 13, zone_type_id = 1, scope_weight_id = 5,service_id = 1, parcel_type_id =1,service_price = 60000 },
                new ParcelServicePrice { parcel_price_id = 14, zone_type_id = 2, scope_weight_id = 5,service_id = 1, parcel_type_id =1,service_price = 66000 },
-               new ParcelServicePrice { parcel_price_id = 15, zone_type_id = 3, scope_weight_id = 5,service_id = 1, parcel_type_id =1,service_price = 70000 }
+               new ParcelServicePrice { parcel_price_id = 15, zone_type_id = 3, scope_weight_id = 5,service_id = 1, parcel_type_id =1,service_price = 70000 },
+               new ParcelServicePrice { parcel_price_id = 16, zone_type_id = 1, scope_weight_id = 1, service_id = 1, parcel_type_id = 2, service_price = 15000 },
+               new ParcelServicePrice { parcel_price_id = 17, zone_type_id = 2, scope_weight_id = 1, service_id = 1, parcel_type_id = 2, service_price = 17000 },
+               new ParcelServicePrice { parcel_price_id = 18, zone_type_id = 3, scope_weight_id = 1, service_id = 1, parcel_type_id = 2, service_price = 28000 },
+               new ParcelServicePrice { parcel_price_id = 19, zone_type_id = 1, scope_weight_id = 2, service_id = 1, parcel_type_id = 2, service_price = 29000 },
+               new ParcelServicePrice { parcel_price_id = 20, zone_type_id = 2, scope_weight_id = 2, service_id = 1, parcel_type_id = 2, service_price = 21000 },
+               new ParcelServicePrice { parcel_price_id = 21, zone_type_id = 3, scope_weight_id = 2, service_id = 1, parcel_type_id = 2, service_price = 32000 },
+               new ParcelServicePrice { parcel_price_id = 22, zone_type_id = 1, scope_weight_id = 3, service_id = 1, parcel_type_id = 2, service_price = 34000 },
+               new ParcelServicePrice { parcel_price_id = 23, zone_type_id = 2, scope_weight_id = 3, service_id = 1, parcel_type_id = 2, service_price = 35000 },
+               new ParcelServicePrice { parcel_price_id = 24, zone_type_id = 3, scope_weight_id = 3, service_id = 1, parcel_type_id = 2, service_price = 46000 },
+               new ParcelServicePrice { parcel_price_id = 25, zone_type_id = 1, scope_weight_id = 4, service_id = 2, parcel_type_id = 2, service_price = 50000 },
+               new ParcelServicePrice { parcel_price_id = 26, zone_type_id = 2, scope_weight_id = 4, service_id = 2, parcel_type_id = 2, service_price = 55000 },
+               new ParcelServicePrice { parcel_price_id = 27, zone_type_id = 3, scope_weight_id = 4, service_id = 2, parcel_type_id = 2, service_price = 59000 },
+               new ParcelServicePrice { parcel_price_id = 28, zone_type_id = 1, scope_weight_id = 5, service_id = 2, parcel_type_id = 2, service_price = 60000 },
+               new ParcelServicePrice { parcel_price_id = 29, zone_type_id = 2, scope_weight_id = 5, service_id = 2, parcel_type_id = 2, service_price = 66000 },
+               new ParcelServicePrice { parcel_price_id = 30, zone_type_id = 3, scope_weight_id = 5, service_id = 2, parcel_type_id = 2, service_price = 70000 },
+               new ParcelServicePrice { parcel_price_id = 31, zone_type_id = 1, scope_weight_id = 4, service_id = 2, parcel_type_id = 1, service_price = 50000 },
+               new ParcelServicePrice { parcel_price_id = 32, zone_type_id = 2, scope_weight_id = 4, service_id = 2, parcel_type_id = 1, service_price = 59000 },
+               new ParcelServicePrice { parcel_price_id = 33, zone_type_id = 3, scope_weight_id = 4, service_id = 2, parcel_type_id = 1, service_price = 59000 },
+               new ParcelServicePrice { parcel_price_id = 34, zone_type_id = 1, scope_weight_id = 5, service_id = 2, parcel_type_id = 1, service_price = 60000 },
+               new ParcelServicePrice { parcel_price_id = 35, zone_type_id = 2, scope_weight_id = 5, service_id = 2, parcel_type_id = 1, service_price = 66000 },
+               new ParcelServicePrice { parcel_price_id = 36, zone_type_id = 3, scope_weight_id = 5, service_id = 2, parcel_type_id = 1, service_price = 70000 }
+
            );
 
             modelBuilder.Entity<MoneyServicePrice>().HasData(

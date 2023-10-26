@@ -208,8 +208,12 @@ namespace PostOffice.API.Repositories.ParcelOrder
                 return new ApiSuccessResult<bool>();
             }
             return new ApiErrorResult<bool>("Update failed");
-        }           
+        }
 
+        public Task<ParcelOrderFeeShippingDTO> GetOrderWithFee(int id, ParcelOrderFeeShippingDTO dto)
+        {
+            throw new NotImplementedException();
+        }
     }
     
 }

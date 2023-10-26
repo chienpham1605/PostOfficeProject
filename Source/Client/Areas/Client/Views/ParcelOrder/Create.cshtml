@@ -72,7 +72,7 @@
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Weight(cm) </label></div>
-                <div class="col-12 col-md-9"><input asp-for="parcel_weight" id="weight" type="number" placeholder="Enter Weight" class="form-control" onkeyup="filter()"><small class="help-block form-text" onkeyup="filter()"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_weight" id="weight" type="number" placeholder="Enter Weight" class="form-control" onkeyup="filter()"><small class="help-block form-text" onchange="filter()"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Height(cm) </label></div>
@@ -89,6 +89,11 @@
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">payer </label></div>
                 <div class="col-12 col-md-9"><input asp-for="payer" type="text" placeholder="Enter payer" class="form-control"><small class="help-block form-text"></small></div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Send Date</label></div>
+                <div class="col-12 col-md-9"><input asp-for="send_date" type="text" value="@DateTime.Now"class="form-control"></div>
+
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">payment</label></div>
@@ -130,7 +135,7 @@
         const recpin_input = document.getElementById("receiver_pincode");
         const type_input = document.getElementById("parcel_type_id");
         const weight_input = document.getElementById("weight");
-
+        const submitBtn = document.getElementById("submit-button");
         submitBtn.addEventListener("click", function (e) {
             e.preventDefault();
             $.ajax({
