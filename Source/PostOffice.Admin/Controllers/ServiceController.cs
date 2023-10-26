@@ -50,14 +50,19 @@ namespace PostOffice.Admin.Controllers
         }
         
         [HttpGet]
+        [Authorize(Roles ="admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var result = await _parcelServiceAPIAdmin.GetById(id);
             if (result != null &&  result.IsSuccessed)
             {
                 var parcelService = result.ResultObj;
-                var updateRequest = new ParcelServiceBaseDTO()
+                var updateRequest = new ParcelServiceUpdateDTO()
                 {
+                    service_id = parcelService.service_id,
+                    name = parcelService.name,
+                    description = parcelService.description,
+                    status = parcelService.status,
                     delivery_time = (int)parcelService.delivery_time
                 };
                 return View(updateRequest);
@@ -65,6 +70,7 @@ namespace PostOffice.Admin.Controllers
             return RedirectToAction("Error");
         }
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(ParcelServiceUpdateDTO request, int id)
         {
             if (!ModelState.IsValid)

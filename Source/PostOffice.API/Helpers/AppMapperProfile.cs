@@ -43,7 +43,7 @@ namespace PostOffice.API.Helpers
             CreateMap<ServicePriceBaseDTO, ParcelServicePrice>().ReverseMap();
             CreateMap<ServicePriceCreateDTO, ParcelServicePrice>().ReverseMap();
             CreateMap<ServicePriceUpdateDTO, ParcelServicePrice>().ReverseMap();
-
+            CreateMap<ParcelServicePriceDTO, ParcelServicePrice>().ReverseMap();
             CreateMap<ParcelOrderFeeShippingDTO, ParcelOrder>().ReverseMap();
 
             CreateMap<ParcelTypeBaseDTO, ParcelType>().ReverseMap();

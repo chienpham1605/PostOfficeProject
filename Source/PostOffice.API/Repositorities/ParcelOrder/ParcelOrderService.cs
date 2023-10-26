@@ -64,10 +64,6 @@ namespace PostOffice.API.Repositories.ParcelOrder
             return true;
         }    
 
-        public Task<ParcelOrderFeeShippingDTO> GetOrderWithFee(int id, ParcelOrderFeeShippingDTO dto)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<ApiResult<PagedResult<ParcelOrderViewDTO>>> GetAllParcelOrderPaging(GetParcelOrderPagingRequest request)
         {

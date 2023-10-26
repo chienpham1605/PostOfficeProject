@@ -31,6 +31,8 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 builder.Services.AddTransient<IParcelOrderApiClient, ParcelOrderApiClient>();
 builder.Services.AddTransient<IParcelServiceAPIAdmin, ParcelServiceAPIAdmin>();
+builder.Services.AddTransient<IServicePriceAPIClient, ServicePriceAPIAdmin>();
+
 
 builder.Services.AddTransient<IParcelOrderApiClient, ParcelOrderApiClient>();
 

@@ -9,7 +9,7 @@
         <strong>Parcel Orders</strong>
     </div>
     <div class="card-body card-block">
-        <form class="form-horizontal" id="form-submit">
+        <form asp-action="Create" asp-controller="ParcelOrder" method="post" class="form-horizontal" id="form-submit">
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Your First Name</label></div>
                 <div class="col-12 col-md-9"><input value="@ViewData["FirstName"]" type="text" placeholder="Please enter your full name" class="form-control"><small class="form-text text-muted"></small></div>
@@ -172,8 +172,6 @@
                     service_id: service_input.value
                 },
                 success: function (response) {
-                    // document.getElementById("description_value").textContent = "Order Price  " + response.description;
-                    // document.getElementById("money_order_fee").value = response.order_fee;
                     document.getElementById("total_charge").value = response.total_charge;
                 },
             })
