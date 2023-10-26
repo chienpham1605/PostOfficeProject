@@ -34,7 +34,7 @@
                 <div class="col col-md-3"><label for="inputSm" class=" form-control-label">City</label></div>
                 <div class="col-12 col-md-9">
                     <input asp-for="sender_pincode" list="datalistOptionsPincode" id="sender_pincode" class="form-control" required>
-                    @await Component.InvokeAsync("Pincode")
+                        @await Component.InvokeAsync("Pincode")
                     </input>
                 </div>
             </div>
@@ -59,16 +59,16 @@
                 <div class="col-12 col-md-9">
                     <input asp-for="receiver_pincode" list="datalistOptionsPincode" id="receiver_pincode" class="form-control" required>
                         @await Component.InvokeAsync("Pincode")
-                        </input>
+                    </input>
                 </div>
-            </div> 
+            </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Note</label></div>
                 <div class="col-12 col-md-9"><textarea asp-for="note" rows="9" placeholder="Please put your note of the parcel." class="form-control" required></textarea></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description</label></div>
-                <div class="col-12 col-md-9"><textarea asp-for="description"  rows="9" placeholder="Content..." class="form-control"></textarea></div>
+                <div class="col-12 col-md-9"><textarea asp-for="description" rows="9" placeholder="Content..." class="form-control"></textarea></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Weight(g) </label></div>
@@ -103,32 +103,33 @@
                 <div class="col col-md-3"><label class=" form-control-label">Choose the parcel type</div>
                 <div class="col col-md-9">
                     <input asp-for="parcel_type_id" list="datalistOptionsType" id="parcel_type_id" class="form-control" required>
-                            @await Component.InvokeAsync("ParcelType")
-                  </input>
+                        @await Component.InvokeAsync("ParcelType")
+                    </input>
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label class=" form-control-label">Choose the service</div>
                 <div class="col col-md-9">
                     <input asp-for="service_id" list="datalistOptionsService" id="service_id" class="form-control" required>
-                    @await Component.InvokeAsync("ParcelService")
+                        @await Component.InvokeAsync("ParcelService")
                     </input>
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Total Charge</label></div>
                 <div class="col-12 col-md-9">
-                    <input type="number" asp-for="total_charge" id="total_charge" class="form-control" readonly ><small class="help-block form-text"></small></div>
+                    <input type="number" asp-for="total_charge" id="total_charge" class="form-control" readonly><small class="help-block form-text"></small>
+                </div>
             </div>
-    <div class="card-footer">
-        <input type="submit" id="submit-button" value="submit" class="btn btn-primary btn-sm"/>
-        <input type="reset" class="btn btn-danger btn-sm"/>
-    </div> 
-    </form>
-</div>
+            <div class="card-footer">
+                <input type="submit" id="submit-button" value="submit" class="btn btn-primary btn-sm" />
+                <input type="reset" class="btn btn-danger btn-sm" />
+            </div>
+        </form>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
+    <script>
 
         const service_input = document.getElementById("service_id");
         const sendpin_input = document.getElementById("sender_pincode");
@@ -173,7 +174,7 @@
                     weight: weight_input.value,
                     sender_pincode: sendpin_input.value,
                     receiver_pincode: recpin_input.value,
-                    parcel_type_id:type_input.value,
+                    parcel_type_id: type_input.value,
                     service_id: service_input.value
                 },
                 success: function (response) {
@@ -181,4 +182,4 @@
                 },
             })
         }
-</script>
+    </script>

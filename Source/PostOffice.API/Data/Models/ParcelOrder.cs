@@ -50,7 +50,7 @@ namespace PostOffice.API.Data.Models
 
         public ParcelService? ParcelService { get; set; }
         public ParcelType? ParcelType { get; set; }
-       /* public OrderStatus? OrderStatus { get; set; }*/
+        public OrderStatus? OrderStatus { get; set; }
         public Pincode? ParcelSenderPincode { get; set; }
         public Pincode? ParcelReceiverPincode { get; set; }
 
