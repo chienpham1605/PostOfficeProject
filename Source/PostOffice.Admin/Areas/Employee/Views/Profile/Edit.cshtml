@@ -32,7 +32,9 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="PincodeId" class="control-label"></label>
-                        <input asp-for="PincodeId" class="form-control" />
+                        <input asp-for="PincodeId" list="datalistOptionsPincode" type="number" id="PincodeId" class="form-control" required>
+                        @await Component.InvokeAsync("Pincode")
+                        </input>
                         <span asp-validation-for="PincodeId" class="text-danger"></span>
                     </div>
                     <div class="form-group">

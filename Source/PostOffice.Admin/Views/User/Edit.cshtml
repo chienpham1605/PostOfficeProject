@@ -4,13 +4,11 @@
     ViewData["Title"] = "Update User";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-                          <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>General Form</h1>
+                <h1>Edit Employee</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -27,7 +25,7 @@
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-8">
+          <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
@@ -39,24 +37,26 @@
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="card-body">
                   <div class="form-group">
-                                    <label asp-for="FirstName" class="control-label"></label>
+                                <label asp-for="FirstName" class="control-label">First Name</label>
                                     <input asp-for="FirstName" class="form-control" />
                                     <span asp-validation-for="FirstName" class="text-danger"></span>
                   </div>
                   <div class="form-group">
-                                    <label asp-for="LastName" class="control-label"></label>
+                                <label asp-for="LastName" class="control-label">Last Name</label>
                                     <input asp-for="LastName" class="form-control" />
                                     <span asp-validation-for="LastName" class="text-danger"></span>
                   </div>
 
                                 <div class="form-group">
-                                    <label asp-for="UserName" class="control-label"></label>
+                                <label asp-for="UserName" class="control-label">Username</label>
                                     <input asp-for="UserName" class="form-control" />
                                     <span asp-validation-for="UserName" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="PincodeId" class="control-label"></label>
-                                    <input asp-for="PincodeId" class="form-control" />
+                                    <label asp-for="PincodeId" class="control-label">City/Province Pincode</label>
+                                    <input asp-for="PincodeId" list="datalistOptionsPincode" type="number" id="PincodeId" class="form-control" required>
+                                    @await Component.InvokeAsync("Pincode")
+                                    </input>
                                     <span asp-validation-for="PincodeId" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
@@ -65,7 +65,7 @@
                                     <span asp-validation-for="Address" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="PhoneNumber" class="control-label"></label>
+                                <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
                                     <input asp-for="PhoneNumber" class="form-control" />
                                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                 </div>
@@ -83,5 +83,3 @@
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
-  </div>

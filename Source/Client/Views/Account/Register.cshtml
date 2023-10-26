@@ -44,8 +44,10 @@
                                         <span asp-validation-for="UserName" class="text-danger"></span>
                                     </div>
                                     <div class="form-outline mb-2">
-                                        <label asp-for="PincodeId" class="form-label">City/Province Pincode</label>
-                                        <input asp-for="PincodeId" type="text" id="form2Example17" class="form-control form-control-lg" />
+                                        <label asp-for="PincodeId" class="form-label">City/Province Pincode</label>                                      
+                                        <input asp-for="PincodeId" list="datalistOptionsPincode" type="number" id="PincodeId" class="form-control form-control-lg" required>
+                                            @await Component.InvokeAsync("Pincode")
+                                        </input>
                                         <span asp-validation-for="PincodeId" class="text-danger"></span>
                                     </div>
                                      <div class="form-outline mb-2">
