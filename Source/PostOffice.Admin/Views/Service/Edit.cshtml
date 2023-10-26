@@ -9,9 +9,33 @@
     </div>
     <div class="card-body card-block">
         <form asp-action="Edit" asp-controller="Service" method="post" class="form-horizontal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row form-group">
+                <div class="col col-sm-5"><label for="input-normal" class=" form-control-label">Delivery Time</label></div>
+                <div class="col col-sm-6"><input type="number" asp-for="service_id" placeholder="Normal" class="form-control" readonly></div>
+                <span asp-validation-for="service_id" class="text-danger"></span>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5"><label for="input-normal" class=" form-control-label">Delivery Time</label></div>
+                <div class="col col-sm-6"><input type="number" asp-for="name" placeholder="Normal" class="form-control"></div>
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5"><label for="input-normal" class=" form-control-label">Delivery Time</label></div>
+                <div class="col col-sm-6"><input type="number" asp-for="description" placeholder="Normal" class="form-control"></div>
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5"><label for="input-normal" class=" form-control-label">Delivery Time</label></div>
+                <div class="col col-sm-6"><select asp-for="status" class="form-control">
+                                                <option value="True">Active</option>
+                                                <option value="False">InActive</option></select></div>
+                <span asp-validation-for="status" class="text-danger"></span>
+            </div>
             <div class="row form-group">
                 <div class="col col-sm-5"><label for="input-normal" class=" form-control-label">Delivery Time</label></div>
                 <div class="col col-sm-6"><input type="number" asp-for="delivery_time" placeholder="Normal" class="form-control"></div>
+                <span asp-validation-for="delivery_time" class="text-danger"></span>
             </div>
             <div class="card-footer">
                 <input type="submit" values="Edit" class="btn btn-primary btn-sm">

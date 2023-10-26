@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using PostOffice.Admin.Services;
 using PostOffice.API.DTOs.ParcelOrder;
 using PostOffice.API.DTOs.ParcelService;
 using PostOffice.API.DTOs.ParcelServicePrice;
@@ -15,9 +16,14 @@ namespace PostOffice.Admin.Areas.Employee.Controllers
     {
         Uri baseAddress = new Uri("https://localhost:7053/api");
         private readonly HttpClient _httpClient;
+        private readonly IServicePriceAPIClient _servicePriceApiClient;
+        private readonly IConfiguration _configuration;
 
-        public ServicePriceController()
+        public ServicePriceController(IServicePriceAPIClient servicePriceApiClient,
+            IConfiguration configuration)
         {
+            _servicePriceApiClient = servicePriceApiClient;
+            _configuration = configuration;
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = baseAddress;
         }
@@ -67,40 +73,77 @@ namespace PostOffice.Admin.Areas.Employee.Controllers
             }
             return View(servicePrice);
         }
+        //[HttpGet]
+        //public async Task<IActionResult> Edit(int id)
+        //{
+        //    try
+        //    {
+        //        ServicePriceUpdateDTO servicePrice = new ServicePriceUpdateDTO();
+        //        HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelServicePrice/GetPriceById/" + id).Result;
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            string data = response.Content.ReadAsStringAsync().Result;
+        //            servicePrice = JsonConvert.DeserializeObject<ServicePriceUpdateDTO>(data);
+
+        //        }
+        //        return View(servicePrice);
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        return View();
+        //    }
+        //}
+        //[HttpPost]
+        //public IActionResult Edit(ServicePriceUpdateDTO servicePriceUpdate)
+        //{
+        //    string data = JsonConvert.SerializeObject(servicePriceUpdate);
+        //    StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+        //    HttpResponseMessage response = _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelServicePrice/UpdateServicePrice", content).Result;
+        //    if (response.IsSuccessStatusCode)
+        //    {
+
+        //        return RedirectToAction("Index", "ServicePrice");
+
+        //    }
+        //    return View();
+        //}
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        [Authorize(Roles = "employee")]
+        public async Task<IActionResult> Edit(int parcel_price_id)
         {
-            try
+            var result = await _servicePriceApiClient.GetById(parcel_price_id);
+            if (result.IsSuccessed)
             {
-                ServicePriceUpdateDTO servicePrice = new ServicePriceUpdateDTO();
-                HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/ParcelServicePrice/GetPriceById/" + id).Result;
-                if (response.IsSuccessStatusCode)
+                var servicePriceDTO= result.ResultObj;
+                var updateRequest = new ServicePriceUpdateDTO()
                 {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    servicePrice = JsonConvert.DeserializeObject<ServicePriceUpdateDTO>(data);
-
-                }
-                return View(servicePrice);
+                    parcel_price_id = servicePriceDTO.parcel_price_id,
+                    service_price = servicePriceDTO.service_price
+                    
+                };
+                return View(updateRequest);
             }
-            catch (Exception ex)
-            {
-
-                return View();
-            }
+            return RedirectToAction("Error", "Home");
         }
+
         [HttpPost]
-        public IActionResult Edit(ServicePriceUpdateDTO servicePriceUpdate)
+        [Authorize(Roles = "employee")]
+        public async Task<IActionResult> Edit(ServicePriceUpdateDTO request, int parcel_price_id)
         {
-            string data = JsonConvert.SerializeObject(servicePriceUpdate);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = _httpClient.PutAsync(_httpClient.BaseAddress + "/ParcelServicePrice/UpdateServicePrice", content).Result;
-            if (response.IsSuccessStatusCode)
+            if (!ModelState.IsValid)
+                return View();
+
+
+            var result = await _servicePriceApiClient.UpdateServicePrice(parcel_price_id, request);
+            if (result.IsSuccessed)
             {
-
-                return RedirectToAction("Index", "ServicePrice");
-
+                TempData["result"] = "Update successfully";
+                return RedirectToAction("Index","ServicePrice");
             }
-            return View();
+
+            ModelState.AddModelError("", result.Message);
+            return View(request);
         }
     }
 }
