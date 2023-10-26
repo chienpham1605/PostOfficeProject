@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PostOffice.API.Data.Context;
 using PostOffice.API.Data.Models;
 using PostOffice.API.DTOs.Area;
+using PostOffice.API.DTOs.MoneyServicePrice;
 using PostOffice.API.DTOs.ParcelService;
 using PostOffice.API.DTOs.ParcelServicePrice;
 using PostOffice.API.DTOs.ParcelType;
@@ -107,6 +108,12 @@ namespace PostOffice.API.Controllers
             return Ok(await prices.ToListAsync());
         }
 
+        [HttpGet("Zone")]
+        public async Task<ServicePriceBaseDTO> GetByZone(int zone, int scope, int service, int parcelType)
+        {
+            var servicePriceDto = await _repository.GetByZone(zone, scope, service, parcelType);
+            return servicePriceDto;
+        }
     }
 }
 

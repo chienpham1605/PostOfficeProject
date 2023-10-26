@@ -8,6 +8,7 @@ namespace PostOffice.API.Repositories.ParcelServciePrice
     using Microsoft.AspNetCore.Mvc;
     using PostOffice.API.Data.Context;
     using PostOffice.API.Data.Models;
+    using PostOffice.API.DTOs.MoneyServicePrice;
     using PostOffice.API.DTOs.ParcelService;
     using PostOffice.API.DTOs.ParcelServicePrice;
     using PostOffice.API.Repositories.ParcelServicePrice;
@@ -33,6 +34,13 @@ namespace PostOffice.API.Repositories.ParcelServciePrice
             _context.ServicePrices.Add(servicePriceEntity);
             await _context.SaveChangesAsync();
             return servicePriceEntity;
+        }
+
+        public async Task<ServicePriceBaseDTO> GetByZone(int zone, int scope, int service, int parcelType)
+        {
+            var servicePrice = await _context.ServicePrices.Where(m => m.zone_type_id == zone && m.scope_weight_id == scope && m.service_id == service && m.parcel_type_id == parcelType)
+              .FirstOrDefaultAsync();
+            return _mapper.Map<ServicePriceBaseDTO>(servicePrice);
         }
 
         public async Task<ServicePriceBaseDTO> GetServicePriceById(int id)

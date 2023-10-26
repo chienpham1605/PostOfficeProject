@@ -88,7 +88,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
             parcelorder.order_status = 1;
 
             var test = _httpClient.PostAsJsonAsync<ParcelOrderCreateDTO>(parcelOrderURL, parcelorder).Result;
-            return Json(new{ });
+            return RedirectToAction("Index", "ParcelOrder");
         }
         public IActionResult Edit()
         {
@@ -116,39 +116,11 @@ namespace PostOffice.Client.Areas.Client.Controllers
                 return View();
             }
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Calculate(ParcelOrderCreateDTO parcelOrder)
-        //{
-        //    var calculation = new Calculation
-        //    {
-        //        weight = (float)parcelOrder.parcel_weight,
-        //        parcel_type_id = parcelOrder.parcel_type_id,
-        //        service_id = parcelOrder.service_id,
-        //        sender_pincode = parcelOrder.sender_pincode,
-        //        receiver_pincode = parcelOrder.receiver_pincode
-        //    };
-
-        //    string data = JsonConvert.SerializeObject(calculation);
-        //    StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-        //    HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/Calculation/CalculationFee", content);
-
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var resultString = await response.Content.ReadAsStringAsync();
-        //        var result = JsonConvert.DeserializeObject<double>(resultString);
-        //        parcelOrder.total_charge = (float)result;
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("NO data");
-        //    }
-        //    return View(parcelOrder);
-        //}
         [HttpPost]
         public async Task<IActionResult> ScopeFilter(double weight, string sender_pincode, string receiver_pincode, int parcel_type_id, int service_id)
         {
-            var service = JsonConvert.DeserializeObject<ParcelServiceBaseDTO>(await _httpClient.GetStringAsync(parcelServiceURL + "GetServiceById?id=" + service_id));
-            var parcelType = JsonConvert.DeserializeObject<ParcelTypeBaseDTO>(await _httpClient.GetStringAsync(parcelTypeURL + "GetParcelTypeById?id=" + parcel_type_id));
+            var service = JsonConvert.DeserializeObject<ParcelServiceBaseDTO>(_httpClient.GetStringAsync(parcelServiceURL + "GetServiceById?id=" + service_id).Result);
+            var parcelType = JsonConvert.DeserializeObject<ParcelTypeBaseDTO>(_httpClient.GetStringAsync(parcelTypeURL + "GetParcelTypeById?id=" + parcel_type_id).Result);
             int zone_id;
             
             if (sender_pincode == receiver_pincode && sender_pincode != null && receiver_pincode != null)
@@ -171,7 +143,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
             var weightScope = JsonConvert.DeserializeObject<WeightScopeBaseDTO>(_httpClient.GetStringAsync(weightScopeURL + "getWeightRange?weight=" + weight).Result);
 
             // Lấy thông tin về giá dịch vụ
-            var priceResponse = _httpClient.GetStringAsync(parcelServicePriceURL + "ZoneNScope" + "?zone=" + zone_id.ToString() + "&scope=" + weightScope.id.ToString() + "&service=" + service.service_id.ToString() + "&parcelType=" + parcelType.id.ToString()).Result;
+            var priceResponse = _httpClient.GetStringAsync(parcelServicePriceURL + "GetByZone/Zone" + "?zone=" + zone_id.ToString() + "&scope=" + weightScope.id.ToString() + "&service=" + service.service_id.ToString() + "&parcelType=" + parcelType.id.ToString()).Result;
 
             ServicePriceBaseDTO? servicePrice = JsonConvert.DeserializeObject<ServicePriceBaseDTO>(priceResponse);
 
