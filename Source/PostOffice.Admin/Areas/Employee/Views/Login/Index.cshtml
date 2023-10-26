@@ -29,6 +29,7 @@
                 <p class="login-box-msg">Sign in to start your session</p>
 
                 <form asp-action="Index" asp-controller="Login" asp-area="Employee" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="input-group mb-3">
                         <input asp-for="Email" type="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
@@ -49,13 +50,7 @@
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
+                        <div class="col-8">                          
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
@@ -66,7 +61,7 @@
                 </form>
 
                 <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
+                  @*   <a href="forgot-password.html">I forgot my password</a> *@
                 </p>
             </div>
             <!-- /.card-body -->

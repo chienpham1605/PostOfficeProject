@@ -2,8 +2,7 @@
 @model PagedResult<PostOffice.API.DTOs.ParcelOrder.ParcelOrderViewDTO>
 
 @{
-    ViewData["Title"] = "Parcel Order";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Parcel Order";    
 }
 
 <!-- Content Wrapper. Contains page content -->
@@ -107,8 +106,8 @@
                                                 @Html.DisplayFor(modelItem => item.total_charge)
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                                                @Html.ActionLink("Details", "Details", new { id = item.id })
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.id }) 
+                                              
 
                                             </td>
                                         </tr>

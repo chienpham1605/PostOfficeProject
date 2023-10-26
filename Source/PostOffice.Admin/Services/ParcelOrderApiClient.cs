@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 using PostOffice.API.DTOs.ParcelOrder;
 using System.Text;
+using PostOffice.API.DTOs.TrackHistory;
 
 namespace PostOffice.Admin.Services
 {
@@ -50,9 +51,13 @@ namespace PostOffice.Admin.Services
 
             return JsonConvert.DeserializeObject<ApiErrorResult<ParcelOrderViewDTO>>(body);
         }
-       
 
-        public async Task<ApiResult<bool>> UpdateParcelOrder(int id, ParcelOrderUpdateDTO request)
+		public Task<ApiResult<TrackHistoryViewDTO>> GetHistoryByOrderId(int id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public async Task<ApiResult<bool>> UpdateParcelOrder(int id, ParcelOrderUpdateDTO request)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);

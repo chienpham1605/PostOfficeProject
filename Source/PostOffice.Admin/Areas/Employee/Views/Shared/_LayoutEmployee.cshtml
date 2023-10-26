@@ -52,7 +52,7 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">             
                 <li class="nav-item dropdown">
-                    <form class="nav-link" asp-action="Logout" asp-controller="User">
+                    <form class="nav-link" asp-action="Logout" asp-controller="Home">
                         <input value="Logout" type="submit" style="background-color: transparent; border:none">
                     </form>
                 </li>
@@ -122,24 +122,23 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/charts/chartjs.html" class="nav-link">
+                                    <a asp-controller="Profile" asp-action="Index" asp-area="Employee" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>My Profile</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/charts/flot.html" class="nav-link">
+                                    <a asp-controller="Profile" asp-action="ChangePassword" asp-area="Employee" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Change password</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                               @*  <li class="nav-item">
                                     <a href="pages/charts/flot.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>My Submission</p>
                                     </a>
-                                </li>
-                               
+                                </li> *@                               
                             </ul>
                         </li>
                     </ul>

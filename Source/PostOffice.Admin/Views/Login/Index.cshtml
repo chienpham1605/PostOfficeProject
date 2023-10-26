@@ -29,7 +29,7 @@
                 <p class="login-box-msg">Sign in to start your session</p>
 
                 <form asp-action="Index" asp-controller="Login" method="post">
-
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="input-group mb-3">
                         <input asp-for="Email" type="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">

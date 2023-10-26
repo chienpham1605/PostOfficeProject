@@ -16,5 +16,7 @@ namespace PostOffice.Admin.Services
         Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateDTO request);
 
         Task<ApiResult<UserViewDTO>> GetById(Guid id);
+
+        Task<ApiResult<bool>> ChangePassword(UserChangePasswordDTO request);
     }
 }

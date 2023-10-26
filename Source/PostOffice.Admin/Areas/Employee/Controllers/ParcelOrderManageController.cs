@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Asn1.Ocsp;
 using PostOffice.Admin.Services;
 using PostOffice.API.Data.Enums;
 using PostOffice.API.Data.Models;
@@ -107,5 +108,15 @@ namespace PostOffice.Admin.Areas.Employee.Controllers
             return View(request);
         }
 
-    }
+
+        [HttpGet]
+        [Authorize(Roles = "employee")]
+        public async Task<IActionResult> History(int id)
+        {
+			
+		
+			return RedirectToAction("Error", "Home");
+		}
+
+		}
 }

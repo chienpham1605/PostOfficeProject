@@ -40,7 +40,7 @@ namespace PostOffice.Admin.Controllers
             var result = await _userApiClient.Authenticate(request);
             if (result.ResultObj == null)
             {
-                ModelState.AddModelError("", "Login Failed");
+                ModelState.AddModelError("", result.Message);
                 return View();
             }
             var userPrincipal = this.ValidateToken(result.ResultObj);

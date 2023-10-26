@@ -35,14 +35,14 @@ namespace PostOffice.API.Repositorities.User
         public async Task<ApiResult<string>> Authenticate(UserLoginDTO userLogin)
         {
             var user = await _userManager.FindByEmailAsync(userLogin.Email);
-            if (user == null)  return null;
+			if (user == null) return new ApiErrorResult<string>("Account is not exist");
 
-            var result = await _signInManager.PasswordSignInAsync(user, userLogin.Password, userLogin.RememberMe, true);
+			var result = await _signInManager.PasswordSignInAsync(user, userLogin.Password, userLogin.RememberMe, true);
 
             if(!result.Succeeded)
             {
-                return null;
-            }
+				return new ApiErrorResult<string>("Incorrect Email or Password");
+			}
 
             var roles = await _userManager.GetRolesAsync(user);
             var claims = new[]
