@@ -107,6 +107,13 @@ namespace PostOffice.API.Controllers
             return Ok(await prices.ToListAsync());
         }
 
+        [HttpGet("Zone")]
+        public async Task<ServicePriceBaseDTO> GetByZone(int zone, int scope, int service, int parcelType)
+        {
+            var servicePriceDto = await _repository.GetByZone(zone, scope, service, parcelType);
+            return servicePriceDto;
+        }
+
     }
 }
 

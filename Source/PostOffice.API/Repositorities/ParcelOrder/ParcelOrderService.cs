@@ -1,7 +1,7 @@
-﻿    using System.Threading.Tasks;
-    using System.Collections.Generic;
-    using System;
-    using AutoMapper;
+﻿using System.Threading.Tasks;
+using System.Collections.Generic;
+using System;
+using AutoMapper;
 using System.Linq;
 
 using Microsoft.EntityFrameworkCore;
@@ -40,12 +40,12 @@ namespace PostOffice.API.Repositories.ParcelOrder
         }
 
 
-    public async Task<ParcelOrderBase> GetParcelOrderById(int id)
+        public async Task<ParcelOrderBase> GetParcelOrderById(int id)
         {
-                var parcelOrder = await _context.ParcelOrders.FindAsync(id);
-                var parcelOrderDto = _mapper.Map<ParcelOrderBase>(parcelOrder);
+            var parcelOrder = await _context.ParcelOrders.FindAsync(id);
+            var parcelOrderDto = _mapper.Map<ParcelOrderBase>(parcelOrder);
 
-                return parcelOrderDto;
+            return parcelOrderDto;
 
         }
 
@@ -57,17 +57,13 @@ namespace PostOffice.API.Repositories.ParcelOrder
             {
                 return false;
             }
-             _mapper.Map(parcelOrderUpdateDTO, parcelorders);
+            _mapper.Map(parcelOrderUpdateDTO, parcelorders);
 
-             _context.SaveChanges();
+            _context.SaveChanges();
 
             return true;
-        }    
-
-        public Task<ParcelOrderFeeShippingDTO> GetOrderWithFee(int id, ParcelOrderFeeShippingDTO dto)
-        {
-            throw new NotImplementedException();
         }
+
 
         public async Task<ApiResult<PagedResult<ParcelOrderViewDTO>>> GetAllParcelOrderPaging(GetParcelOrderPagingRequest request)
         {
@@ -113,7 +109,7 @@ namespace PostOffice.API.Repositories.ParcelOrder
                 send_date = p.send_date,
                 receive_date = p.receive_date,
                 vpp_value = p.vpp_value,
-                total_charge = p.total_charge               
+                total_charge = p.total_charge
             }).ToListAsync();
 
             //4. Select and projection
@@ -165,7 +161,7 @@ namespace PostOffice.API.Repositories.ParcelOrder
                 receive_date = parcelorder.receive_date,
 
                 vpp_value = parcelorder.vpp_value,
-                total_charge = parcelorder.total_charge                
+                total_charge = parcelorder.total_charge
             };
             return new ApiSuccessResult<ParcelOrderViewDTO>(parcelOrderView);
         }
@@ -176,7 +172,7 @@ namespace PostOffice.API.Repositories.ParcelOrder
             if (parcelorder == null)
             {
                 return new ApiErrorResult<bool>("Order is not exist");
-            }           
+            }
             parcelorder.sender_name = request.sender_name;
             parcelorder.sender_pincode = request.sender_pincode;
             parcelorder.sender_address = request.sender_address;
@@ -206,7 +202,7 @@ namespace PostOffice.API.Repositories.ParcelOrder
             parcelorder.vpp_value = (float)request.vpp_value;
             parcelorder.total_charge = (float)request.total_charge;
 
-            bool result  = await _context.SaveChangesAsync() > 0;
+            bool result = await _context.SaveChangesAsync() > 0;
             if (result)
             {
                 return new ApiSuccessResult<bool>();
@@ -220,5 +216,5 @@ namespace PostOffice.API.Repositories.ParcelOrder
         }
 
     }
-    
+
 }

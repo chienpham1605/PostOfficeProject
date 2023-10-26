@@ -61,7 +61,7 @@ namespace PostOffice.Client.Areas.Client.Controllers
             }
             catch (Exception ex)
             {
-                
+
             }
             return View(parcelOrders);
         }
@@ -150,8 +150,10 @@ namespace PostOffice.Client.Areas.Client.Controllers
         [HttpPost]
         public async Task<IActionResult> ScopeFilter(double weight, string sender_pincode, string receiver_pincode, int parcel_type_id, int service_id)
         {
-            var service = JsonConvert.DeserializeObject<ParcelServiceBaseDTO>(await _httpClient.GetStringAsync(parcelServiceURL + "GetServiceById?id=" + service_id));
-            var parcelType = JsonConvert.DeserializeObject<ParcelTypeBaseDTO>(await _httpClient.GetStringAsync(parcelTypeURL + "GetParcelTypeById?id=" + parcel_type_id));
+            var serviceString = await _httpClient.GetStringAsync(parcelServiceURL + "GetServiceById/id?id=" + service_id);
+            var service = JsonConvert.DeserializeObject<ParcelServiceBaseDTO>(serviceString);
+            var parcelTypeString = await _httpClient.GetStringAsync(parcelTypeURL + "GetParcelTypeById/id?id=" + parcel_type_id); 
+            var parcelType = JsonConvert.DeserializeObject<ParcelTypeBaseDTO>(parcelTypeString);
             int zone_id;
             
             if (sender_pincode == receiver_pincode && sender_pincode != null && receiver_pincode != null)
@@ -171,10 +173,11 @@ namespace PostOffice.Client.Areas.Client.Controllers
                     zone_id = 2;
                 }
             }
-            var weightScope = JsonConvert.DeserializeObject<WeightScopeBaseDTO>(_httpClient.GetStringAsync(weightScopeURL + "getWeightRange?weight=" + weight).Result);
+            var weightScopeString = await _httpClient.GetStringAsync(weightScopeURL + "getWeightRange?weight=" + weight);
+            var weightScope = JsonConvert.DeserializeObject<WeightScopeBaseDTO>(weightScopeString);
 
             // Lấy thông tin về giá dịch vụ
-            var priceResponse = _httpClient.GetStringAsync(parcelServicePriceURL + "ZoneNScope" + "?zone=" + zone_id.ToString() + "&scope=" + weightScope.id.ToString() + "&service=" + service.service_id.ToString() + "&parcelType=" + parcelType.id.ToString()).Result;
+            var priceResponse = await _httpClient.GetStringAsync(parcelServicePriceURL + "GetByZone/Zone" + "?zone=" + zone_id.ToString() + "&scope=" + weightScope.id.ToString() + "&service=" + service.service_id.ToString() + "&parcelType=" + parcelType.id.ToString());
 
             ServicePriceBaseDTO? servicePrice = JsonConvert.DeserializeObject<ServicePriceBaseDTO>(priceResponse);
 

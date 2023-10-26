@@ -1,8 +1,8 @@
-﻿ using AutoMapper;
- using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 namespace PostOffice.API.Repositories.ParcelType
 {
-   
+
     using PostOffice.API.Data.Context;
     using PostOffice.API.Data.Models;
     using PostOffice.API.DTOs.MoneyOrder;
@@ -14,7 +14,7 @@ namespace PostOffice.API.Repositories.ParcelType
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
-        public ParcelTypeService(AppDbContext context, IMapper mapper) 
+        public ParcelTypeService(AppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -41,7 +41,7 @@ namespace PostOffice.API.Repositories.ParcelType
         public async Task<ParcelTypeBaseDTO> GetParcelType(int id)
         {
             var parceltypeByid = await _context.ParcelTypes.FindAsync(id);
-            var parcelTypeDto =  _mapper.Map<ParcelTypeBaseDTO>(parceltypeByid);
+            var parcelTypeDto = _mapper.Map<ParcelTypeBaseDTO>(parceltypeByid);
             if (parcelTypeDto == null)
             {
                 throw new KeyNotFoundException();
@@ -57,24 +57,13 @@ namespace PostOffice.API.Repositories.ParcelType
             return typeDTO;
         }
 
-        public async Task<ParcelTypeBaseDTO> GetParcelType(int id)
-        {
-            var parceltypeByid = await _context.ParcelTypes.FindAsync(id);
-            var parcelTypeDto =  _mapper.Map<ParcelTypeBaseDTO>(parceltypeByid);
-            if (parcelTypeDto == null)
-            {
-                throw new KeyNotFoundException();
-            }
-            return parcelTypeDto;
-        }
-
         public async Task<ParcelType> UpdateParcelType(ParcelTypeUpdateDTO parcelTypeUpdateDTO)
         {
             var parceltype = _context.ParcelTypes.Find(parcelTypeUpdateDTO.id);
             if (parceltype != null)
             {
                 // Assign updated values to the product entity
-                parceltype.max_length= parcelTypeUpdateDTO.max_length;
+                parceltype.max_length = parcelTypeUpdateDTO.max_length;
                 parceltype.max_width = parcelTypeUpdateDTO.max_width;
                 parceltype.max_height = parcelTypeUpdateDTO.max_height;
 

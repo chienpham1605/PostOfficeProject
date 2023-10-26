@@ -62,6 +62,12 @@ namespace PostOffice.API.Repositories.ParcelServciePrice
             return true;
         }
 
+        public async Task<ServicePriceBaseDTO> GetByZone(int zone, int scope, int service, int parcelType)
+        {
+            var servicePrice = await _context.ServicePrices.Where(m => m.zone_type_id == zone && m.scope_weight_id == scope && m.service_id == service && m.parcel_type_id == parcelType)
+              .FirstOrDefaultAsync();
+            return _mapper.Map<ServicePriceBaseDTO>(servicePrice);
+        }
     }
     
 }

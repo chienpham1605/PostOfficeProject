@@ -67,7 +67,8 @@ namespace PostOffice.Client.Areas.Client.Controllers
             moneyOrderCreateDTO.transfer_status = API.Data.Enums.TransferStatus.Pending;
 
             var test = httpClient.PostAsJsonAsync<MoneyOrderCreateDTO>(moneyorderURL, moneyOrderCreateDTO).Result;
-            return Json(new { });
+            return Json(new { 
+            });
         }
         //caculate moneyscope and zonetype dbo.moneyservice
         [HttpPost]

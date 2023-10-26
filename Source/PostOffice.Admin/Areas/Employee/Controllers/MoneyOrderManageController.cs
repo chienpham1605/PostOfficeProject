@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿//using Microsoft.AspNetCore.Mvc;
 
-namespace PostOffice.Admin.Areas.Employee.Controllers
-{
-<<<<<<<< HEAD:Source/PostOffice.Admin/Areas/Employee/Controllers/MoneyController.cs
-    public class MoneyController : Controller
-========
-    public class MoneyOrderManageController : Controller
->>>>>>>> main:Source/PostOffice.Admin/Areas/Employee/Controllers/MoneyOrderManageController.cs
-    {
-        public IActionResult Index()
-        {
-            return View();
-        }
-    }
-}
+//namespace PostOffice.Admin.Areas.Employee.Controllers
+//{
+
+//    public class MoneyOrderManageController : Controller
+
+//    {
+//        public IActionResult Index()
+//        {
+//            return View();
+//        }
+//    }
+//}
