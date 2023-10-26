@@ -5,8 +5,10 @@ namespace PostOffice.API.Repositories.ParcelType
    
     using PostOffice.API.Data.Context;
     using PostOffice.API.Data.Models;
+    using PostOffice.API.DTOs.MoneyOrder;
     using PostOffice.API.DTOs.ParcelService;
     using PostOffice.API.DTOs.ParcelType;
+    using PostOffice.API.DTOs.Pincode;
 
     public class ParcelTypeService : IParcelTypeRepository
     {
@@ -29,17 +31,30 @@ namespace PostOffice.API.Repositories.ParcelType
 
         }
 
-        public async Task<List<ParcelType>> GetAllParcelTypes()
+        public async Task<List<ParcelTypeBaseDTO>> GetAllParcelTypes()
         {
-            var parceltype = await _context.ParcelTypes.ToListAsync();
+            var parcelTypes = await _context.ParcelTypes.ToListAsync();
+            var parcelTypeDTOs = _mapper.Map<List<ParcelTypeBaseDTO>>(parcelTypes);
+            return parcelTypeDTOs;
+        }
 
-            return parceltype.Select(p => new ParcelType
+        public async Task<ParcelTypeBaseDTO> GetParcelType(int id)
+        {
+            var parceltypeByid = await _context.ParcelTypes.FindAsync(id);
+            var parcelTypeDto =  _mapper.Map<ParcelTypeBaseDTO>(parceltypeByid);
+            if (parcelTypeDto == null)
             {
-                name=p.name,
-                max_height=p.max_height,
-                max_length = p.max_length,
-                max_width = p.max_width
-            }).ToList();
+                throw new KeyNotFoundException();
+            }
+            return parcelTypeDto;
+        }
+
+        public async Task<ParcelTypeBaseDTO> GetParcelTypeById(int id)
+        {
+            var type = await _context.ParcelTypes.FindAsync(id);
+            var typeDTO = _mapper.Map<ParcelTypeBaseDTO>(type);
+
+            return typeDTO;
         }
 
         public async Task<ParcelTypeBaseDTO> GetParcelType(int id)

@@ -9,7 +9,7 @@
         <strong>Parcel Orders</strong>
     </div>
     <div class="card-body card-block">
-        <form asp-action="Create" asp-area="Client" asp-controller="ParcelOrder" method="post" enctype="multipart/form-data" class="form-horizontal" id="parcelForm">
+        <form class="form-horizontal" id="form-submit">
             <div class="row form-group">
                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Your First Name</label></div>
                 <div class="col-12 col-md-9"><input value="@ViewData["FirstName"]" type="text" placeholder="Please enter your full name" class="form-control"><small class="form-text text-muted"></small></div>
@@ -72,7 +72,7 @@
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Weight(cm) </label></div>
-                <div class="col-12 col-md-9"><input asp-for="parcel_weight" id="weight" type="text" placeholder="Enter Weight" class="form-control"><small class="help-block form-text" onkeyup="filter()"></small></div>
+                <div class="col-12 col-md-9"><input asp-for="parcel_weight" id="weight" type="number" placeholder="Enter Weight" class="form-control" onkeyup="filter()"><small class="help-block form-text" onkeyup="filter()"></small></div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Height(cm) </label></div>
@@ -113,7 +113,7 @@
             <div class="row form-group">
                 <div class="col col-md-3"><label for="email-input" class=" form-control-label">Total Charge</label></div>
                 <div class="col-12 col-md-9">
-                    <input asp-for="total_charge" id="total_charge" class="form-control" ><small class="help-block form-text"></small></div>
+                    <input type="number" asp-for="total_charge" id="total_charge" class="form-control" readonly ><small class="help-block form-text"></small></div>
             </div>
     <div class="card-footer">
         <input type="submit" id="submit-button" value="submit" class="btn btn-primary btn-sm"/>
@@ -125,35 +125,57 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
-        // const service_input = document.getElementById("service_id");
-        // const sendpin_input = document.getElementById("sender_pincode");
-        // const recpin_input = document.getElementById("receiver_pincode");
-        // const type_input = document.getElementById("parcel_type_id");
-        // const weight_input = document.getElementById("weight");
+        const service_input = document.getElementById("service_id");
+        const sendpin_input = document.getElementById("sender_pincode");
+        const recpin_input = document.getElementById("receiver_pincode");
+        const type_input = document.getElementById("parcel_type_id");
+        const weight_input = document.getElementById("weight");
 
-        $("#parcelForm").submit(function (e) {
+        submitBtn.addEventListener("click", function (e) {
             e.preventDefault();
-
-            var parcelOrder = {
-                parcel_weight: $("#parcel_weight").val(),
-                parcel_type_id: $("#parcel_type_id").val(),
-                service_id: $("#service_id").val(),
-                sender_pincode: $("#sender_pincode").val(),
-                receiver_pincode: $("#receiver_pincode").val()
-            };
             $.ajax({
-                type: "POST",
-                url: "Client/ParceOrder/Calculate",
-                data: JSON.stringify(parcelOrder),
-                contentType: "application/json",
+                url: "/Client/ParcelOrder/Create",
+                type: "post",
+                data: $("#form-submit").serialize(),
                 success: function (response) {
-                    console.log(response);
-                    $("#total_charge").val(response.total_charge);
+                    let timerInterval;
+                    Swal.fire({
+                        title: 'Automatically move to Index Page',
+                        html: 'I will move in <b></b> milliseconds.',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                b.textContent = Swal.getTimerLeft()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                        }
+                    }).then((result) => {
+                        window.location.href = "/Client/ParcelOrder/Index";
+                    })
                 },
-                error: function (error) {
-                    // Handle error here
-                    console.log(error);
-                }
-            });
+            })
         });
+        function filter() {
+            $.ajax({
+                url: "/Client/ParcelOrder/ScopeFilter",
+                type: "post",
+                data: {
+                    weight: weight_input.value,
+                    sender_pincode: sendpin_input.value,
+                    receiver_pincode: recpin_input.value,
+                    parcel_type_id:type_input.value,
+                    service_id: service_input.value
+                },
+                success: function (response) {
+                    // document.getElementById("description_value").textContent = "Order Price  " + response.description;
+                    // document.getElementById("money_order_fee").value = response.order_fee;
+                    document.getElementById("total_charge").value = response.total_charge;
+                },
+            })
+        }
 </script>

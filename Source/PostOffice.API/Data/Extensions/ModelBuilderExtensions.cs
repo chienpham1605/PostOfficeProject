@@ -373,7 +373,7 @@ namespace PostOffice.API.Data.Extensions
                     parcel_length = 20,
                     parcel_width = 30, 
                     parcel_height =25,
-
+                    parcel_weight = 1000,
                     service_id = 1,
                     parcel_type_id = 2,
 

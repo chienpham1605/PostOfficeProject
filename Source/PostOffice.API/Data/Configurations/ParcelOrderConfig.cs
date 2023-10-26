@@ -68,7 +68,7 @@ namespace PostOffice.API.Data.Configurations
 
             builder.HasOne(d => d.ParcelType).WithMany(d => d.ParcelOrders).HasForeignKey(d => d.parcel_type_id);
             builder.HasOne(d => d.ParcelService).WithMany(d => d.ParcelOrders).HasForeignKey(d => d.service_id);
-            builder.HasOne(d => d.OrderStatus).WithMany(d => d.ParcelOrders).HasForeignKey(d => d.order_status);
+           /* builder.HasOne(d => d.OrderStatus).WithMany(d => d.ParcelOrders).HasForeignKey(d => d.order_status);*/
 
         }
     }

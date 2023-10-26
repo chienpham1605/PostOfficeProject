@@ -9,6 +9,7 @@ namespace PostOffice.API.Repositories.ParcelType
         Task<ParcelType> UpdateParcelType(ParcelTypeUpdateDTO parcelTypeUpdateDTO);
 
         Task<ParcelTypeBaseDTO> GetParcelType(int id);
-        Task<List<ParcelType>> GetAllParcelTypes();
+        Task<List<ParcelTypeBaseDTO>> GetAllParcelTypes();
+        Task<ParcelTypeBaseDTO> GetParcelTypeById(int id);
     }
 }

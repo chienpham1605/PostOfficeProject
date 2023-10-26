@@ -1,9 +1,8 @@
-﻿using PostOffice.API.Data.Enums;
-
-namespace PostOffice.API.DTOs.ParcelOrder
+﻿namespace PostOffice.API.DTOs.ParcelOrder
 {
-    public class ParcelOrderUpdateDTO
-    {        
+    public class ParcelOrderViewDTO
+    {
+        public Guid user_id { get; set; }
         public int id { get; set; }
         //personal infor
         public string? sender_name { get; set; }
@@ -19,7 +18,7 @@ namespace PostOffice.API.DTOs.ParcelOrder
         public string? receiver_email { get; set; }
 
         //parcel infor
-        public int? order_status { get; set; }
+        public int order_status { get; set; }
         public string? description { get; set; }
         public string? note { get; set; }
         public float? parcel_length { get; set; }
@@ -38,8 +37,6 @@ namespace PostOffice.API.DTOs.ParcelOrder
 
         //charge infor
         public float? vpp_value { get; set; }
-
         public float? total_charge { get; set; }
-
     }
 }

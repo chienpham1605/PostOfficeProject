@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TARS Delivery - Admin | Dashboard</title>
+    <title>TARS Delivery - Employee | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -50,27 +50,11 @@
             </ul>
 
             <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+            <ul class="navbar-nav ml-auto">             
+                <li class="nav-item dropdown">
+                    <form class="nav-link" asp-action="Logout" asp-controller="User">
+                        <input value="Logout" type="submit" style="background-color: transparent; border:none">
+                    </form>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -96,22 +80,9 @@
                         <img src="~/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"> @User.Identity.Name</a>
+                        <a href="#" class="d-block">@User.Identity.Name</a>
                     </div>
                 </div>
-
-                <!-- SidebarSearch Form -->
-                <div class="form-inline">
-                    <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-sidebar">
-                                <i class="fas fa-search fa-fw"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -127,17 +98,17 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/ParcelOrderManage/Index" class="nav-link">
+                                    <a asp-area="Employee" asp-controller="ParcelOrderManage" asp-action="Index" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Parcel Order</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
+<<<<<<< HEAD
                                     <a href="pages/charts/flot.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Money Order</p>
+=======
+                                    <a asp-area="Employee" asp-controller="MoneyOrderManage" asp-action="Index" class="nav-link">
                                     </a>
-                                </li>
                             </ul>
                         </li>                   
                      
@@ -165,9 +136,16 @@
                                 <li class="nav-item">
                                     <a href="pages/charts/flot.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
+<<<<<<< HEAD
                                         <p>Logout</p>
                                     </a>
                                 </li>
+=======
+                                        <p>My Submission</p>
+                                    </a>
+                                </li>
+                               
+>>>>>>> main
                             </ul>
                         </li>
                     </ul>
