@@ -39,12 +39,12 @@
                             <div class="card-body">                               
                                 <div class="form-group">
                                     <label asp-for="id" class="control-label"></label>
-                                    <input asp-for="id" type="text" class="form-control" />
+                                    <input asp-for="id" type="text" class="form-control" readonly/>
                                     <span asp-validation-for="id" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="sender_name" class="control-label"></label>
-                                    <input asp-for="sender_name" type="text" class="form-control" />
+                                    <input asp-for="sender_name" type="text" class="form-control" readonly />
                                     <span asp-validation-for="sender_name" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
@@ -56,22 +56,22 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="sender_address" class="control-label"></label>
-                                    <input asp-for="sender_address" type="text" class="form-control" />
+                                    <input asp-for="sender_address" type="text" class="form-control" readonly />
                                     <span asp-validation-for="sender_address" class="text-danger"></span>
                                 </div>
                                  <div class="form-group">
                                     <label asp-for="sender_phone" class="control-label"></label>
-                                    <input asp-for="sender_phone" type="text" class="form-control" />
+                                    <input asp-for="sender_phone" type="text" class="form-control" readonly />
                                     <span asp-validation-for="sender_phone" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="sender_email" class="control-label"></label>
-                                    <input asp-for="sender_email" type="text" class="form-control" />
+                                    <input asp-for="sender_email" type="text" class="form-control" readonly />
                                     <span asp-validation-for="sender_email" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="receiver_name" class="control-label"></label>
-                                    <input asp-for="receiver_name" type="text" class="form-control" />
+                                    <input asp-for="receiver_name" type="text" class="form-control" readonly />
                                     <span asp-validation-for="receiver_name" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
@@ -93,7 +93,7 @@
                                 </div>
                                  <div class="form-group">
                                     <label asp-for="receiver_email" class="control-label"></label>
-                                    <input asp-for="receiver_email" type="text" class="form-control" />
+                                    <input asp-for="receiver_email" type="text" class="form-control" readonly />
                                     <span asp-validation-for="receiver_email" class="text-danger"></span>
                                 </div>
                                  <div class="form-group">
@@ -103,7 +103,7 @@
                                 </div>
                                  <div class="form-group">
                                     <label asp-for="description" class="control-label"></label>
-                                    <input asp-for="description" type="text" class="form-control" />
+                                    <input asp-for="description" type="text" class="form-control" readonly />
                                     <span asp-validation-for="description" class="text-danger"></span>
                                 </div>
                                  <div class="form-group">
@@ -113,32 +113,32 @@
                                 </div>
                                  <div class="form-group">
                                     <label asp-for="parcel_length" class="control-label"></label>
-                                    <input asp-for="parcel_length" type="number" class="form-control" />
+                                    <input asp-for="parcel_length" type="number" class="form-control" readonly />
                                     <span asp-validation-for="parcel_length" class="text-danger"></span>
                                 </div>
                                  <div class="form-group">
                                     <label asp-for="parcel_width" class="control-label"></label>
-                                    <input asp-for="parcel_width" type="number" class="form-control" />
+                                    <input asp-for="parcel_width" type="number" class="form-control" readonly />
                                     <span asp-validation-for="parcel_width" class="text-danger"></span>
                                 </div>
                                  <div class="form-group">
                                     <label asp-for="parcel_height" class="control-label"></label>
-                                    <input asp-for="parcel_height" type="number" class="form-control" />
+                                    <input asp-for="parcel_height" type="number" class="form-control" readonly />
                                     <span asp-validation-for="parcel_height" class="text-danger"></span>
                                 </div>
                                  <div class="form-group">
                                     <label asp-for="parcel_weight" class="control-label"></label>
-                                    <input asp-for="parcel_weight" type="number" class="form-control" />
+                                    <input asp-for="parcel_weight" type="number" class="form-control" readonly />
                                     <span asp-validation-for="parcel_weight" class="text-danger"></span>
                                 </div>
                                  <div class="form-group">
                                     <label asp-for="payer" class="control-label"></label>
-                                    <input asp-for="payer" type="text" class="form-control" />
+                                    <input asp-for="payer" type="text" class="form-control" readonly />
                                     <span asp-validation-for="payer" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="payment_method" class="control-label"></label>
-                                    <input asp-for="payment_method" type="text" class="form-control" />
+                                    <input asp-for="payment_method" type="text" class="form-control" readonly />
                                     <span asp-validation-for="payment_method" class="text-danger"></span>
                                 </div>
                                  <div class="form-group">
@@ -158,12 +158,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="total_charge" class="control-label"></label>
-                                    <input asp-for="total_charge" type="number" class="form-control" />
+                                    <input asp-for="total_charge" type="number" class="form-control" readonly />
                                     <span asp-validation-for="total_charge" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="order_status" class="control-label"></label>
-                                    <input asp-for="order_status" type="number" class="form-control" />
+                                    <input asp-for="order_status" list="datalistOptionsStatus" class="form-control">
+                                    @await Component.InvokeAsync("OrderStatus")
+                                    </input>
                                     <span asp-validation-for="order_status" class="text-danger"></span>
                                 </div>                                                                                  
                             </div>
